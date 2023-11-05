@@ -1,0 +1,118 @@
+=================== [ Testing ] =================
+[Unit Testing]
+
+search for the other Testing types
+
+[Manual Testing] & [Automated Testing]
+
+[Manual testing] is the test that we do by testing all thefunctionality manually through calling funciton run depug
+
+[Automated Testing] like Unit testing
+
+Expected Output and Actual Output 
+
+[Microsoft Unit Testing]
+      
+      create new project
+      MS Test Project .net core visual C#
+      MS Test Test Project
+      name the project with the same name of the project which I goig to test + "Test"
+      
+      the class must have TestClass attribute and the method must have TestMethod Attribute to make visibile for the Testing Engine
+
+now we have to project (my main project and the testing project)
+      - we should add the reference to the other project 
+      - then we should to add the name space of the other project [using prjectNamespace]
+      - make sure to make the access modifier accessible to the other project (testing project)
+
+Test method is a void function without any parameters $$ 
+
+Test method only capable for one case 
+
+      in switch case in male/female/default
+            - so here we need 3 test method
+naming the Unit method testing 
+      [Given - When - Then]
+
+for a function in the main project we have a method the get the ideal weight called GetIdealWeight
+      - so this is the [Given]
+      - also we will expect inputs gender male and height 170 and that is [When]
+      - also we expect the output for that result 
+
+[TestMethod]      
+public void GetIdealWeight_Gender_Male_Height_170_Result_65(){}
+      
+      Given => the name of the fucntion in the main project 
+      When  => sample inputs for the function parameters
+      Then  => it the expected output for that method
+      
+how to test then inside the modfy of the test method?
+      There is more than one pattern used in the testing 
+            the most common method is [AAA] in Testing Unit
+            
+[AAA] 
+      - Arrange => section or block of code that you write to prepare your function like creating specific object from a class or creating a variable 
+      - Act => Call the method of the created instance
+      - Assert => is the framework or the package that we call to test our code
+
+[Arrange] declare the required Variable and the objects with specified properties
+[Act] call the function in the created instance
+[Assert] here we use out package to Test the method 
+      static class have multiple useful methods
+      
+@
+Assert.AreEqual(EResult, AResult);
+
+[Code Coverage Results] shows cover percentages for the entire elements in the solution
+      -- but its exists only in the interprice edition (paid version of the visual studio)
+
+for throwing exception in the test method from the instace method we cal deal with it by providing this attribute
+      - [ExpectedException(typeof(ArgumentException))]
+      - this will let the test method to get the final result not stop at the throw exception 
+      
+we created three testing method which test three cases 
+
+AreNotSame=> if both referring to the same object or not
+AreSame=>
+
+[AreEqual/ AreEqual<>/ AreNotEqual<>/ AreNotSame]
+
+Assert.IsFalse(8<10);   -- if the condition inside the Parentheses is false then it True
+
+2:58:00
+
+what is string assert?
+      - used for string validation 
+
+instal-package FluentAssertions
+
+we could work with any other package 
+      any package have a manual which explain how it works
+
+Name.Should().Contain("");    -- if name vairable does not contain the specifid string in the Contain it will return false 
+
+CollectionAssert.AllItemsAreNotNull(list);      // takes a list and check for all the items in the list 
+Collection.Contains(list, "Sarah"); - checks if Sarah Exists in the list 
+
+[Timeout(10)] -- if the time got over 10 will throw time out 
+[Ignore]    -- ignores the test method => won't test it 
+[TestCategory("Gender")]      -- dividing into parts like a schemas, something sort of organization
+[Priority(1)]     -- The priority of the execution over the other testing methods
+[Owner ("Ahmed")] -- Description for the function
+[Description("this is description for the")]    -- like a summary
+
+AssemblyInitializeAttribute Class
+      => the method that holds this attribute => make the function runs before any test function 
+            - here we write the code that I want to initialzie before the execution of the testing method
+            - Higher that priority Priority (class Scoped) AssemblyInitializeAttribute (Assembly Scoped)
+
+ClassInitializeAttribute Class
+      - the function that holds this attribute will run before any test method (class Scoped)
+
+ClassCleanupAttribute Class
+
+
+[TestInitializeAttribute]
+      - runs before any test method (before Unit Test running) for configuration or initizalization purposes
+      
+build a project and by like desktop application for store for example any try to buy

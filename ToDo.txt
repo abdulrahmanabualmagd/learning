@@ -1,0 +1,6 @@
+Fluent Api
+ASP.NET Identity
+ASP.NET JWT
+
+Patterns [ Unit Of Work / Generic Repository ]
+

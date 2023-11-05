@@ -1,0 +1,1121 @@
+what is linear programming  [ go to were n invention but makes the code a spacitti code ( very very hard to trace ) ] [ repetition - maintainance - no scope - (syntactic error [ assigning different value type to the variable ]
+structural programming or procedural programming => came after linear programming [ divide the page to two scopes ( the main code / functions ) 
+y2k problem date issues due to modifying all the code to have more digits in all the code / ( in general big code and places to modify any modification )
+the one that invented first os and then invent the first language that was the beginning of the OOP called [ simula => after that developed simula67 ]
+OOP => didn't invent for [ usability ] interview $$$ made a lot of researches on oop
+pedestrians pronuciation
+class is a stamp for the same object type that every object take it as a definition sheet to fill [ TEMPLATE ]
+Object is the physical representation for the class 
+course represents [ class ] 
+course oop [ object ]
+means that object holds specified data like how many hours is the course takes but class is the course that have a property that this course xxx consists of How many hours
+course I know that it have a value of hours I know that it must have but I don't know the value but when I say the course C# then now I know the value of the hours that it takes then it's an [ object ]
+with oop, reusability terminated
+the main four princible core 
+	-- Encapsulation		-- Hide Data
+	-- Abstraction 			-- Hide Functionality's Details		$$ -- may be merge the two concepts [ encapsulation / abstraction ] under  ( ABSTRACTION )
+	-- Inheritance			-- Class inherits attributes and methods from another class
+	-- Polymorphism			-- Different results with different uses
+
+note: js with es.next became Object oriented programming language.
+what is different between framework and core and what is the standard
+
+each class must be in a separated file  must be descriptive for the main 
+
+inside a file for one class only
+internal class employee
+{
+	// properties
+	public int id;
+	public string name
+	public string address;
+	public int salary;
+
+	//methods
+	public void display()
+	{
+		console.writeline($"id:{id}, name: {name}, address: {address}, salary: {salary}");
+	}
+}
+
+int x; 
+here we make the x only can store int and cannot stores strings or non int vale 
+primitive types: type that holds something only one type like [int string ] but class is non primitive type that is new to the language and we declare it and set attributes and methods that it holds
+stack primitive types
+heacp stores reference types
+
+BUT in oop ref stored in stack
+
+	@ Employee emp	//declaration => ref
+	@ Employee emp1 = new Employee(); //declaration _ initialization => (creating objec) -- and called constractor
+
+Employee() is the constructor	
+new Employee() -- create new object
+new -- allocate the constructor in the memory so when it created we called then new created object because without intialization will not be an object
+can't not creat object without initialization -- we must intialization but constructor intialize int with zero and strings with null
+
+we can access object fields using this line
+@emp1.id or emp.display();
+
+// business logic --we have to set default values for the properties in the class to out it if the user didn't insert it's  value
+-- constructor  -- is a special function -- to make it unique we have to name it with the name of the main class -- fileName = ConstructorName 
+-- constructor don't have a return type because the main prupose of using instructors is intialization 
+-- default logic ( setting default values )
+@
+public Employee()
+{
+	id = 1;
+	name =  "N/A";
+	Address = "minia";
+	salary = 200;
+}			-- if we didn't intialize the constructor fields it, the value will be already set in the fields (override on intialization)
+
+-- another option for assigning the value of the object 
+
+-- Parameterized Constructor
+public Employee ( int id, string name, string address, int salary )
+{
+	id = id;
+	name = name;
+	Address = address;
+	salary = salary;
+}
+
+@	Employee emp = new Employee ( 1, 'ahmed', 'minia', 200 );
+
+-- for more logic we put conditions inside the constructor
+-- make sure that id not equal to zero and address = somthing or not equal to something and make it to use the default values if the intered data is wrong or not logic
+-- not good to but functionality (logics) inside the constructor
+
+
+Empp=loyee emp4 = new Employee() { id =3, name ="something", salary= 500, address = "alex" );	--this called Object initializer	=> create the object and update the data with the inserted data as a parameters -- but not the best case to create object  [ SLOWER ]
+-- Constructor over loading -- making more than constructor have the same key but different in the parameter input
+@	Employee emp = new Employee();
+	Employee emp = new Employee('mohamed', 'miia', 5000 );
+	Employee emp = new Employee(1, 'mohamed', 'minia', 50000 );
+	-- here the same constructor but different parameter inputs -- we call it Constructor over loading 
+-- if there is a missed field when using the constructor to create object, the compiler will generate a default constructor and and set the value of the missed field with null
+	-- low performance worst case of all because the compiler will look in the memory and findout that that there is no field with this name and then created using defualt constructor and then set value to null automatically (low performance)
+-- if we create object and set its value and create another and set its assign it with the previous created object then the second one will only point to the address of the first object
+	-- so if we modified any field inside one of them it will change in the other one becuase we make both pointing to the same reference that holds fields and methods
+	-- This called shallow copy [ only copy the reference not the value (both have the same address that holds those values) ]
+
+-- if we want to create object and takes the values and methods without making a shallow copy then we add keyword 'new' in the assigning 
+	@ emp1 = new emp2	-- here we take only the feilds without taking the values inside it
+	@ emp1.name = emp2.name	-- and so on, now we are copying the values inside the emp2 object [ Manually ] ( we are copying the value not the reference to this value )
+		-- and we call it Deep Copy
+	-- instead of copying the the data individually like emp1.name = emp2.name we could use 
+	@ emp 1 = new Employee(emp2, name, ... )
+	or @ emp1 = new Employee(emp2) 		-- but before being able to use it, the constructor must be existed already with the same order of parameteres to the emp2
+						-- if the constructor not exist we create this constructor
+	@
+	public Employee(Empolyee e)		-- then I will be able to use Emp1 = new Employee ( Emp2 );		-- [ DEEP COPY]
+	{
+		id = e.id;
+		name = e.name;
+		.
+		. and so on
+	}
+-- bonus how to make the copy instructor make a shallow copy 
+-- shallow copy copy references 
+-- deep copy 	copy values
+
+-- array of objects	$$ [ ] $$
+@
+in[] arr = new int[3];
+arr[0] = 1;
+employee[] emparr = new Employee[3];
+Emparr[0].id = 1;		-- won't work becaues we didn't create an object for this index
+
+-- instead we do
+emparr[0] = new Employee(); 	-- we have to create object inside each index ( looping over it )
+
+lec summary : 	[ linear vs structured vs oop / class vs objecct / constructors / default / parameterized / copy / constructor overloading / shallow copy vs deep copy / array of objects ]
+upcoming [ encapsulation / this keyword / constructor chaining / access modifieres ]
+
+
+========================= [ DAY TWO ] =========================================
+we could create the constructor inside the inside the class // no problem with naming the class with the name of the class file name 
+we make conditions inside the constructor that inside the class
+constructor like @ public Employee() // default
+// creates another constructer and put the id only inside with the default avlue  (low performance)
+// the fields must be public inside the class
+// the fields stored inside the memory, where does the function stroed?	does it stored with the object? [ NO ]
+	-- there is another place in the memoory that stores functions one time 
+	@ emp1.display();	// display(emp1)
+	@ emp2.display();	// display(emp2)	
+		the compiler have a hidden refernce in the moory we could call it 'this'
+		in the first call to display function -- the compiler make this points to the object emp1
+		in the second call to display function -- the compiler make this points to the object emp2
+
+	-- we don't have to write this inside the method as a parameter 	-- but we could use it inside the method	console.writeline($"{name}")	THE COMPILER AUTOMATICALLY make it {this.name}
+	
+// instead of writing the logic in each constructor we could write in one place to aviod the repetition
+
+-- to do it we write after the () of the constructor :this(1,name,address,salary)	on each constructor
+// [ constructor chaining ] after :this(1,name,address,salary) it will jumb to the constructor that I put the logic inside it [ then we write the logic one time ]
+// we put the logic inside the biggest constructor is the one which we put inside it all the logic [ because it have all the possiblities for all the fields
+// we could one more logic inside another constructor // like if I didn't send something as a parameter but there is a logic
+// public employee(string name , ----, ----):this(1,name,address,salary) it will call to the constructor that accept four param and will check for the logic inside that constructot and then comeback to this constructor again and here he could face another logic $$$
+	{} 
+//color of this is brighter when it's not neccessary but if it darker so it have to be exsist 
+//if the paramater name is the same as the object field so we should add this keyword to make the compiler abel to differntiate between both of them inside the constructor
+
+// we can change the values of the object after creating it with specific values to pass [to pass the logic only] and then be able to change it later
+// prevent the user from changing the values of the fields indside the object we have something called [ access modifiers ] 
+// access modifiers [ protect / internal protected / private / internal / public ]
+
+// what different between the private and the protected?
+// private is accessible inside its own class only	-- but I think we could access it with methods that check every time when trying to change it		-- this called [ Encapsulation ] // HIDING THE DATA -- ( who can change the values of the fields [ as a value onl.y ] )
+// we can apply the encapsulation principle through [ ACCESS MOFIFIERS ] 
+
+// if we didn't set any field with public or internal or so on [ BY DEFAULT IT WILL BE SET TO PRIVATE ]  $$
+
+// all private fields at first of the class then proerties then constructors then methods [ CLEAN CODE ] $$
+
+// for private property we make a method to display it because  it's not accessible from outside but we could access it using a public method 
+	@public double getSalary() {return Salary;}	-- it will return the salary ( method can access that private field ) because it's inside the class so it can see it and access it
+
+$$// public or private it depends on the bussiness logic that show I'm the owner or the buyer
+
+
+// naming convention for public property we make the name of the field UpperCase for public fields $$
+// naming convention for the private field _price
+// for set method with private field we put logics inside the method also [ understant the concept of the oop ]
+
+// property 
+	@int price;
+	@
+	public int price		/ function but takes the shape of the variable // and this function has  keywork (hidden parameters) called 'value' and it containt the value of the _price
+	{
+	get{}
+	set{}
+	}
+// proerty is a field that have get and set to save the shape of the object property not a functionality
+
+
+propfull + double tap				// keyboard shortcut	// full property
+private double _salary;
+public int Salary
+{
+	get {return _salary}
+	set {_salary - value;
+}
+
+// we could delete the get or set of the property if I want to set only or get only the property
+
+// auto implemented property	// the compiler create get and set automatically but it's not have logics 	// also it doesn't have a field created previously
+	public string address {get; set;}
+	// we use it if this field isn't importing for my just addtional information
+// auto implemented property have another usages in frameworks
+
+orders [ private ] [ properties ] [ constructors ] [ methods ] from left to right 			[ ORDERING CONVENTION ]
+
+// single responsiblity an factory design pattern	 [ search ]
+// the best example to explain th static keyword is the counter of employee that created for the first time with a value ant each count more to make each employee takes its count depend on how many emloyees hired before it
+	// like a global created one time
+
+// object how is pointing to the static field not the opposite		like object employee poiniting to the static field [count]
+// all created object are pointing to the static field that exsist on the creator class
+// for static field if we try to emp1.staticFieldName = "something"	-- will throw error because there is no thing called with that name because all the objects is pointing to this static filed in the creator class
+		-- but the object don't have this field in hid inherited fields
+// to modify the static field instead of saying @emp.count we could say @employee.count because it belongs to the class not the object 
+	// but the static filed is shared on all the objects
+	// also we cannot use this.count because this is pointing to the object
+-- up we talked about the static field
+
+
+-- static method : used with static fields mostly like displaymethod that display a static field
+// static cannot get or set any non-static field because the objec know where is his own field but static that only in the class cannot know where is the nonstatic fields in the object
+-- static constructor refuse access modifiers because it creates only one time in the first deal with the class -- used forthe first intialization of the static field 
+
+
+when does the static constructor excecute ?  [ with the first interaction with the class ] 
+
+-- before the garbage collector killing any object it checks at first if there is any instruction to follow before kill this object [ looks for destructor ]
+-- to create destructor @~employee() {something to do before the killing an object by the garbage collector}
+	-- like there is a session that will end after specific time and when it end the garbage collector check if there is instruction to follow before the killing process 
+
+
+================================================================================================
+summary 
+	this keyword 
+	constructor chaining 
+	encapsulation
+		acccess modifiers
+		property 
+	static keyword 
+		static field 
+		static method
+		static constructor
+	destructor
+==================================	
+next 
+	relations betwen classes 
+		composition
+		aggregation 
+		association
+		inheritance
+		types of classes 
+================================================================================================
+
+========================================= [ day 3 ] ============================================
+
+relations between classes 
+	-- Composition		-- find the solve of its issues in design pattern ( concept of main part that give another part a meaning [ without it will make it nothing ] )
+				-- class A is main part of class B
+	-- Aggregation		-- class A is optional part of class B
+	-- Association 		-- [ most common ] -- class using another class for a period of time and so on for another classes that could use it like the first class for a persiod of time 
+				-- Class A use Class B for a period of time 
+	-- Inheritance 		-- Is_A relation	-- to be cont.
+
+-- Composition 
+	Ex on motor 
+@
+internal class car
+{
+	public int modelNum;		
+	public int Power;	-- public
+	public Motor M;		-- make it proerpty [ use get and set ] and avoid to set null values in set scope
+
+// factor design pattern -- search for fixing the issues of composition 
+
+
+
+	public car (int modelNo, string Color, Motor motor)		-- to create Motore it must be existed so put logics that it exists
+	{
+		_modelNum = motorNo;
+		this.Color = Color;
+
+		if (motor = null)		-- make sure that there is an object called car 
+		{carMotor = motor}
+		else
+		{Motor motor = new Motor();  }	-- in case there is no object called motor then we create it inside else condition [ this is [COMPOSITION] not used because of that ]
+
+
+	}	
+	
+	car c = new Car();
+	Motor motor = new Motor();
+	car c = new car);
+
+	// constructors all	
+}
+
+-- aggregation will not affect car object if not exsisted 
+	-- the same as composition but not have to check if it exists like the roof of the car not important to exist
+
+// search for design patterns , design principles 
+
+-- association -- depends on a function that we callit then it excecute what inside then terminated ( for a period of time )
+	like car c = new car();
+	person p = new persoin();
+	-- both not depend each other
+
+	Association
+	public coid drivingCar()
+	{	
+		car c = new car();	used inside this function but not all time exist in the class ( just when excecuting the called function )
+		console.writelIne();
+	}
+
+
+
+--private constructor
+	-- if it exist alone inside the class we can't create object because it will be visible only for the clas from inside
+	-- not problem with constructors with the same name (key) but it must be different in the shape of parameter [ overloading ]
+	like 
+	person(){}
+	public person(){} 
+		-- we can't write this line @ person per = new person() // error [ we have to differentiate between both of them by changing the parameter inputs ]
+
+-- inheritance	[ is a relationship ]
+ambiguity / diamond inheritance
+multiple inheritance is forbidden in c#
+	means class can ingherit from one class only - can have muultilevel inheritance but cannot have mulitple inherit
+	-- class inherit that inherits from other class child , derived, subclass, 
+	-- class that classes inherits from [ parent, based, super ] 
+
+	internal class student : person // inherit from person
+	{}
+
+Access modifiers
+	-- public		-- visible over the solution
+	-- private		-- souction scope 
+	-- internal		-- visible only inside the project (namespace) -- assemply
+	-- protected		-- children scope in solution
+	-- proteced internal	-- project scope + children scope in solution
+	-- private protected 	-- won't use it
+	
+public visible for all solution
+
+-- to be able to use the other project inside the solution we should add references of the first project and inside the new project we should add using projectName
+
+grand child is the last class that inheritance
+
+
+-- all created classes by default inherit from the object class unless I make it inherit from something.
+
+types of classes 
+	-- concrete class	-- the normal one that we take any class can inherit from it
+	-- sealed class		-- we can't inherit from it 		-- must be used in the beginning of creating the project and then after implemenation 
+	-- static class 	-- all its fields, proerpties, methods, and constructor must be static like Math class consists of static and const
+				-- can't create object from it, cant inherit except from static class
+	-- partial class	-- we have two classes and defined it as partial then the compiler merge both classes, this will make more than developer work on it each dev works on a different scope on the partial class
+				internal partial class className 	-- use this line on sepearated class files	
+	-- nested class		-- class inside a class -- for the inner class we should create object to the outer class and then we can use its field [ we can see the private feild in the inner but the opposite won't work ]
+				-- to create an oabject with the inner class we should include the outer.inner		
+	-- abstract class 	-- we can only create objects with the abstract class just other classes can inherirt from it.
+
+
+=======================================================================
+summary :
+relations between classes
+	composition
+	aggregation	
+	association
+inheritance
+	all access modifiers
+private constructor 
+all types of classes
+====================================================================
+next lec:
+base keyword 
+polymorphism
+	static
+	dynamic
+struct
+====================================================================================================================================
+
+
+=========================================== [ DAY FOUR ] ===============================================
+short cut ctor will write the constructor automatically
+we set the class to selaed until I make sure that the class is working proplerly to deny any inheritance from it 
+inheritance is done for everything except the constructors
+this is pointing to all the block that contain the parent and its own block
+base is pointing to the parent block inside teh memory 				[ base keyword ] 
+is we didn't make a constructoor inside the class the compiler will make the default automatically	so we constroctur is not inheritable
+if we don't have a constructor in subclass we can use chaining to the base to call the instrucotr of the base class like @ public car():base(arg1, arg2)
+we call the base constructor if the business logic enforce me to not have  a constructor in the subclass so we use the base constructor
+only one chain is allowed for each constructor
+inside the subclass method we can call the parent method using we write the name of the base method() [ base keyword before the method name optional, the compiler automatically add it to the the method name ]
+when creating a new object to a class with specific fields and methods and then I assigned it to another object with different methods and fields 
+	-- if the new vlaue to assign have the same structure of it's okay and if it have more properties ( incase we are pointing to a child to the parent (with the same struture) )
+		-- it will have access only to the parent properties and methods that have the same structure of the left hand value 
+
+-- if we create an object z from class x and tried to assign it to child object y to parent x but y have more data values 
+	-- z will allow to assign the value of child y because y have inherit from the parent x which have the same structure 
+		-- but the extra data, z will not allow to access it 
+
+
+-- if we trying to assign a value with datatype  and the right hand value with bigger data type , cimpiler with imlicitly convert it to bigger datatype.(implicit casting )
+	-- the above exmple explain the above assigning of objects
+
+	@ int x = 8 ;
+	double y = 10;
+	x = y	// implicitly casting 
+	y = (int) x // expilicitly casting 
+
+@ c1 = (car) v; // will throw an exception not error because he can not convert v as car object -- becuase they are references to object and becuase it's userdefined datatype the compiler cannot convert it ( i will explain it to compiler )
+
+	-- parent can ref child object 
+	-- child can not ref parent 
+		[ boxing - unboxing - domcasting - upcasting ]
+
+	-- upcasting can done implicitly ( access the parent class member gut it is not possible to access all teh child class members
+boxing is the process of converting a value type to a referecnce type 
+unboxing is the process of conveting a reference type to a value type 
+
+upcasting is the process of converting derived type to a base type 
+downcasting is the process of converting base type to a derived type 
+
+// method hiding 	-- hide parent function from child
+	-- hiding the method of the parent and create another one with the same name in the child 
+	-- when creating another one in the child but we add new keyword like @public new void moveForward(){} it will automatically remove the method with the same name(same signature[same name returnType parameters] ) for that deriven class
+
+[ method hiding - overloading - overriding ] IV Questions 
+
+
+-- in the main class we add 'virtual' keyword to the method name
+	-- virtual will allow you to take it and give you permession to modify it int the derived class with 'overriding' keyword
+	
+// overriding 
+
+// to override a method in derived class -- at first the base class method must have virtual keyword to allow override
+					 -- then add override keyword in the derived class method and modify it ( or you can take it as it be )
+
+-- inherit with [ no changes - create his own method - inherit it and modify ]
+
+
+if I want to add more statement beside the bases method we use [ virtual and override ] 
+		-- inside the derived class @ public override methodName(){base.methodName; .. add more statements }
+-- if I tryied to use the base method that was virual it will execute the method that exist in the derived class that have override $$$ in ( upcasting ) at run time polymorphism (dynamic binding)
+	
+-- polymorphism have dynamic binding and static binding
+	-- dynamic binding ( override, new,
+				-- new is to ignore the base method and create another mothod in child with the same signature
+
+	-- static binding ( overloading, 
+
+-- in case of method hidding not like the override will not go to the child because itsn't modified so it will excecute the base method not the child method 
+
+-- override keyword by default have 'virtual' keyword in case of multi inherit 
+
+-- in case of mutli inherit the last updated method is the visible one 
+
+-- new virtual (in specific order of inheritance)	new -- create function , virtual -- allow the child to modify the method
+
+-- sealed method remove the vitual keyword to stop modifying in the childs
+	@ public sealed override void stop()	=> sealed remove the virtual keyword from the override ( previously we said that override have a virtual keyword )
+
+-- overloading changing the signature of the method with the same name so it have multiple shapes with the same name 
+	[ no of params, 
+	In C# we can not overload in return type will cause (ambiguity)
+
+=============
+summary 
+base keyword
+polymorphism
+	dynamic binding 
+	static binding 
+sealed keyword
+	sealed class
+	sealed function
+@sealed search for the other usages of the sealed keywored
+
+================================= [ DAY FIVE ] =============================
+operator overloading 
+	-- clone as shallow or deep 
+
+@
+public point clone(point p )
+{
+	return this;	return reference;
+	return point p1 = new point();		--create new object
+	return p.clone();
+
+		
+}
+
+-- new allocate in memory and return a reference $$$
+variety to user for shallow copy using the clone
+we set the operator overload to static becuase it provided by the class to add two objects so object is not responsible for adding its self with another object 
+operator overload is bad in performance 
+
+point result = new point()		== open the memory and create 
+	result = 			== open memory again and update vlues 
+
+the best is 
+	return new point(p1.x + p2.x, p1.y + p2.y)	from the first time of opening the memory he will do all the works instead of do the prefvious four steps
+
+look for response time how to get full details 	[ show execution time ] it's an option from top bar
+
+public static implicit operator point (int no)		// in program @ p1 = x		implicit becuase i write implicit inside the class we don't have to add (point)	where point is an object 
+return new point(no + no)				// from int to object 
+
+public static explicit operator int (point p)		// in program @ x = (int) p1	explicit becuase i write explicit inside the class we should add (int)	
+return p._xCord						// from object to int
+
+object == anotherObject					// compare references
+
+gethashcode
+gettype
+look in object file cs
+
+for logic operator overloading we have to create the opposite
+
+abstract contain virtual inside it show any class inherit from it it must implement this abstract method inside it 
+
+abstract method must be inside abstract class 
+	-- abstract method must be public 
+	-- abstract method have by default virtual so in the derived class we use override and implement it
+	-- the derived class from abstract class must have the abstract method from the base class 	OR  we can set the derived class to abstract class
+
+
+interface a contract that the class must do it 
+	-- any method inside the interface by default => abstract + public + virtual  --- so I can't set one of these to interface 
+	-- we can't write variable inside the interaface, 
+	-- we can write property inside the interface just (auto implemented property) and that's becuase it doesn't have implementation
+
+	-- defualt implementation [ self study ]
+
+what is the difference between the abstract class and the interface 
+	abstract class can have both abstract method and non abstract method 
+	interface can have abstract methods / property only (auto implemented property) added newley 
+						-- indexer (added newley in the interfaces)
+	abstract class can have variables and but inerfaces cannot 
+	abstract methods in abstract class can have access modifiers , interfaces by default public + abstract + virtual
+	class can implement multiple interfaces but inherits from only one class 
+		mutlitple implementation for interfaces allowed in specific logic allowed, but in c# multiple inheritance not allowed in C#
+	abstract class used in case of inheritance
+	there is no inheritance between the class and the interface but there is a contract that the class must implement all of it 
+
+
+summary 
+	operator overloading 
+	abstraction
+	abstract class
+	intro for interfaces
+	
+how to do abstraction 100% => the answer is to use interface 
+
+
+------------------------------------- [ Tricks ] ---------------------------------
+
+-constractor 
+Special Type Of Function because => 1- Must Named AS Class Name ||  2- Don't Have Return Type 
+
+Can't Inhericted But Can Chaing 
+Can be Overloadind 
+
+
+-private ctor -- cannot create objec From It, 
+
+-Static Constructor
+ Called only once with first interaction with class 
+ cannot have any access modifiers or param
+-Destructor or Finalizer
+        ~ClassName()
+        {
+            
+        }
+instructions for Garbage Collector before killing object in memory 
+can not  be called 
+cannot have any access modifiers or Param 
+
+-------- Static Members ----------------------
+ created only once in memeory 
+ belongs to class only not objects 
+ Shared for all objects
+ can be accessed only by class name 
+
+-- Statict Function Work With Onley Static Member 
+-- Non Static Function Work with Static Andd Non Static Member
+
+***********************************************************************
+-- Class And Struct And Enum ===> By Default Internal 
+-- Class Member  And Struct Members ==> By Default Private 
+*********************************************************************
+ClassName  ObjectName ==> Declare Reference 
+ObjectName = New ClassName() ===> Creatioin or Instantion 
+New===> Allocation In Memory 
+Constractor ===> Inialize Member of Object
+********************************************************************
+Shallow Copy :: Two References Point(Refere to) Same Object In Heab ==> التعديل ف واحد يسمع ف التاني 
+Deep Copy :: Copy Date From object To Anthor ==> التديل ف واحد ملهوش علاقه بالتاني 
+*******************************************************************
+Relations Between Classes :
+             *  1- Composition ==> Class A is Main part of Class B  ==> Consist Of Relation   
+             *  2- Aggregation ==> Class A is optional part of Class B ==> Has A  Relation
+             *  3- Association ==> Class A use class B  ==> Use  Relation 
+             *  4- Inheritance ==> is-A Relation 
+*******************************************************************
+   Inhertance 
+
+             * ==> Represent is-A Relation
+             * ==> Class can inherit from ONE class Only 
+             * ==> Can have Multi-level inheritance ==> Class A inherits from class B and Class B inherirts from class C
+             * ==> but cannot have multiplue inhrit ==> Class A cannot inherit from 2 classes at the same time
+             * ==> Class that classes inherits from  ==> Parent , Base , Super
+             * ==> Class inherit that inherits from other class ==> Child , Derived , Subclass
+-- Base KeyWord Reference To Parent
+-- This KeyWord Reference To Current Object
+
+الكونستراكتر لا يورث لاكن بيحصله  -
+chaning
+بورث كل حاجه من الاب لكن مقدرش اكسس غير -
+public , protected
+
+Reference parent = Object Child ==> Valid , Implicitly 
+Refrence child = Object Parent ===> Not Valid , Explicily
+if you write this code ---> Refernce Child = (Parent) oBjectChild ==> Compile Time Error 
+-----------------------------------------------------------------------------------------------------
+Acesss Modifiers 
+
+        private ==> class scope 
+        public ==> Solution Scope Or Any Project That Refere To My Project 
+        internal ==> project (Assembly) Scope حتي لو عامل رفير ف بروجكت تاني مش هيشوفه  
+        protected ==> Parent Class And  Childeren Scope in solution Not Accessable In Main
+        protected internal ==> project Scope + //Childeren Scope in solution
+-----------------------------------------------------------------------------------------------------
+Types of classes  ::
+
+1- Concrete Class 
+==> User Define Class
+2- Sealed Class
+     ==> cannot inherit from it 
+     ==> can inherit from other class 
+     ==> can create object
+3- Sataic Class 
+    ==> cannot create object 
+    ==> all fileds inside class must be static 
+    ==> Ex : Math Class
+4- Partial Class 
+       ===> Merge two files as one class
+       ==>two  Classes Must Be Same Name 
+5- Nested Class
+    //outer class
+    internal class CarFactory
+    {
+        int ModelNo;
+        public string CarName;
+
+        public void GetCarData()
+        {
+            AutoCars A = new AutoCars();
+           // A.MotoreType //error Cant Acess Private Inside Inner Can Acess Only Public 
+        }
+
+        //nested class, inner class
+       internal class AutoCars
+        {
+            public string Color;
+            string MotoreType;
+
+            public void GetData()
+            {
+                CarFactory CF = new CarFactory();
+                CF.ModelNo = 9; // Can Acess Private And Public 
+                
+            }
+        }
+    }
+
+in Main 
+  CarFactory.AutoCars A = new CarFactory.AutoCars(); This Is Only Way To Create Instance Of Innere Calss In Main
+          
+  CarFactory CF = new CarFactory(); // Outer عادي زيه زي اي كلاس 
+6- Abstract Class 
+      ==> cannot create object But Cant Create Refrence From It
+      ==> made to inherit from it 
+           ==> Contain Abstract And Non Abstract Member 
+      ==>  Can Implement InterFace 
+-----------------------------------------------------------------------
+sealed Mehod :: Can not Be inherted زيها زي الكلاس السيلد مقدرش اوث منه 
+New Mthod :: hides parent function from child خلاص دي بقت جديده والي يوث مني لاما يخدها زي مهيا لاما يعمل هوه واحده نيو خاصه بيه  
+virtual method :: 
+==> 1- chils can inherit it with no changes 
+==> 2- child can create his own new function [using New KeyWord]
+==> 3- child can inherit it and reimplement it ( change implementation) [[using Override KeyWord] 
+خلي بالك دا لو ريقرنس من الاب بيشاور علي اوجكت من الابن كلمه فرشوله بتقوله روح شوف اخر تحديث 
+last Updated Version 
+
+Override Method ::
+         Override by default virtual 
+	عكس النيو انها بتدي الي بعدي السماحيه انه يعمل اوفرريد او لا 
+ abstract Method  ==> bydefault virtual 
+        		required override 
+			Dont Have Implementation
+----------------------------------------------------------------------------------------------------------------
+Method Overloading  ==> 
+
+
+Overloading function with same name and same Returned data type and different in  number of parameter an order of parameter and data type of parameter
+
+
+static binding ==> Copile Time Ploy 
+        
+        public int Sum(int x)
+        {
+            return x + 1;
+        }
+        public int Sum(int x,int y)
+        {
+            return x + y;
+        }
+
+        public int Sum(int x, double y)
+        {
+            return x;
+        }
+
+        public int Sum(double x, int y)
+        {
+            return y;
+        }
+
+        //error, cannot overrload return type ==> ambguity
+        //public double Sum(double x, int y)
+        //{
+        //    return x;
+        //}
+	عشان سعتها الكوميلر مش هيعرف ينفذ مين فيهم 
+-------------------------------------------------------
+Method Overiding :: Two Function Same Segnature And Dirrent Implementation [Body]
+
+-Dynamic binding run time polymorphism using virtual and override 
+Or  by Method hiding using new 
+--------------------------------------------------------
+//Operator Overloading
+--- must be static and public 
+--- if you overload operator = you must implment != and any contional operator
+
+public static Point operator + (Point Px, Point Py)
+{
+	return new Point(Px._xCord + Py._xCord, Px._yCord + Py._yCord);
+}
+  public static Point operator -(Point Px, Point Py)
+  {
+    return new Point(Px._xCord - Py._xCord, Px._yCord - Py._yCord);
+  }
+ public static Point operator +(Point Px, int no)
+  {
+            return new Point(Px._xCord + no);
+   }
+       
+   public static Point operator +( int no, Point Px)
+   {
+            return new Point(Px._xCord + no);
+   }
+
+
+public static implicit operator Point(int no)
+{
+  return new Point(no);
+}
+
+public static explicit operator int(Point P)
+{
+return P._xCord;
+}
+
+-----------------------------------------
+interface 
+-- define a contract betwwen interface and any type want to implement it 
+-- contain auto implemented property and Signature For Method
+
+interface member : by default ==> abstract + public + virtual 
+
+----------------------------------------------------------------------
+     /* Abstract Class Vs Interface
+         * ==> Abstract class can have both abstract method and non abstract methods
+         * ==> Interface ==> abstract methods /Proprty only 
+         * ==> Abstract class can have variables but interfaces cannot
+         * ==> Abstract methods in asbtract class can have access modifiers , interfaces by default public=abstract+virtual
+         * ==> Class can Implement multi interfaces but inherits from only one class
+         * ==> Abstract class used in case of inheritance 
+         **/
+--------------------------------------------------------------------
+
+
+
+
+------------------------------- [ ITI OOP Exam Revision ] ---------------------------------
+[ constructor ]	
+	[ private costructor ] 
+		( singelton pattern ) to make sure to create only one instance from it
+		more control on the created instance valume but make sure that there is no subclasses can inherit from it so we make it sealed
+	[ Static Constructor ]
+		called only once with the first call of the class cannot
+		Can't have any access modifiers or parameters
+	
+	[ Destructor / Finializer ] 
+		its $$ we need to talk about it more deeper
+		talk about IDisposal and Dispose()
+		chatgpt not saying that it's instructions that the garbage collector follow before killing a resource in memory
+		can't have any access modifiers or params
+
+[ Static Members ]
+	Created only once in memory
+	belongs to class only not objects but shared for all objects
+	can be accessed only by class name
+
+[ Static Function ]
+	Works only with static memebers
+	
+[ Non-Static Functions ] 
+	Works with static and non-static members
+
+	[Class, Struct, Enum] => Internal by default
+	[ Class Member and Struct Member ] => Private by default
+	
+new is used to create new instance of that class
+	store in the heap to store the employee object 
+	the amount of fields allocated is determined by the class's fields and properties
+	then the default instructor is called to intialize the newly allocated memory
+	if we haven't defined a constructor explicitly 
+		C# provides default one that initalizes fields to their default values 
+	the reference variable e is created on the stack holding a reference to tha data that he is pointing to in the heap
+	
+	so here we can say that when creating a new variable from a specefic type that from reference type variables 
+	the variable name that holds the address of the data is stored in the stack and the data that is pointed
+ 	by that variable is stored in the heap [ heap is larger than stack ]
+	
+	for value type variables the variable is holding its data directly in tha stack 
+
+	
+	first - reserve a block of memory for the object 
+	secon - constructor invocation and object intialization [ check for the defined contructor call it - and then initalize the object' properties ] if not defined constructor C# have a default value that will be called automatically and then also will intialize the object's members
+	third - the reference variable is created in the stack and then assigned to the newely created object address in the heap 
+	
+	Employee e = new Employee();
+	-- here look at this line from right to left 
+	[ new Employee() ] 
+		-- [ new ] reserve a block of memory from type Employee
+		-- [Employee()] constructor invocation and then executing that constructo to intialize the object's propeerties
+		-- [ this line leaves then and return an address for the reserved block in memory heap ]
+
+		-- now create a reference variable from type Employee and make it holds the address of the reserved block in heap
+		-- that reference variable and the address that he holding is stored in the stack
+		-- new allocation in memory
+[ Classes Relations ]
+	[ Composition ] 
+		Class A is main part of class B ( Consists of )
+	[ Aggregation ] 
+		Class A is optional part of Class B ( Has a )
+	[ Association ] 
+		Class A use Class B
+	[ Inheritance ] 
+		IS A Relaction
+
+so composition, a class's instance is a member of another class
+inheritance realation between classes is a relation like vehicle with bus and car , both car and bus inherits from the vehicle
+
+association => class a use class b but like as a parameter in a method of class a
+composition => class a is a main part of class b one of its members
+inheritance => class a is a class b beside it have its own members beside the ones that inherited from class b
+aggregation => is like composition but in a weak shape not 
+
+in composition	class { public anotherClass } 	strong relation between it and the whole
+in aggregation 	class { list<anotherClass> }	weaker relation between it and the whole
+in inheritance 	class : anotherClass {}		inherit from another class
+in association class { public void print(AnotherClasss){}} class uses anotherClass as a parameter
+
+class can inherit from one class only 
+can have multi  level inheritance
+can't have multiple inherit
+parent, base, super we call 
+child, derived, subclass
+base keyword refer to the parent
+this keyword refer to the current object 
+constructor is uninheritable but we can chain it in the derived by : base with the super
+
+downcasting and up casting
+concrete class // userdefined class 
+
+we can't inherit from a sealed class but 
+	we can include it as a member inside another class (composition relation)
+	we use it without any ability to modify it 	
+	can create objects normally
+	sealed with methods virtual methods stop overrideing to subclasses
+		-- so we have a virtual method in a class another class inherit and override this method but he don't won't the subclasses to override that method so we make it sealed overriden
+
+static class
+	cannot create objects
+	all fields inside class must be static like in math class ( utility class)
+
+	static can also be used for singleton pattern (instance limitation)
+	static member can be used to defing consts members 
+	constant can access without creating an instance also from that class 
+	we can use it as statistics (counting and tracking) like counting the instances that created from the class 	
+	static class also used to write an extention method 
+
+what is an extension method 
+	is a method inside another class that extends a specific class with methods that we call it an extension method
+	can't access private members of the refered class's instances
+	so the extension method inside the static class have parameter starts with 'this' keyword here the this keyword have another meaning in this location, the compiler understand it as an 
+	indication that this method is extension for the second word parameter that comes after this
+	like in @ public static void empExt ( this Employee e )
+	// here this exsits in the first parameter so it indicates that this is an extension method 
+	// also Employee comes after the this keyword so that this extention method is an extension for Employee instances
+	
+partial is the ability for classes to work in separate files
+
+
+abstract class can't create object but can create reference from it 
+	made to inherit from it 
+	can implement interface
+	contain abstract and non abstract member
+	
+abstract method 
+	method without a body ( implementaion )
+
+static binding for function overloading [ Compiler-Time Binding ]
+	change in parameter [ data types and number of the parameter ]
+
+what is the differnet between overriding and overloading 
+
+overloading happens on the function signature [ parameter datatypes and number of the parameter ] also its a static binding because it determined on the compile time [ name binding ]
+overriding happens on the same signature but different implementaion in the function body
+
+public is accessible through the entire solution 
+private is accessible only for class members
+protected is accessible only for class members and derivec class members
+protected internal is accessible for class members and derived class in the same project 
+protected private is accessible only for class members and derived class members that exists in the same asscembly
+
+protected private is accessible for class members and for derived class only exists in the same assembly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

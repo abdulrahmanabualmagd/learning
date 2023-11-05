@@ -1,0 +1,775 @@
+========= [ Resources ] =============
+https://www.entityframeworktutorial.net/code-first/what-is-code-first.aspx
+https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
+https://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/code-first-approach-in-entity-framework/
+
+
+
+LinQ ( Language Integrated Query )
+	-- we can deal with Two Primary Syntax [ Method Syntax ] & [ Query Syntax ]
+
+-[ Method Syntax ] 
+	-- we use Extension methods provided by the System.LinQ (which designed to chained together)
+	-- Fluent Interface 	// Offers a more fluent and method-chaining approach
+	-- Lambda Expressions 	// We use it for defining the creteria for filtering, projecting, ordering, and other query operations 
+	-- @ var q = collection.Where(n => n < 2).OrderBy(n => n.Name).Select(n => n.Name)
+
+
+-[ Query Expressions ] 
+	-- (SQL-like Syntax) we use Sql Queries 
+	-- Readability 		// more preferred for complex queries
+	-- Compiler Translation // #under the hood, the C# compiler translates query expressions into method syntax, so the two styles are equivalent
+	-- @ var q = from n in collection where n < 2 order by n.Name select n.Name;
+
+
+Code-First Devlelopment 
+      [ how to define data model classes ]
+      [ Entity Classes ]
+      [ Create Data Schema through the code First Development ]
+
+Database Mirgrations 
+      [ Associatied with Code-First Approach ]
+      [ Evolve a database schema over time ]
+      [ Adding new tables, Modifying Columns, Creating Indexes ]
+      [ Here we Apply changes over time to a data base using migration tools to add columns, Modify Tables ]
+
+Database-First Development
+      [ Starting with an Existing database schema ]
+      [ We are generating code (model) from the already existing schema [ Reverse Engineering ]
+      [ Tools and Frameworks like Entity FrameWork can reverse-Engineer the database schema to create entity classes and other code constructs that represent the database tables ]
+      [ This Approach is used when you already have an estabished database and want to build your application around it ]
+
+	
+Defining New Model
+      - Create Class that represents your data model.
+            @
+                  public Person
+                  {
+                        pubic int Id {get; set;}
+                        public string FirstNameP {get; set;}
+                        public string Lastname {get; set;}
+                        
+                        // write other propeties
+                  }
+      
+      - Seting Primary key Manually We can use the [Key] Attribute
+            @
+                  [Key]
+                  public int Id {get; set;}
+      
+      - Setting DataAnnotations of Fluent API To configure Additional Aspects of your model, such as ColumnNames, DataTypes and constraint
+            @
+                  [Required]
+                  [StringLength(50)]
+                  public string FirstName {get; set;}
+                  
+                  [Required]
+                  [StringLength(50)]
+                  public string LastName {get; set;}
+      
+            - OR
+            @ 
+                  modelBuilder.Entity<Person>().Property(p => p.FirstName).IsRequired().HasMaxLength(50);
+      
+      - Relationships 
+            
+            - One To Many
+            @
+                  public class Department
+                  {
+                        public int Id{get; set;}
+                        public string Name {get; set;}
+                        
+                        // this is the foriegn key to the Empoloyee table
+                        // the development kit will understand it without creating an column in Department table
+                        public ICollection<Employee> Employee {get; set;}
+                  }
+                  
+            - OR
+            @
+                  modelBuilder.Entity<Employee().HasOne(e=>e.Department).WithMany(d=>d.Employee).HasForeignKey(e=>e.departmentID);
+            
+            
+            - For many-to-many relationship we add the property to both exchangably
+            
+            @
+                  public class Course
+                  {
+                        public int CourseId{get;set;}
+                        public string CourseName{get;set}
+                        
+                        publicICollection<StudentCourse> StudentCourses{get;set;}
+                  }
+                  public class Student
+                  {
+                        public int StudentId{get;set;}
+                        public string Name{get;set;}
+                        
+                        public ICollection<StudentCourse> StudentCourses{get;set;}
+                  }
+                  
+                  public class StudentCourse
+                  {
+                        public int StudentId{get;set;}
+                        public Student Student{get;set;}
+                        
+                        public int CourseId{get;set;}
+                        public Course Course{get;set;}
+                  }
+            
+            - using Fluent API
+            @
+                  
+                  modelBuilder.Entity<StudentCourse>().HasKey(sc=> new {sc.StrudentId, sc.CourseId});
+                  modelBuilder.Entity<StudentCourse>().HasOne(sc=>sc.Student).WithMany(s=>s.StudentCourses).HasForeignKey(sc=> sc.StudentId);
+                  modelBuilder.Entity<StudentCourse>().HasOne(sc=>sc.Course).WithMany(c=>c.StudentCourses).HasForeignKey(sc=>sc.CourseId);
+                  
+
+For Creating a new project Code-First 
+      --#-- install entity framework using nuget package manger [ Install-Package EntityFramework + ENTER ]
+      --#-- Define my model classes create classes properties and define constrains priary keys and so on 
+      --#-- Create a DbContext that inherit from the DbContext and have DbSet for each of my model classes
+      --#-- add a connection string specifying the database server, initial catalog and other server details also the name of the connection 
+      --#-- don't forget to write Database.CreateIfNotExist & Database.SetInitializer in the constuctor of the class that inherits from the DbContext
+
+
+What is [ Proxy in C# ]
+
+
+------------------- [ Qeustions ] -------------------
+
+enable lazy loading by adding keyword 'virtual' to the property
+      
+what is .Include(), .Load()
+
+what is intial data retrieval?
+
+what is include method used for 
+
+what is InverseProperty ?
+
+what are database initialization strategies?   [ CreateDatabaseIfNotExists / DropCreateDatabaseIfModelChanges / DropCreateDatabaseAlways ]
+
+what is 'using' keyword
+
+what is discard '_'  like in _= new connection() instead of Connection context = new connection()
+
+what is migration history table ?
+
+attributes like key and composite primary key how to make it 
+
+------------------ [ Operators ] -----------------------
+
+1- [ Projection Operators ] 
+	- [ Where ] 	Filters Element based on a specified condition
+@	- [ OfType ] 	Filters Eelements of a specific type from a collection
+
+2- [ Filtering Operators ] 
+	- [ Select ] 	Project each eleemnt into a new form or type 
+@	- [ SelectMany ]Projects each element of a collection to an IEnumberable and Flattens the Resulting sequece into one sequence 	
+
+3- [ Sorting Operators ]
+	- [ OrderBy ] 	Sorts elements in Ascending order based on a key 
+	-[orderByDescending] Sorts elements descending order based on a key
+	- [ ThenBy ] 	Performs a secondary sort on elements that have the same key
+	-[ThenByDescending]  Performs a secondary desceding sort on elements that have the same key
+
+4- [ Aggregation Operators ]
+	- [ Count ] 	Returns the number of elements in a collection
+	- [ Sum ]	Computes the sum of numeric elements in a collection
+	- [ Average ] 	Computes the average of numberic elements in a collection
+	- [ Min ] 	Returns the minimum element in a collection
+	- [ Max ] 	Returns the maximum element in a collection
+@	- [ Aggregate ] Applies an accumulator function to the elements in a colletion
+
+5- [ Quantifier Operators ]
+	- [ Any ] 	Determines if any elements in acollection satisfy a specified condition
+	- [ All ]	Determines if all elements in a collection satisfy a specified condition
+
+6- [ Element Operator ]
+	- [ First ] 	Returns the first element that satisfies a specified condition
+	- [FirstOrDefault]  Returns the first element that satisfies a specified condition or a default value if no elements match
+	- [ Single ] 	Returns the only element that satisfies a specified condition 
+	- [SingleOrDefault] Returns the only element that satisfies a specified condition or a default value if no elements match
+
+7- [ Set Operators ]
+	- [ Distinct ] 	Returns distinct elements from a collection
+	- [ Union ] 	Returns the union of two collections
+	- [ Intersect ] Returns the intersection of two collections
+	- [ Except ] 	Returns elements that are in the first collection but not in the second collection
+
+8- [ Partitioning Operators ] 
+	- [ Take ] 	Returns a specified number of elements from the start of a collection
+	- [ Skip ] 	Bypasses a specified number of elements from the start of a collection
+	- [ TakeWhile ] Returns elements from a collection as long as a specified condition is true
+	- [ SkipWhile ] Bypasses elements from a collection as long as a specified condition is true
+
+----------------------- [ Types ] ------------------------
+// There are several types each type designed for different Data Sources and different Scenarios
+// the most comomon type :
+
+1- [ LinQ to Object ] 
+	-- Data Source => [ Memory Collections ]
+	-- Most Common Type of LinQ query
+	-- It allow you to Query in memory collections [ Arrays, List, Dictionaries ] with the LinQ operators
+	-- @ var nums = new List<int> {1,2,3,4,5,6};
+	   @ var q = nums.Where(n => n < 3);	// 
+	-- then we use foreach to use it
+
+2- [ LinQ to XML ] 
+	-- Data Source => [ XML Data ]
+	-- Manipulate XML data using [XElement] & [XDocument] Classes
+	-- we can perform operations like filtering, projecting and sorting 
+	-- @ XDocument xmlDoc = XDocument.Load("fileName.xml");	
+	-- @ var q = from element in xmlDoc.Descendants("Person") where (string)element.Attribute("gender") == "male" select element;
+
+3- [ LinQ to SQL ] 
+	-- Data Source => [ SQL Database ] 
+	-- Create LinQ Queries that translate into SQL Queries
+	-- Providing strongly-typed approach to database access
+	-- @ var db = new DataContext("connectionString");
+	-- @ q = from customer in db.Customers where custromer.City == "NewYork" select customer;
+
+4- [ LinQ to Entity ] 
+	-- Similar to LinQ to SQL
+	-- query databases using Entity Framework
+	-- A more versatile and feature-rich ORM (Object-Relational Mapping) Framework
+	-- @ using (var context = new MyDbContext())
+	-- @ {var query = from product in context.Products where product.Category == "Electronics" select product;}
+
+
+5- [ LinQ to DataSet ]
+	-- Data Source => [ ADO.NET DataSet ]	
+	-- which is a collection of zero or more tables represented by DataTable objects
+	-- @ var dataSet = new DataSet();
+	-- @ dataTable = dataSet.Tables["TableName"];
+	-- @ var q = from row in dataTabel.AsEnumerable() where (int)row["Age"] > 30 select row;
+
+6- [ LinQ to Objects with parallelism ]
+	-- Data Source => [ Memory Collections ] 
+	-- Use PLinQ to perform LinQ Queries on in-memory collections in parallel
+	-- which takes advantage of multi-coreprocessors to speed up query execution
+	-- @ var nums = Enumerable.Range(1,100000);
+	-- @ var q = numbers.AsParallel().Where(n=> n % 2 == 0);
+
+
+
+=========== [ Day One ] ===========
+LinQ & Entity Framwork
+console --
+
+[ Extension Method ]
+making an extenstion method for the list 
+create static class == static because it is a functionality class
+create static method that will be an extension for the class the we specify
+
+public static List<int> Filter(List<int> inputList)
+{
+	List<int> OutList = new List<int>();
+	foreach(var item in inputList)
+	{if (item%2==0) OutList.Add(item);}return OutList;
+}
+
+we can path the delegate as a parameter for the static function in the main function 
+
+we create two function for even and odd funciton and make a delegate have the same signature as even and odd
+but we didn't use extension method yet 
+
+any thing I can do iteration on it implement IEnumerable 
+we should make extension method if I want to make it extension for generic class
+to make an extension for List we create method 
+public static IEnumerable<T> Filter<T> (this IEnumerable e, del)
+{
+	// this extenstion for any collection that have iteration 
+	// IEnumerable<int> Result = Lst.Filter(n=> n> 3);	// here we make extension method for any class Emplement IEnumerable like list
+	// 
+}
+
+rules for extension method 
+-- function must be static 
+-- class must be static and obtain the static function
+-- first parameter for the method must be 'this' // here the compiler understand that this function is extension method for the next word after 'this'
+
+public static IEnumeable<int> Test()
+{
+	return new List<int>() {1,2,3,4};
+}	
+
+var Result = Test();
+foreach(var item in Result)
+{
+	Console.WriteLine(item);
+}
+
+
+
+var something dynamic determine the data that it referring to in compile time unlike js
+
+var 
+public static IEnumeable<int> Test2()
+{
+	yield return 1;
+	yield return 2;
+	yield return 3;
+// we can obtain multiple return for IEnumerable object using yeild 'keyword'
+// relation between yeild with return and foreach for IEnumberable object 
+
+	-- [ Yeild ] --
+-- allow many returns => return each item alone in each iteration 
+-- changing the default behaiour of execution called [ Deferred Execution ]
+	-- the funtion will be executed only when there is Iteration like below 
+	@
+	var result = functionNameThatHaveYeild(); --here the result holds Potential result 
+	foreach(var item in result){} $$because of this line the function will be executed and on each iterate it will look execute the function not thre result to make it return the next Yeild value
+-- the function that have Yeirl return to execute must be foreach to execute it [ Deferred Execution ]
+-- the behaviour that caused by Yeild return [
+the normal execution called [ Eager Execution ]	=> holds the return result of the function
+
+[Eager / Deferred ] Execution
+}
+
+IEnumerable<int> R = Lst.Filter(n=>n>3);
+
+foreach(var item in R){}
+lst.add(9)
+// deffered => will see the new item => execute function again with the updates of the data source
+	with every iteration will execute the function 
+// Eager => will only print the result list from r without any updates happen for it 
+foreach(var item in R){}
+any variable holds data we call it datasource
+
+// eager execution => sub_routine
+
+// deffered execution => co-routine
+
+IEnumberable<int> r = Lst.Where();
+	-- Where<TSource> returns IEnumerable<Tsource> ==> Built-in Extension method 
+	-- Select  				       ==> Built-in Extension method 
+	-- Top
+	-- join
+	-- subquery
+
+Linq => IEnumerable (static class) contain static methods and use [yeild return]
+
+LinQ come after ADO
+More easier for 
+Language Integrated Query => 
+
+@ => Import sympoly from the upcomming path
+
+Northwind db new Northwind(@"Path");
+var query = from c in db.Custromers select c;
+
+there is types of linQ
+
+LinQ to [ SQL/ Xml/ Object/ Data Set ]
+sql not used any more because why should I have to work with sql only 
+data set => ef
+object => in memory objects $$
+xml => 
+what is the different between ado and linq
+	== ado more speed that linq used in banks system
+
+all differ in the way that we get to the data source 
+
+-- instead of writting IEnumerable ... we short it to var and it will ..
+var Query = SamplData.Departments.Select(d => d); -- Query holds Potential data 
+foreach(var item in Query) -- this is important for deffered execution 
+{
+	Console.WriteLine(item.Name);	
+}
+
+could we convert it to eager ==> we add .ToList();
+@@@ var Query = SamplData.Departments.Select(d => d).ToList(); -- here we make it eager 
+	-- Query Holds List of Departments
+
+in Deferred any modification is sensible for the list before foreach
+when we should use eager and deffered 
+
+what Are all the extension method for the LinQ??$$ [ Deffered by default ]
+single, default, first, take, while 		-- |^
+
+if  i want to return mutli value we can use anoanymous object in return 
+var Query = SampleData.Select().Where();
+		-- the output of Select is input for Where
+		-- so we should contain the data that Where use in conditino
+
+var Query = from d in SampleData.Departments where d.Name.Length > 3 select d;
+
+int Query = (from e in SampleData.Employees where e.Salary > 2000 select e).Count(); 
+
+Query Expression 
+pipline
+aggregate function 
+
+var Query  = (from e in SampleData.Empolyees where e.Salary > 2000 select e).Max(e>e.Salary);
+
+var Query = ( from e in SampleData.Emploees where e.Salary > 2000 select e ).First();
+
+/First()/ throw exception if not become true  /FirstOrDefault/ put the default value if not become true(condition)
+
+what is the different between take() and FirstOrDefault
+	take(n) take n numbers of data not only one unlike FirstOrDefault
+
+Skip(2) skip first two and get the rest 
+
+TakeWhile(e=>e.name.lenth<5); -- takes lambda Expression
+what is different between takewile and where ??
+	where check all the list 
+	takewhile if the condition become false it will stop checking what is next if even there is a match for the condition
+
+skipwhile()take lambda expression
+	-- after first match will take it and the restof the list weither matches or not 
+
+first, firstOrDefault, Take, TakeWhile, Skip, SkiopWhile, 
+
+join @ subQuery
+
+var Query = from e in SampleData.Employees from d in SampleData.Departments where e.Department == d select new {e.Name, d.Name};
+foreach(var item in Query){console.WriteLine(item.Name);}
+
+var Query = from e in SampleData.Employees join d in SampleData.Departments on e.Dpepartment equals d select new { e.Name, DeptName = d.Name };
+foreach (var item in Query){console.WriteLine(item ... }
+
+var Query = SampleData.Employees.Select(e=>new {e.Name, DepName = e.Department.Name}
+
+// sub Query
+var Query = from d in SampleData.Departments select new { d.Nam, Employees = from e in Sampledata.Employees where e.Department == d select e.Name};
+
+
+or sub-query 
+IEnumerable 
+
+region Casting
+// error, Cannot Implement IEnumberable 
+var Query = from e in SampleData.GetEmployee() select e;
+
+1-- not the best 
+@var Query = from Employee e in SampleData.GetEmployee() select e;	-- casting every object return to [employee]
+	-- high risk for object not type of employee [Not Safe]
+
+2-- not the best 
+@var  Query = from e in SampleData.GetEmployee().Cast<Empolyee>() select e; -- casting all the returning object to Employee
+	-- high risk for object not type of Employee [Not Safe]
+
+3-- most used [ More Safe ] called [ Safe Casting ]
+-- cast to IEnumerable<Employee>
+@var Query = from e in SmpaleData.GetEmployee().OfType<Employee>() select e; -- convert it to IEnumerable of Employee (just convert the object from type IEnumerable<Employee>
+
+lab
+using 2 method [ sub-Query / joni / relation .. differentiate
+
+
+=========== [ Day Two ] ==============
+application = [A medium] = database
+
+ef is a medium layer [ EF API ] called [Entity Data Model] => Contain [ Conceptual Model / Mapping / Storage Model ]
+
+we are using LinQ to deal with EF that Deal with the data source
+
+deepy context lite weight from EF [unrequired functionality removed]
+object context is old version but deepy context is new and light weight 
+
+install to the project 
+three methods to work with EF
+	- [ new item in the project ]
+	- [Data] [ADO.NET Entity Data Model] 
+	
+	- database first [ EF Designer from database]
+	- [Empty EF Designer model] not working in the industry
+	- [Emply Code First Model] Code First - Most Common Used
+	- [Code First From Database] Mixed Mode for complex projects [ Classes + 
+
+	IP Address
+connection string contain all the data for connection details
+app.config is like bios tells how the application should work 
+
+which version of EF [6.x / 5.0] // choose the latest
+
+what is DbContext (entity framework)
+concurrency mode 
+navigation peroprty
+
+CompanyEntity 
+
+// connection string must have name // we can obtain more that one connection string // stored in app.config
+CompanyEntities context = new CompanyEntities();
+what is different between IQueryable and IEnumerable?
+What is Expression Tree [respnsible for converting c# query to sql server query
+
+var q = context.Department.Select(d=>d);
+
+$$$-eager laod, lazy load, Explicit load, IQueryable, IEnumerable, when to use each one on different business cases
+
+explain what happened here
+var q = context.Departments.Select(d=>d).Where(d=>d.ID>); // $$
+search for it 
+
+performance and memory overload [ deferred / eager ] which case make me chose which one
+
+to convert from deferred to eager we pub .ToList()
+var q = context.Departments.Select(d=>d).ToList.Where(d=>d.ID > 10);
+explain what heppned here$$
+
+context.Database.Log = Console.WriteLine; // show all states
+
+Department Dept = context.Departments.FirstOrDefault();
+dept.Name = "UpdateDept";
+
+context.SaveChanges();	// 
+context.Entry(Dept).State=System.Data.Entity.EntityState.Modified  // this line occurs autmatically 
+context.Entry(Dept).State=System.Data.Entity.EntityState.Add
+context.Entry(Dept).State=System.Data.Entity.EntityState.Delete
+context.Entry(Dept).State=System.Data.Entity.EntityState.Detached
+[ Unchanged/ Modified ]
+// search for it 
+Department dept = new Department(ID=, NAME='', ...);
+context.Departments.Add(dept);
+context.SaveChanges();
+
+
+Department Dept = context.Departments.FirstOrDefault();
+context.Departments.Remove(dept);
+context.SaveChanges();
+
+[Relation] we don't have join because we're working C#
+
+var q = from e in context.Employees select new {e.Name, DeptName=e.Department.Name};
+foreac(){}
+
+Department NewDept = new Department(){ID = 26, Name= "TestRelation"};
+Employee Emp = new Employee (){Name = "EmpRelation", Department = NewDept};
+context.Employees.Add(Emp);
+contxtl.saveChanges();
+
+Department newDept2 = new Department(){}
+Employee emp2 = new Employee(){Name = "empRelation2", Department = emp.ID};
+context.Departments.Add();
+context.saveChanges();
+
+//include foreign key with the model // Search for it 
+
+// adding stored procedure 
+	// browser model show 
+view/ table => class
+stroed procedure => function 
+
+ef can't understand the return of the stored procedure so we determine it by ourself 
+	-- go to model browser and the name of the proc in function imports and change it to entity with the name of the class that we know it will return data from that type
+	-- return a collection Of
+
+what is DbSet // IQueryrable
+concurrence mode 
+
+
+============== [ Day Three ] ================
+the deferred execution occurs when you enumerate the results by using the foreach or ToList() ToArray()
+
+what is ToList(), ToArray() search for it ??
+
+[databasefirst] we took yesterday !
+
+relation in C# search!
+
+dependent is the foreign key that is pointing to the primary key [Princible Key] 
+
+relook at the relation region in the demo // why we send it as newDept and the different between send it as the dept.id 
+
+(@"") what is the purpose of the '@' symbol
+
+concurrency mode // check before savechanges that the value as excpected 
+but lower the performance and extra amount consumed in memory [ OriginalValue / CurrentValue ]
+
+TimeStamp Search!!
+
+Entris is an array in the exception that holds all the objects that a problem occured to it 
+
+var value = ex.Entries.First(); // get the last object add to the list 
+value.Reload(); // select again from the beginning to update the value // can't detect wich column have problem occured so it reload the all the columns (Row)
+
+value.OriginalValues.SetVAslues(value.GetDatabaseValue());	the same as the previous two line inside the catch 
+	// here we set the original value that added from the concourrency mode 
+	// value.GetDatabaseValue() Search!! // it get the values from the database again as the [ value.Reload() ] 
+
+also we have a getValues like setValue search!!
+
+each context has its own try-catch 
+
+what is custom error handling
+
+what is documentation in C#?
+
+============================
+
+what is dataware house ?
+
+what is netget package manger ==> search for entityframework (not the core version)	work with the latest stable version !!
+
+if there is no internet connection get the ef from the package from an old project
+
+how to add connection string to the app.config
+
+in the datacontext class that inherits from dbcontext in the constructor of the datacontext 
+public context():base(name of the connection string )	sent it to the dbcontext constructor with the connection string name 
+
+what is DbSet //implemented in the datacontext class // is the table that create in the sql server when adding it to the sql server //context.add(dept)
+
+what is migration history a table in the sql
+
+ID column auto detected and will by default set it as primary key 
+and if it numeric will set it Identity and not null
+
+any reference type by default will make it allow null
+
+context.add // automatically savechanges [affect the database] // only will create the table without adding the objects created 
+	-- to add it we have to write context.saveChanges(); // this will save the object to the [binded table] that we add it to the context 
+
+the created table in the database is the name of the DbSet<>
+
+migration is the mapping of c# to database [migration]
+
+class Database is existed if the datasource is sql
+
+Database.SetIntializer<dataContext>(strategy) like [ drop... ]
+
+what is model in ef?
+
+model is the structure of the table, each row record considered as model
+
+if the database is in use we can't modify or drop any table $$ like if we open the ssms and we're trying to modify the database from the visual studio 
+
+what is attributes in C#
+	addtional infromation that maps over a class
+
+what is data annotation use the attrubutes 
+
+[table(""myDept,schema="newschema")]
+internal class{}
+
+[key]
+[Column("ID")]
+public int deptID {get;set;}	// here the key is information for that line [ next line ]
+
+[Required] -- make the name not allow the null [ attributes ] 
+[]	// we can add more than one attribute in sperated line or sperated by comma on the same line like [,]
+public string Name{get;set;}
+
+to be able to use the data annotations we have to add using namespaces for the data annotation
+
+
+// in c# corner 
+// search for that snippet 
+[Timestamp]
+public byte[] TimeStamp{get;set;}
+
+
+seperate which one to use [ Code First ] or [ Database First ]
+which functionality we should focus on when use each case !
+
+what is fluent API or AI ??$$
+
+how to handle relations like one to many or many to many 
+
+one to many we add the a list in the many
+
+inside the department list of employees and it will directly understand that a relation 
+
+// InverseProerty search!!
+https://www.entityframeworktutorial.net/code-first/inverseproperty-dataannotations-attribute-in-code-first.aspx
+
+many to many relation we put list on both $ it will autmatically create new table and understant that it's a many to many relation
+
+what is descriptive attribute // create new class with both lists of each and with the descriptive.
+
+composite attribute search!
+	-- no ID prop or [key] attribute
+	-- no user-defined datatype must all be primitive type 
+	-- must be object only inside the other class [not list]
+	-- if we add a user defined datatype it must be [ complex type & must add [ComplexType] attribute & object not list ]
+
+Employees file implement all relations 
+
+[notmapped] attribute
+
+Fluent API	[ Code First Purpose ]
+
+override OnModelCreating()
+
+create departementconfigurtion class 
+
+Auto Migration
+
+netget packaages Manger => Console => enable Migration
+	-- 
+
+open path => entityframworktutorial.net 
+
+seed() serch for it ?
+
+on the configuration constructor enable automaticMigrationEnabled -- set it to true
+
+allowdataloss search for it under the context of the migration 
+
+===================================== [ Notes To Study ] =============================
+IList, IDictionary, IEnumerator, ICollection, IComparable, IEnuerable
+what are the other built-in interface 
+razor pages
+titly coupled / dependency injection 
+
+query in the context of computing and databases, is a command or statement for requesting information or data from a database or datasource
+DbSet => [ Create / Delete / Update / ... ]
+IQueryable => [ Sorting / Filtering / Projecting ]
+
+==============================================================================
+
+[HashSet] is a collection in C# that doesn't allow duplicate elements 
+
+
+==============================================================================
+
+[Lazy Loading]
+      - a design pattern and a technique used to defer the loading of an object until it is actually needed       
+      - improve performance and resource effciency by loading data or objects on-demand rather than loading everything upfornt.
+      - [Deferred Initialization] we defer the initialization until the property is accessed for the first time 
+      - [Loading On Demand] when a client code accesses the property, it checks whether the data or resource has already been loaded
+      - good dealing with performance bottlenecks to avoid loading data on that moment
+            @
+            public class Customer
+            {
+                  private List<Order> orders;
+                  public List<Order> Orders{get{if (orders==null)orders=LoadOrders();}}
+            }
+[ Deffered Execution ]
+      - have the same concept like in Lazy Loading but it's associated with LINQ
+      - it refers to the practice of postponing the execution of a query or operation on a collection until the  results are actually needed 
+      - 
+      
+[ Lazy Loading Proxy ]
+      - marking a navigation property with virtual keyword in Entity framework => Generates a [Dynamic Proxy Class] at runtime for the entity class
+      - used to intercept property access and load related data on-demand ( Lazy Loading )
+      - without using virtual keyword, Lazy Loading won't work as expected instead to explicitly load data using methods like .Include(), .Load()
+      - by making the navigation property 'virtual' we allow entity framework to create the necessary infrastructure to enable lazy loading for the property
+      
+[ Navigation Property ]
+      - property of an entity class that represents a relationship between entities in a database 
+      - it represent the relatinships between tables in a relational database 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

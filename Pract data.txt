@@ -1,1 +1,4 @@
 1 - I'm trying to practice what Hassan did in our graduation project back-end // creating database and implement Generic Repository and Customize Identity
+      - created two Library classes to implement N-Tier Architecture [ Core / Infrasture ] and to Implement Generic Repository
+      - Installing in API project Authentication.JWTBearer
+      - Installing in Infrastructure Project EntityFrameworkCore[Core/SqlServer/Design/Tools]

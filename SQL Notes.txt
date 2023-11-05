@@ -1,0 +1,922 @@
+before insetring 
+make sure that you are on the choosed data that you wanna modify, can use drag file to write the name on the editor
+ [ publisherName fk ] inside columns 
+we don't use double quote
+on inserting we should ineter the values with the same arrangement 
+ritght clik on db with select or edit wil show you the table 
+@
+insert publlisher
+values('p1','minia')
+@
+if you want to enter with your specified arrangement order enter that order after the name of database  write 
+@
+insert publisher ([address], [name])
+values ('cairo','p2')
+-- if you want to enter more than one row 
+values ('',''), ('',''),('','');
+-- with the same order
+@
+insert into [dbo].[member]
+values('mohamed',null,default) -- here we added null value and the defualt value that you made in creating the data base 
+@
+-- there is a property called identity_insert all upper case are the default 
+-- if you the cell in the end of the table and you didn't add it to the value() it will take null or default that depends on what you set  for the default value if it has default value or null allowed in creating database
+	or choose in insert() line the ordeered data that you want and it will insert the unspecified cells with default or null if default not set for that column
+-- if you set the ordered value for three columns and set two of them only it will throw a exception to set the third column
+look for refrential integrety constraint [ foreign key constraint ] 
+all the above applied in the library example [ insert ]
+insert => add/ remove/ modify  columnsrows but NOT MOFIFYING THE SHAPE OF THE TABLE LIKE [ ALTER, DROP, CREATE, DELETE] 
+@
+
+
+insert dbname
+values
+@
+@
+update dbname
+set [column] = 'value to set' -- untill here it will modify all values in the specified column
+where [column] = 'cell value to edit' -- this will prevent modifying all column and modify only cells with specifed value in this cell
+@
+
+we could set more than more value  where another column is 'something'
+@
+update dbname
+set [columnn] = '', [another column] = '', [another column] = '',
+where [column] = 'value to edit the upper values' -- this line will choose the cells that i will update 
+@
+
+@
+select getdate() -- will show the date on the messages
+@
+-- for boorow date it will throw conflict in check but try to 
+
+@
+update [column] = 'column'
+where [column] = '', [column] = '' -- here I must to include the tow columns because there is a constraint check that the member have to borrow one book in one day so we included two columns at least to make sure the we modify the choosed column to not modify uninteded columns and both are primary keys
+@
+
+@
+delete from dbname 		
+where puplisherName = 'p3'
+@
+
+what is different between delete and truncate 
+- delete will delete all rows in this table 
+- truncate will delete all rows in this table 
+but delete called ddml and will record every row (all transaction) with the specified value seperately in lines in log file 
+and truncate called dml or dcl will drop the table and create new table with removing the truncated matches
+
+-- using delete will make me able to find each line deleted in log file 
+but truncate WILL NOT (( and don't have where to delete specific values in rows ))$$
+@
+delete [db].[book]
+truncate [book]
+@
+
+- transaction mean that multiple lines excute together 
+look for the difference between truncate and delete
+
+@
+delete from puplisher
+where name = 'p4'
+@		-- will show conflict that there is many things pointer on it and this  is (no action)
+		-- modifying the constraint or making conditions on deleting set it with null  or set it with the specified default value or use Cascade ( when delete puplisher delete all cells that pointer on it ) 
+		
+#first case and the default case no action on delete or update
+#second case 
+@
+alter table tname
+alter column  varchar(50) null -- add null here to make it allow null values
+@
+@
+alter table book 
+add constraint conName defualt 'p1' for publisherName
+@
+@
+alter table tname
+drop constraint conName
+@
+@
+alter table tname
+add constraint conName
+on delete set null on update set null --we can replace null with default or cascade
+@
+
+@
+update publisher
+set name = ''
+where name = ''
+@
+## look for how to modify to casade -- on constriant open properties to add action when delete or update 
+-- sql parser parse in parallel means that i have to seperate each different transaction or put GO keyword to fix this issue
+
+@
+use dbname
+select *[col], [col] -- * will show all rows of this columns in message 
+@
+@
+select [col], [col] from [], []
+where [gnder]  = 'm' and [maritalStatus] = 's'
+@
+
+@
+select [col],[col] from --col to appear in the message log
+where somthing beteen 5 and 9 
+@
+
+@
+select* from [].[]
+where ciyt = '' or city = '' or city = ''
+where city in ('','','')
+@
+
+@
+select * from [].[]
+where [] like '%'
+where [] like 'ma___%' -- match with ma+3digits
+where [] like '%ma' --end with
+where [] like [] -- specific characters
+where [] is null
+where [] is not null
+@
+
+@
+select [] + ' ' + [] as 'FULL Name' 		-- as '' will make the showed table header column with the specified name 
+from [person].[contact] 
+from [person].[contact] 
+or we can use @ select [col1], [col2] as 'FULL Name', [], [] -- col1 and col2 will named as fullname and the other will not 
+@
+-- on concatenation if any column of the concatenated column null will make it all null
+-- to solve it put each column inside function ISNULL([COL]) will make it appear empty if it null
+
+@
+select coalesce([],[],'no Address') [address] -- will put no address if the previous [] are nulls
+from [person].[address]
+where [addressID] between 1 and 5
+@
+
+@
+--select top 10 [],[],[] will show the top 10 results only
+select [],[],[]
+from [],[]
+order by [col1] asc, [col2] desc -- will order col1 asc and col2 desc
+@
+
+@
+select count ([]) from [].[] --count only not null values 
+select count (*)  from [].[] -- count all rows even if it have null values
+group by [] -- will count each group on the column like (males and females)
+@
+
+@ -- aggregation function  like count()
+select gender, count(*) as 'count' from [].[]
+select gender, count(*) as 'count', max([]) as 'max' from [].[] -- in this line we cant include another column with the aggregation function unless we use with it an aggreagation function
+where [] = '' -- this line must be before group by 
+group by gender, []
+having count(*) >12 -- will include the the counted columns the > 12 in the message log
+order by 'count' asc -- added in that line 
+
+-- all ordered in the demo file 
+-- aggregation takes place after group by line 
+@
+
+@
+select [city] from [].[] -- will show all column with repeatd value unless we used DISTINCT
+select DISTINCT [city] from [].[] -- will show witouht duplication values
+@
+
+-- using top 10 with ties will show top 10 and if the 11th is like 10th will include it in the top 10 means that it will show 11 values not 10 and if there is more than one value will include them all
+adventureworks database for sql 2022 on microsoft OLTP VERSION
+right click on database and then install database 
+
+======================================== DAY FOUR ====================================================
+default schema is DBO Datebase OWNER 
+
+-- for creating new schema 
+
+@
+	CREATE SCHEMA schemaName
+	CREATE TABLE schemaName.tableName
+	(
+		-- table preprerties 	
+	)
+@	-- we could creating tables with the same names but in different schemas
+
+@
+	alter schema schemaName
+	transfer anotherSchemaName.tableName
+@	-- moving a table from a schema to another 
+	-- also with setting foreign keys must have the name of the schema before the table name 
+	-- we could only trnasfer tables must be different schemas 
+
+	-- aliasing is to name the selected column with specified name by putting ' as '--' '
+	
+@
+	select e. -- here by wrting this will display all tables if you don't rembemer the name 
+	-- alias is on the command level only 
+@
+
+	-- synonym used for shorten the name of the table 
+	-- WHAT IS THE DIFFERENT BETWEEN SYNONYM AND ALIAS (AS)
+	--- IT'S A NORMAL OBJECT CREATING BY DDL AND DML LIKE CREATE AND DROP 
+	-- FOR MORE COMFORT ON USING SYNONYM WE CARET IT ON DBO SCHEMA 
+
+	-- WHAT IS DIFFERENT BETWEEN IDENTITY AND SEQUENCE
+	-- for identity 
+		-when creating table 
+		-strat incremnt
+		-not editable by default 
+		-not inserted by default directly increment
+
+	- example
+	@
+		insert int [].[] values ('','','')
+		-will increment if the insert successeded or not 
+		-- you will see  the identity oreder like 1,2,5,6
+		-- if we delete a row the identity number will be deleted and I will not be able to use again 
+		--- means that after deleting the row, the identity number will not assign again to any created row
+		-- but we could add the row at the deleted row 
+		-- or use set IDENTITY_INSERT [].[] ON/OFF
+		--- AND insert int [].[] (id,name,address,type) values(2,'','','') -- here I inserted on the row on the deleted rot that that was having identity num 2 
+		-- after turnning of the identity insert OFF IT WILL COMPLETE NORMALLY
+	@
+
+	-- FOR SEQUENCE in general providing MORE CONTROLL and also a solution for making the column editable
+	-- we could restart and select and reverse counting and alter $$
+
+	@
+		alter sequence seqName restart
+	@
+
+	-- accepts datatypes for numbers like bigint and smallint
+	-- we could determine the max value for it unlike identity 
+	-- we could set cycle that will make it repeat counting after acheiving max num (that determined)
+	-- we could set cache like we reserving 5 values as a package for recording records note that we won't see any differences but will differ in performance only
+	-- located in => programability-sequence (seperated)
+	@
+		create sequence IDs start with 1 increment by 1 
+		select next value for IDs  	-- will show the next counter 
+		-- passing sequence values to more than one table to prevent different values for identity 
+		insert into [].[] values(next value for IDs,'','') -- will insert the next num for the sequence like x++ (can be used in any statement as value)		
+	@
+	
+	-- look for joins will make cartesian product at first step by repeating each row with the other table and then on step two will remove the wrong matching only correct matching will remain 
+	-- also look for cartesian product in matching two table this step called cross join and it's the first step for joins
+
+	-- cross join 
+	select * from [].[]
+
+	-- inner join
+	select * from [].[]
+	where [cell in the table ] = cell value in the other table (primary keys)
+
+	-- JOIN SYNTAX (inner join)
+	select * from [].[]
+	inner join [].[]  		-- 'inner' will be written by defualt if not writen
+	on [cell in the table ] = cell value in the other table -- in this line it will select only the matched value but will not select the unmatched values
+
+	--left outer join  -- but if we want to select the unmatched with the mached with null values with the other table values
+	select * from [].[] left join [].[]
+	on [cell in the table ] = cell value in the other table
+	
+	--right outer join 	--fill the right table and the other table with nulls unlike the left join 
+	select * from [].[] right join [].[]
+	on [cell in the table ] = cell value in the other table
+	
+	-- full outer join 	-- fill both unmatched table values with the matched value
+	select * from [].[] full outer join
+	on [cell in the table ] = cell value in the other table
+
+	--which one is better joins or subquery 
+		in performance subquery is bettter 
+		but some issues can be solved using joins only
+
+	-- three tables showing all products with each name and category and subcategory
+	select p.name as '' , s.name as '', c.name as ''	--selecting three column with setting its name by using alias
+								-- we could add count(*) to count all and group it all by
+	from [].[] as p
+	join [].[] as s		--adding second table
+	on p.[] = s.[]		-- both [] are the same but in a different schemas
+	join [].[] as c 	--adding third table
+	on s.primarycellvalue = c.primarycellvalue
+	-- until now it will show name with its category with its sub-category 
+	--group by c.name
+
+
+	-- look at the demo
+
+	-- sub query 
+	
+	-- up comming builtin functions variables control and flow views temp data dynamics sql
+	
+================================ day five =========================================================
+join / subquery / synenom / sequence / 
+where before group and having after group -- beside where couln't have aggregation function unlike having $$
+
+	
+	-- built-in function 
+		ISNULL(COL,SUB)
+		COALESCE(COL,SUB1,SUB2,...)
+		 in mySQL IFNULL(	) -- return a specific value if the expression is null in sql the we use ISNULL()
+		CONVERT AND CAST  -- CASE ( (VALUE) AS DATATYPEv )
+		@ CAST ('1' AS INT) -- WE COULD USE IT TO CAST BIGNUMBER TO AVIOD OVERFLOW , but we can't change the format of the outpur of that functioon 
+		
+		-- convert have a case more than cast that we can change the output format 
+		@ print convert( nvarchar(100) , getDate(),  ExpresionCode ) -- expression code is a sttandard number in the decumentation page
+
+		-- Format(getDate(), 'dd/MM/yyy'y) -- convert the ouput of the getdate to the specified format 
+	
+	-- system function 
+		-- db_name()	// out the current used database
+		-- suser_name() // out the current used user account
+		-- newID() 	// out GUID generates new random ID number -- GLOBAL UNIVERSAL IDENTIFY // LIKE FIREBASE PUT GUIs for records -- not tested for identifying the old generated to prevent confilcts for duplication -- search fot that
+		-- all the aggregation considered as builtin function 
+			-- min, max, avg, count, sum
+		-- all the string functions considered as builtin function
+			-- lower, upper, format, usbstring, concat, len, trim
+
+				@ print substring('iti Minia', 1,3) //out iti -- starts from 1 not zero unlike the indexing of the arrays
+			 	-- concat many columns as one column -- not printing null values if any of the collumns have null value , but not put spaces betweem the merged collumn
+					-- make sure have the same datatype 
+		-- all the math functions 
+			-- rand, 
+		-- all the date functions
+			-- getDate, month, day, year(getDate), month nd year as the year, datediff([year/month/day], [firstDate], [secondDate])
+				datediff could
+		=========== self study ==============-
+		-- ranking functions
+			-- row_number, Dense_rank, ntile_rank, ntile, rank
+		-- windowing functions				 	
+			lead, lag, firstvalue, lastvalue	
+
+		-- logical functions
+			-- chose, iif, nullif
+				-- iif like ternary operator 
+					@ select [],  iif([col] is null, execute in true, execute in false) from [].[]
+			
+		@ select [],		-- like switch case -- accept more that condition in the line -- accept comparing 		
+			case
+				when []	= '' then 'will execute if true'
+				when []	= '' then 'will execute if true'
+				when []	= '' then 'will execute if true'
+				else 'then 'will execute if true'
+			end	
+		  from [].[]
+		@
+
+	-- variables are two types [ Local and Global ] variables
+		-- as a developer I can only use local variables life time execution statement only ( batch level , body of an object ) also starts with @
+		-- global variales it's back to sql software the change and control this values and I can only acces this variables and use it but can't controll it 
+
+@ 
+	declare @x int = 10 , @name varchar (10) = 'something'	declaring the variable
+	-- set 	@x = 20 		-- could be used as an initialization or assigning 
+	select 	@x -- = 20 		in this case select only perform one action either assign or display -- in this line it assign the value of x but will not display the value
+	print 	@x
+@		
+	we could use both
+		select @x = [] from [].[]
+	or 
+		set @x = ( subQuery )
+
+
+	-- if we use assign for a local variable with a query have distinct and top it will assign the last value (over write) as long as it hvae more than one value 
+	
+	-- declaring variable assigned to a 
+
+@	-- insert based on select 
+	declare @x table (columnName datatype)	-- declared as a table have one column
+	insert into @x 				-- to add record use insert as a table
+	query -- stored in the column		-- query that have one column with specified values like @select distinct top 3 [] from [].[] orderr by [] desc
+	select * from @x 			-- to show the data in that column 
+@	
+
+	$$$$ we could use where to assign more than one value using in (subquery returns more than one value)
+
+========================================= [ day six ] =================================================
+-- view is an object means that we could [ alter drop 
+	-- multiple views means that every user have specific access to specific database depends on ( logical schema - view schema - 
+	@ creeate view viewName as ()
+	@ select * from viewName
+	-- keep select statement not result set 
+	-- view is an object
+	-- to insert by using view $$
+		-- view select from 1 table only ( no joins or subquery )
+		-- select all view columns ( missing should allow null or have default value )
+	create view viewName (
+	
+	where [] is null
+	) with check option 	-- when inserting, this view will check first if the [] that you wnat to insert is null if not it will throw a constraint error
+
+	if I want to make a specific access using a specific view it done by adminstration
+
+	we could write the name of the aliases like this 
+	create view viewName ( , , ) as 	-- but here I must include all the names of all the tables   $$ this consisdered as a level of sucrity to hide the real name of the columns
+	(
+	)
+	
+	-- if I assigned the local variable with names of columns and table name, to use it I must include execute to make it work ( called Dynamic SQL ) $ another level of security
+	@ exec('select', + @col1 + ',' + @col2 + 'from' + @tableName)
+	
+	Global variables
+	starts with @@ unlike local
+	@@ERROR returns the error code of the last executed statement
+	@@VERSION returns the sql version
+	@@ROWCOUNT returns the count of the rows of the statement that is executed with this line
+	-- I could assign it a loacal variable and use it in if conditions or deal with it 
+	@@IDENTITY returns the last used identity of the statement in inserting case search for it , use cases
+	-- also search for common used Global variables
+	$$ IMPORTANT using condition	
+	-- control of flow 
+	@	if condition begin [body] end
+	@
+		declare @x int = 0
+		if @x > 0
+			print 'pos'
+		else if @x<0
+			print 'neg'	
+		else
+			print 'zero'
+	@	-- we include [begin - end] when the body have more than one line
+		-- we could include in the body a query to do when the condition is true
+		-- in if condition we could use in , between, like where constraint in the select 
+		-- also we could use if exists() we put inside a query to select something with where constraint if it select something or there is something exist the condition will become true
+		
+	-- loop : while condition begin [body] end
+		-- note that to make x++ LIKE JAVA we write @x = @x + 1
+	-- break & continue
+	
+ 	-- temp tables: 
+		-- local and global temp tables
+		-- local starts with #		-- live time ( one session ), and not accesible in other sessions (new query) 	dies on disconnection of its session
+		-- global starts with ##	-- live time shared all over session connection					dies on disconnection of all session or the owner session
+		
+		@create table #tablename -- it will be added to tempdb in system databases we could use dql and dml as a normal table
+		
+
+		@ create table #tempTable
+		(
+
+		)
+		
+		@insert into #temptable	
+			select * from tableName -- It will save the records of the tablename in the temptable
+						-- life time of the temptable is connection session only
+						-- change in template tabe will not affect original table 
+						-- temp table will not affect original table 
+						-- $$ unlike local variables scoped only on the execution statement 
+						-- if we try to display that table in new query it will throw invalid object name because It's [LOCAL TEMP TABLE]	
+		-- select into -- if the table exists it will insert the followed data but if not it will create the table with the same attributes of the input data and insert that data on the created table
+		select [], [], [], into [table]
+		from[].[] as e 
+		join [].[] as c
+		on e.[] = c.[]		-- it will copy the data of the (from [[].[]) into the [table] and it will created if it not exist ( the created table could be table or local or global temp table )
+		
+
+
+-- user defined function 	
+	-- inline function 	
+	-- multi statement fnction 
+	-- scalar function
+-- all of them differ in the type of the inputs and the return of each one
+	
+
+-- scalar function it have to return value
+	@ --SCALAR FUNCTION	
+	create function functionName (@firstnum, int, @secondNum int) 
+	returns int as 
+
+	begin
+		
+		 @declare @reslt int 
+		if ( @firstnum > 0 and @secondNum > 0 )
+
+		begin 
+			set @result = @firstnum + @seconNum	
+			return @resullt
+		else
+			print 'numbers must be positive'
+		end
+		return 0
+	end
+	@
+	
+
+	to call this function 
+	@ select functionName(arg1, arg2) 	-- don't forget to write the function's schema
+	-- computed column like ( age, ...) could use scalar function
+	
+
+	-- scalar function to out the age takes date ( one parameter )
+	
+	@
+		create function calcAge(@birthDate date)
+		returns int
+
+		as begin
+
+		if ( @birthdate is null)
+			return 0
+		declare @age int 
+		set @age = datediff(year,@birthdate, dateDate())		-- datediff() 
+		return @age
+
+		end
+
+		-- to create a computed table column
+		@age computed int not null		-- also it have a different icon in the object explorer
+							-- if the function is binded to a column it cannot be delete -- the showed exmple was on scalar function
+
+-- inline function 	-- similar to view but it takes a parameter but return table 
+	
+@		-- inline function don't accept if condition and other loops and condition 
+	create function employeeDate( @targetCity nvarchar(30) )		-- the input value will be used in matching to select the target row from all the tables exists in the query
+	returns table 
+	as (			-- accept only seelct statement
+		query			
+	)		
+@
+
+
+-- multi statement function like inline but execute multistatement and returns variable as table (table preferences) in GENERAL it's a mix of the previous two function	
+
+	create function citynum( @ )
+	returns @t table (table preferences)
+
+	begin
+		[body] -- also there is an if condition that checks that there is an input before get into the body
+	end
+
+	return			-- don't require to enter a value because it knows what will it return from the second line after the function creation
+		
+	
+============== [ Day seven ] ============================
+-- execution steps 
+								$$$$ QUERY TREE
+	-> query -> parsing (ceck syntax) -> optimization -> query tree -> execution plan ( real memory allocation ) unlike all the previous virtual -> RESULT
+	-- stored procedure => store steps after first call untill execution plan ( high performance )
+	-- function used in the stored procedures
+	-- stored procedure saves execution plan only
+	-- declare and set for variables , dql and dml statement, dynamic queries, control oof flow, try and catch, can return or not 
+
+		-- in any task you have to try to solve the task with subquery not join because the performance in subquery is better than join due to cartesian product
+-- Stored Procedure Syntax
+
+	@
+		create proc procName @par1 int 	as	-- we could write procedure or proc
+		begin
+		[ body ] 		
+		end
+	@
+
+		
+ 	-- we use where in with subquery that returns more than one value as a column in a table
+
+	-- to call the stored procedure we use EXEC to execute the inner query of the stroed procedure
+	-- to take the returned value from the stored procedure we assign it to a declared variable 
+	-- stored procedure returns only int values to solve it we will use the output paramters
+	-- the output parameter is like a normal parameter but before the type we put the keyword 'output' after type
+	@ create proc procName @par1 int, @outpar1 int ouput -- here we have two paramteres one of them is an output parameter
+
+	we could assign a column record to a variable after select
+	@ select @name = stuID from [].[]	-- here we assign the selected columns records to the variable
+	-- inside a stored procdure if condition not became true we could throw an error but it have to assign number from 51000
+	@throw 51000, 'error message', severity num like 16  
+	
+-- triggers is a special type of stored procedure		-- types of it is [ AFTER / INSTEAD OF ]  $ USING AFTER WITH THE EXPLAINED example to solve it we could use [ ROLL BACK ]
+	@ 	-- don't take parameter  -- there is two table in the triggers [ inserted table - deleted table ] for the inserted and deleted values  and the trigger use both of them when updating value
+					 -- so if I want to see the variables from the insert table I take the input data and 
+		@ insert into tableName
+		values(, ,)	-- here the values that will be inserted it stored in the insert table of the trigger 
+		-- so we write this code to get those values
+		@ select @par1 = [], @par2 = [], @par3 = [] from inserted -- where [] is the data stored in the table that belong to the trigger that called inserted
+	@	
+		create trigger triggerName   		
+		on tableName instead of insert
+	@	
+
+	-- in general I set the trigger parameters from the inserted and deleted table that belong to the trigger 
+	-- those variables store on these tables when using @insert into tableName values (,,) those values will be stroed in the trigger table before the execution
+	@create  trigger triggerName on tableName instead of [ insert , update , delete ] -- dml trigger -- so when inserting or whatever wrote after instead of it will fire the trigger 
+	
+	-- the trigger is between the insert statement and the final execution to set values in the table
+	-- so if the condition that inside the table not true it will not setting the values in the table weither it was delete or insert or update
+
+	
+	-- ddl trigger have only after unlike dml trigger have after and instead of 
+	
+	-- soft delete delete the value from a table and insert it into another table
+	-- select into tableName from anothertableName 		-- if the table not exist it will create it and continue its execution
+	
+	-- $$ to prevent from updating specific column we could use update([]) where [] is the column name that I want to update and put it into if condition	
+	@if update([]) throw 51000, 'error message', 16
+
+	-- or there is another solution to prevent from modifying specific column names using trigger after update and compare between the two value of the inserted value and the deleted value
+	
+-- ddl trigger only have after
+	@	
+		create trigger triggerName
+		on database for Drop_Table
+		as begin 
+			print 'error mesasage'
+			rollback			-- this statement used with after triggers to rollback to stop the action means without saving in the table
+		end
+	@
+
+	-- DDL_DATABASE_LEVEL_EVENT		-- if used with the trigger it will take place in any 
+	@ create trigger triggerName on database for []		-- [] means type of evens like the existing one in the previous line
+	-- search for EVENTDATA()
+	-- declare @eventdata xml = EVENTDATA()
+	@SELECT 
+	-- WE COULD USE INSERT OR UPDATE SEPARATED WITH COMMA
+
+	-- CURSOR
+
+=========================================== [ DAY EIGHT ] ============================================================
+-- scripts is the page or file that we use to enter command
+-- batch is a collection of commands (statements) executed together  one file could be a batch when we select all the commands that exist in the file then it's a file have one batch
+
+
+				----------- [ TRANSACTION ] ----------
+
+-- transaction the storing of the data in the log file is called the transaction
+-- like when @insert into tableName values(,,)
+-- implicit transaction -- automatically done by sql server in each command and save all commands automatically save it in log file
+	-- beging transaction	and start to insert into the table and check if it will transact without any errors in the insertion 
+	-- if the transaction done it will out [ commit ] if not it will out [ rollback ] 
+	-- so any transactions only have two cases, [ commit - rollback ]
+	
+-- if server down before implicit transaction not finished -- it will rollback automatically @@ when electricity down
+
+
+-- exiplict transaction 
+	@
+		begin tranaction			-- we could write tran instead of writing the full name
+			insert into [].[] values (,,)	
+			commit		-- it will add the values to the table 
+			-- rollback	-- in this case it will not add the values to the table but will show message completed successfully
+			
+	@
+
+@
+begin tran
+	insert into [].[]
+	declare @error1 int = @@error		
+
+	declare @id int = (subquery that select the last id by select top 1 order desc)
+	insert into[].[] values(,,)
+	declare @error2 int = @@error			-- after each command it updated and shows if error happen in the last previous command
+	
+	if @error1 !=0 of @error2 !=0			-- if any of the variables stored an error happen then it will roll back and won't execute the commands to ensure that all the data are done together
+		roll back
+	commit						-- if no error happen then it will continue 
+
+	-- we use exiplict tran when I want to ensure that more than one value are set together in the records, when any server fall down here we handled this issue
+@
+
+-- now we will seperate the transaction which mean roll back for some and commit for other 
+
+
+@										[	just understand the concept 	]
+begin tran tranName
+	insert into [].[] values (,,)			-- first transaction
+	declare @error1 int = @@error 			-- @@error is a global variable returns [zero] if no error encountered in the previous statement ( insert statement )
+								-- also it update it automatically after any transaction 
+	save transaction tranName			-- a mark to use when roll back to rollback only the below transactions and commit the upper transaction 
+	
+
+	insert into [].[] values (,,)			-- second transaction
+	declare @error2 int = @@error
+	declare @currentID = @@				--record the last value of the identity that I arrived to
+	declare @id int = (subquery that select the last id by select top 1 order desc)
+	
+	insert into [].[] values(@currentID, , )	-- third transaction
+	declare @error3 int = @@error
+
+	if @error1 != 0
+		rollback
+	else if @error2 != 0 or @error3 != 0
+	begin
+		rollback tran saveName 		-- that I declared after the first insert -- it nwill 
+		commit tran tranName		-- it will commit only the upper transactions of the (save transaction tranName)
+	end
+
+	commit tran tranName				-- in case of no error it will commit all the lines
+@
+	-- in rollback if i want to rollback all the tran then I should write the name after tran lik @ rollback tran tranName -- the same in commit
+	-- if I want to rollback to a specific point I should include the name of the save point like @ rollback tran saveName -- the same in commit
+	
+	-- if I want to rollback if any error happen then I could write 
+	
+	@ 
+		begin try			-- if any error happened in general it will catch it and do something 
+			[query insert]	-- if any error happened here
+		end try
+		begin catch
+			rollback	-- this command well be executed
+		end catch
+	@
+
+
+-- backups have three types
+	-- fullbackup			-- backup full database from creation  		-- mdf/ndf	-- bigger volume of all 					-- speedest one of all 
+	-- deferential backup		-- backup from latest full backup		-- mdf/ndf	-- smaller that fullbackup and bigger than transactional	-- slowest one of all
+	-- transactional log backup	-- backup from latest backup of any type	-- LOG FILE 	-- after taking the backups here it empty log file		-- more speed than full
+	
+	-- if I want to automatically backup data we use sql agent (sql adminstration)
+
+	-- the meta data contains times of modifying		-- [ transactional log backup ] saves those meta data
+
+	-- when restoring we may have to restart the sql servive from windows servieces $$ make it take lower time restoreing
+
+	-- you cat restore the full without the differential but You can't do the opposite (defferential without full)
+
+	-- all types could save on the same file You will see it 
+
+-- indexing 
+	-- any table without brimary key called ( HEAP table ) sorted as inserted
+	-- seqeuntial search | row scanning that in case we don't have a primary key 
+
+	-- but if we have a primary the data will be ordered depend on primary key for ex if we have data and we insert a record it will be located on the table depend on the primary key
+
+	-- clustered index order the data by the primary key by default	
+	-- index will convert the scanning from table scanning to database page scanning [ HIGHER  PERFORMANCE ]
+	-- but if I need to sarch with another column not primary key like name or whatever then we can use nonclustered index
+	-- so we could add cluster index only one allowed and nonclustered index more than one to enhance the performance of select 
+
+	-- so after adding index to a table it creates a page in the memory like a tree that uses binary search
+	-- index affected by dml transaction so it will affect the performance and exhaust the engine, wo we don't use index 
+	-- $$ tunning advisor / sql profiler
+		-- The tuning advisor helps to get the performance report that is generated by SQL Profiler and provides the appropriate indexing
+	-- when setting a primary key for a table ( clustered generate automatically )?
+
+	-- for create a clustered index
+	@
+		create table tableName
+		(
+			id int not null,
+			name nvarchar(20)
+		)
+	
+		alter table tableName	
+		add constraint testPK primary key (id)		-- automatically a clstered index generated
+		
+		-- if I want to create nonclustered index 
+		create nonclustered index indexName on test (name) -- manually create a clustered index on name column
+
+		-- any unique item have a unique nonclustered index
+		alter table test
+		add constraint consName unique (name)		-- it will generate a unique non clustered index to the name
+	@
+
+	-- clustered index and unique non clustered are added automatically or manually create by addding constraing [ primary key / unique ]
+	-- non clustered index manually create
+
+	-- to cluster any other column not primary key column
+		-- creating the table without primary key 
+		-- create cluster index on nameColumn
+		-- then now we could make the primary key
+			-- here the order ordered by the cluster not the primary key because the primary key is not clustered 
+				-- after setting the primary key it will automatically try to make it cluster index but will find out then that another column took the cluster index so it won't become clustered
+	--[ non unique / unique / non clustered / clustered / primary key ] mix all of them
+	
+-- Normalizzation process of decomposing bad relations and composing them into small relations 
+-- search for denormalization?
+	-- functinal dependency
+		-- name id all data of a record is social security number ( functioning depend on primary key )
+	-- Normalization forms [ from first to third normal form ] is important
+
+	migration?
+	when to choose stored procedure not functions 
+		returns what tables values strings or what
+
+	all in erd
+	all in mapping
+	division takes place after that
+	functionalitis
+	indexex 
+	functions
+	stored procedures
+	triggers
+	transactions [ rollback / commit ]
+	
+	count ten days after sunday
+
+	erd must take three days at maximum all the project depent on that steps
+	the difficult thing in that projecct that I don't have an interface that talk with me in the project like testing 
+
+	intake : 37 system development Assuit
+	no dummy data => you have to record real data $$$
+	we have to prepare test cases before project dicussion
+	
+	data to store questions to put in the database and test data
+	and prepare
+
+	
+	
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

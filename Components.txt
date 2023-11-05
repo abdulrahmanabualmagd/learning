@@ -1,0 +1,117 @@
+Product Catalog:
+      ProductListComponent (List products) => include [ side panel filter/ search ]
+      pageination
+      ProductDetailComponent (View product details)
+      
+
+Shopping Cart:
+      ShoppingCartComponent (Display items in the cart)     (Adjustable(full crud))
+      CheckoutComponent (Proceed to checkout)
+
+User Accounts:
+      LoginComponent (User login)
+      RegisterComponent (User registration)
+      ProfileComponent (User profile)     => include Images  side panel for showing the faviorites, orders, wishlists, cart and so on
+
+Payment Processing:
+      PaymentComponent (Credit card, PayPal, COD)
+
+Order Management:
+      OrderHistoryComponent (View order history)
+      OrderDetailComponent (View order details)       => include calculations and costs
+
+Inventory Management:   we need one for users and [DASHBOARD] 
+      InventoryComponent (Manage product stock)       => dashboard, add features like nogification on low stock           
+
+Product Reviews and Ratings:
+      ReviewListComponent (List product reviews)
+      WriteReviewComponent (Write a product review)   -- handle to rate product also 
+
+Wishlist and Favorites:
+      WishlistComponent (View wishlist)               => include small buttons in the products list to add
+      FavoritesComponent (View favorite products)     => include small buttons in the products list to add
+      //showed in the userprofile component also
+      
+Shipping and Fulfillment:
+      ShippingComponent (Select shipping method)
+
+* Returns and Refunds:
+      ReturnRequestComponent (Initiate a return request)
+      ReturnStatusComponent (View return status)
+      RefundComponent (Process refunds)
+
+* Sales and Discounts:
+      PromotionComponent (Apply promotions and discounts)   // managed by admin and take effect in the final cost of the project 
+
+Recommendation Engine:  // display the recommended products here also up sell/cross sell included
+      RecommendationComponent (Display product recommendations)
+
+
+
+// Ignored
+Security and Fraud Prevention:
+      SecurityComponent (Handle security measures)
+
+Mobile Responsiveness:
+      Layout and styling components to ensure mobile responsiveness throughout the app.
+
+
+
+
+
+
+2. Shared Components:
+
+Navbar and Footer:
+Create shared components for the app's navigation and footer that are consistent across all pages.
+
+Authentication Service:
+Implement an authentication service for user login and registration, user sessions, and authentication guards.
+
+Shopping Cart Service:
+Manage the shopping cart and cart-related operations (add, remove, update items).
+
+User Profile Service:
+Handle user profile data and operations.
+
+Product Service:
+Manage product-related data and operations (e.g., fetch product details, list products, and reviews).
+
+Order Service:
+Manage order-related data and operations.
+
+Review Service:
+Handle product review-related operations.
+
+Wishlist and Favorites Service:
+Handle wishlist and favorite product-related operations.
+
+Shipping and Return Service:
+Manage shipping and return-related data and operations.
+
+Promotion Service:
+Handle discount codes and promotions.
+
+API Service:
+Implement a service to communicate with the .NET API endpoints.
+
+Shared UI Components:
+Create shared UI components, such as buttons, forms, and modals, to maintain a consistent look and feel throughout the app.
+
+3. Routing:
+Set up routing in Angular to navigate between different components/pages of the application.
+
+4. State Management:
+Use NgRx or a similar state management library to manage the application's state, especially when dealing with complex data interactions.
+
+5. Error Handling and Interceptors:
+Implement global error handling and HTTP interceptors to handle network requests and errors consistently.
+
+6. Localization:
+If your app supports multiple languages, consider implementing internationalization (i18n) and creating language files.
+
+7. SEO Optimization:
+Ensure your app is optimized for search engines by handling metadata, schema markup, and prerendering for SEO purposes.
+
+8. Testing:
+Write unit tests and end-to-end tests for your components and services to ensure the application functions as expected.

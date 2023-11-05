@@ -1,0 +1,64 @@
+[Authentication] And [Authorization] 
+
+[OAuth] And [JWT]
+
+[OAuth]
+      - OICD OpenID Connnect
+      - SSO  Single Sign-On
+      - OPs  OpenID Providers
+
+[ Id / Access / Refresh ] Tokens
+
+ID Tokens => in JWT format => strictly for authentication
+      - not meant for authorization
+      - shouldn't be sent to an API
+      - not have authorization information
+      - a required format JWT
+      
+Access Tokens => delegating authorization
+      - not used for authentication ( not used for assumption the identity or the fact that they're logged in or not )\
+      - do not guarantee that the user is logged in
+      - do not have a required format  
+
+ReactDom library
+
+
+
+what is cross site scripting XSS Attacks?
+      - also what are the other attacks 
+      - sql injection
+      
+      
+      
+what are the properties the the hr interviewer is looking for or concentrating on while interviewing the interviewee
+What is Backend For Frontend BFF (software Architectural pattern)
+What is SPAs (single page Applications)
+What is Scopes in OAuth for access tokens
+setting Httponly and secure flags in cookies (tell me more)
+salt and hashing passwords    -- search for the hashing algorithms
+
+passwords => (passwords + salt + peppers) => [hashing] => Hashed password
+
+to use the hash password we could use the library in angular
+      - SHA-2
+@
+  async calculateSHA256() {
+    let text: string = this.email + this.password
+    const encoder = new TextEncoder();
+    const data = encoder.encode(text);
+    const buffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(buffer));
+    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    console.log(hashHex)
+  }      
+@
+
+salt is generated and stored with each user (random plain of text for each user concatenated with the password before hashing)
+hash use the password and the salt together to generate the hash password (concatenate them and then generate)
+
+
+$dictionary attacks - attempting to find the original plaintext by hashing common passwords(alot of them) and then compare them to the target hash
+$Bruteforce attacks - Trying every possible of charachters against the hashed password (time increase exponentially as password length and keyspace increase)
+--proxy-config 
+
+How to build an Authentication HTTP Interceptor

@@ -1,0 +1,273 @@
+=============== [ Day One ] ==================
+       Web        |   Mobile  |        Desktop                
+UI  | [HTML+CSS+JS]   [XML + Andriod]  WPF                
+Code| C#              Java             C#                
+DB  | MSQLS           SQLLite          SQLExpress                
+
+Different application on different platforms
+
+- one code one database = mulitple platform
+      - but still there are issues
+            - how server talk to another server 
+            - how would java call a function in C#
+            
+      Fixed by web service    // What is web services used in that technology
+      
+      - SOAP      SIMPLE OBJECT ACCESS PROTOCOl
+      - REST      REPRESENT SERVER TRANSFER
+      
+in [SOAP] case :
+      - server can talk to each other on any protocol (we Determine the protocol on pregiven data)
+      - Calling function Proxy Class      -- proxy works as a translator that convert for example between java and C#      
+      - Transferring data through XML / Json    on a XML File like <soap.envlop><emp><id>1</id><name>Yousef</name></emp></soap.envlop>
+      -                            in case we want to sent as json <soap.envlop>{id:1, name:yousef}</soap.envlop> => json inside xml
+      - definition of service       Help Page but now working on a third party application make definition for the server automatically                                     
+      - soap have issues with mobile application and ...
+            - transfer data on xml file and the mobile can't handle this that's why we use rest 
+        
+        
+in [REST] case :
+      - can talk only through HTTP & HTTPS
+            - HTTP have some constraint make it unique
+      - calling function Uniform URL
+      - transferring Data through JSON    -- Light weight
+      - definition of service      WSDL
+            - metadata of service 
+            web sevice description language 
+      
+
+definition of service : 
+      
+      
+What is API Application Presentation Interface 
+
+what is diefferent between API and Web API?
+
+what is class library ?
+
+presentation and models + bussiness on the same machine => called API
+models + bussness on a seperated server called Web API
+
+what is WCF? before API
+
+WCF   windows *** form
+      - issues on 
+
+API .net framework not core version until 2017
+from 2017 API Core with Web API
+
+we are working with Restfull WebAPI Core
+      - Seperated Backend (.net)
+      - Seperated Frontend (Angular/WPF/React/...)
+
+rest is restfull both are the same       
+- we have obtain an application and want to open for him another service like payment and logging in in PayPal
+      - when we write Amazon.com => front page loads (amazon have a provider contain multiple methods like ShowAll()/Order()/DetailsProduct()/AddRate())
+            - for the Payment() action in the amazon when filling the card number to the payment method 
+                  - amazon not deal withit but it provide another service that make a check validation service from another server 
+                  - each bank provide a WebService like check the cardentitial validation for the card and the balance for that user()
+                  - that server is paid not free $$
+
+      B2B bussiness to bussiness like the bank and the amazon
+            amazon to the bank is the consumer
+            amazon to client is the provider 
+            bank to amazon is the provider webService    (B2B) also paid service
+      
+What is RESTFULL? is an Architectural Style
+what is design pattern?
+what is the meaning of the principle?
+
+design pattern is a way to solve an issue what ever  the used programming languge in solving that issue
+principle is some thing good that we follow under 
+
+Architicture Style : provide stadard between systems communication
+
+To Apply RestFull we have 
+      - constraint : we must have  Server / Client -- -- Provider / Consumer
+      - constraint :work on Stateless     - what is the meaning of Stateless (state management: like cookie, session, ...)
+            - that's why RestFull work on HTTP that apply these constrains
+      - constraint :there is a standard format for the messages (Json / XML) but here we use [Json] 
+      - constraint : Enable Cache
+      - constraint : Uniform Name
+            - what is the meaning of Uniform Name?
+                  each resource have a unique URL
+                        Resource is like a Curd [/Employee - /Department - /.. ] 
+                        in the server there are multiple Actions have different methods like [Get/Post/Put/Delete] those called (Verbs)
+                        [Client] => URL + Verb => [Server]  $$$
+                        Resource is the model and each model have a controller 
+     
+What is the different of the four Verbs get/post/put/delete?
+
+search for Request Url body header consumer provider
+
+      - between the Consumer and the provider
+            - request which contain Header and Body
+            [Header]
+            - ReqUrl:/Emploee
+            - ReqVerb:"post|get|put|delete
+            - content-type:application/json -- application/datatype?
+            - accept:"Json/Xml"     the type of data that you want to receive in core it send any way json
+            
+            [Body]
+            - contain the data sent with the request 
+            
+            json object to C# object this process called [Deserilization]
+            
+      Response
+      [Header]
+      - ReqUrl:
+      - StatusCode:
+      
+      [Body]
+      - containt the reponse data // -- Serilization convert the C# object to json object to put it in the body of the Response
+      
+
+Status Code:
+      - Success  2xx     200 OK      201 Created       204 NoContent
+      - Redirect 3xx
+      - Client Error 4xx      404 NotFound      405 MethodNotAllowed    400 BadRequest    401 NotAuthoriezed
+      - Server Error 5xx      
+      
+high level .net web app [blazor] in C#
+web app
+
+project name 
+      asp.net core web api    restfull http
+      
+      .net 7
+      no authentication type none or jwt
+      no configure for https
+      
+      use controllers   minimal APIs => like microservice
+      enable openAPI support     // will install package swashbuckle.appnetcore under the frameworks in the dependencies
+what is swaagger?
+      do not use top-level statments (to see the main fuction and program)
+      
+      
+there is no wwwroot
+if I want to add class library right click on dependencies
+
+
+[code first]
+      - create folder Models                                                 public int Id{get;set;}
+      - install ef package    [ .sqlserver / .tools / .design ]    four ways [ ef name convention / data annotation / fluent api / external configuration ]
+      
+      In MVC EmployeeController inherits from Controller and controller inherits from baseController
+      In API EmployeeController inherits from BaseController
+      
+[ApiController] attribute to let him know that this controller belongs to the MVC
+[Route("api/[controller]")]   controller is a token place holder replacable with the name of the controller 
+in API there is no default Route for him so we add the attribute of that controller 
+
+there is a generic type for the action result ActionResult<List<Department>>
+
+what is PostMan? 
+
+[HttpGet]   // URL => domain /api/department ===> Get 
+public IActionResult GetAll(){
+      List<Department> dpts = db.Departments.ToList();
+      if(dpets.Count > 0)
+      {
+            return OK(dpgs);
+      }
+      else
+      {
+            return Badrequest();
+      }
+}
+
+we test on postman/thridller for the first time and then we test on swagger UI
+[GttpGet("{id}")] let hiim know that there is an extra segment comming api/department/id  the id segment 
+
+what is model binding ?
+
+what is ModelState?
+
+what is remote validation and ajax call?  $$$
+
+return created in POST Verb
+
+what is different between Find() and FirstOrDefault()
+      - find takes primary key only must be unique
+      - FirstOrDefault() search for anything whether it primary key or not
+      
+update is a method in .net 7
+
+what is jwt? (Json Web Token)       like cookie
+
+
+-------------  [ Day Two ] -------------
+
+return Created()  parameter => string URL / Object
+      - we could pass with the object sometihng that makes him able to get the place of the newly created object 
+      - it return location for the object that we created 
+
+Binding =>
+      
+      Url.Link()  parameter => RouteName / Object 
+            - returns Url string so we can but it in the return created link segment beside the object 
+            - to display or open the location of the newly created file 
+
+      [HttpGet("{Id}"), Name ="GetOne"]
+            - the route name for the action that contain this route is "GetOne"
+            
+      what is the purpose of the ModelBinder? in MVC and in API because there is a different
+      ModelBinder=>
+            - for Primitive DT => try to find it in the Route DAta / Query String
+            - for Compolex DT  => try to find it in the Request body
+
+      [FromBody]
+            - when sending a data in the body in Post verb we can receive it by adding the attribute [FromBody] beside the param to let him look inside the body 
+            - as long as we tell them a constraint that there is some thing in the body by adding from attribute it will return basd request if the data not found 
+
+      [FromQuery]
+            - here it will look to the query string and get the data fro mthe query string with Post Verb
+            
+      PostMan, Fiddler
+            - postman is a composer and good for testing the binding
+
+      IF WE SEND PARAMATER FOR AN OBJECT BUT NOT COMPLETED WE SENT TWO OUT OF THREE 
+            - IN MVC IT WILL BIND IT WITH NULL 
+            - IN API IT WILL THROW AN ERROR YOU MUST SEND THE SAME PARAMS OF THE OBJECT 
+
+Json Serilization exception for the relational loading infinit cycle 
+      - to fix it we can use [JsonIgnore] will not Serialized (not recommended solution)
+      - DTO Data Transfer Object is the best practice solution (ViewModel)
+            - we create new folder named DTOs and create class, not recommended to use complex data type, we use primitive datatype and then map on them
+            - classes EmployeeWithDepartment
+            
+            
+what is the different between find and ...
+      
+      we define a model for departmant that have a property for the name of the department and a list of string That I will map over the employees and add it to the list of string in the department
+      
+we're creating a service (provider)
+      - now the user for that provider is the (consumer) that use this service (Front-End)
+      
+What is Ajax Call
+      - why return Partial view and use the ajax call with it
+      - remote validation 
+
+What is CORS ?
+      - app.UseCors(); => have three overloads 
+      - builder.Services.AddCors(options=>{options.AddPolicy("MyPolicy", corsPolicyOptions(poption=>{
+            poption.WithOrigins("domain").WithMethods("").WithHeaders("");
+            
+            }))});
+we could create a folder called wwwroot and it will automatically take the shape 
+      
+      
+wpf
+      -async button_click event 
+            - HttpClient httpclient = new HttpClient();
+            - await httpclien.GetAsync("URL works with Verb GET");
+                  - run the application to get the Url and use it in the previous method
+            - HttpResponseMessage res = await httpclient.GetAsync("Url"); - this line instead of the previoud line 
+            - if ( res.IsSuccessStatusCode){
+                        string msg = await res.Content.ReadAsStringAsync();
+                        // we can get the shape of the data that we receive and create the class with the same name of the comming data 
+                        create a class that can receive the data and put the properties 
+                        list<Departement> depts = JsonSerlizer.Deserialize<List<Department>>(msg);
+                        DeptList.ItemSource = depts;
+                  }
+            

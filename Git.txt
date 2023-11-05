@@ -1,0 +1,219 @@
+git have settings that we have to set at three levels 
+      - the settings are [ Name / Email / DefaultEditor / Line Ending ]
+      - the levels are    
+            - System level    => All users
+            - Global level    => all repostiories of the currentuser
+            - Local           => the current repository 
+            
+      to sit it 
+            @ git config --global user.name "Abdularhamn Ahmed"
+            @ git config --global user.email abdwbedoo@gmail.com        // here we didn't use double quote because there is no space between the letters unlike the name 
+            @ git config --global core.editor "code --wait"             // with the wait flag we tell the terminal window to wait untell we close the vscode instance 
+            @ git config --global -e                                    // since all the settings is store in a text file we can edit them using this line to open that text with the default editor that we set
+            @ git config --global core.autocrlf true                    //Configuring Line Ending \r Carriage Return \n Line Feed [true] in windows [input] in mac
+            
+we can get the help page to know the commands
+      @ git --help
+      @ git config --help
+      @ git config -h
+      
+[Creating Snapshots]
+      - @ git init                                    // initialize empyt git Repository and create folder [.git] if we lose it we will lose the file history 
+      - @ ls                                          // show the files in the current directory 
+      - @ ls -a                                       // show all the files in the current directory include the hidding files
+      - @ explorer .git                               // open that folder in the explorer 
+      
+[local] => [index] => [git]
+      - git add [file]
+      - git commit -m "initial commit"                // the message for useful history 
+      
+commit include [id / message / data&time / author  completeSnapshot ]
+
+[Staging Files]
+      - @ git status                                  // show the untracked files and the commits
+      - @ git add *.txt                               // tracking all txt files (adding them to stage area)
+// on each modification we have to add it to the index 
+      - by usin status it will show you which one modified and not tracked the updated modification so we have to add even the deleted file we have to add it again to delete from the index
+      - @ git ls-files                                // get the files in the stagging area
+      
+[Commit]
+      - @ git commit -m "message"                     // -m used for insert a message for the commit
+      - @ git commit                                  // before the commit it will open the default editor to add the commit message
+      
+      
+// commit best practice 
+      - we don't commit every file we change it, it would be better to do all the changes at first and thit commit all at once 
+      - and at the same time we don't commit each three days
+      - the commit must be each separated logic update for good history recovery, each commit must have dependent state 
+      - each commit is just for only one solving for the issue
+      - each commit must represing a SINGLE UNIT OF WORK
+      
+      
+[ Skipping the Staging Area ]
+      - we can skip the staging area 
+      - we don't use the @ git add . => instead we use directly => 
+            - @ git commit -a -m "message"            // her -a means all the modified files we can use them combinied -am
+      - skipping not Recommended
+
+[ Remove files ]
+      - there is two method one by the windows command and the other using the git commands
+            
+            [Windows Commands]
+            - @ rm file1.txt 
+            - now the file is deleted but it's stored in the stagging area 
+            - we have to remove it by adding the deleted file again because deleting them is known as modification for that file 
+            - @ git add file1.txt
+            - after that we commit it with the approperiate message like "Removed Unused Code"
+                  @ git commit -m "Removed Unused Code"
+      
+            [git Commands]
+            - @ git rm file1.txt
+                  - this will remove the file from the working area and the stagging area 
+                  
+                  
+[ Renaming or Moving Files ]  
+      - there is two method one by the windows comand and the other using the git commands
+            [Windows Command]
+            - renaming is two changes [ delete and add ]
+            - @ mv file1.txt main.js
+                  - the file is renamed 
+                  - in git status => file1.txt is deleted and main.txt is not added 
+            - @ git add .
+            
+            [git Command]
+            - @ git mv file1.txt main.js              // this command will rename it and add to the stagging are automatically unlike the windows command     
+
+[ Unstage file ]
+      - @ git restore --staged main.js
+      
+      
+[ Ignoring Files ]
+      - if we have a unneccessary files like compiling or depugging results that's generated by the original code we can ignore it 
+      - there is a file called .gitignore => no name just extension and should in the root of the project 
+      - creating a file inside a folder and add it to the .gitignore file
+            @ mkdir logs      @ echo datamessage > logs/main.log  
+      - after that we add the name of the directory (append it using '>>' )
+            @ echo /logs >> .gitignore
+      - we can open the .gitignore  => @ code .gitignore
+      - can add different pattern like 
+            @ echo *.log >> .gitignore
+            @ echo main.js >> .gitignore
+      - for example after creating this file .gitignore we have to commit it and the message is "Adding gitignore file"
+            @ git commit -m "Add gitignore"
+      - if a file added to the repository and we add this file to the gitignore the git won't ignore it because it's already in the repository 
+      - to fix it we have to remove that file from the stagging are and keep it in the working area becaus we won't it so
+            - we can have help for the option to only removed from the index just type @ git rm -h
+            @ git rm --cached file.txt                // now it's removed from the stagging area 
+[Short Status]
+      @ git status -s
+      
+[ Viewing the staged and unstaged changes ]
+      - @ git diff --staged               // to see the content of the files in the staged area
+      - @ git diff
+      
+[ Visual Diff Tool ]
+      - to use it we have to set to configurations
+            - @ git config --global diff.tool vscode          // we configured the default diff tool which is vscode
+            - @ git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
+                  // wait => wait until we close vscode instance / diff => to let him that we're gonna use if for diffing or comparing files
+                  // $  => place holders for the old and new copy of the file 
+            - we can edit our global default settings
+                  @ git config --global -e
+                  // make sure that the placeholders are in the config file 
+      - now we will compare both files in the working directory and in the staging area 
+            - @ git difftool
+            - won't work => make sure that in the @ git config --global -e 
+                  @ [difftool "vscode"]
+                        cmd = code --wait --diff --new-window $LOCAL $REMOTE
+                        
+[ View The History ]
+      - where are the commits that we done 
+      - @ git log                         // open the history of all the commits that we done 
+      - @ git log --oneline               // short version of the git log 
+      - @ git log --oneline --reverse     // short reversed version of the git log 
+      
+[ Viewing Commit ]
+      - first you don't know the number of the commig log so we 
+            @ git log --oneline
+      - after that we can show any one of them using the generated code beside the commit
+            @ git show cbaf23             // if the number is not closely similar to any other number so we don't have to write it all 
+      - we can access that one the head or any previous commit by determining the position of that commit relatively to the head 
+            @ git show HEAD~2             // two step previous to the head but all will show the differences 
+      - to not see the differences we can write 
+            @ git show head~1:.gitignore  // will show the final record without the diff but we add the full path of the file that we won't to see
+      - if we want to see all the files that stored in a specific commit
+            @ git ls-tree head~1          // will show all the files in that commit 
+      
+Git Objects can be [ Commits / Blobs(files) / Trees(directories) / Tags ]
+
+[ Staging Files]
+      - @ git restore --staged .          // restoring all the staged file or we can specify the file name 
+      - when restoring the file from the staged area it keep the one in the working place and throw the other 
+
+[ Discarding the local changes ]
+      - @ git clean -fd                   // removing the local changes that are not added to the staging area 
+      
+[ Restoring a file to an earlier Version ]
+      - if we deleted a file and we have many commits before we can restore it 
+      - we can undo a commit or revert it (explained later)
+      - or we can restore earlier version 
+            @ git restore --source=head~1 file1.txt
+            
+      - we can go to specific opint in the history using
+            @ git checkout {identity of the commit}
+            - now we are in another branch that's mean the master branch is as I left it I'm in another time 
+
+[Create new Branch]
+      - @ git switch -c branchName
+      
+[Navigating through Branches]
+      - @ git switch brnachName
+      - @ git branch                // indicator on which branch I'm on
+      
+[Merge Git]
+      - after finishing the work run merge 
+            @ git merge brnachName        // this will mergethe branch to the master
+
+[Clone the porject]
+      - @ git clone url
+      - @ git fetch     // fetch latest changes from the remote repo
+      - @ git merge main/origin
+      - @ git add and commit
+      - @ git push origin
+      
+[Push Project to new Repository]
+      - at first we can check for the current origin 
+            @ git remote -v               // show the current origin 
+      - Add origin with specified url
+            @ git remote add origin https://github.com/Abdulrhman-Ahmad/Project_Front.github.io
+      - after that we can use this to push to the (master)
+            @ git push -u origin master   Caution: you are pushing to the master origin
+                  // using -u flag sets up tracking so we can use git push and pull without specifying the remote 
+
+[Adding and switcing New Origin]
+      - first we can check the current remote 
+            @ git remote -v
+      - we can add new remote
+            @ git remote add origin2 url
+      - now we can to switch to the new remote for targeting on push and pull
+            @ git remote set-url origin2 url
+      - now we can push and pull through that remote 
+            @ git remote orign master
+            
+      we can also make it pull from one place and push to another place 
+
+[change the branch]
+      - @ git checkout master
+      - @ git fetch origin
+      - @ git merge --allow-unrelated-histories- origin/master    // before merge make sure that the remote branch files exist in the local
+      - @ git push origin master
+      
+
+      
+      
+      
+      
+      
+
+      
+      

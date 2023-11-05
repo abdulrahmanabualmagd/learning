@@ -1,0 +1,588 @@
+What is Redux library?
+
+------------- [ Day One ] --------------
+npm   npmjs.com   packages for typescript
+      each pakacage depend on another package 
+      
+let grade:any;    let us assign in datatype in typescript file 
+let studentAge: number|null;  let us assign numbers or null
+let anys:any[] = [1,2,{fname:"ali"},false]
+let numbers:number[]= [1,2,3,4];
+let numbersOrStings:(string|number)[] = [];       have to initialize to be able to use push and pop
+      
+user defined datatype
+type stringsOrNumbers = string|number;
+      user defined datatype accpet string && numbers
+      
+      
+objects
+      let person = {fname:"ali", lname:"Ahmed", age:20};
+            person.color = "red"    error won't add it like in js
+            
+            person = {fname:"mona", lname"ahmed"};    // error 'age' missed you have to define it 
+            
+            let employee:{fullName:string, company:string, Salary:number};
+                  employee = {fullname:"ahmed omar", company:"ITI", salary:1000};
+                  
+optional field (?)
+      
+      let employee : {fullName:string, company:string, salary?:number};
+            employee = fullName:"ahmed omar", company"ITI"} won't throw error on missing salary
+            
+array of objects 
+      let persons :{}[] = [];
+      
+      
+tuples      -- array with limited number of elements
+
+      let phone contact : [fname:string, phonenumber:strin];
+            // here we defined array of two elements only both are strings
+            // but if we pushed -> not handled $$
+            
+      
+Functions in js we don't declare the datatype of each parameter also the return datatype
+
+      //Function Statement
+      function add(num1:number, num2:number)   :number 
+      {
+            console.log(num1+num2);
+            return num1 + num2;
+      }
+      
+      //Function Expression
+      let addFun = function (num1:number, num2:number) :number
+      {
+            console.log(num1+num2);
+            return num1+num2;
+      }
+      
+      //Arrow Function
+      let addArrow = (num1:number, num2:number) : string => console.log(num1+num2);
+      
+using the functions 
+      Add(1,2,3) throw error accept only two parameter in type of numbers
+      Add("1", 2) // also throw error 
+      
+      
+      function add(num1:number, num2?:number)         // optional parameter
+      function add(num1:number, ...params:number) :number    // Rest Params using spread operator 
+      {
+            let result = num1;
+            if ( params.length > 0)
+            {
+                  for (let i of params)
+                  {
+                        result += i;
+                  }
+                  
+            }
+            return result;
+      }
+      
+json place holder => fake APIs
+
+
+Abstration
+      Interface (Contract)
+
+      interface IUser{
+            id:number;
+            name:string;
+            address:{
+                  street:string;
+                  buildingNo:int;
+            };
+      }
+
+here interface have a collection of datatype and the object must implement it exactly no less or extra data unilke class
+
+      let user:Iuser ={}      // object implement the IUser interface 
+            and this is the first use for the interface 
+            
+      interface IUserMethods extends IUser{                 // it will take the elements that IUser have and add extra data on it
+            
+            display:()=> void | string    // this is a function that return void or string and takes no parameter
+            PrintUserInfo:()=> void
+                  // so here we only define the parameter datatype and the return datataype
+      }
+
+Aliases 
+
+Class [ class / implements / extend (used with two element with the same type [class with class / interface with interface ] ) ]
+      // implements used with two different types 
+
+      class User implements IUsermethods{
+            // quick tip right click => fix => implement interface -- and then it will automatically implement it all
+      }
+
+-------------- [ Day Two ] ---------------
+what is the different between the framework and the library?
+      - library is a collection of codes written for solving specifing problems like ( React / JQuery / )
+      - framework is a collection of libraries only import what we want to use 
+      - Component-Based Application
+      - single page application (routing)
+      
+CMD Commands used 
+      - npm i -g @angular/cli       -- install angular globally
+      - ng version                  -- get the version of the current installed angular
+      - ng serve -o                 -- run the application and open it in the browser
+      - npm i bootstrap             -- install bootstrap locally 
+      - ng g c ComName --skip-test  -- create new component (one of two methods to create a component)
+      
+      
+[Angular] is an Open Source framework 
+      - Component Based Application [ Aside / Nav / body / footer / ]
+      
+when sharing the projcet we don't share all the files include node modules because it's too large in size 
+      - we share the project without that file and the receiver and in the package.json and package.lock.json both contains modules and modules dependencies 
+      - so the receiver by running # npm install => it will install all the modules automatically from package.json
+      
+      
+      
+      
+------------------------------- [Angular project Files] ------------------------------- 
+      - [.gitignore]
+            -  Specifies which files and directories should be excluded from version control
+      
+      - [package.json]
+            - list project dependencies and scripts for managing them (high-level information)
+            
+      - [package-lock.json]
+            - contain version information for all the dependencies including their sub-dependencies
+      
+      - [angular.json]
+            - Configuration for build option and project structures      
+      
+      - [tsconfig.json]
+            - Configuration for type script including complier options
+            
+      - [src/]
+            - the main source code directory containingyour application's code
+      
+      - [index.html] 
+            - the main html file that serves as the entry point for your app
+            
+      - [app.component.ts]
+            - the root component of your angular application
+            
+      - [Styles.css]
+            - Global Styles for your Angular app
+            
+      - [Environments/]
+            - Configuration files for different environments (devlopment and production)
+            
+      - [assets/]
+            - Diretory for static assets like images, fonts, and json data
+           
+      
+------------------------------- [Creating Interface & Component] -------------------------------
+  
+- Automaticqlly using command @ ng g i InterfaceName
+      
+------------------------------- [Creating Compnent] -------------------------------
+
+      -  Manually 
+            - by creating files [html/css/ts] for the component and inside the ts file we determine the templateUrl / StyleUrls and export it 
+            - after that add the name of the component to the declarations and import the class name of the component in the [App.Module.ts]
+            
+      - Automatically 
+            - using command @ ng g c ComponentName --skip-tests     // the last word used to prevent creating specs ts file for testing
+      
+      - Note : the component ts file containt 
+            - Component class Import
+            - Component Decorator 
+                  - selector which used in the app html file (Component Directive)
+                  - TemplateUrl
+                  - SylteUrls
+            - Class export with the name of that component // this name used in the declaration and import in the app.module.ts file
+
+      
+      
+      
+------------------------------- [Binding Types] -------------------------------
+ 
+      - Interpolation Binding             (One-Way) 
+            @ <p>{{ VariableInExportClass }}</p>
+      
+      - Property Binding                  (One-Way)
+            @ <img [src]="VariableInExportClass">
+            
+      - Event Binding                     (One-Way)
+            @ <button (click)="FucntionInExportClass()">Click me</button>
+            
+      - Forms / [(ngModel)] Binding       (Two-Way)   => considered as Attribute Directive 
+            @ <input [(ngModel)] = 'VariableInExportClass'>             // to use it we must import [FormsModule] in the app.module.ts in the imports section
+            @ <input [ngModel]="name" (ngModelChange)="name = $event">  // this is the unshorted version of the two way binding [(ngModel)]
+      
+      - Attribute Binding 
+            @ <input [attri.maxLength] = "VariableInExportClass" >
+            
+      - Class Binding
+            @ <div [class.container] = "conditionInExport"></div>       // will be container class if the conditino become true in the get in export section
+            
+      - Style Binding 
+            @ <div [style.color] = "VariableInExportClass"></div>
+            
+            
+------------------------------------ [ Pipes ] ----------------------------------------
+
+      - Pipes are features that allows you to trnasform and format data in your template 
+      - used to modify the way the data is displayed in the view without changing the actual data itself
+            @ {{ myDate | date:'short' }}
+            @ {{ myNumber | number:'1.2-2' }}
+            @ {{ myString | uppercase }}
+            @ {{ price | currency:'USD':true }}
+            
+      - also we can create custom pipelines using @Pipe decorator 
+            @ {{ myData | myCustomPipe }}
+            
+      
+------------------------------- [Directives in Angular] -------------------------------
+ 
+      - Component Directive => <app-root></app-root> 
+      
+      - [Attribute Directive]  [ng-....]    => takes object "{'___':____ , ... }"
+            - [ng-class]
+                  @ <div [ng-class] = "{'container':IsValid, 'bg-primary':!IsPrimary}" >Text</div>
+            - [ng-style]
+                  @ <div [ng-style] = "{'color':color}">Text</div>      // where color is a string value in the ts file 
+      
+------------------------------- [Structural Directiive] 
+            - *ng-if
+                  @ <div *ng-if="Show">of the property 'show' is true this element is true</div> 
+            - *ng-for
+                  @ <div *ng-for="let item of array">repeatedText {{item}}</div>
+            - [ngSwitch] [ngSwitchCase] [ngSwitchDefault]
+                  @
+                      <div [ngSwitch]="value">
+                        <div *ngSwitchCase="'case1'">Content for case 1</div>
+                        <div *ngSwitchCase="'case2'">Content for case 2</div>
+                        <div *ngSwitchDefault>Default content</div>
+                      </div>
+            
+      
+      
+------------------------------- [Custom Directive]  
+      @
+      import { Directive, ElementRef } from '@angular/core';
+      @Directive({
+        selector: '[my-class]'      // this is the name of the newely created directive 
+      })
+      export class MyClassDirective {
+        constructor(private elementRef: ElementRef) {}
+
+        ngOnInit() {    // explained later
+          this.elementRef.nativeElement.classList.add('my-class');      // this directive is used to add classes to the selected element
+        }
+      }
+      
+------------------------------- [Component Interactions] ------------------------------- 
+
+------------------------------- [ Input Binding ]
+
+      - From Parent To Child        
+            - in the child ts file we create a property with @Input decorator
+                  @ @Input childProperty:string = '';
+                  
+            - in the parent ts file we create a property
+                  @ parentProperty:string = '';  
+                  
+            - in the parent html file we follow this line Paradigm
+                  @ <app-child [childProperty]="parentProperty" ></app-child>
+                  
+
+------------------------------- [ Output Binding ]
+
+      - From Child To Parent        
+            - In the Child ts file
+                  - Create a Property 
+                        @ ChildProperty : string = '';
+                        
+                  - Create an Event
+                        @ @Output() CustomEvent = new EventEmitter<string>();
+                        
+                  - Create a Function that Emit the customEvent with ChildProperty
+                        @ EmitEvent(){this.CustomEvent.emit(ChildProperty)}
+                        Note: // --$-- If we won't to stop binding just reset the childProperty after the previous line
+                        
+            - In the Parent html file 
+                  - Assign the custom event to the event handler in the child component directive
+                        @ <app-child (customEvent) = 'EventHandler($event)' ></app-child>
+                        
+            - In the Parent ts file 
+                  - Create a Property
+                        @ ParentProperty :string = '';
+                  
+                  - Create a function 
+                        @ EventHandler(e:any){ParentProperty = e;}
+            
+            - Create a button that Fire the EmitEvent() to start transferring the data from the child to the parent
+            
+        
+--------------------------- [ Life Cycle Hooks ] ----------------------------
+
+      - are methods that you can implement in your components to interact with the life cycle of a component
+      - these hooks allow you to perform actinos at specific moment during the creation, updating, and destruction of a component 
+      
+      - {OnInit}        ngOnInit    => is called once after the compnent have been initalized after the constructor       
+                        @ ngOnInit(){//do something ...}
+                              
+      - {OnChanges}     ngOnChanges => is called when on or more inpur of the properties have been changed
+                        @ ngOnChanges(changes:SimpleChanges){console.log(changes['propertyName'].currentValue)}   // [currentValue, previousValue]
+                        
+      - {OnDestroy}     ngOnDestroy => this hook is called just before the component is destroyed its a good place to clean resources and unsubscripe from observables
+                        @ ngOnDestroy(){//do something ...}
+        
+------------------------------- [ Routing ] -------------------------------
+
+      - in app-routing.module.ts file we add the pathes and tha component
+            @ const routes:routes = [{path:'url', component:ComponentName}]
+            @ const routes:routes = [{path:'**', component:NotFoundComponent}] // ** means wild card (match any url that doesn't match any of the defined routes also used as [Catch-All])
+            @ const routes:routes = [{path:'url', redirecto:''}]  
+            @ const routes:routes = [{path:'url/:id', component:ComponentName}]
+      
+      
+      
+      - we can add route parameteres
+            @ const routes:routes = [{path:'url/:id', component:ComponentName}]     => where the id is a parameter 
+            
+      - in the main html file we add 
+            @ <router-outlet></router-outlet> here will be placed the loaded comopnent from the router 
+            
+      - in the html element we add 
+            @ [routerLink] = "['path', 'path']" to load that component 
+            
+      - Note that it works by order => we have to put the last expectations in the end of the array 
+            @ {path:"**", compenent:NotFoundComponent }     => we have to put it in the end of the route array 
+      
+
+------------------- [ Dependency & Dependency Injection ] ------------------
+
+      - we in angular framework we define the dependencies that a component or service needs in the constructor
+            constructor(data:dataService, router:Router, activatedRoute: ActivatedRouter){}     // dependencies injection
+      - then the framework automatically inject the required dependencies 
+      - we list the dependencies as a parameter in the constructor 
+      - so we define the dependency in the constructor 
+      - in the OnInit() we assign the data that came from these dependencies       
+      
+    
+------------------------------- [ Services ] -------------------------------
+
+      - to create service
+            @ ng g s --skip-tests
+            
+      - make the service get the data from the model that you want to share it 
+            - We imoprt that class and use the sevice constructor to get the data in a variable that we created in the service 
+                  @ let data:IStudent[]=[]; constructor(){ this.data = ImportedData }
+      
+      - after that we have the data and we create the required functions to be able to do crud operations like create / delete / remove 
+      
+      - in the component we inject this service in the constructor and assign the data in the ngOnInit function
+            @ constructor(private data: ServiceName , other services ... ){} ngOnInit(){ this.MyVariable = this.data}
+            
+      - to modify the data we have to make functions in the service ts file to add, delete
+      
+------------------------------- [ Built-In Services ] -------------------------------
+     
+      [ ActivatedRoute ]
+            - Provides infromation about the route's parameter, data, and other related parameters
+                  @ constructor (private route:ActivatedRoute){} ngOnInit():void{ this.data = this.route}
+                  
+            - We use it to access the route parameters and query parameters like .../Products/23 => where 23 is a parameter we can obtain it using this service 
+                  @ data.snapshot.params => object of the params in the url
+            
+      [ Router ]
+            - define it in the prameter of the class and then assign it to your data in the ngOnInit function            
+            - navigate to another path
+                  @ router.navigate(['/home'])
+                  @ [routerLinkActive] = "'active'" // we could add more than one class, will be applied if we are on the link that deteremined in the routerLink
+                  @ [routerLinkActiveOptions] = "{exact:true}"
+                  
+      // TO BE CONTINUED ...  
+                  
+                  
+
+------------------------------- [ Angular Material ] -------------------------------
+      
+      - It's a UI Component library, it provides wide range of components such as buttons, inputs, menus, and navigation bars also contain wide range of themes and customizable themes
+            
+      - install Angular Material 
+            @ ng add @angular/material
+            
+            
+                  
+                  
+                  
+------------------------------- [ Reactive Forms ] -------------------------------
+      
+      we have [FormControl] and [FormGroup] and [FormBuilder] from '@angular/forms'
+      
+      - in the app.module.ts we have to import ReactiveFormsModule in imports section 
+      - first we dclare a property from type FormGroup (must import)
+      - in onInit method we initialize the previouse property and then declare new form control for each part of the form
+      - [formGroup] => we assign it to the property from type form group in ts file 
+      - formControlName => we assign it to the property from type formcontrol in ts file 
+      
+    
+------------------------------- [ Api Service ] -------------------------------      
+      
+      ------------------------- [ in Service File ]
+      
+      - we Impoort [HttpClientModule] in app.module.ts file to be able to use the HttpClient service 
+      - create new service for connecting to an api 
+      - each category must have its api service and we must create Interface for each category that used in each api to recieve the data 
+      - we create a variable that holds the url for the api data that we will connect to in this service 
+            @ baseUrl = "http://localhost:3000/products"
+            
+      - in the service we inject the HttpClient sevice in the servce constructor
+            @ constructor(private httpClient : HttpClient){}
+            
+      - after that we create the verbs funciton [ Get / Post / Delete / Put ]
+      
+      
+      
+      -------------------------[ in the component ts file ]
+      - we inject the api servcie that connect to the products
+            @ constructor (private products : ProductsServcie ){}
+      
+
+
+------------------------------ [ Json Web Token (JWT) ] ------------------------
+      Construction
+            - Header -- Payload -- Signature
+            
+      [Header]
+            - Typically consists of Two parts [ The Type of The Token /&/ The Signing Algorithms ]
+                  @
+                        {
+                              "alg":"HS265",
+                              "typ":"JWT"
+                        }
+      
+      [Payload]
+            - Contains the claims which are statements about an entity 
+            - There are three types of claims [ Registered / Public / Private ]
+            - the informataion which it include is like the [ Subject / Not Valid Before / Expiration Date / Issuer ]
+                  @
+                        {
+                              "sub": "12541231",
+                              "name": "John Doe",
+                              "Iat": 1516239022                   // Issued At Time
+                              "exp": 1516241022                   // expiration
+                              // we can add more claims about the user 
+                        }
+      [Signature]
+            - is used to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way
+            - the signature is created by taking the [encoded header / encoded payload / a secret if using HMAC / algorithm specified in the header and signing it ]
+            - the header and the payload are encoded not encrypted so the user can decode it 
+                  - but the signature is hashed with the result of ()
+            how to include the jwt on client request header 
+            how do we compare the time iat exp in the payload 
+            
+      
+
+---------------------------------- [ Day Six ] ----------------------------------
+
+[ Reactive Forms ]
+
+ controlname.touched
+ 
+ class invalid-feedback 
+ 
+ npm i json-server
+
+in the package.json file we determine the start script 
+      json-server -- watch -p 3005 data.json                open data.json file in port 3005
+            
+            // we determine the port and 
+            // json file must be string use replace to edit them all 
+            
+      
+      add file data.json
+      
+      for connect to an api 
+            - we create a service API Service 
+            - import module =>      HttpClientModule => obtain the code that responsible for openning the connection to get post put delete verbs 
+                  -- add that module to the httpclient 
+            - in API Service 
+                  - we have to determine the base URL
+                  - we create service for each controller => posts / comments / categories / ...
+                  - in each service we dtermine the base URL that the service will connect to 
+                  - We inject the service 
+                        @ constructor(private http: HttpClient){}
+                  - Observables => is like Promise in js and we use it here 
+                        - object contain three functinos [ next / error / complete ]
+                        - we subscripe() on the observables to run the inner codes (call back )
+                        
+                        @ Subscripe({
+                              next (data)=> {};
+                              error (error) => {},
+                              complete () =>{}
+                        })
+            would keep running in the background untill it got the complete and the API won't sent it 
+                  - so we have to unsubscripe on the destroying 
+                        @ ngOnDestroy(){unsubscript()}
+                        
+      HttpClient returns observable 
+      
+      in the api service 
+            - getall():Observable<Iproduct[]> function => make it return this.http.get(this.baseURL)
+                  we make the get generic because I know what will it return so we write in that way
+                        @ return this.http.get<Iproduct[]>(this.baseURL)
+                        
+            - getbyid(i:number){return this.http.get($`{this.baseURL}/{id}`) }
+      
+      in the add 
+      @ add(prod:Iproduct){return this.http.post(this.baseURL, prod);}
+      
+      in the edit 
+      @ edit(id:number, prod:IProduct){reutrn this.http.put($`{this.baseURL} /{id}`)}
+      
+      in the delete
+      @ delete(id:number){reutrn this.http.delete($`{this.baseURL}/{id}`)}
+      
+      
+      for your knowledge we use httpclient service to be able to use the verbs
+            - also you must know it return an observables
+            - we must subscript to be able to use the data 
+            
+            this.api.getAll().succript({
+                  next:(data) => {this.products = data},
+                  error : (err)=> {console.log('Error'+err)},
+                  complete: () => {}
+            })
+            
+            
+            
+      what is guards in angular 
+            @ ng g g guardName --skip-tests
+            
+            can deactivate 
+            can activate 
+            
+            in the routes we add another property in the object properties after component, canActivate:[GuardName]
+            we use to disallow users from accessing somewebsites unless it login 
+            
+            we are updating the list of the deleted item from the list using 
+                  @ this.students = this.students.filter(item=> item.id != i) // filtering the list for the students that not i id
+                  
+                  
+            edit using put verb takes two parameters (baseurl/id, object) where the object is the one to update
+            
+            
+            github landing page like the instructor
+                  
+            reactive forms 
+            connect to api
+                  
+                 
+            @Input and @Output 
+            Shared Services
+            @ViewChild & @ViewChildren
+            Component LifeCycle Hooks
+            Router navigation and router parameter
+            parent Child component hierarchy
+            content projection => ng-content
+            Event Emitters
+            Rxjs
+

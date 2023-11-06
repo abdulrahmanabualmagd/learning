@@ -2,7 +2,6 @@ Product Catalog:
       ProductListComponent (List products) => include [ side panel filter/ search ]
       pageination
       ProductDetailComponent (View product details)
-      
 
 Shopping Cart:
       ShoppingCartComponent (Display items in the cart)     (Adjustable(full crud))
@@ -48,7 +47,7 @@ Recommendation Engine:  // display the recommended products here also up sell/cr
 
 
 
-// Ignored
+# Ignored
 Security and Fraud Prevention:
       SecurityComponent (Handle security measures)
 

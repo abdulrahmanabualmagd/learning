@@ -2,3 +2,10 @@
       - created two Library classes to implement N-Tier Architecture [ Core / Infrasture ] and to Implement Generic Repository
       - Installing in API project Authentication.JWTBearer
       - Installing in Infrastructure Project EntityFrameworkCore[Core/SqlServer/Design/Tools]
+      - [ Controller / Interfaces and models / DataAccess migration and db-Context ] => N-Tier layers + Generic 
+      - the benefits of using N-Tier layer is the make the code more readable, maintainable, scalable  [ Seperation of Concert (Programming Princible) ]
+      - Repository_Layer contain the interface and the models of the data 
+      - DataAccess_Layer contain the the migration and dbcontext
+      - BussinessLogin_Layer contain all the controllers
+      - Models and Interfaces in Core Project
+      

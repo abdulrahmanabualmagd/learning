@@ -236,9 +236,13 @@ Git Objects can be [ Commits / Blobs(files) / Trees(directories) / Tags ]
 @ git fetch 
 @ git merge {branch}                            // where branch will merge its value into my current brnach (already selected)
 
-      
 
-      
+@ git checkout Abdulrahman                      // switch to Abdlurahman (make it current branch to work on local branches)      
+@ git merge master                              // merge the local brnach (master) into the current checked out brnach  from local  master to(Current Branch)
+@ git merge origin/master                       // merge the remote branch (master) into the current checked out branch from remote master to(Current Branch)
+
+
+
       
       
       

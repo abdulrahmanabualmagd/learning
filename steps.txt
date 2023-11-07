@@ -1,0 +1,11 @@
+1- header and footer is done 
+2- Home 
+	- banner
+	- offers
+	- reviews
+	- top-picks
+	- brands
+3- contact-us
+4- sign in and sign up  
+5- blog
+6- profile 

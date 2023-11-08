@@ -242,6 +242,41 @@ Git Objects can be [ Commits / Blobs(files) / Trees(directories) / Tags ]
 @ git merge origin/master                       // merge the remote branch (master) into the current checked out branch from remote master to(Current Branch)
 
 
+[ Creating An Alias]
+      - @ git config --global alias.ac "commit -am"
+            git ac "commit message"
+      
+      - @ git commit --amend -m "update last commit"              // update the last commit message 
+      
+[revert] how to use it 
+
+you can open an online editor autatically by going to the repo and press period key (.) $$
+
+[hold your changes for later] 
+      - @ git stash                       // will remove your changes for later 
+      - @ git stash pop                   // get the stored changes 
+// also we can put a name to reference it later 
+      - @ git stash save myChanges        // saved it with the name myChanges
+      - @ git stash list                  // list all the references stashed with the index of each one (used in return it)
+      - @ git stash apply 0               // git the stored stashed with index 0
+      
+[Change the branch name]
+      - @ git branch -m NewName                 // rename the branch
+      
+[Decorating the Log]
+      - git log --graph --oneline --decorate
+      
+[bisect]    // search for it 
+      - let you start from a commit that known to have a bug but we know that the app was working before it 
+      - git bisect start            // start to the latest known working commit and then start to check every upcomming commit after that 
+      // it perform a binary search to walk you through each commit betweenk
+      - git bisect bad
+      - git bisect good 6d010fd
+      
+url = https://www.youtube.com/watch?v=ecK3EnyGD8o
+
+how to squash commit       
+
 
       
       

@@ -277,6 +277,10 @@ url = https://www.youtube.com/watch?v=ecK3EnyGD8o
 
 how to squash commit       
 
+[Git the Remote Branches]
+      - @ git branch -r                   // to get remote branches
+      - @ git branch -a                   // to get both remote and local branches
+      
 
       
       

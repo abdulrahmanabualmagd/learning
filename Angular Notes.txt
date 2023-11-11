@@ -586,3 +586,38 @@ in the package.json file we determine the start script
             Event Emitters
             Rxjs
 
+[Create Interceptor]
+      - open terminal => app path
+            - @ ng generate interceptor auth
+      
+      - in the interceptor file we will find these imports => [HttpInterceptor,HttpRequest,HttpHandler,HttpEvent]
+      
+      @ -------------------------------------------------------------
+      - this method is autmatically call on each request and it have the request and the next,
+      - request holds the request from the application and we have to assign it to the next
+      - next is the property which hold the data for the server
+      - so the interceptor the the request medium between the application and the server
+        
+        intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+
+      - first we get the jwt token from the storage
+          const token = localStorage.getItem('token');
+
+      - second we check for the token is found
+          if (token)
+          {
+            // in case the token found we create a clone from the request and add the token to the header
+              // espicially to the bearer in which exists in the authorization in the header
+            const clonedRequest = request.clone({setHeaders: {Authorization : `Bearer ${token}`}})
+
+      - after cloning the request and add the token to the bearer in the authrorization in the header
+      - we send the request
+            return next.handle(clonedRequest);
+          }
+          else
+          {
+      - in case the token were not found we send the normal request without adding anything
+            return next.handle(request);
+          }
+        }
+      @ -------------------------------------------------------------

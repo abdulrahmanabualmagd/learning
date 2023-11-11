@@ -1,0 +1,11 @@
+ClaimsService           => contain the key names of the claims
+CurrentuserService      => contain the data of the current logged in user 
+[Iclaims]               => contain an interface for claimtypes 
+[LoginService]          => contain IsLoggedIn, CurrentUserName
+
+- we got the name of the logged in user in login service 
+- we got the name of the logged in user in navbar ts file 
+
+
+      // httpParams used
+[getProduct] in [productlistService] => pass a parameter of [IproductFilter]

@@ -62,3 +62,5 @@ $Bruteforce attacks - Trying every possible of charachters against the hashed pa
 --proxy-config 
 
 How to build an Authentication HTTP Interceptor
+
+- What is the purpose of using Jti in Server Token Validation?

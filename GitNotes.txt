@@ -281,11 +281,41 @@ how to squash commit
       - @ git branch -r                   // to get remote branches
       - @ git branch -a                   // to get both remote and local branches
       
+[ Here how we use fetch and merge ]
+      - in this scenario we are going to fetch tha data from a remote branch and compare it with my current branch to see the differences between both before adding the changes to my current branch 
+      - my curent branch is [Abdulrahman] and the remote branch is [master]
+      - @ git fetch origin master 
+      - @ git difftool origin/master Abdulrahman            // here I will see the differences for both branches before merging them 
+      - if every thing is OK then we jump to the next step 
+      - @ git merge origin/master                           // here my current branch is Abdulrahman and I will merge the updates from the remote branch [master] into my branch 
+      
+      
+[ Compare between two branches ]
+      - git fetch the barnch that I want to compare your branch with to show the latest update of that branch
+      - git difftool origin/branch Abdularhman              // compare between the two branches left side and right side as we specified in the code
+            // this line will open the differences in vscode one by one both file together to show the differences
+            
+      - git difftool -d origin/branch Abdulrahman 
+            // this lie will open all the files of the left side and all files of the right side, only the files that have changes and differences
+      
+      - git difftool --no-prompt origin/branch Abdulrahman              // here we don't need to press [y] to jump to the next differencies
+      - git difftool -y origin/branch Abdulrahman                       // the same as the previous
+      
+[ Search log by Author ]
+      - @ git log --author="AuthorName"
+      - @ git rebase -i commitHash
+      
+[ Reset ]
+      - in case we want to delete commits permenantly from the log history we use hard Reset 
+      - @ git reset --hard head~3               => delete the last two commits from the head 
+      - @ git push origin Abdulrahman --force   => because now the remote branch have these commits that we removed so he won't let you push unless you get that update, so here we use --force to push it any way
+      
+[ Update the delete brnach from local ]
+      - @ git push origin -d BranchName         // delete a remote branch       
+      - @ git remote prune origin               // update the local repo with the remoted branches after deleting 
+      
 
-      
-      
-      
-      
+
 
       
       

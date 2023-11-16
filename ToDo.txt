@@ -6,3 +6,4 @@ Patterns [ Unit Of Work / Generic Repository ]
 
 how to use packages Identity JWT bearer 
 
+the differences between the hard , soft , and mix Reset 

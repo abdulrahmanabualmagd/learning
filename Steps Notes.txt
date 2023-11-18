@@ -38,3 +38,14 @@ to send a file we have to
       update product 
             - warranties
             - Images
+            
+We assign users to role through the AddToRoleAsync() method
+
+
+Updated the return of 
+      - Favorite get all
+      - wishlist get all
+      - reviews get all
+      - cart get all
+      
+$$ if the user doesn't logged in do not use user cart or favorite, I have to stop to overcome the problem errors in console $$

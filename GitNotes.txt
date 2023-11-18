@@ -188,7 +188,9 @@ Git Objects can be [ Commits / Blobs(files) / Trees(directories) / Tags ]
             @ git remote add origin https://github.com/Abdulrhman-Ahmad/Project_Front.github.io
       - after that we can use this to push to the (master)
             @ git push -u origin master   Caution: you are pushing to the master origin
-                  // using -u flag sets up tracking so we can use git push and pull without specifying the remote 
+                  // using -u flag sets up tracking so we can use git push and pull without specifying the remote
+      - to Delete the remote we type 
+            @ git remote rm originName
 
 [Adding and switcing New Origin]
       - first we can check the current remote 
@@ -313,8 +315,20 @@ how to squash commit
 [ Update the delete brnach from local ]
       - @ git push origin -d BranchName         // delete a remote branch       
       - @ git remote prune origin               // update the local repo with the remoted branches after deleting 
+ 
+[ Conflicts ]
+      - @ git checkout --ours -- FilePath       // take the current changes for the specified File
+      - @ git checkout --ours -- .              // take the current changes for all the files included 
       
-
+      - @ git checkout -- theirs -- FilePath    // take the incomming changes for the sepcified File
+      - @ git checkout -- theirs -- .           // tkae the incomming changes for all the files included
+      
+[ Untrack somthing ]
+      - If we've already committed and pushed the product images to your Git repository, and you now want to remove them from version control and stop tracking them without deleting them from your local working directory
+            - remove from git but keep locally 
+                  - @ git rm -r --cached Path
+                  - @ git commit -am "Message"
+                  - @ git push origin BrnachName --force
 
 
       

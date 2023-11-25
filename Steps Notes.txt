@@ -49,3 +49,17 @@ Updated the return of
       - cart get all
       
 $$ if the user doesn't logged in do not use user cart or favorite, I have to stop to overcome the problem errors in console $$
+
+Differences between React and Angular Deeply?
+
+--------------- [ Product Filtering ]
+
+      - search                => 
+      - sort [ name(default) / priceAsc / priceDesc]
+      - category              => https://localhost:7003/api/Category/All            {id, name}[]
+      - brand                 => https://localhost:7003/api/Brand/All               {id, name}[]
+      - condition             => 
+      - rating                => 
+      - min / max price       =>
+      - page size
+      - page index

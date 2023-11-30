@@ -3,11 +3,6 @@
             - npm i -g typescript         // installing typescript compiler 
                   - to verify the installation write tsc -v 
              
-
-
-
-[TypeScript Types]
-      - [ number / string / any / tuble / array / enum ]
       
 [Non-Null Assertion operator]       =>    !
 [Optional Property Acess Operator]  =>    ?
@@ -29,10 +24,6 @@
             - type employee = { id:number, job:string };
             - type Engineer = person & employee & {ShowData () => void}
             - let a : Engineer = {id:1, name:'ahmed', age:25, job:'Engineer', print: function () {console.log(`${this.id}`)}}
-
-[Literal type]
-      - type Quantity = 50 | 100;
-      - let  quantity : Qunatity = 50;
       
 [Nullable Type]
       - function print (name : string | null | undefined){
@@ -210,6 +201,16 @@
             - type Person = { name: string, age: number };
                   - let persons: CustomData<Person[]>;
       
+      [Mapping Type]
+            - Purpose is to perform transformation on existing types
+            - type Person = { id: number; name: strig };          type subPerson = { [Property in keyof Person]?: Person[Property] }      
+                  // [ Property i keyof Person ]      => Mapping over the properties in Person Type
+                  // Person[Property]                 => Will get the datatype of the choosed property
+            - type subPerson2 = { [P in keyof Person]: string }   
+                  // Make all the properties string
+                  
+      
+      
 [Generic Functions] 
       - function fillarray<T>(size: number, value: T){return Array(size).fill(value);}          // returns an array with size and filled with the determined value
 
@@ -265,6 +266,88 @@
               return sport.serve();
           else if ('kick' in sport)                         // checks if the passed parameter object have property called 'kick'    using 'in' key word in condition
               return sport.kick();
-      }
+      } // also we can use it with just else without putting the second condition
+      
+[Interface and Type]
+      - difference between interface and type is that interface can only be used to type objects, while type can be used to type objects, primitives, and more
+      
+      - [Declaration Syntax]
+            - [ Interface ] => interface Person { id: number; name: string }
+            - [ Type ]      => type Person = { id: number; name: string }
+            
+      - [Extending / Implmentation]
+            - [ Interface ] => Interface Employee extends Person { role: string; }
+            - [ Type ]      => type Employee = Person & { role: string }
+            
+      - [ Declaration Merging ]
+            - [ Interface ] => Interfaces can be merged, when declaring two interfaces with the same name it will merge and combine the properties into one interface
+            - [ Type ]      => Type does not support merge!
+            
+      - [ Implement / Extend ]
+            - [ Interface ] => interface Printable{ print(): void }     class Document implements Printable{ print(){console.log('')} }
+            - [ Type ]      => Type cannot be used to enforce that a class implements a certain structure
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      - Type     
+            - type Objects
+                  type Person = {
+                        id: number;
+                        name: string;
+                  }
+            
+            - type Primitives
+                  type Age = number;
+                  type Name = string;
+            
+            - and more
+                  type Color = 'red' | 'green' | 'blue';
+                  
+                  // Combining types using intersections
+                  type ColoredPoint = Point & { color: Color };
+            - Interface                                                       
+                  // Using a mapped type      - interface Person {                                        
+                  type ReadonlyPoint = { readonly [K in keyof Point]: Point[K] }; id: number;                                           
+                        name: string;                                         
+                  // Using conditional types      }                                                           
+                  type TypeName<T> =                                                                  
+                    T extends string ? 'string' :                                                                  
+                    T extends number ? 'number' :                                                                  
+                    T extends boolean ? 'boolean' :                                                                  
+                    'other';                                                                  
+                                                                              
+                  // TypeName example                                                                  
+                  type PointTypeName = TypeName<Point>; // 'other'                                                                                 
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+            
+            
+
+            
+               
+     
+
+
+
+

@@ -300,4 +300,3 @@
             - [ Interface ] => Declaration merging can be useful for extending interfaces, and interfaces are generally more comonly used when defining object shapes
             - [ Type ]      => Types are more flexible and powerful when it comes to working with union types, intersection types, and mapped types
       
-      

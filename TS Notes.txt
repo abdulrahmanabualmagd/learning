@@ -172,6 +172,12 @@
       - let persons: { name: string, age: number}[]   =[{ name: 'Ahmed', age: 25 },{ name: 'Ali', age: 27 }];
       
 [Types Aliases]
+      [Literal Types]
+      - type Color = 'Yellow' | 'Green' | 'Blue'        
+            - let color : Color =                       // the color must be within the colors in type 'Color'
+      - type Max = 50 | 100
+            - let degree : Max =                        // the degree must be either 50 or 100 
+            
       [Object Types] --------------------------------------------------------------------
             - type Person = { name: string, age: number };                    // Object
                   - let person : Person = { name: 'Ahmed', age: 25 };
@@ -204,9 +210,61 @@
             - type Person = { name: string, age: number };
                   - let persons: CustomData<Person[]>;
       
-      [Generic Functions] ---------------------------------------------------------------
-            - function fillarray<T>(size: number, value: T){return Array(size).fill(value);}          // returns an array with size and filled with the determined value
+[Generic Functions] 
+      - function fillarray<T>(size: number, value: T){return Array(size).fill(value);}          // returns an array with size and filled with the determined value
+
+[Unions Types]
+      
+      [Defining Unions]
+      - Allows us to define multiple allowed type members by seperating each type member with '|' Character
+      - let ID : string | number;
+            - here it's more flexible than one single type and more specific than any type
+      - function double(arg : string | number){ console.log(arg))}
+      
+      [Narrowing]
+      - function double (arg: string | number) {
+      
+            // this is (Narrowing) do action depend on the type of the input parameter
+            // also we can call it [Type Guard]
+            if (typeof arg === 'string) { // Do Something... }
+            else if (typeof arg === 'number') { // Do Something... }   
+      }
+      
+      [Inferred Union return types]
+      - type User = {id: number, name: string}
+      - function createUser (){ let randomChance = Math.random() >= 0.5; if(randomChance){return {id: 1, name:'ahmed'} else {return 'not found'}}}
+      - let user: string | User = createUser()        // Here we inferred the return of the function as string or User object, so we don't have to manually write them
+      
+      [Unions and Arrays]
+      - let array : (string | number)[];                // this indicates that array could be an (array of strings and numbers together) => [Union]
+      - let array : [string , number][];                // this is array of Tuple (fixed length array with specified type for each index)
+      - let array :  string | number [];                // this indicates that array could be a (string) or an (array of numbers)
+      
+      [Union with Literal Types]
+      - type Color = 'Yellow' | 'Green' | 'Blue'        
+            - let color : Color =                       // the color must be within the colors in type 'Color'
+      - type Max = 50 | 100
+            - let degree : Max =                        // the degree must be either 50 or 100
             
-
-
+[Type Guards (Narrwing)]
+      
+      [Type Guards]
+      function formatStatistic(stat: string | number) {
+        if (typeof stat ==='string')                        // checks if the stat is a string
+          return stat.toUpperCase();                        // all string methods enabled inside the condition
+        else if (typeof stat === 'number')                  // checks if the stat is a number
+          return stat.toFixed(2);                           // all number methods enabled inside the condition
+      }
+      
+      [Using in with type guards]
+      - we use 'in' key word in the condition to check the existance of a property in the object 
+      function check (sport: Tennis | Soccer)               // function that takes parameter from type Tennis or Soccer
+      { 
+          // it checks here if the property exists in the passed parameter
+          if ('serve' in sport)                             // checks if the passed parameter object have property called 'serve'   using 'in' key work in condition
+              return sport.serve();
+          else if ('kick' in sport)                         // checks if the passed parameter object have property called 'kick'    using 'in' key word in condition
+              return sport.kick();
+      }
+      
       

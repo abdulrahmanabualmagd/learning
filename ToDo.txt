@@ -105,3 +105,7 @@ Host Listener
 how to contribute with other open source in github
 
 ask for pull request in the context of contributing with others
+
+typescript projects to do, try catch
+
+how to collaborate on a database using version control in git

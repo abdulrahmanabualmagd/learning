@@ -209,6 +209,11 @@
             - type subPerson2 = { [P in keyof Person]: string }   
                   // Make all the properties string
                   
+      [Conditional Type]
+            - type typeName<T> = T extends string ? string : number;
+            - let  x: typeName<string>;   // ~ let x: string;
+            - let  x: typeName<others>;   // ~ let x: number;
+                  
       
       
 [Generic Functions] 
@@ -279,75 +284,20 @@
             - [ Interface ] => Interface Employee extends Person { role: string; }
             - [ Type ]      => type Employee = Person & { role: string }
             
-      - [ Declaration Merging ]
-            - [ Interface ] => Interfaces can be merged, when declaring two interfaces with the same name it will merge and combine the properties into one interface
-            - [ Type ]      => Type does not support merge!
-            
       - [ Implement / Extend ]
             - [ Interface ] => interface Printable{ print(): void }     class Document implements Printable{ print(){console.log('')} }
             - [ Type ]      => Type cannot be used to enforce that a class implements a certain structure
       
+      - [ Mapped Types ]
+            - [ Interface ] => syntax more verbose
+            - [ Type ]      => type Employee = { [P in keyof Person]?: Person[P] }
       
-      
-      
-      
-      
-      
-      
-      
-      
-      - Type     
-            - type Objects
-                  type Person = {
-                        id: number;
-                        name: string;
-                  }
-            
-            - type Primitives
-                  type Age = number;
-                  type Name = string;
-            
-            - and more
-                  type Color = 'red' | 'green' | 'blue';
-                  
-                  // Combining types using intersections
-                  type ColoredPoint = Point & { color: Color };
-            - Interface                                                       
-                  // Using a mapped type      - interface Person {                                        
-                  type ReadonlyPoint = { readonly [K in keyof Point]: Point[K] }; id: number;                                           
-                        name: string;                                         
-                  // Using conditional types      }                                                           
-                  type TypeName<T> =                                                                  
-                    T extends string ? 'string' :                                                                  
-                    T extends number ? 'number' :                                                                  
-                    T extends boolean ? 'boolean' :                                                                  
-                    'other';                                                                  
-                                                                              
-                  // TypeName example                                                                  
-                  type PointTypeName = TypeName<Point>; // 'other'                                                                                 
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-            
-            
-
-            
+      - [ Declaration Merging ]
+            - [ Interface ] => Interfaces can be merged, when declaring two interfaces with the same name it will merge and combine the properties into one interface
+            - [ Type ]      => Type does not support merge!
                
-     
-
-
-
-
+      - [ Compatibility ]
+            - [ Interface ] => Declaration merging can be useful for extending interfaces, and interfaces are generally more comonly used when defining object shapes
+            - [ Type ]      => Types are more flexible and powerful when it comes to working with union types, intersection types, and mapped types
+      
+      

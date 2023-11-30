@@ -21,6 +21,7 @@ Back-End:
       - Windows Forms
       - Node.js
       - Express.js
+      
       - Full Stack:
       - Full-Stack Development
 
@@ -95,3 +96,12 @@ Englich Bussiness Networking course
 
 build workshop gallery for you work 
 
+SMTP
+
+SignalR
+
+Host Listener
+
+how to contribute with other open source in github
+
+ask for pull request in the context of contributing with others

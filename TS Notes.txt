@@ -1,0 +1,212 @@
+[Installing the development enviroment] 
+      - install node.js 
+            - npm i -g typescript         // installing typescript compiler 
+                  - to verify the installation write tsc -v 
+             
+
+
+
+[TypeScript Types]
+      - [ number / string / any / tuble / array / enum ]
+      
+[Non-Null Assertion operator]       =>    !
+[Optional Property Acess Operator]  =>    ?
+[Chaining Operator]                 =>    .
+            
+[Combining Techniques]
+
+      - [Union types]               => '|'
+            - A variable or a function parameter have can be one of many types
+            - function printNumber( num : number | string)
+                  { 
+                        // Narrowing Section
+                        if (num ==='number') return num; 
+                        else return parseInt(num)
+                  }
+                  
+      - [Intersection Types]        => '&'      // used to combine two types
+            - type person = { name:string, age:number };
+            - type employee = { id:number, job:string };
+            - type Engineer = person & employee & {ShowData () => void}
+            - let a : Engineer = {id:1, name:'ahmed', age:25, job:'Engineer', print: function () {console.log(`${this.id}`)}}
+
+[Literal type]
+      - type Quantity = 50 | 100;
+      - let  quantity : Qunatity = 50;
+      
+[Nullable Type]
+      - function print (name : string | null | undefined){
+            // here we handling the case of the name that must be string to make sure there is no crash would happen
+            // null and type checks here (prevent crash for not string or no value objects)
+            if (typeof name === 'string')
+            {
+                  // do something here if the name has a value and in string 
+            }
+            else
+            {
+                  // do something here if the name have no value or not string value 
+            }
+        }
+
+[Optional Chaining]
+      - type Customer = {date : Date}
+      - let getCustomer : function (id : number) : Customer | null | undefined { return id === 0 ? null : {date : Date()} }
+      - let customer : Customer = getCustomer(0);
+            - console.log(customer?.date?.getFullYear())          // here we used nullable operator instead of making a null check condition
+      ----------------------------------------------------
+      - let log : any = function () : void {console.log('Hello There!')}            // here the log is a function
+      - log()           // this is will work without errors 
+      - log = null      // assign the log to null (not a function anymore)
+      - log()           // Error! because log is not a function so to avoid this we can use the nullable chaining Access operator
+            # Solution : => log?.()             // if log is not a function, this line won't be executed
+            
+            
+------------------------ [ Codecademy ] ----------------------------
+
+[Overview]
+      - We write typescript code in file with extension ts
+      - Then we write tsc fileName.ts           // In this stage the transpiler (source-to-source Compiler) will check if it can be converted or not to the js code due to typescript standards
+      - Then we write node fileName.js
+      
+[Type Inferences]
+      - Variable can only have data from type that declared at the first of the code 
+      - let x = 5;      => let x = '5 years'    => Error, x can hold only numbers 
+      - let x;          => x = 5                => x = '5 years'  // won't show any error because the x implicitly delcared as any on the initialization
+            - What happened here is type annotation (The typescript assign type to a variable because we didn't determined it)
+            
+[Type Shapes]
+      - Means that typescript knows the methods that can be used with each variable depending on its type like strings have methods such as [toUpperCase, length, toLowerCase, and so on...]
+
+[TsConfig.json]   => [Typescript Compiler Configuration]
+      - the presence of the this file indicates that this file is the root of a typescript project (must be in the project root directory)
+      - Including this file give us the ability to compile all ts files without writing them in tsc parameters in the terminal
+      - Also we can determine the outDir and the SrcDir for compiling and output path for genereated js file 
+      - java script can use jsconfig.json file instead, which acts almost the same but has some javascript-realted compiler flag [Enabled by Default]
+      
+      - [Compiler Options]
+            - target                => to which version of js the transpiler will convert to like (es2017) EcmaScript Standards
+            - module                => the way used for importing and export modules like (commonjs) syntax
+            - strictNullChecks      => variable can only have null or undefuined values (if they are explicitly assigned those values)
+            
+      - [Include]
+            - that determines what file the compiler applies the rules to, in this case ["**/*.ts"] means the compiler should check every single file that has a .ts extension
+            
+      - Setting up the configuration file for the Typescript file 
+            - tsc --init                        // this will generate the tsconfig.json which containt the ts compiler configuration 
+            - [rootDir] => "./src"              // Determine the Root Dir => tsc will look to that path to compile it
+            - [outDir]  => "./dist"             // Determine the Out Root => tsc will generate the js code to that directory
+            - [removeComments] => true          // don't emit the comments to the js file 
+            - [noEmitOnError]  => true          // don't generate when there are errors in the ts file 
+            - [noUnusedLocals] => true          // don't allow unused delcared variables
+            - [noUnusedParameters] => true      // don't allow for not used parameters
+            - [noImplicitReturns]  => true      // don't allow for implicit returns, like if we don't declare a function and under a condition it return something but in the other condition not returning something, so it implicitly return undefined, by setting this feature true we're preventing this scenario to not return undefined code ever 
+
+      - [tsc CLI Options]
+            - https://www.typescriptlang.org/docs/handbook/compiler-options.html
+            
+      [Depugging Ts Application in VSCode]
+                  - [sourceMap] => true               // specify how each line of the ts code maps the generated js code 
+                        - this going to generate index.js.map     // this is the source map, tells us how ts code map the js code for depuggers
+                  - after that we go to the run and debug button in the left side and click on create a [launch.json] file 
+                  - select the node.js 
+                        - this is a json file that tells our code how to debug this application 
+                  - after the [program] we add ["preLaunchTask":"tsc: build - tsconfig.json",]
+                  - add a breakpoint on the line you want to start debug from that line 
+            MAKE SURE TO SET THE CMD AS THE DEFAULT PROFILE
+            
+[Options Parameters]
+      - function pringName(name?: string){console.log(`${name||'Ananymous'}!`)}           // we used '?' to make the function work normally if there is no parameter Input (optional Paramater)
+
+[Default Parameters]
+      - function printName(name:string = 'ahmed'){console.log(name)}
+      
+[Documenting Functions]
+      - Typescript recognize the javascript comment syntax
+      - // single line comment
+      
+      - /*  
+       Multiline comment */
+      
+      - /**       Documentation Comment
+        *   Description
+            @param1 paramName - description
+            @param2 paramName - description
+            @returns description
+        */
+
+[Arrays] 
+      - let x : number[];
+      - let y : number[][];
+      - let z : number[][][];
+
+[Tubles]
+      - let x: [number,string] = [3, 'ahmed']
+      - We cann't add extra elements to the tuples
+
+[Rest Parameter]
+      - function print(...data: string[]): void{for(let i = 0; i < data.lnegth; i++){console.log(data[i])}}
+
+[Spread Parameter]
+      - print(...data)
+      - it is opposite for rest 
+
+[Enum]
+      -------------- [ Numberic Enum ]
+      - enum Day {
+            Saturday,         // 0
+            Sunday,           // 1
+            Monday,           // 2
+            Tuesday,          // 3
+            Wednesday,        // 4
+            Thrusday = 10,    // 10
+            Friday            // 11     
+      }    
+      - let day : Day = Day.Monday;       // Type of Day (enum) = 2
+      
+      --------------- [ String Enum ]
+      - enum DirectionNumber { North, South, East, West }
+      - enum DirectionString { North = 'NORTH', South = 'SOUTH', East = 'EAST', West = 'WEST' } // we must write the strigs explicitly
+
+[Object]
+      - let person : { name: string, age: number}     = { name: 'Ahmed', age: 25 };
+      - let persons: { name: string, age: number}[]   =[{ name: 'Ahmed', age: 25 },{ name: 'Ali', age: 27 }];
+      
+[Types Aliases]
+      [Object Types] --------------------------------------------------------------------
+            - type Person = { name: string, age: number };                    // Object
+                  - let person : Person = { name: 'Ahmed', age: 25 };
+      
+      [Tuple Types] ---------------------------------------------------------------------
+            - type Coord = [ number, number, string, number, number, string ] // Tuble
+                  - let coordinate : Coord = [ 1, 2, 'N', 3, 4, 'S']    
+            
+      [Function Types] ------------------------------------------------------------------
+            - type voidFunc = ( arg: string ) => void;
+                  - let printName : voidFunc = function ( arg: string ){ console.log(arg)}
+            Note: don't omit the parameter names or the parameter parenthesis around the parameter
+                  - Like : type voidFunc = string => void;              // Wrong X
+                  
+            - We can Assign functions to variables
+                  - let variable = cosole.log           // Without parenthesis (we won't invoke it)
+                        - variable('ahemd')
+                        
+            - We can write the name of the passed function like console.log(functionName.name)  // this will print the name of the function passed to console.log
+            
+            - Using Function types considered as a safety for entring safe function with expected result to avoid passing undesirable function 
+                  - Means that if I make a function for specefic purpose, and I want to make it do something build on the output of that function
+                  - then I should create a function type and make it specified to enforce the co-worker to use it correctly and avoid errors 
+            
+      [Generic Types] ------------------------------------------------------------------- 
+            - Allows us to write reusable and flexible code without sacrificing type safety
+            - type CustomData<T> = { data:T };
+                  - let myData: CustomData<number[]> = { data: [ 1, 2, 3, 4 ]};
+            - we could also use object type with it like 
+            - type Person = { name: string, age: number };
+                  - let persons: CustomData<Person[]>;
+      
+      [Generic Functions] ---------------------------------------------------------------
+            - function fillarray<T>(size: number, value: T){return Array(size).fill(value);}          // returns an array with size and filled with the determined value
+            
+
+
+      

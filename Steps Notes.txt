@@ -49,6 +49,7 @@ Updated the return of
       - cart get all
       
 $$ if the user doesn't logged in do not use user cart or favorite, I have to stop to overcome the problem errors in console $$
+don't forget to remove the extra address from the user profile addresses that come from the token
 
 Differences between React and Angular Deeply?
 

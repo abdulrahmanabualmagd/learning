@@ -300,3 +300,49 @@
             - [ Interface ] => Declaration merging can be useful for extending interfaces, and interfaces are generally more comonly used when defining object shapes
             - [ Type ]      => Types are more flexible and powerful when it comes to working with union types, intersection types, and mapped types
       
+[Class (extends / implements)]
+      - export interface Iemployed{       // making interface, making the Importable by using export keyword
+            print: ()=> void;             // Only the signature and the class must implement its body
+      }
+      
+      - export class Person {             // making class Person, also Importable
+            
+            private _name: string;        // Private Properties
+            private _age: number;
+            
+            constructor(name?:string, age?:number){   // constructor
+                  this._name = name || 'N/A';         // ctor params are optional, that's mean it may have a value or be undefinded so we have to use '||' Operator to Assign value in case it was undefined
+                  this._age = age || 0;
+            }
+            
+            get Name(): string{                       // Get data using Getter, We have to use it or the private property in the top will show warrning 'It's declared but Its value never read
+                  return this._name;                  // Means that It must be readable through getter or a function that print it or use it
+            }
+            
+            get Age(): number{
+                  return this._age;
+            }          
+
+            set Age(value:number){
+                  this._age = value;                  // Note that, Set Accessor can not have return type annotation
+            }
+      }
+      
+      - export class Employee extends Person implements Iemployed{
+            private _job: string;
+            constructor(name?:string, age?: numberr, job?:string){
+                  super(name, age);
+                  this._job = job || 'N/A';
+            }
+            
+            print: ()=> void = () => console.log(this._job);
+            
+            get Job(): string{
+                  return this._job;
+            }
+            
+            set Job(value: string){
+                  this._job = value;                  // Set Accessor Can not have return type annotation
+            }
+            
+      }

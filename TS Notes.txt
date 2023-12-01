@@ -2,58 +2,26 @@
       - install node.js 
             - npm i -g typescript         // installing typescript compiler 
                   - to verify the installation write tsc -v 
-             
+
+[Standard Directory Structure]
       
-[Non-Null Assertion operator]       =>    !
-[Optional Property Acess Operator]  =>    ?
-[Chaining Operator]                 =>    .
-            
-[Combining Techniques]
-
-      - [Union types]               => '|'
-            - A variable or a function parameter have can be one of many types
-            - function printNumber( num : number | string)
-                  { 
-                        // Narrowing Section
-                        if (num ==='number') return num; 
-                        else return parseInt(num)
-                  }
-                  
-      - [Intersection Types]        => '&'      // used to combine two types
-            - type person = { name:string, age:number };
-            - type employee = { id:number, job:string };
-            - type Engineer = person & employee & {ShowData () => void}
-            - let a : Engineer = {id:1, name:'ahmed', age:25, job:'Engineer', print: function () {console.log(`${this.id}`)}}
+      -------------------------
+      project-root/
+      |-- src/                            // Store all the .ts files                  
+      |   |-- app/
+      |   |   |-- controllers/
+      |   |   |-- models/
+      |   |   |-- services/
+      |   |   |-- utils/
+      |   |   |-- app.ts
+      |-- dist/                           // store all the transpiled Typescript code into Javascript code which is responsible for running the program
+      |-- node_modules/
+      |-- tsconfig.json                   // Typescript Compiler Configuration 
+      |-- package.json
+      |-- .gitignore
+      |-- README.md
+      -------------------------
       
-[Nullable Type]
-      - function print (name : string | null | undefined){
-            // here we handling the case of the name that must be string to make sure there is no crash would happen
-            // null and type checks here (prevent crash for not string or no value objects)
-            if (typeof name === 'string')
-            {
-                  // do something here if the name has a value and in string 
-            }
-            else
-            {
-                  // do something here if the name have no value or not string value 
-            }
-        }
-
-[Optional Chaining]
-      - type Customer = {date : Date}
-      - let getCustomer : function (id : number) : Customer | null | undefined { return id === 0 ? null : {date : Date()} }
-      - let customer : Customer = getCustomer(0);
-            - console.log(customer?.date?.getFullYear())          // here we used nullable operator instead of making a null check condition
-      ----------------------------------------------------
-      - let log : any = function () : void {console.log('Hello There!')}            // here the log is a function
-      - log()           // this is will work without errors 
-      - log = null      // assign the log to null (not a function anymore)
-      - log()           // Error! because log is not a function so to avoid this we can use the nullable chaining Access operator
-            # Solution : => log?.()             // if log is not a function, this line won't be executed
-            
-            
------------------------- [ Codecademy ] ----------------------------
-
 [Overview]
       - We write typescript code in file with extension ts
       - Then we write tsc fileName.ts           // In this stage the transpiler (source-to-source Compiler) will check if it can be converted or not to the js code due to typescript standards
@@ -252,6 +220,23 @@
       - type Max = 50 | 100
             - let degree : Max =                        // the degree must be either 50 or 100
             
+[Combining Techniques]        [ Unions(|) / Intersections (&) ]
+
+      - [Union types]               => '|'
+            - A variable or a function parameter have can be one of many types
+            - function printNumber( num : number | string)
+                  { 
+                        // Narrowing Section
+                        if (num ==='number') return num; 
+                        else return parseInt(num)
+                  }
+                  
+      - [Intersection Types]        => '&'      // used to combine two types
+            - type person = { name:string, age:number };
+            - type employee = { id:number, job:string };
+            - type Engineer = person & employee & {ShowData () => void}
+            - let a : Engineer = {id:1, name:'ahmed', age:25, job:'Engineer', print: function () {console.log(`${this.id}`)}}
+            
 [Type Guards (Narrwing)]
       
       [Type Guards]
@@ -299,8 +284,14 @@
       - [ Compatibility ]
             - [ Interface ] => Declaration merging can be useful for extending interfaces, and interfaces are generally more comonly used when defining object shapes
             - [ Type ]      => Types are more flexible and powerful when it comes to working with union types, intersection types, and mapped types
-      
+
+[Interface Extends]
+      - 
+
+ 
 [Class (extends / implements)]
+      - Note: without specifying the access modifier for the property, It is Public by default.
+
       - export interface Iemployed{       // making interface, making the Importable by using export keyword
             print: ()=> void;             // Only the signature and the class must implement its body
       }
@@ -343,6 +334,57 @@
             
             set Job(value: string){
                   this._job = value;                  // Set Accessor Can not have return type annotation
-            }
-            
+            }    
       }
+      
+[Index Signature]
+      - Note: each class or interface could have only one index signature
+      - Useful when we're working with objects that have dynamic or unknown property names
+      - interface DataToReceive{
+            [key:string]:string;          // what ever the data is to receive from the API, as log as the key is string also the value assigned to it is string
+      }
+      - class DataToReceive{
+            [key:string]:string;
+            constructor(){
+                  this.d1 = 'Abdulrahman';
+                  this.d2 = 'Khaled';
+                  this.a1 = 'Yousef';
+                  // And so on...
+            }
+      }
+  
+  
+[Non-Null Assertion operator]       =>    !
+[Optional Property Acess Operator]  =>    ?
+[Chaining Operator]                 =>    .
+            
+
+      
+[Nullable Type]
+      - function print (name : string | null | undefined){
+            // here we handling the case of the name that must be string to make sure there is no crash would happen
+            // null and type checks here (prevent crash for not string or no value objects)
+            if (typeof name === 'string')
+            {
+                  // do something here if the name has a value and in string 
+            }
+            else
+            {
+                  // do something here if the name have no value or not string value 
+            }
+        }
+
+[Optional Chaining]
+      - type Customer = {date : Date}
+      - let getCustomer : function (id : number) : Customer | null | undefined { return id === 0 ? null : {date : Date()} }
+      - let customer : Customer = getCustomer(0);
+            - console.log(customer?.date?.getFullYear())          // here we used nullable operator instead of making a null check condition
+      ----------------------------------------------------
+      - let log : any = function () : void {console.log('Hello There!')}            // here the log is a function
+      - log()           // this is will work without errors 
+      - log = null      // assign the log to null (not a function anymore)
+      - log()           // Error! because log is not a function so to avoid this we can use the nullable chaining Access operator
+            # Solution : => log?.()             // if log is not a function, this line won't be executed
+      
+      
+      

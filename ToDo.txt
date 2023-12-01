@@ -111,3 +111,7 @@ typescript projects to do, try catch
 how to collaborate on a database using version control in git
 
 what is mapped type in typescript
+
+Promises (Asynchronous Operation)
+
+Search for "What are the Core Features for Javascript?"

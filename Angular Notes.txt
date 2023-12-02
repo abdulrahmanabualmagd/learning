@@ -1,8 +1,11 @@
-What is Redux library?
+[Installing Angular]
+      - npm install -g typescript               // Installing Typescript Globally, Because Angular use TypeScript for buil the application      
+      - npm install -g @angular/cli             // Installing Angular globally
+            - ng new projectName                // Create new Angular project and initialize its files
+                  - ng serve -o                 // Starts your development server to host the Angular project 
 
 ------------- [ Day One ] --------------
-npm   npmjs.com   packages for typescript
-      each pakacage depend on another package 
+
       
 let grade:any;    let us assign in datatype in typescript file 
 let studentAge: number|null;  let us assign numbers or null

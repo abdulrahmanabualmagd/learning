@@ -115,3 +115,5 @@ what is mapped type in typescript
 Promises (Asynchronous Operation)
 
 Search for "What are the Core Features for Javascript?"
+
+What is Redux library?

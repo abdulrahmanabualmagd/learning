@@ -7,19 +7,22 @@
       
       -------------------------
       project-root/
-      |-- src/                            // Store all the .ts files                  
-      |   |-- app/
-      |   |   |-- controllers/
-      |   |   |-- models/
-      |   |   |-- services/
-      |   |   |-- utils/
-      |   |   |-- app.ts
-      |-- dist/                           // store all the transpiled Typescript code into Javascript code which is responsible for running the program
-      |-- node_modules/
-      |-- tsconfig.json                   // Typescript Compiler Configuration 
-      |-- package.json
-      |-- .gitignore
-      |-- README.md
+            |-- src/                            // Store all the .ts files                  
+            |   |-- app/
+            |   |   |-- controllers/
+            |   |   |-- models/
+            |   |   |-- services/
+            |   |   |-- utils/
+            |   |   |-- app.ts
+            |   |-- asset/                      // Contain the project assets
+            |   |   |-- images/
+            |   |   |-- audios/
+            |-- dist/                           // store all the transpiled Typescript code into Javascript code which is responsible for running the program
+            |-- node_modules/
+            |-- tsconfig.json                   // Typescript Compiler Configuration 
+            |-- package.json
+            |-- .gitignore
+            |-- README.md
       -------------------------
       
 [Overview]
@@ -385,6 +388,11 @@
       - log = null      // assign the log to null (not a function anymore)
       - log()           // Error! because log is not a function so to avoid this we can use the nullable chaining Access operator
             # Solution : => log?.()             // if log is not a function, this line won't be executed
+            
+[Decorators]
+      - Allows us to add new functiuonality to [Classes, Methods, Properties, Parameters, Accessors(getters and setters)]
       
       
+      
+typeof used with primitive data types only
       

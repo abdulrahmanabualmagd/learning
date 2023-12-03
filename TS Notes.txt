@@ -35,7 +35,13 @@
       - let x = 5;      => let x = '5 years'    => Error, x can hold only numbers 
       - let x;          => x = 5                => x = '5 years'  // won't show any error because the x implicitly delcared as any on the initialization
             - What happened here is type annotation (The typescript assign type to a variable because we didn't determined it)
-            
+
+[Built-In Type Primitives]
+      - [ boolean, string, number, undefined, null, any, unknown, never, void, bigint, symbol ]
+      
+[Common Built-in JS Object]
+      - [ Data, Error, Array, Map, Set, Regexp, Promise ]
+         
 [Type Shapes]
       - Means that typescript knows the methods that can be used with each variable depending on its type like strings have methods such as [toUpperCase, length, toLowerCase, and so on...]
 
@@ -184,7 +190,17 @@
             - type typeName<T> = T extends string ? string : number;
             - let  x: typeName<string>;   // ~ let x: string;
             - let  x: typeName<others>;   // ~ let x: number;
-                  
+      
+      [Type Of Value]
+            - const x = {data:'something', ...}
+            - type data = typeof x
+            
+      [Type From Func Return]
+            - const func = () => {...}
+            - type data = ReturnType<typeof func>
+      
+      [Type From Module]
+            - const data: import("../..").data
       
       
 [Generic Functions] 
@@ -290,6 +306,14 @@
 
 [Interface Extends]
       - 
+      
+[Interface Overloads]
+      - interface Expect{
+            (value: boolean): string
+            (value: string): boolean;
+        }
+      // this interface is used to represent a function taht can either take a boolean and return a string or take a string and return a boolean
+      // (Overload)
 
  
 [Class (extends / implements)]
@@ -339,6 +363,9 @@
                   this._job = value;                  // Set Accessor Can not have return type annotation
             }    
       }
+      
+      - [Abstract Class]
+            - only can be inherited only, cannot be implemented
       
 [Index Signature]
       - Note: each class or interface could have only one index signature
@@ -392,7 +419,132 @@
 [Decorators]
       - Allows us to add new functiuonality to [Classes, Methods, Properties, Parameters, Accessors(getters and setters)]
       
+      [Decorator Factory]
+            - to customize the decoration, by implementing a function that returns the expression that will be called by the decorator at runtime
+            function color(value: string) {           // this is the decorator factory that accepts a string argument from the @decorator('')
+              return (target: Function) => {
+                  // this is the main decorator 
+              };
+            }
+            
+            - @color('argument') class className{}
       
+      [Decorator Composition]
+            - We can apply multiple decorator for the same target whether it was class, method, or whatevery it is
+            
+            - @dec1 @dec2 @dec3 class color{}         // dec3 will execute first then dec2 and so on... (nearest from class is first)
       
-typeof used with primitive data types only
+      [Decorator Evaluation]
+            - Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each instance/static member.
+            - Parameter Decorators are applied for the constructor.
+            
+      [Class Decorator]
+            - Note: the class decorator function must have one argument from type [Function]                       $$
+            - function ClassDecorator(target: Function){//do smoething...}
+                  - @ClassDecorator
+                    class ClassName{//someproperties and methods}
+            - // We could make it Seal the class
+      
+      [Method Decorator]
+            - Note: the method decorator function must have three argument [ Object , string , PropertyDescriptor ] $$
+                  - PropertyDescriptor is a typescript interface
+            - function MethodDecorator(target: Object, methodName: string, descriptor: PropertyDescriptor){
+                  originalValue = descriptor.value;                                       // we use [.value]
+                  descriptor.value = () => console.log('Move Function Cancelled');        // here we changed the method implmentation
+                                                                                          // this line will be executed instead of the console.log(speed)
+                  originalValue.call(target,123)
+            }
+            - class className{
+                  
+                  @MethodDecorator                          // Here is the @decorator
+                  move(speed:number){
+                        console.log(speed);
+                  }
+            }
+      
+      [Accessor Decorator]
+            - Note: the Accessor Decorator function must have three arguments [ Object, string, PropertyDescriptor ]  $$
+            - function AccessorDecorator(target: Object, name: string, descriptor: PropertyDescriptor){
+                  descrptor.get = () => {                   // we use [.get]
+                        return 'newValue'                   // Here we changing the value of the Getter, Use Set with Setters
+                  }
+            }
+            
+            class Car{
+                  private _color: string = 'red';
+                  @AccessorDecorator
+                  get Color():string{
+                        return this._color;
+                  }
+            }
+            
+      [Property Decorator]
+            - Note: the Property Decorator function must have two arguments [ Object, string ]
+            - we add the value of the property inside the function [ let value: string ]              // in case we're refferring to a string property
+            - we add the descriptor from type PropertyDescriptor beside the value and we set the getter and setter inside it 
+            - we use Object.defineProperty(target, name, descriptor)
+            function IsValid(target: Object, name: string){
+                  let value: string;
+                  const descriptor: PropertyDescriptor = {
+                        get(){
+                              return value;                       // we could add validation logics
+                        },
+                        set(newValue: string){
+                              value = newValue;                   // we could add validation logics 
+                        }
+                  }
+                  Object.defineProperty(target, name, dscriptor); // setting the descriptor for the method knew by its name and target
+            }
+            
+            class Person{
+                  @IsValid                                        // We invoke the decorator function 
+                  name: string;
+                  constructor(name: string){
+                        this.name = name;                         // in this line will access the setter in the description inside the decorator function
+                  }                             
+            }
+      
+      [Parameter Decorator]
+            - Note: the Parameter Decorator function must have three arguments [ Object, string, number]
+            - function IndexDecorator(target: Object, name: string, index: number){                         // here we got the index of the parameter
+              }                                                                                             // in this case the index is 0
+            - class Person{
+                  move(@IndexDecorator distance: string){
+                        // do something
+                  }
+            }
+      
+      [MetaData] ---
+      
+[If Statements]
+      - typeof                (for Primitives)              => input: number | string     => if (typeof input === 'string')   {//do something...}
+      - property in object    (for Objects)                 => input: {data:'yes'}        => if (data in input)               {//do something...}      
+      - instanceof            (for Classes)                 => input: number | number[]   => if (input instanceof Array)      {//do something...}      
+      - type-guard functions  (narrowing for anything) like => input: number | number[]   => if (Array.isArray(input))        {//do something...}
+      
+[Discriminated Unions]
+      - type Response = {status:200, data:any} | {status:301, to:string} | {status:400, error:Error}
+            // in case 200, 301, or 400 => each one have different property next to it
+      
+      - const response: Response = getResponse()
+      - switch(response){
+            case 200: return response.data
+            case 301: return redirect(response.to)
+            case 400: return response.error
+      }
+      
+[Type Assertion]
+      - Description: is to make sure that the variable is as descriped
+      - let text : number = (variable as string).length;
+      - let text : number = (<string>variable).length;
+      - function isString(value:any): value is string{return typeof value === "string";}
+
+[Different between void and never types]
+      - function logMessage(message: string): void {
+            console.log(message);
+        }
+      - function throwError(message: string): never {
+            throw new Error(message);
+        }
+      
       

@@ -1,187 +1,172 @@
-[Installing Angular]
+[Framework/Library]
+      - library is a collection of codes written for solving a specific problem like ( React / JQuery / )
+      - framework is a collection of libraries only import what we want to use (Angular) 
+            - Component-Based Application
+            - single page application (routing)
+            
+[Development Enviroment Installation] 
+      - install node.js                         // to use the node package manger (npm) to install the required packages
       - npm install -g typescript               // Installing Typescript Globally, Because Angular use TypeScript for buil the application      
       - npm install -g @angular/cli             // Installing Angular globally
             - ng new projectName                // Create new Angular project and initialize its files
-                  - ng serve -o                 // Starts your development server to host the Angular project 
+                  - ng serve -o                 // Starts your development server to host the Angular project with option -o to open the server  
 
-------------- [ Day One ] --------------
+      - ng generate module        [name]        // group related code and comopnents
+      - ng generate component     [name]        // angular component with its associated files (HTML, TS, CSS)
+      - ng generate service       [name]        // Used for encapsulating and organizing business logic, data retrieval or other operations that can be shared (across components)
+      - ng generate directive     [name]        // Used to extend and enhance the behavior of HTML elements, attributes, and even CSS
+      - ng generate class         [name]        // Generate Importable Class
+      - ng generate enum          [name]        // Generate Importable Function
+      - ng generate pipe          [name]        // Used to Transform the data before Displaying it like <p>{{data | json}}</p>
+      - ng generate interface     [name]        // Generate Importable Interface
+      - ng generate guard         [name]        // Used to control whether a route can be activated or not, based on certain conditions
+      - ng generate resolver      [name]        // Used to ensure that the data required for a component is avialable before the component is activated
+      - ng generate interceptor   [name]        // Used to intercept and modify HTTP request or responses globally before they reach the server of the application's comopnents ( Add Headers, Loggin, Error Handling )
+      - ng generate library       [name]        // Packages of resuable code that can be shared on distributed across multiple projects, contain (components, services, directives,)
+      
+      - --skip-tests                            // Skip creating testing file .spec for the created element
+      - --skip-import                           // Skip importing and adding the created element to the app.module (NgModule)
 
-      
-let grade:any;    let us assign in datatype in typescript file 
-let studentAge: number|null;  let us assign numbers or null
-let anys:any[] = [1,2,{fname:"ali"},false]
-let numbers:number[]= [1,2,3,4];
-let numbersOrStings:(string|number)[] = [];       have to initialize to be able to use push and pop
-      
-user defined datatype
-type stringsOrNumbers = string|number;
-      user defined datatype accpet string && numbers
-      
-      
-objects
-      let person = {fname:"ali", lname:"Ahmed", age:20};
-            person.color = "red"    error won't add it like in js
-            
-            person = {fname:"mona", lname"ahmed"};    // error 'age' missed you have to define it 
-            
-            let employee:{fullName:string, company:string, Salary:number};
-                  employee = {fullname:"ahmed omar", company:"ITI", salary:1000};
-                  
-optional field (?)
-      
-      let employee : {fullName:string, company:string, salary?:number};
-            employee = fullName:"ahmed omar", company"ITI"} won't throw error on missing salary
-            
-array of objects 
-      let persons :{}[] = [];
-      
-      
-tuples      -- array with limited number of elements
-
-      let phone contact : [fname:string, phonenumber:strin];
-            // here we defined array of two elements only both are strings
-            // but if we pushed -> not handled $$
-            
-      
-Functions in js we don't declare the datatype of each parameter also the return datatype
-
-      //Function Statement
-      function add(num1:number, num2:number)   :number 
-      {
-            console.log(num1+num2);
-            return num1 + num2;
-      }
-      
-      //Function Expression
-      let addFun = function (num1:number, num2:number) :number
-      {
-            console.log(num1+num2);
-            return num1+num2;
-      }
-      
-      //Arrow Function
-      let addArrow = (num1:number, num2:number) : string => console.log(num1+num2);
-      
-using the functions 
-      Add(1,2,3) throw error accept only two parameter in type of numbers
-      Add("1", 2) // also throw error 
-      
-      
-      function add(num1:number, num2?:number)         // optional parameter
-      function add(num1:number, ...params:number) :number    // Rest Params using spread operator 
-      {
-            let result = num1;
-            if ( params.length > 0)
-            {
-                  for (let i of params)
-                  {
-                        result += i;
-                  }
-                  
-            }
-            return result;
-      }
-      
-json place holder => fake APIs
-
-
-Abstration
-      Interface (Contract)
-
-      interface IUser{
-            id:number;
-            name:string;
-            address:{
-                  street:string;
-                  buildingNo:int;
-            };
-      }
-
-here interface have a collection of datatype and the object must implement it exactly no less or extra data unilke class
-
-      let user:Iuser ={}      // object implement the IUser interface 
-            and this is the first use for the interface 
-            
-      interface IUserMethods extends IUser{                 // it will take the elements that IUser have and add extra data on it
-            
-            display:()=> void | string    // this is a function that return void or string and takes no parameter
-            PrintUserInfo:()=> void
-                  // so here we only define the parameter datatype and the return datataype
-      }
-
-Aliases 
-
-Class [ class / implements / extend (used with two element with the same type [class with class / interface with interface ] ) ]
-      // implements used with two different types 
-
-      class User implements IUsermethods{
-            // quick tip right click => fix => implement interface -- and then it will automatically implement it all
-      }
-
--------------- [ Day Two ] ---------------
-what is the different between the framework and the library?
-      - library is a collection of codes written for solving specifing problems like ( React / JQuery / )
-      - framework is a collection of libraries only import what we want to use 
-      - Component-Based Application
-      - single page application (routing)
-      
-CMD Commands used 
-      - npm i -g @angular/cli       -- install angular globally
-      - ng version                  -- get the version of the current installed angular
-      - ng serve -o                 -- run the application and open it in the browser
-      - npm i bootstrap             -- install bootstrap locally 
-      - ng g c ComName --skip-test  -- create new component (one of two methods to create a component)
+[Create Multible Projects]
+      - ng new my-workspace --no-create-application               // this flag to create the workspace without any project
+      - ng generate application [name]    --skip-tests            // Create new project inside the workspace in projects/ directory
+            --skip-tests => will make all things generated on that project without the test file (.spec)
+      - ng generate library [name]                                // Generate library that may have components, services, modules, directives, and pipes
       
       
 [Angular] is an Open Source framework 
-      - Component Based Application [ Aside / Nav / body / footer / ]
+      - Component Based Application [ Aside / Nav / body / footer / ] => (Shared / Core)
       
-when sharing the projcet we don't share all the files include node modules because it's too large in size 
-      - we share the project without that file and the receiver and in the package.json and package.lock.json both contains modules and modules dependencies 
-      - so the receiver by running # npm install => it will install all the modules automatically from package.json
-      
-      
-      
-      
-------------------------------- [Angular project Files] ------------------------------- 
-      - [.gitignore]
-            -  Specifies which files and directories should be excluded from version control
-      
-      - [package.json]
-            - list project dependencies and scripts for managing them (high-level information)
-            
-      - [package-lock.json]
-            - contain version information for all the dependencies including their sub-dependencies
-      
-      - [angular.json]
-            - Configuration for build option and project structures      
-      
-      - [tsconfig.json]
-            - Configuration for type script including complier options
-            
-      - [src/]
-            - the main source code directory containingyour application's code
-      
-      - [index.html] 
-            - the main html file that serves as the entry point for your app
-            
-      - [app.component.ts]
-            - the root component of your angular application
-            
-      - [Styles.css]
-            - Global Styles for your Angular app
-            
-      - [Environments/]
-            - Configuration files for different environments (devlopment and production)
-            
-      - [assets/]
-            - Diretory for static assets like images, fonts, and json data
-           
-      
-------------------------------- [Creating Interface & Component] -------------------------------
+[Project Sharing]
+      - when sharing the projcet we don't share all the files include node modules because it's too large in size 
+            - we share the project without that file and the receiver and in the package.json and package.lock.json both contains modules and modules dependencies 
+            - so the receiver by running # npm install => it will install all the modules automatically from package.json
+
+
+[Workspace Files]       => ng new MyWorkSpace --no-create-application                              
+|
+|-----[Workspace Configuration Files]
+|     |
+|     |-----[.editorconfig]
+|     |           - Configuration for code editors
+|     |     
+|     |-----[.gitignore]
+|     |           - Specifies intentionally untracked files that Git should ignore.
+|     |           
+|     |-----[README.md]
+|     |           - Introductory documentation for the root application.
+|     |     
+|     |-----[angular.json]
+|     |           - CLI configuration defaults for all projects in the workspace
+|     |     
+|     |-----[package.json]          => (npm)
+|     |           - Configures npm package dependencies that are available to all projects in the workspace
+|     |           
+|     |-----[package-lock.json]     => (npm)
+|     |           - Provides version information for all packages installed into node_modules by the npm client
+|     |           
+|     |-----[tsconfig.json]
+|                 - The base TypeScript configuration for projects in the workspace
+|
+|
+|-----[Projects Files (All)]        => ng generate application MyProject1
+      |
+      |-----[Project Files]
+      |     |
+      |     |-----[Project Application Configuration Files]
+      |     |     |
+      |     |     |-------[tsconfig.app.json]
+      |     |     |           - Extends the settings from the [tsconfig.json] 
+      |     |     |           - Specified for the Current Angular Proejct Application
+      |     |     |   
+      |     |     |-------[tsconfig.spec.json]
+      |     |                 - Extends the settings from the [tsconfig.jcon]
+      |     |                 - Specified for Typescript Unit Tests configuration
+      |     |     
+      |     |-----[Project Application source files]    [src/]
+      |           |     
+      |           |-----[Application Files]     [app/] 
+      |           |     |
+      |           |     |     - Contains the component files in which your application logic and data are defined
+      |           |     |   
+      |           |     |-----[app-routing.module.ts]
+      |           |     |           - Setting up the routing configuration for the Angular Project
+      |           |     |     
+      |           |     |-----[app.config.ts]
+      |           |     |           - Defines the application config logic that tells Angular how to assemble the application
+      |           |     |           - As we add more providers to the app, they must be declared here
+      |           |     |           
+      |           |     |-----[app.component.ts]
+      |           |     |           - Define the logic for the application's root component (AppComponent)
+      |           |     |     
+      |           |     |-----[app.component.html]
+      |           |     |           - Defines the HTML template associated with the root (AppComponent)
+      |           |     |           
+      |           |     |-----[app.component.css]
+      |           |     |           - Defint the base CSS stylesheet for the root (AppComponent)
+      |           |     |           
+      |           |     |-----[app.component.spec.ts]
+      |           |     |           - Define a unit test for the root (AppComponent)
+      |           |     |           
+      |           |     |-----[app.module.ts]
+      |           |                 - Defines the root module, named (AppModule), that tells Angular how to assemble the application
+      |           |                 - Initially declares only the (AppComponent)
+      |           |                 - As we add more components to the app, they must be declared here
+      |           |     
+      |           |-----[Project Assets Files]  [assets/]
+      |           |
+      |           |           - Contains image and other asset files to be copies as-is when you build your application
+      |           |           
+      |           |-----[favicon.ico]
+      |           |           - An icon to use for this application in the bookmark bar
+      |           |           
+      |           |-----[index.html]
+      |           |           - The main HTML page that is served when someone visits your site
+      |           |           - The CLI automatically adds all JavaScript and CSS files when building you app
+      |           |                 - So we Typically don't need to add any <script> or <link> tags here manually
+      |           |     
+      |           |-----[main.ts]
+      |           |           - The main entry point for your application
+      |           |           - Compiles the application with the JIT compiler and bootstraps the application's root module (AppModule) to run in the browser
+      |           |           - We can also use the AOT compiler without changing any code by appending the --aot flag to the CLI build and serve commands
+      |           |
+      |           |-----[styles.css]
+      |                       - Lists CSS files that supply styles for a project
+      |      
+      |-----[Library Project Files]       => ng generate library myLibrary
+            |     
+            |---- [Library Configuration Files]
+            |     |
+            |     |-----[ng-package.json]
+            |     |           - Configuration file used by ng-packagr for building your library
+            |     |     
+            |     |-----[package.json]
+            |     |           - Configures npm package dependencies that are required for this library 
+            |     |           
+            |     |-----[tsconfig.lib.json]
+            |     |           - Library-specific TypeScript configuration, including TypeScript and Angular template compiler options'
+            |     |     
+            |     |-----[tsconfig.lib.prod.json]
+            |     |           - Library-Specific TypeScript configuration that is used when building the library in (production mode)
+            |     |           
+            |     |-----[tsconfig.spec.json]
+            |                 - TypeScript configuration for the library tests
+            |     
+            |-----[Library Source Files]      [src/]
+                  |    
+                  |-----[lib]
+                  |           - Contains Library project's logic and data. Like an application project, a library project can contain Components, Services, modules, directives, and pipes
+                  |     
+                  |-----[public-api.ts]
+                              - Specifies all files that are exported from your library
+
+
+
+
+[JIT Compiler/ AOT Compiler]    
+
+
   
-- Automaticqlly using command @ ng g i InterfaceName
-      
 ------------------------------- [Creating Compnent] -------------------------------
 
       -  Manually 

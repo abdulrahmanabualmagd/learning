@@ -117,3 +117,5 @@ Promises (Asynchronous Operation)
 Search for "What are the Core Features for Javascript?"
 
 What is Redux library?
+
+github => [issues, code review, pull requests]

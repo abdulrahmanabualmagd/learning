@@ -1,4 +1,4 @@
-[Installing the development enviroment] 
+[Development Enviroment Installation] 
       - install node.js 
             - npm i -g typescript         // installing typescript compiler 
                   - to verify the installation write tsc -v 

@@ -330,6 +330,13 @@ how to squash commit
                   - @ git commit -am "Message"
                   - @ git push origin BrnachName --force
 
+[Revert Not Stagged changes]
+      - You made a changes and that you didn't add it to the index and you want to discard these changes on the modified file
+      - @ git checkout -- fileName
+            [--] => those separator indicating that the following are files names not branches or tags names
+            // this will discard the changes (undo - revert changes)
+            Note: this command not reversible, means that it will undo changes for good...
+
 
       
       

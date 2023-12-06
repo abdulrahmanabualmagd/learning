@@ -9,10 +9,14 @@
       - npm install -g typescript               // Installing Typescript Globally, Because Angular use TypeScript for buil the application      
       - npm install -g @angular/cli             // Installing Angular globally
             - ng new projectName                // Create new Angular project and initialize its files
+                  - any flags set while creating the project applied over the entire project
                   - ng serve -o                 // Starts your development server to host the Angular project with option -o to open the server  
 
       - ng generate module        [name]        // group related code and comopnents
       - ng generate component     [name]        // angular component with its associated files (HTML, TS, CSS)
+            - --inline-template --inline-style  // These flags used to make the style and template inline (creates only the ts file and write CSS and HTML on the main file) 
+            - --standalone --flat               // flat used to create it on the current folder and (standalone) means that it does not require a declaration in NgModule
+            - standalone component   => explicitly manage their own dependencies
       - ng generate service       [name]        // Used for encapsulating and organizing business logic, data retrieval or other operations that can be shared (across components)
       - ng generate directive     [name]        // Used to extend and enhance the behavior of HTML elements, attributes, and even CSS
       - ng generate class         [name]        // Generate Importable Class
@@ -96,13 +100,13 @@
       |           |     |           - Defines the application config logic that tells Angular how to assemble the application
       |           |     |           - As we add more providers to the app, they must be declared here
       |           |     |           
-      |           |     |-----[app.component.ts]
+      |           |     |-----[app.component.ts]      (root component)
       |           |     |           - Define the logic for the application's root component (AppComponent)
       |           |     |     
-      |           |     |-----[app.component.html]
+      |           |     |-----[app.component.html]    (root component)
       |           |     |           - Defines the HTML template associated with the root (AppComponent)
       |           |     |           
-      |           |     |-----[app.component.css]
+      |           |     |-----[app.component.css]     (root component)
       |           |     |           - Defint the base CSS stylesheet for the root (AppComponent)
       |           |     |           
       |           |     |-----[app.component.spec.ts]
@@ -125,7 +129,7 @@
       |           |           - The CLI automatically adds all JavaScript and CSS files when building you app
       |           |                 - So we Typically don't need to add any <script> or <link> tags here manually
       |           |     
-      |           |-----[main.ts]
+      |           |-----[main.ts]               (main entry point)
       |           |           - The main entry point for your application
       |           |           - Compiles the application with the JIT compiler and bootstraps the application's root module (AppModule) to run in the browser
       |           |           - We can also use the AOT compiler without changing any code by appending the --aot flag to the CLI build and serve commands
@@ -161,12 +165,52 @@
                               - Specifies all files that are exported from your library
 
 
+[JIT Compiler/ AOT Compiler]        // By default Angular are set up for (JIT Compilation) Just-In-Time   
+      
+      [JIT] // Compile TypeScript just in time for executing it in the client side browser... 
+            [Timing]
+                  - Happens at runtime, in the browser before the application runs
+            [Process]
+                  - The Angular application's templates and TypeScript code are shipped to the client side as is. the compilation of application's template and typescript code in the user's browser during application startup 
+            [Pros]
+                  - Quick Development, you don't need to wait for separate compiltion step each tie you make a change, this speed boost help you build and test your website more effieciently 
+                  - Easy Debuggin, JIT makes it simple to find and fix errors in your code it gives you real-time feedback on any issues, making it easier to identify and solve problems as you work
+                  - Flexible Prototyping, JIT is perfect for trying out new ideas and experimenting with different desings it allows you to see immeiate result, so you can quickly iterate and improve your website
+                  - Interactive Learning, For those learnig Angular, JIT is a great learning tool. It lets you play with the code and see theeffects in real-time, making the learning process more engaging and interactive 
+                  - the browser loads a smaller payload initially, as the tmeplates and code are shipped as is 
+                  
+            [Cons]
+                  - Slower application startup time as compilation occurs on the client side 
+                  - Users might experience a delay before the application becomes fully interactive 
+            
+            - Each file compiled separately
+            - No need to build after changing your code and before reloading the browser page ( because in AOT you have to build the application after each modification before sent it to the client  )
+            - Suitable for local development ( because compilation no a separate step )
+            [JIT Scenario]
+                  - You write code using HTML, CSS, and TypeScript for your angular website
+                  - When someone opens you website in their browser, the JIT compiler starts working 
+                  - The JIT compiler reads and understands your code, looking for angular components and instructions\
+                  - It then translates your code into optimized JavaScript, a language the browser understands
+                  - The browser uses this translated JavaScript to build and display your website on the screen
+                  - During development, if you make changes to your code, the JIT compiler quickly re-translates the modified code  allowing you to see the changes instantly
+                  - Whe nusers interact with your website, the browser uses the translated JavaScript code to respond to their actions and provide a dynamic user experience
+            
+      
+      [AOT] // Compile TypeScript during build phase (Ahead of Time)
+            [Timing]
+                  - AOT compoilation occurs before the application is deployed to the client typically during the build process
+            [Process]
+                  - The Angular appilication's templates and TypeScript code are compiled into JavaScript and HTML during the build phase. This compiled ccode is then shipped to the client-side, and there is no need for the client to perform compilation
+            [Pros]
+                  - Faster application startup time as there is no compilation on the client side
+                  - Smaller Payload sent to the client, as only the compiled code is shipped
+                  
+            - Compiled by the machine itself, via the command line (Faster)
+            - All code compiled together, inlining HTML/CSS in the scripts
+            - No need to deploy the compiler (Half of Angular size)
+            - Suitable for production builds
 
 
-[JIT Compiler/ AOT Compiler]    
-
-
-  
 ------------------------------- [Creating Compnent] -------------------------------
 
       -  Manually 
@@ -216,10 +260,10 @@
 
       - Pipes are features that allows you to trnasform and format data in your template 
       - used to modify the way the data is displayed in the view without changing the actual data itself
-            @ {{ myDate | date:'short' }}
+            @ {{ myDate   | date:'short' }}
             @ {{ myNumber | number:'1.2-2' }}
             @ {{ myString | uppercase }}
-            @ {{ price | currency:'USD':true }}
+            @ {{ price    | currency:'USD':true }}
             
       - also we can create custom pipelines using @Pipe decorator 
             @ {{ myData | myCustomPipe }}
@@ -609,3 +653,45 @@ in the package.json file we determine the start script
           }
         }
       @ -------------------------------------------------------------
+      
+
+[Deployment]      
+
+      -- [Build]
+            - ng build              // (JIT) Just in Time compilation (by default)
+            - ng build --aot        // (AOT) Ahead of Time compilation
+            - Project will be published in [dist/] Directory 
+            
+      -- [Production (Budget)]
+      
+            - [initial]                   // This budget applies to the initial bundle size of your application
+                  - [maximumWarning]      // Specifies the warning threshold, it the initial bundle size exceeds the specified size 
+                  - [maximumError]        // Specifies the error threshold, if the initial bundle size exceeds 1 megabyte,
+            
+            - [anyComponentStyle]         // This budget applies to the size of styles (CSS) associated with any component in your application
+                  - [maximumWaring]       // Specifies the Warning threshold if the styles exceed the specified size
+                  - [maximumError]        // Specifies the error threshold if the Styles exceed the specified size
+                  
+      -- [Error 404 Not Found Page Solution(IIS Server)]
+
+            - Install IIS URL Rewrite Module
+            - add this snippet of code to the web.config file 
+            -------------------------------------------------------------------------------------------
+                  <?xml version="1.0" encoding="utf-8"?>
+                  <configuration>
+                    <system.webServer>
+                      <rewrite>
+                        <rules>
+                          <rule name="AngularJS Routes" stopProcessing="true">
+                            <match url=".*" />
+                            <conditions logicalGrouping="MatchAll">
+                              <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                              <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />   
+                            </conditions>
+                            <action type="Rewrite" url="/" />
+                          </rule>
+                        </rules>
+                      </rewrite>
+                    </system.webServer>
+                  </configuration>
+            -------------------------------------------------------------------------------------------

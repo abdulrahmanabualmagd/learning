@@ -311,6 +311,7 @@ how to squash commit
       - in case we want to delete commits permenantly from the log history we use hard Reset 
       - @ git reset --hard head~3               => delete the last two commits from the head 
       - @ git push origin Abdulrahman --force   => because now the remote branch have these commits that we removed so he won't let you push unless you get that update, so here we use --force to push it any way
+      - @ git reset                             => Unstage stagged files
       
 [ Update the delete brnach from local ]
       - @ git push origin -d BranchName         // delete a remote branch       

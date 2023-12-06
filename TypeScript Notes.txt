@@ -78,9 +78,10 @@
                   - after that we go to the run and debug button in the left side and click on create a [launch.json] file 
                   - select the node.js 
                         - this is a json file that tells our code how to debug this application 
-                  - after the [program] we add ["preLaunchTask":"tsc: build - tsconfig.json",]
+                  - after the [program] we add ["preLaunchTask":"tsc: build - tsconfig.json",]        // optional
                   - add a breakpoint on the line you want to start debug from that line 
-            MAKE SURE TO SET THE CMD AS THE DEFAULT PROFILE
+                  - use shortcuts [F5] [F11] like visual studio
+            MAKE SURE TO SET THE CMD AS THE DEFAULT PROFILE in case we ad "preLaunchTask"
             
 [Options Parameters]
       - function pringName(name?: string){console.log(`${name||'Ananymous'}!`)}           // we used '?' to make the function work normally if there is no parameter Input (optional Paramater)

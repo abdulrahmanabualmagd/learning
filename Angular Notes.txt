@@ -216,20 +216,70 @@
 
 ------------------------------- [Component] -------------------------------
 
-      -  [Create Manually] 
-            - by creating files [html/css/ts] for the component and inside the ts file we determine the templateUrl / StyleUrls and export it 
-            - after that add the name of the component to the declarations and import the class name of the component in the [App.Module.ts]
-            
       - [Create Automatically] 
-            - using command @ ng g c ComponentName --skip-tests     // the flag used to prevent creating specs.ts file for testing
+            - using command @ ng g c ComponentName --skip-tests         // the flag used to prevent creating specs.ts file for testing
+            - --inline-template  --inline-style                         // uses compnent decorator property template and styles to write both in the same file without creating files form both html and css
+            - --flat                                                    // Creates the comopnent in the same directory without creating a specific directory for them 
+            Note : any flag applied on the creation of the project applied on all angular elements 
+            
+      -  [Create Manually] 
+            - Create a typescript file
+            - make a normal importable class (export) class and then we add the @Component class decorator 
+            - Used metadata for the component decorator is :
+                  - selector:                         // string  , defines how component can be used in other templates
+                  - template/templateUrl              // string  , defines the HTML template whether it was inline or external both take string [template/ url to an existing template]
+                  - styles/styleUrls                  // string[], defines the style sheets for the component whether it was inline of external, both take array of string
+                  - animations                        // any[]   , defines the animations for the component => Identifiers[triger, state, sylte, animate, transition]
+                  - changeDetection                   // changeDetectionStrategy{Default, OnPush}, specify the changes detection between component interactions(@input, @output), Default => detect changes automatically, OnPush => detect changes only on triggering it from the other comopnent to make it affected in the second component, higher performance in OnPush Option
+                  - viewProviders                     // Provider[], defines the providers especialy the services that you want to provide it for the component level, in case we didn't make that provider in the root level or the level that contain the current component like @Injectable({providedIn: 'root', // or specify a module where the service is provided})
+                                                      // @Injectable(), here we create a provider which is injectable but not providedin any level, no one can use it, unless you added to the user (component) viewProviders
+                  - encapsulatin                      // ViewEncapsolation{none, emulated, shadowDom}, defines the style policy
+                  - interpolation                     // [string,string], defines the way that how we could use the interpolation between the class file and the tmeplate, like the default is ['{{', '}}']
+
+-------------------------------- [ Component Animations ] ------------------------------
+@component{
+
+      selector: 'app-header',
       
-      - Note : the component ts file contain 
-            - Component class Import
-            - Component Decorator 
-                  - selector which used in the app html file (Component Directive)
-                  - TemplateUrl
-                  - SylteUrls
-            - Class export with the name of that component // this name used in the declaration and import in the app.module.ts file
+      template: `<nav>              // [We're using back tic for multiple line]
+                       <button type="button" (click)="toggle()">Toggle Open/Close</button>
+                 </nav>
+
+                 <div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+                       <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+                 </div>`,                 
+
+      animations: [
+            trigger('openClose', [
+
+                  state('open', style({
+                        height: '200px',
+                        opacity: 1,
+                        backgroundColor: 'yellow'
+                        })
+                  ),
+
+                  state('closed', style({
+                        height: '100px',
+                        opacity: 0.8,
+                        backgroundColor: 'blue'
+                        })
+                  ),
+
+                  transition('open => closed', [
+                        animate('1s')
+                  ]),
+
+                  transition('closed => open', [
+                        animate('0.5s')
+                  ]),
+
+            ]),
+      ]
+}
+  
+      
+      
 
       
       

@@ -168,6 +168,11 @@
 [JIT Compiler/ AOT Compiler]        // By default Angular are set up for (JIT Compilation) Just-In-Time   
       
       [JIT] // Compile TypeScript just in time for executing it in the client side browser... 
+                  
+            - Each file compiled separately
+            - No need to build after changing your code and before reloading the browser page ( because in AOT you have to build the application after each modification before sent it to the client  )
+            - Suitable for local development ( because compilation no a separate step )
+            
             [Timing]
                   - Happens at runtime, in the browser before the application runs
             [Process]
@@ -182,10 +187,7 @@
             [Cons]
                   - Slower application startup time as compilation occurs on the client side 
                   - Users might experience a delay before the application becomes fully interactive 
-            
-            - Each file compiled separately
-            - No need to build after changing your code and before reloading the browser page ( because in AOT you have to build the application after each modification before sent it to the client  )
-            - Suitable for local development ( because compilation no a separate step )
+
             [JIT Scenario]
                   - You write code using HTML, CSS, and TypeScript for your angular website
                   - When someone opens you website in their browser, the JIT compiler starts working 
@@ -196,7 +198,12 @@
                   - Whe nusers interact with your website, the browser uses the translated JavaScript code to respond to their actions and provide a dynamic user experience
             
       
-      [AOT] // Compile TypeScript during build phase (Ahead of Time)
+      [AOT] // Compile TypeScript during build phase (Ahead of Time) 
+            - Compiled by the machine itself, via the command line (Faster)
+            - All code compiled together, inlining HTML/CSS in the scripts
+            - No need to deploy the compiler (Half of Angular size)
+            - Suitable for production builds
+            
             [Timing]
                   - AOT compoilation occurs before the application is deployed to the client typically during the build process
             [Process]
@@ -205,22 +212,18 @@
                   - Faster application startup time as there is no compilation on the client side
                   - Smaller Payload sent to the client, as only the compiled code is shipped
                   
-            - Compiled by the machine itself, via the command line (Faster)
-            - All code compiled together, inlining HTML/CSS in the scripts
-            - No need to deploy the compiler (Half of Angular size)
-            - Suitable for production builds
 
 
-------------------------------- [Creating Compnent] -------------------------------
+------------------------------- [Component] -------------------------------
 
-      -  Manually 
+      -  [Create Manually] 
             - by creating files [html/css/ts] for the component and inside the ts file we determine the templateUrl / StyleUrls and export it 
             - after that add the name of the component to the declarations and import the class name of the component in the [App.Module.ts]
             
-      - Automatically 
-            - using command @ ng g c ComponentName --skip-tests     // the last word used to prevent creating specs ts file for testing
+      - [Create Automatically] 
+            - using command @ ng g c ComponentName --skip-tests     // the flag used to prevent creating specs.ts file for testing
       
-      - Note : the component ts file containt 
+      - Note : the component ts file contain 
             - Component class Import
             - Component Decorator 
                   - selector which used in the app html file (Component Directive)

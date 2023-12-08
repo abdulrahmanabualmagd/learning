@@ -323,3 +323,20 @@ input.ng-invalid {
 this.loginForm.value.username       // to access the form control syntax
 
 // we have to use ngSubmit
+// stand alone and lazy loading 
+-- when the router receives a URL, it goes through the configuration in order$$
+inject() method from angular/core
+different between angular core and cli
+
+//new form of injection 
+router = inject(Router);
+navigate() {
+  this.router.navigateByUrl('/contacts');
+}           // Make sure to import inject from core 
+
+$$$$$$$ WebSocket
+      // like in gmail updating messages autmatically without cliking on anything like (signalR) I think
+      
+agile methodologies (Scrum, Kanban).
+
+unit test to add to cv

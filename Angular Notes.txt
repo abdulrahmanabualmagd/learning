@@ -235,6 +235,12 @@
                                                       // @Injectable(), here we create a provider which is injectable but not providedin any level, no one can use it, unless you added to the user (component) viewProviders
                   - encapsulatin                      // ViewEncapsolation{none, emulated, shadowDom}, defines the style policy
                   - interpolation                     // [string,string], defines the way that how we could use the interpolation between the class file and the tmeplate, like the default is ['{{', '}}']
+                  - preserveWhiteSpaces               // boolean, defines how to treat white spaces in from the compiled template
+                  - 
+                  // lazy routing => create standalone components => create routes ts file => use it in routing module , use loadchildren: () => import('path').then(r=> r.products)      r here is the file, and products is the arrya inside the file that contains the paths
+                  loadcomponent works only with standalone component 
+                  // different between loadchildren and loadcomponent
+                  // Reactive X
 
 -------------------------------- [ Component Animations ] ------------------------------
 @component{

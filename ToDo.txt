@@ -285,7 +285,15 @@ github => [issues, code review, pull requests]
 asynchronous and parallelism
 
 CPU-Intensive VS I/O Intensive Tasks
-SSR & SSG
+SSR & SSG   in new version of angular 
+AWS
+
+enableProdMode
+createCustomElement
+
+how to produce an angular custom elements to use it in any enviroment
+
+.pipe.tap
 
 Angular Component Standalone and dependency => look for angular updates
 

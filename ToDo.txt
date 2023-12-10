@@ -285,6 +285,7 @@ github => [issues, code review, pull requests]
 asynchronous and parallelism
 
 CPU-Intensive VS I/O Intensive Tasks
+SSR & SSG
 
 Angular Component Standalone and dependency => look for angular updates
 

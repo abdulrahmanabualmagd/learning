@@ -322,7 +322,7 @@
 
 [Component Interactions] ------------------------------------------------------------------ 
 
-      [ Input Binding ]
+      [ Input Binding (@Input()) ]
             - From Parent To Child        
                   - 1 - in the child ts file we create a property with @Input decorator
                         @ @Input childProperty:string = '';
@@ -333,13 +333,13 @@
                   - 3 - in the parent html file we follow this line Paradigm
                         @ <app-child [childProperty]="parentProperty" ></app-child>
                         
-                  [@input]
+                  [@Input]
                         [alias]           // string, The name of the DOM property to which the input property is bound 
                         [required]        // boolean, Whether the input is required for the directive to function
                         [transform]       // function, Function with which to transform the input value before assignng it to the directive instance
                   
 
-      [ Output Binding ]
+      [ Output Binding (@Output()) ]
             - From Child To Parent        
                   - In the Child ts file
                         - Create a Property 
@@ -347,6 +347,7 @@
                               
                         - Create an Event
                               @ @Output() CustomEvent = new EventEmitter<string>();
+                              Note: <string> means that the event are going to handle string payloads
                               
                         - Create a Function that Emit the customEvent with ChildProperty
                               @ EmitEvent(){this.CustomEvent.emit(ChildProperty)}
@@ -364,18 +365,12 @@
                               @ EventHandler(e:any){ParentProperty = e;}
                   
                   - Create a button that Fire the EmitEvent() to start transferring the data from the child to the parent
-            
- 
--------------------------------- [ Routing ] --------------------------------------------
-
-      
+                  
+                  [@Output]
+                        [alias]           // string, The name of the DOM property to which the input property is bound
 
 
-                 // lazy routing => create standalone components => create routes ts file => use it in routing module , use loadchildren: () => import('path').then(r=> r.products)      r here is the file, and products is the arrya inside the file that contains the paths
-                  loadcomponent works only with standalone component 
-                  // different between loadchildren and loadcomponent
-                  // Reactive X
-------------------------------- [Binding Types] -------------------------------
+[Binding Types] --------------------------------------------------------------
  
       - Interpolation Binding             (One-Way) 
             @ <p>{{ VariableInExportClass }}</p>
@@ -400,30 +395,56 @@
             @ <div [style.color] = "VariableInExportClass"></div>
             
             
------------------------------------- [ Pipes ] ----------------------------------------
+[Pipes] --------------------------------------------------------------
 
-      - Pipes are features that allows you to trnasform and format data in your template 
-      - used to modify the way the data is displayed in the view without changing the actual data itself
+      - Pipes are features that allows you to trnasform and format data in your template  
+      - Used to modify the way the data is displayed in the view without changing the actual data itself
             @ {{ myDate   | date:'short' }}
             @ {{ myNumber | number:'1.2-2' }}
             @ {{ myString | uppercase }}
             @ {{ price    | currency:'USD':true }}
             
-      - also we can create custom pipelines using @Pipe decorator 
-            @ {{ myData | myCustomPipe }}
-            
+      - Also we can create custom pipelines using @Pipe decorator 
+            - ng generate pipe myCustomPipe --skip-tests
+            - or create ts file, import Pipe decorator and and PipeTransform (implement it in the class)
+                  - create a transform method (Implomented from the interface) takes (value: unknown, ...args: unknown)
+            - [@Pipe({name:'custom'})]
+                  [name]            // the name of the custom pipe which will be used in the template 
+            @ {{ myData | custom }}
       
-------------------------------- [Directives in Angular] -------------------------------
+[Template reference variables, ElementRef, and ViewCihld] -----------------------------
+
+      [Template Reference Variabale]
+            <input type="text" #paragraph>                        // Refering the input as #paragraph reference  Type is => [HTMLInputElement]
+            <button (click)="method(paragraph)">start</button>    // Sending that reference to the method
+            // We can print its value, setattribute, 
+      
+      [ElementRef and ViewChild]
+            @ViewChild('refName')               // Take the reference name in the template
+                  SelectedElement: ElementRef           // This property holds the selected html element using the view child decorator 
+                        this.SelectedElement.nativeElement.value / style / click() / ...
+            // After that we can control element's value, style, attribute, FireEvent of another html element and so on
+      
+                            
+[Angular Directives] --------------------------------------------------------------
+      // Are defined through modules such as CommonModule, RouterModule, FormsModule, ...
  
-      - Component Directive => <app-root></app-root> 
+      - Component Directive 
+            <app-root></app-root> 
       
-      - [Attribute Directive]  [ng-....]    => takes object "{'___':____ , ... }"
+      - [Attribute Directive]  
+            
+            - Shape: [ng-....]      =>      takes object "{'___':____ , ... }"
+            
             - [ng-class]
-                  @ <div [ng-class] = "{'container':IsValid, 'bg-primary':!IsPrimary}" >Text</div>
+                  @ <div [ng-class] = "{'container':IsValid, 'bg-primary':!IsPrimary}">Text</div>
             - [ng-style]
                   @ <div [ng-style] = "{'color':color}">Text</div>      // where color is a string value in the ts file 
+                  
+            - [(ngModel)]
+                  - Adds two way data binding 
       
-------------------------------- [Structural Directiive] 
+      - [Structural Directiive]
             - *ng-if
                   @ <div *ng-if="Show">of the property 'show' is true this element is true</div> 
             - *ng-for
@@ -437,26 +458,54 @@
                       </div>
             
       
-      
-------------------------------- [Custom Directive]  
-      @
-      import { Directive, ElementRef } from '@angular/core';
-      @Directive({
-        selector: '[my-class]'      // this is the name of the newely created directive 
-      })
-      export class MyClassDirective {
-        constructor(private elementRef: ElementRef) {}
+      [Custom Directive]  
+            @
+            import { Directive, ElementRef } from '@angular/core';
+            @Directive({
+              selector: '[my-class]'      // this is the name of the newely created directive 
+            })
+            export class MyClassDirective {
+              constructor(private elementRef: ElementRef) {}
 
-        ngOnInit() {    // explained later
-          this.elementRef.nativeElement.classList.add('my-class');      // this directive is used to add classes to the selected element
-        }
-      }
+              ngOnInit() {    // explained later
+                this.elementRef.nativeElement.classList.add('my-class');      // this directive is used to add classes to the selected element
+              }
+            }     
+
+  
+[ Driven-Template Form ] -------------------------------------------------------------- 
+
+      // [#myform]            => Create a local template variable         
+      // [ngForm]             => a reference to the angular NgForm directive, It represents the Angular form object and provides access to the form's methods and propertes like (valid, value, invalid, dirty, touched ...)
+      // [#myForm="ngForm"]   => create a reference to tha angular form, which make the [#myForm] able to access the Angular Form properties and methods
+      // [ngSumbit]           => an angular directive used to bind bind a function to submit form of an angular form 
       
+      <form #myForm="ngForm" (ngSubmit)="Submit(myForm)">
+          
+          // [(ngModel)]      => We must use the NgModel Directive two way data binding to let it know that it's a template form control
+          <input type="text" [(ngModel)]="formData.name" required>     
+
+          // Binding it to the object 'formData' which have proerty 'pasword'
+          <input type="password"  [(ngModel)]="formData.password" required>
+
+          // [myForm.invalid] => As we said we can use the Angular form properties and methods because we created a reference to the angular form within the template 
+          <button [disabled]="myForm.invalid">Submit</button>  
+          
+      </form>
+
+[ Reactive Form ] -------------------------------------------------------------- 
+
+      
+
 
         
-
-        
+  
 ------------------------------- [ Routing ] -------------------------------
+
+     // lazy routing => create standalone components => create routes ts file => use it in routing module , use loadchildren: () => import('path').then(r=> r.products)      r here is the file, and products is the arrya inside the file that contains the paths
+      loadcomponent works only with standalone component 
+      // different between loadchildren and loadcomponent
+      // Reactive X
 
       - in app-routing.module.ts file we add the pathes and tha component
             @ const routes:routes = [{path:'url', component:ComponentName}]

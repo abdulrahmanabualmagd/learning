@@ -449,6 +449,26 @@
                   @ <div *ng-if="Show">of the property 'show' is true this element is true</div> 
             - *ng-for
                   @ <div *ng-for="let item of array">repeatedText {{item}}</div>
+                  [ng-for and trackby]
+                        - by default angular track the data by their references. So if I reassign list of data to the 
+                              variable which ngfor use to list the elements, the reserve in different places in the memory 
+                              so the angular look at them like their new to it because angular look to data's references despite 
+                              of the data is the same but their locations in the memory have changed so Angular reinitialize the 
+                              html elemnts again that used with ngfor. To fix it we have to make the angular track this data by 
+                              something tracking something constant instead of looking to the object references that wouldn't 
+                              change like the data's IDs. So if we reload the data angular will notice no changes because he is 
+                              looking to the IDs of the objects in the list then he won't reinitialize the html elements. In this 
+                              scenario with large data will offer big difference in performance
+                              
+                              [HTML Template]
+                                    // Note: don't use '()', because, trackby expect a function reference not a function call
+                                    - <ul><li *ngFor="let item of dataList; trackby: trackMethod">{{item.name}}</li></ul>    
+                              
+                              [Class File]
+                                    // Now Anguar track with the item's id instead of tracking them by their locations in the memory which leads to bad performance due to reinitialization every time
+                                    - trackMethod(index, item){return item ? item.id : undefined}
+                  
+            
             - [ngSwitch] [ngSwitchCase] [ngSwitchDefault]
                   @
                       <div [ngSwitch]="value">

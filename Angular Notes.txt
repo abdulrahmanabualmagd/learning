@@ -476,10 +476,24 @@
                         <div *ngSwitchCase="'case2'">Content for case 2</div>
                         <div *ngSwitchDefault>Default content</div>
                       </div>
-            
       
+      [ng-container]
+            - A special element that can hold a structural directives without adding new unnecessary elements to the DOM
+            
+            [Example (without ng-container)]
+                  <ul>
+                    <li *ngFor="let item of items" *ngIf="item.isValid">{{ item.name }}</li>    // Here we will get an error because we can't have multiple structural directives applied to a single element
+                  </ul>                                                                         // To fix it we have to add another element to make each element takes one structural directive to avoid error
+                                                                                                // But we will have extra unnecessary element, so here we can use ng-container instead of using html element to avoid creating extra elements
+            [Example (with ng-container)]
+                  <ul>
+                    <ng-container *ngFor="let item of items">                                   // This line will not create an extra element 
+                      <li *ngIf="item.isValid">{{ item.name }}</li>
+                    </ng-container>
+                  </ul>
+
+
       [Custom Directive]  
-            @
             import { Directive, ElementRef } from '@angular/core';
             @Directive({
               selector: '[my-class]'      // this is the name of the newely created directive 
@@ -515,7 +529,45 @@
 
 [ Reactive Form ] -------------------------------------------------------------- 
 
+      - Add Reactive Form Module to the app.module file (NgModule)
       
+      [FormGroup]
+      
+            - Defines a form with a fixed set of controls that you can manage together 
+                  - the FormGroup is an [Object] and the FormControls inside it are [Properties]
+            - [Template]
+                  <form [formGroup]="myForm" (submit)="submit()">             // binding the formgroup name and add the submit handler to the submit event
+                      <input type="text" formControlName="name">              // binding the control name that defined in the class file 
+                      <input type="text" formControlName="password"           
+                      <button type="submit">Submit</button>                   // Normal button to fire the submit button on click
+                  </form>
+                  
+            - [Class File]
+                  myForm:  FormGroup = new FormGroup({                         // Initialize and assign form group
+                    name: new FormControl('', [Validators.required]),          // Define form contorl with specific validators
+                    password: new FormControl('', [Validators.required])       
+                  })    
+                  submit(){                                                    // Define Submit handler method
+                    console.log(this.myForm)    
+                  }     
+                        
+                  - also we could use formbuilder to make it more easy  
+                        constructor(private fb: FormBuilder){}                 // Inject the FormBuilder
+                        myForm1: FormGroup = this.fb.group({                   // Initialize formgroup and create form controls using form builder 
+                          name: ['', [Validators.required]],
+                          password: ['', [Validators.required]]
+                        })
+                        
+      [FormArray]
+      
+            - Defines a dynamic form where you can add and remove controls at run time 
+                  - the FormArray is an [Array] and the FormControls inside it are [Elements]
+                  - We could add more controls in the run time 
+                  
+            
+                    
+              
+            
 
 
         

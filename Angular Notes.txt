@@ -563,15 +563,39 @@
             - Defines a dynamic form where you can add and remove controls at run time 
                   - the FormArray is an [Array] and the FormControls inside it are [Elements]
                   - We could add more controls in the run time 
+            
+            [Class File]
+                  public mainForm: FormGroup = this.fb.group({
+                    emailAddress: [null, [Validators.required]],        // FormGroup Control [An Object Property]
+                    phones: this.fb.array([                             
+                      this.fb.control(null, [Validators.required])      // FormArray Control [An Array Element]      
+                    ])
+                  })
                   
-            
-                    
-              
-            
-
-
-        
-  
+                  get Phones(): FormArray {
+                    return this.mainForm.get('phones') as FormArray;    // To be able to use the phones controls in the template (avoid possibly null object)
+                  }
+                  
+                  public addPhone() {
+                    (<FormArray>this.mainForm.get('phones')).push(this.fb.control(null, [Validators.required]));      // We have to explicitly get the value as FormArray (Assertion / Type Casting) using '<>' assertion operator
+                  }
+                  
+            [Template File]
+                  <form [formGroup]="mainForm">
+                      <input type="email" formControlName="emailAddress">
+                      
+                      <div formArrayName="phones">                                        // FormArray Container, holds all the controls of the FormArray      
+                          <ng-container *ngFor="let item of Phones.controls; index as i"> // using 'Phones' getter and loop over the controls
+                              <br>
+                              <label>email {{i}}</label>
+                              <input type="text" formControlName="{{i}}">                 // the index of the conrol in formarray
+                          </ng-container>
+                          <br>
+                          <button (click)="addPhone()">Add More Phones</button>           // Used to add more phone control in FormArray
+                      </div>
+                  </form>
+                           
+                           
 ------------------------------- [ Routing ] -------------------------------
 
      // lazy routing => create standalone components => create routes ts file => use it in routing module , use loadchildren: () => import('path').then(r=> r.products)      r here is the file, and products is the arrya inside the file that contains the paths

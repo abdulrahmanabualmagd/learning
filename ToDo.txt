@@ -293,6 +293,8 @@ createCustomElement
 
 how to produce an angular custom elements to use it in any enviroment
 
+changeDetectionStrategy.OnPush
+
 .pipe.tap
 
 Angular Component Standalone and dependency => look for angular updates
@@ -349,3 +351,5 @@ $$$$$$$ WebSocket
 agile methodologies (Scrum, Kanban).
 
 unit test to add to cv
+
+sql server acid 

@@ -494,17 +494,30 @@
 
 
       [Custom Directive]  
-            import { Directive, ElementRef } from '@angular/core';
+            import { Directive, ElementRef, HostListener } from '@angular/core';
             @Directive({
-              selector: '[my-class]'      // this is the name of the newely created directive 
+              selector: '[my-class]',      // this is the name of the newely created directive 
+              standalone: true,              
             })
             export class MyClassDirective {
-              constructor(private elementRef: ElementRef) {}
+              constructor(private elementRef: ElementRef) {
+                  this.nativeElement.style.transitionDuration = '300ms'
+              }
+
+            @HostListener('click') function(){
+                  this.nativeElement.style.backgroundColor= 'red'
+            }
 
               ngOnInit() {    // explained later
                 this.elementRef.nativeElement.classList.add('my-class');      // this directive is used to add classes to the selected element
               }
             }     
+            
+            [user]
+            @Component({
+                  standalone: true,
+                  imports: [directiveName]
+            })
 
   
 [ Driven-Template Form ] -------------------------------------------------------------- 

@@ -303,6 +303,8 @@ how to squash commit
       - git difftool --no-prompt origin/branch Abdulrahman              // here we don't need to press [y] to jump to the next differencies
       - git difftool -y origin/branch Abdulrahman                       // the same as the previous
       
+      - git difftool                                                    // Show differences between the head and the current uncommitted changes 
+      
 [ Search log by Author ]
       - @ git log --author="AuthorName"
       - @ git rebase -i commitHash

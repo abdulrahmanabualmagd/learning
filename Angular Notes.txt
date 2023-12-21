@@ -504,8 +504,10 @@
                   this.nativeElement.style.transitionDuration = '300ms'
               }
 
+            @HostBinding('style.backgrounColor') backgroundColor !: string | null;        // instead of using 'this.el.nativeElement.backgroundColor' we user 'this.backgroundColor'   
+
             @HostListener('click') function(){
-                  this.nativeElement.style.backgroundColor= 'red'
+                  this.backgroundColor= 'red'
             }
 
               ngOnInit() {    // explained later

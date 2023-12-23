@@ -1,10 +1,28 @@
-=============== [ Day One ] ==================
-       Web        |   Mobile  |        Desktop                
-UI  | [HTML+CSS+JS]   [XML + Andriod]  WPF                
-Code| C#              Java             C#                
-DB  | MSQLS           SQLLite          SQLExpress                
+---------------------------------------------------------------------------
+|    |       Web               |     Mobile            |     Desktop      |
+|----|-------------------------|-----------------------|------------------|
+|    |                         |                       |                  |
+|UI  |       [HTML+CSS+JS]     |     [XML + Andriod]   |     WPF          |
+|    |                         |                       |                  |
+|Code|       C#                |     Java              |     C#           |   
+|    |                         |                       |                  |
+|DB  |       MSQLS             |     SQLLite           |     SQLExpress   |   
+|    |                         |                       |                  |
+---------------------------------------------------------------------------
 
-Different application on different platforms
+[DLL]
+      - Dynamic Link Library, contains compiled code that can be used by one or more programs
+      
+[Web Service]
+      - Is a software system that designed to support  interoperable machine-to-machine communication over a network using standard protocols http/https
+      - Allow the exchange of data between different platforms and technologies using:
+            - [SOAP] (Simple Object Access Protocol)
+                  - 
+            - [REST] (Representational State Transfer)
+
+DLL => Dynamic Link Library, contains compiled code that can be used by one or more programs 
+RESTful web service calls (GET, POST, DELETE, PUT)
+What is .NET and what is the differences between the other versions(.NET Framework, .NET Core, .NET)
 
 - one code one database = mulitple platform
       - but still there are issues

@@ -10,45 +10,185 @@
 |    |                         |                       |                  |
 ---------------------------------------------------------------------------
 
-[DLL]
-      - Dynamic Link Library, contains compiled code that can be used by one or more programs
+[RESTful API]
+	- Is an Interface that two computer systems use to exchange information securely over the internet.
+	
+[API]
+	- (Application Prgramming Interface)
+	- Rules that you must follow to communicate with other software systems (actions, endpionts, ...)
+	
+
+[Web API]
+	- An API that is accessible over the web using stardard web protocols (http/https) 
+	- Follow the principles of REST or other architectural styles for web services
+	
+	[Client]
+		- want to access information from the web, like accessing weather data from a weather system
+		
+	[Resources]
+		- the infromation that differet applications provide to their clients
+		
+	- APIs help them to determine which clients get access to specific internal resources 
+
+[REST]
+
+	- A software architecture that imposes condition on how API should work
+	- APIs that follow the REST architectural style are called REST APIs
+	- Web Services that implement REST architecture are called RESTful web services
+	- The term RESTful API generally refers to RESTfful web APIs and we can use both REST API, RESTful API interchangeably
+	
+	
+	[REST Principles]
+		
+		- [Stateless Communication]
+			- all the information needed to understand and fulfill that request must be provided on every request
+		
+		- [Uniform Interface]
+			- the server transfer data in a standard format, like storing data as text but send it in an html representation format
+			
+			- [Uniform interface imposes four architectural]                                                  
+				- Request should identify resources, they do so by using a uniform resource identifier URI / (URL + URN), Uniform Resource Identifier/Locator/Name
+					- 'https://example.com/api/books/123'
+				- Clients have enough information in the resource representation to modify or delete the resource if they want to
+					- {"id":12, "title":"somethine"}	response body 
+				- Self-Descriptive message and metadata
+					- the server include metadata in the HTTP headers to make the response self-descriptive. For example, the 'Content-Type'
+					- HTTP/1.1 200 OK     Content-Type: application/json
+					
+				- Infromation about Processing Representations
+					- the server might include additinoal information in the headers such as how long the client can cache the response
+					- HTTP/1.1 200 OK     Content-Type: application/json      Cache-Control: max-age=3600
+					
+				- Hyperlinks and Dynamic Resource Discovery
+					- the server could include hyperlinks to related resources for instance, it might provide a linke to the author's details or similar books
+		
+		[Layered system]
+			- the client can connect to other authorized intermediaries between the client and server, and it will still receive responses from the server
+
+		[Cacheability]
+			- RESTful web services support caching, which is the process of storing some responses on the client or on an intermediary to improve server response time
+			
+		[Code on demand]
+			- servers can temporarily extend or custmomize client functinoality by transferring software programming code to the client
+			- like validation on the client side which is a code sent by the server 
+				
+				
+	[Why RESTful APIs]
+		- [Scalability] [Flexibility] [Independence]
+	
+	
+	[RESTful APIs workflow]
+		- client sends request to the server 
+		- server authenticates the client and comfirms that the client has the right to make that request 
+		- the server receives the request and processes it internally
+		- the server returns a response to the client 
+
+		
+	[RESTful API client request contain]
+		
+		- [Request Line]
+			- 'GET /example/resource HTTP/1.1'
+		
+			- [URI]
+				- The server identifies each resource with unique resource identifiers, using a URL(Uniform Resource Locator)
+				- URL also called a request endpoint			
+			
+			- [Methods]			
+				- GET
+				- POST
+				- PUT
+				- DELETE
+				
+			-[HTTP Version]
+				- e.g, HTTP/1.1
+		
+		- [HTTP Headers]
+			- Data      
+				- might include data for the POST, PUT, and other HTTP methods to work successfully
+				
+			- Parameters
+				- RESTful API can include parameters that give the server more details about what needs to be done
+					- Path parameter that specify URL details
+					- Query parameters that request more informaion about the resource
+					- Cookie parameters that authenticate clients quickly
+					
+					
+	[RESTful API authentication methods]
+	
+		- [HTTP Authentication]
+			
+			- [Basic Authentication]
+				- the client sends the user name and password in the request header. 
+				- It encodes them with base64, which is an encoding technique that converts the pair into a set of 64 characters for safe transmission
+			
+			- [Bearer Authentication]
+				- The process of giving access control to the token bearer.
+				- The bearer token is typically an encrypted string of characters that the servergenerates in response to a login request.
+				- The client sends the token in the request headers to access resources
+				
+		- [API Keys]
+			- The server assigns a unique generated value to a first-time client.
+			- Whenever the client tries to access resources, it uses the unique API Key to verify itself
+			- API Key are less secure because the client has to transmit the key, which makes it vulnerable to network theft
+			
+		- [OAuth]
+			- OAuth combines passwords and tokens for highly secure login access to any system.
+			- The server first requests a password and then asks for an additional token to complete the authorization process
+			- It can check the token at any time and also over time with a specific scope and longevity
+			
+			
+	[RESTful API server response contain]
+	
+		- [Status Line]
+			- 200 Ok (success)
+			- 201 Ok (Post method Success)
+			- 400 Incorrect request 
+			- 404 Resource not found 
+		
+		- [Message body]
+			- Contains the resource representation
+			- The server selects an appropriate representation format based on what the request headers contain
+			- Clients can request infromation in XML or JSON formats, which define how the data is written in plain text.
+			- if the client request the name and age of a person named John, the server returns a JSON {"name":"John","age":30}
+			
+		- [Header]
+			- the resonponse contains metadata about the response
+			- Provide more informatino (metadata) such as the server, encoding, date, and content type
+			
+		- [Additional Info]
+			- Could obtain additional information
+
       
 [Web Service]
-      - Is a software system that designed to support  interoperable machine-to-machine communication over a network using standard protocols http/https
-      - Allow the exchange of data between different platforms and technologies using:
+		- Is a software system that designed to support  interoperable machine-to-machine communication over a network using standard protocols http/https
+		- Allow the exchange of data between different platforms and technologies
+		- We determine the protocol on pregiven data like:
+	  
             - [SOAP] (Simple Object Access Protocol)
-                  - 
-            - [REST] (Representational State Transfer)
+				- facilitate communication between different systems over a network, it provides a standarized way 
+				- Message are formated using XML(eXtensive Markup Language) 
+				- Message consists of SOAP envelop which contains a header and the body
+				- <soap.envlop><emp><id>1</id><name>Yousef</name></emp></soap.envlop>
+				- Soap have issues with mobile applications(mobile can't handle transferring data in xml file) 
+					
+            - [REST] (Representational State Transfer)   
+				- A Software Architecture that imposes condition on how an API should work
+				- Use HTTP/HTTPS to communicate, http have some constraint make it unique
+				- Transfer data in JSON format (Light Weight)
+				- 
 
-DLL => Dynamic Link Library, contains compiled code that can be used by one or more programs 
-RESTful web service calls (GET, POST, DELETE, PUT)
-What is .NET and what is the differences between the other versions(.NET Framework, .NET Core, .NET)
+		- the only way to make one code and one database have the ability to communicate with multiple platforms
+		
+[DLL]
+      - Dynamic Link Library, contains compiled code that can be used by one or more programs
+	  
 
-- one code one database = mulitple platform
-      - but still there are issues
-            - how server talk to another server 
-            - how would java call a function in C#
-            
-      Fixed by web service    // What is web services used in that technology
+
       
-      - SOAP      SIMPLE OBJECT ACCESS PROTOCOl
-      - REST      REPRESENT SERVER TRANSFER
-      
-in [SOAP] case :
-      - server can talk to each other on any protocol (we Determine the protocol on pregiven data)
-      - Calling function Proxy Class      -- proxy works as a translator that convert for example between java and C#      
-      - Transferring data through XML / Json    on a XML File like <soap.envlop><emp><id>1</id><name>Yousef</name></emp></soap.envlop>
-      -                            in case we want to sent as json <soap.envlop>{id:1, name:yousef}</soap.envlop> => json inside xml
-      - definition of service       Help Page but now working on a third party application make definition for the server automatically                                     
-      - soap have issues with mobile application and ...
-            - transfer data on xml file and the mobile can't handle this that's why we use rest 
         
         
 in [REST] case :
-      - can talk only through HTTP & HTTPS
-            - HTTP have some constraint make it unique
-      - calling function Uniform URL
-      - transferring Data through JSON    -- Light weight
+      
       - definition of service      WSDL
             - metadata of service 
             web sevice description language 

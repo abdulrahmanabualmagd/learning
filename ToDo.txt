@@ -353,3 +353,6 @@ agile methodologies (Scrum, Kanban).
 unit test to add to cv
 
 sql server acid 
+
+
+What is .NET and what is the differences between the other versions(.NET Framework, .NET Core, .NET)

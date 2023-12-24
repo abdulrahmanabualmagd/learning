@@ -29,6 +29,10 @@
 		- the infromation that differet applications provide to their clients
 		
 	- APIs help them to determine which clients get access to specific internal resources 
+	
+	
+	- presentation and models + bussiness on the same machine (Local Deployment) => called API
+	- models + bussness on a seperated server 	=> Web API
 
 [REST]
 
@@ -161,7 +165,7 @@
       
 [Web Service]
 		- Is a software system that designed to support  interoperable machine-to-machine communication over a network using standard protocols http/https
-		- Allow the exchange of data between different platforms and technologies
+		- Allow the exchange of data between different platforms and technologies (One code + one database = Multiple platforms)
 		- We determine the protocol on pregiven data like:
 	  
             - [SOAP] (Simple Object Access Protocol)
@@ -176,35 +180,28 @@
 				- Use HTTP/HTTPS to communicate, http have some constraint make it unique
 				- Transfer data in JSON format (Light Weight)
 				- 
+				
+[WSDL]
+	- Web Services Description Language
+	- A XML notation for describing a web service, the functionality offered by a web service 
+	- Tells a client how to compose a web service request and describes the interface that is provided by the web service provider
+	- Acts as a contract between the service provider and consumber, providing a standarized way to understand and interact with a web service 
+	
+[UDDL]
+	- Universal Description, Discvery, and Intergration
+	- is a specification that provides a standard way for businesses to publish and discover web services
 
-		- the only way to make one code and one database have the ability to communicate with multiple platforms
 		
 [DLL]
-      - Dynamic Link Library, contains compiled code that can be used by one or more programs
-	  
+    - Dynamic Link Library, contains compiled code that can be used by one or more programs
 
+[Class Library]	(new project)
+	- A collection of compiled code (assemblies) that contains classes, interfaces, enums, and other types
+	- It's a way to organize and package reusable code in a modular and maintainable manner
 
-      
-        
-        
-in [REST] case :
-      
-      - definition of service      WSDL
-            - metadata of service 
-            web sevice description language 
-      
+	
+the differents between the class library and dll
 
-definition of service : 
-      
-      
-What is API Application Presentation Interface 
-
-what is diefferent between API and Web API?
-
-what is class library ?
-
-presentation and models + bussiness on the same machine => called API
-models + bussness on a seperated server called Web API
 
 what is WCF? before API
 

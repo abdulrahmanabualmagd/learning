@@ -97,7 +97,7 @@
 				- The server identifies each resource with unique resource identifiers, using a URL(Uniform Resource Locator)
 				- URL also called a request endpoint			
 			
-			- [Methods]			
+			- [HTTP Methods] (verbs)			
 				- GET
 				- POST
 				- PUT
@@ -179,7 +179,22 @@
 				- A Software Architecture that imposes condition on how an API should work
 				- Use HTTP/HTTPS to communicate, http have some constraint make it unique
 				- Transfer data in JSON format (Light Weight)
-				- 
+
+[To Apply RESTful] (must implement the constraint below)
+      - constraint : we must have  Server / Client -- Provider / Consumer
+      - constraint : work on Stateless     - what is the meaning of Stateless (state management: like cookie, session, ...)
+      - That's why RestFull work on HTTP that apply these constrains
+      - constraint :there is a standard format for the messages (Json / XML) but here we use [Json] 
+      - constraint : Enable Cache
+      - constraint : Uniform Name
+            - what is the meaning of Uniform Name?
+                  each resource have a unique URL
+                        Resource is like a Curd [/Employee - /Department - /.. ] 
+                        in the server there are multiple Actions have different methods like [Get/Post/Put/Delete] those called (Verbs)
+                        [Client] => URL + Verb => [Server]  $$$
+                        Resource is the model and each model have a controller 
+
+
 				
 [WSDL]
 	- Web Services Description Language
@@ -191,65 +206,54 @@
 	- Universal Description, Discvery, and Intergration
 	- is a specification that provides a standard way for businesses to publish and discover web services
 
-		
-[DLL]
-    - Dynamic Link Library, contains compiled code that can be used by one or more programs
 
-[Class Library]	(new project)
+
+[Class Library]	
 	- A collection of compiled code (assemblies) that contains classes, interfaces, enums, and other types
 	- It's a way to organize and package reusable code in a modular and maintainable manner
-
-	
-the differents between the class library and dll
-
-
-what is WCF? before API
-
-WCF   windows *** form
-      - issues on 
-
-API .net framework not core version until 2017
-from 2017 API Core with Web API
-
-we are working with Restfull WebAPI Core
-      - Seperated Backend (.net)
-      - Seperated Frontend (Angular/WPF/React/...)
-
-rest is restfull both are the same       
-- we have obtain an application and want to open for him another service like payment and logging in in PayPal
-      - when we write Amazon.com => front page loads (amazon have a provider contain multiple methods like ShowAll()/Order()/DetailsProduct()/AddRate())
-            - for the Payment() action in the amazon when filling the card number to the payment method 
-                  - amazon not deal withit but it provide another service that make a check validation service from another server 
-                  - each bank provide a WebService like check the cardentitial validation for the card and the balance for that user()
-                  - that server is paid not free $$
-
-      B2B bussiness to bussiness like the bank and the amazon
-            amazon to the bank is the consumer
-            amazon to client is the provider 
-            bank to amazon is the provider webService    (B2B) also paid service
       
-What is RESTFULL? is an Architectural Style
-what is design pattern?
-what is the meaning of the principle?
+[DLL] (could be created from a class library)
+    - Dynamic Link Library, contains compiled code that can be used by one or more programs (refrencing) .dll
+    - Could be linked at runtime by multiple programs
+    - It is like .exe an executable program but we can't run .dll directly
 
-design pattern is a way to solve an issue what ever  the used programming languge in solving that issue
-principle is some thing good that we follow under 
 
-Architicture Style : provide stadard between systems communication
+[WCF]
+      - A framework developed by Microsoft for building service-oriented application
+      - Its part from the .NET framework and provides       
+      - Can communicate using various protocols HTTP, TCP, Named Pipes
+      
 
-To Apply RestFull we have 
-      - constraint : we must have  Server / Client -- -- Provider / Consumer
-      - constraint :work on Stateless     - what is the meaning of Stateless (state management: like cookie, session, ...)
-            - that's why RestFull work on HTTP that apply these constrains
-      - constraint :there is a standard format for the messages (Json / XML) but here we use [Json] 
-      - constraint : Enable Cache
-      - constraint : Uniform Name
-            - what is the meaning of Uniform Name?
-                  each resource have a unique URL
-                        Resource is like a Curd [/Employee - /Department - /.. ] 
-                        in the server there are multiple Actions have different methods like [Get/Post/Put/Delete] those called (Verbs)
-                        [Client] => URL + Verb => [Server]  $$$
-                        Resource is the model and each model have a controller 
+[Types of Ecommerce]
+      
+      - [B2B] => Business-to-Business: Transactions between businesses; one business (web service) sells products or services to another, such as Amazon(web service) and Bank(anotehr web service) to validate the payment card of the customer.
+      
+      - [B2C] => Business-to-Consumer: Involves transactions between a business and individual consumers; a typical retail model, like when a customer purchases a product from an online store.
+      
+      - [C2C] => Consumer-to-Consumer: Describes transactions between individual consumers, often facilitated by online marketplaces where individuals sell to each other.
+      
+      - [B2G] => Business-to-Government: Involves businesses selling products or services to government agencies, such as a technology company providing software to a government entity.
+      
+      - [G2B] => Government-to-Business: Describes interactions between government entities and businesses, often related to regulatory compliance, licensing, or procurement.
+      
+      - [G2C] => Government-to-Consumer: Involves interactions between government agencies and individual citizens, such as citizens accessing government services online.
+      
+      - [P2P] => Peer-to-Peer: Refers to direct transactions between individuals, facilitated by a platform, like file sharing or collaborative consumption.
+      
+      - [B2E] => Business-to-Employee: Involves transactions and interactions between a business and its employees, including HR services, employee benefits, and internal communications.
+      
+      - [C2B] => Consumer-to-Business: Describes scenarios where consumers sell products or services to businesses, such as user-generated content or influencer marketing.
+      
+      - [H2H] => Human-to-Human: Emphasizes the importance of personal connections and relationships in business transactions, recognizing the human aspect behind every business interaction.
+ 
+
+
+    
+
+
+
+
+
      
 What is the different of the four Verbs get/post/put/delete?
 

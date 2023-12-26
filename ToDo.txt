@@ -94,6 +94,8 @@ redis in-memory (remote dictionary server)
 
 Englich Bussiness Networking course
 
+design pattern
+
 build workshop gallery for you work 
 
 SMTP
@@ -356,3 +358,7 @@ sql server acid
 
 
 What is .NET and what is the differences between the other versions(.NET Framework, .NET Core, .NET)
+
+design pattern is a way to solve an issue what ever  the used programming languge in solving that issue
+principle is some thing good that we follow under 
+Architicture Style : provide stadards between systems communication

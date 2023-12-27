@@ -180,22 +180,6 @@
 				- Use HTTP/HTTPS to communicate, http have some constraint make it unique
 				- Transfer data in JSON format (Light Weight)
 
-[To Apply RESTful] (must implement the constraint below)
-      - constraint : we must have  Server / Client -- Provider / Consumer
-      - constraint : work on Stateless     - what is the meaning of Stateless (state management: like cookie, session, ...)
-      - That's why RestFull work on HTTP that apply these constrains
-      - constraint :there is a standard format for the messages (Json / XML) but here we use [Json] 
-      - constraint : Enable Cache
-      - constraint : Uniform Name
-            - what is the meaning of Uniform Name?
-                  each resource have a unique URL
-                        Resource is like a Curd [/Employee - /Department - /.. ] 
-                        in the server there are multiple Actions have different methods like [Get/Post/Put/Delete] those called (Verbs)
-                        [Client] => URL + Verb => [Server]  $$$
-                        Resource is the model and each model have a controller 
-
-
-				
 [WSDL]
 	- Web Services Description Language
 	- A XML notation for describing a web service, the functionality offered by a web service 
@@ -205,7 +189,6 @@
 [UDDL]
 	- Universal Description, Discvery, and Intergration
 	- is a specification that provides a standard way for businesses to publish and discover web services
-
 
 
 [Class Library]	
@@ -225,71 +208,38 @@
       
 
 [Types of Ecommerce]
-      
       - [B2B] => Business-to-Business: Transactions between businesses; one business (web service) sells products or services to another, such as Amazon(web service) and Bank(anotehr web service) to validate the payment card of the customer.
-      
       - [B2C] => Business-to-Consumer: Involves transactions between a business and individual consumers; a typical retail model, like when a customer purchases a product from an online store.
-      
       - [C2C] => Consumer-to-Consumer: Describes transactions between individual consumers, often facilitated by online marketplaces where individuals sell to each other.
-      
-      - [B2G] => Business-to-Government: Involves businesses selling products or services to government agencies, such as a technology company providing software to a government entity.
-      
-      - [G2B] => Government-to-Business: Describes interactions between government entities and businesses, often related to regulatory compliance, licensing, or procurement.
-      
-      - [G2C] => Government-to-Consumer: Involves interactions between government agencies and individual citizens, such as citizens accessing government services online.
-      
-      - [P2P] => Peer-to-Peer: Refers to direct transactions between individuals, facilitated by a platform, like file sharing or collaborative consumption.
-      
-      - [B2E] => Business-to-Employee: Involves transactions and interactions between a business and its employees, including HR services, employee benefits, and internal communications.
-      
-      - [C2B] => Consumer-to-Business: Describes scenarios where consumers sell products or services to businesses, such as user-generated content or influencer marketing.
-      
-      - [H2H] => Human-to-Human: Emphasizes the importance of personal connections and relationships in business transactions, recognizing the human aspect behind every business interaction.
+
+
+[Software Application Architectures]
+      - Monolithic Architecture     (All-in-one Application)
+      - Microservices Architecture
+      - Three-Tier Architecture      (N-tier Architecture)
+
+[Monolithic Architecture]
+      - Controllers
+      - Data (Data Access Logic)
+      - Models (UI Models)
+      - Services (Application Services [Interfaces and implementations])
+      - Views (Presentation Logic)
+      - Application Entry Point and Configuration
+            - app.config
+            - appsettings.json
+            - bower.json
+            - bundleconfig.json
+            - Program.cs
+            - Startup.cs
+            
+[N-tier Architecure] (multiple projects (Layers))     each one with a specific role in the application (all serve one application)
+      - ApplicationCore (Bussness/Application Model) [BLL]  => [Models / IRepos / DTOs]                                  
+      - Infrastructure (Data Access Logic) [DAL]                        => [Migrations / Repos]
+      - Web (Presentation Logic) [UI]                                         => Contains the controllers and view
+      - Tests (Automated Tests)
  
-
-
-    
-
-
-
-
-
-     
-What is the different of the four Verbs get/post/put/delete?
-
-search for Request Url body header consumer provider
-
-      - between the Consumer and the provider
-            - request which contain Header and Body
-            [Header]
-            - ReqUrl:/Emploee
-            - ReqVerb:"post|get|put|delete
-            - content-type:application/json -- application/datatype?
-            - accept:"Json/Xml"     the type of data that you want to receive in core it send any way json
-            
-            [Body]
-            - contain the data sent with the request 
-            
-            json object to C# object this process called [Deserilization]
-            
-      Response
-      [Header]
-      - ReqUrl:
-      - StatusCode:
-      
-      [Body]
-      - containt the reponse data // -- Serilization convert the C# object to json object to put it in the body of the Response
-      
-
-Status Code:
-      - Success  2xx     200 OK      201 Created       204 NoContent
-      - Redirect 3xx
-      - Client Error 4xx      404 NotFound      405 MethodNotAllowed    400 BadRequest    401 NotAuthoriezed
-      - Server Error 5xx      
-      
-high level .net web app [blazor] in C#
-web app
-
+ 
+ 
 project name 
       asp.net core web api    restfull http
       
@@ -430,3 +380,8 @@ wpf
                         DeptList.ItemSource = depts;
                   }
             
+            
+            
+identity provider  IDP
+Azure 
+Blazor

@@ -218,25 +218,25 @@
       - Microservices Architecture
       - Three-Tier Architecture      (N-tier Architecture)
 
-[Monolithic Architecture]
-      - Controllers
-      - Data (Data Access Logic)
-      - Models (UI Models)
-      - Services (Application Services [Interfaces and implementations])
-      - Views (Presentation Logic)
-      - Application Entry Point and Configuration
-            - app.config
-            - appsettings.json
-            - bower.json
-            - bundleconfig.json
-            - Program.cs
-            - Startup.cs
-            
-[N-tier Architecure] (multiple projects (Layers))     each one with a specific role in the application (all serve one application)
-      - ApplicationCore (Bussness/Application Model) [BLL]  => [Models / IRepos / DTOs]                                  
-      - Infrastructure (Data Access Logic) [DAL]                        => [Migrations / Repos]
-      - Web (Presentation Logic) [UI]                                         => Contains the controllers and view
-      - Tests (Automated Tests)
+	- [Monolithic Architecture]
+		  - Controllers
+		  - Data (Data Access Logic)
+		  - Models (UI Models)
+		  - Services (Application Services [Interfaces and implementations])
+		  - Views (Presentation Logic)
+		  - Application Entry Point and Configuration
+				- app.config
+				- appsettings.json
+				- bower.json
+				- bundleconfig.json
+				- Program.cs
+				- Startup.cs
+				
+	- [N-tier Architecure] (multiple projects (Layers))     each one with a specific role in the application (all serve one application)
+		  - ApplicationCore (Bussness/Application Model) [BLL]  => [Models / IRepos / DTOs]                                  
+		  - Infrastructure (Data Access Logic) [DAL]                        => [Migrations / Repos]
+		  - Web (Presentation Logic) [UI]                                         => Contains the controllers and view
+		  - Tests (Automated Tests)
  
  
  

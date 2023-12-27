@@ -42,23 +42,34 @@
 		- DateTime date = DateTime.now;
 		
 	- [ Object ]
-		- base Type for all C# types
-		- 
+		- var person = new { name = "John", age = 25 };		// Anonymous types
+		- Person person = new Person("john", 25);			// Instance from a Class Person
+		- dynamic obj = new System.Dynamic.ExpanoObject();	obj.name = "John"; Console.WriteLine(obj.name);	// Dynamic Object
 	
 	- [ Nullable ]
 		- [primitive] + [?]	=> allow null
 
 	- [ Enumerations ]
 		- enum 				=> value type that defines a set of named integral constants
+		- enum Days {sat, sun, mon = 5, tues, }		// int x = (int)Days.sun;
 		
 	- [ Arrays ]
 		- int[] data = {2,3,5} | new int[] {2,3,5} | new int[3] {2,3,5}
 		
 	- [ Structs ]
+		- public struct Person { 
+			public string name;
+			public int age;   									                       
+			public Person(){this.name = "John"; this.age = 25;}					// Constructor
+			public void DisplayInfo(){ Conole.Writeline($"{name} {age}") }		// Methods
+		}
 	
 	- [ Classes ]
+		- Fields, Methods, Properties(get, set), Constructor
+		- Constructor [default, parameterized, deepCopy, shallowCopy, static]
 		
 	- [ Interfaces ]
+		- public interface IMovable{ void Draw(); int X {get; set;} }
 	
 	- [ Other Types ]
 		- dynamic 			=> Represents an object whose operations are resolved at runtime

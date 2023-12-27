@@ -370,3 +370,7 @@ copying
 
 polymorphism (static binding/ dynamic binding)
 boxing and Clr
+
+dynamic keyword
+
+the different between class, constructor, and interface

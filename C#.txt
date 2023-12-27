@@ -1,0 +1,4 @@
+[Create Console Project]
+	- Bash => dotnet new console 	// to create new console project 
+	- bash => dotnet run			// to run the project
+	

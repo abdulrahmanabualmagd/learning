@@ -1,0 +1,137 @@
+[Create Console Project]
+	- Bash => dotnet new console 	// [console, mvc, webapi, ...] [-o output, -n name, ...]
+	- bash => dotnet run			// to run the project
+	- bash => dotnet build          // build the application
+	- bash => dotnet restore 		// install the necessary  
+	
+[Comments]
+	- //							// Single Line Comment	
+	- /* */                         // Multiple Line Comment
+	- ///							// XML Comment 
+	
+[Input & Output]
+	- Console.WriteLine("Something");	// Print 
+	- Console.ReadLine();				// Read
+	- Console.ReadKey();				// Read the next Key Pressing by the User
+	- Console.Clear();					// Clear the log
+	- Console.SetCursorPosition			// Set the position of the Cursor
+	
+[Data Tpyes]
+	- [Integral Types]
+		- byte / sbyte		=> 8bit			
+		- short / ushort	=> 16bit	=> System.Int16		//.Net Type
+		- int / uint		=> 32bit    => System.Int32     //.NET Type
+		- long / ulong		=> 64bit	=> System.Int64		//.NET Type
+		
+	- [ Floating-Point ]
+		- float 			=> 32bit		0.1f			=> System.Single			
+		- double 			=> 64bit		0.1				=> System.Double
+		- decimal 			=> 128bit		0.1m			=> System.Decimal
+		
+	- [ Character ]
+		- Char 				=> 16bit	=> System.Char
+		
+	- [ String ]
+		- String 			=> 16bit/char	=> System.String
+	
+	- [ Boolean ]
+		- bool				=> 1bit	=> true/false			=> System.Boolean
+				
+	- [Date]		
+		- DateTime			=> 8bit							=> System.DateTime
+		- DateTime date = DateTime.now;
+		
+	- [ Object ]
+		- base Type for all C# types
+		- 
+	
+	- [ Nullable ]
+		- [primitive] + [?]	=> allow null
+
+	- [ Enumerations ]
+		- enum 				=> value type that defines a set of named integral constants
+		
+	- [ Arrays ]
+		- int[] data = {2,3,5} | new int[] {2,3,5} | new int[3] {2,3,5}
+		
+	- [ Structs ]
+	
+	- [ Classes ]
+		
+	- [ Interfaces ]
+	
+	- [ Other Types ]
+		- dynamic 			=> Represents an object whose operations are resolved at runtime
+		- var				=> Implicitly-typed variable, the type is inferred by the compiler
+		
+[Operators]
+	- Arithmetic Operators: 	=> [+, -, /, *, %]  
+	
+	- Comparison Operators: 	=> [==, !=, <, >, <=, >=]   
+	
+	- Logical Operators: 		=> [&&, ||, !]              
+	
+	- Assignment Operators: 	=> [=, +=, -=, *=, /=, %=]  
+	
+	- Inc and Dec Operators: 	=> [++, --]  
+	
+	- Bitwise Operators: 		=> [&, |, ^, ~, <<, >>]
+		
+[ Implicit / Explicit Conversions ]
+	- Implicit Conversion is done by the compiler if there is no data will be lost like:
+		int x = 5;	double y = x;		// here x implicitly converted into double => no data loss
+		
+	- Explicit Conversion is done manually and need a cast to force it like:
+		double x = 3.3; 	int y = (int)x;		// We have to cast the value as an int
+		
+[Built-In Methods]
+
+	- [String Methods]
+		- .Length | [indexing] | .Substring() | .Concat | .Equals | .Compare | .ToLower
+		  .ToUpper | .Trim | .Contains | .IndexOf | .LastIndexOf | .Replace | .Split
+	
+	- [Math Methods]
+		- Math.[Add, Subtact, Multiply, Divide, Pow, Sin, Cos, Tan, PI, Log, Log10, Sqrt, Round, Ceiling, Floor, Abs]
+	
+	- [Array & List methods]
+		- .Length | [Indexing] | .CopyTo | .Clone | .Sort | .BinarySearch | .Fill | .Reverse | .Clear | .Equals | .ToList() | .Copy
+	
+	- [Type Conversion Methods]
+		- implicit / explicit (casting)
+		- Convert.ToInt[16/32/64] | .ToString | int.Parse | int.TryParse 
+		- [Boxing & UnBoxing]
+			- [Boxing] 
+				- ValueType 			=> 	ReferenceType
+				- int intvalue = 42;		object BoxedValue = intvalue;
+				
+			- [Unboxing]
+				- ReferenceType			=> 	ValueType
+				- object BoxedValue = 42;   int intValue = (int)BoxedValue;
+			
+			- [Performance Considerations]
+				- (memory allocation) new object is created in the heap and the reference to that object stored in the stack
+				- (Copying) Copy the value type from the stack, which introduces overhead especially for larger value types
+				- (Type-Checking Overhead) when unboxing a value from an object there's a need for type-checking to ensure that the object actually contains a value of the expected type
+				
+		- [explicit operator]
+			- public static explicit operator double(myObject value){ return value.weight; }
+			// User-defined explicit conversion operator which convert an instance from the class to a double
+			
+	
+	- [DateTime Methods]
+		- DateTime.[Now | UtcNow ]
+		- value.[Yar | Month | Day | Hour | Minute | Second | AddHours() | AddMinutes(-2) | ParseExact() | IsLeapYear() | ToUniversalTime() ]
+		- .ToString() | 
+	
+	- [Linq Methods]
+		- Where | Select | OrderBy | OrderByDescending | GroupBy | Join | GroupJoin | Take | Skip
+		- First | FirstOrDefault | Single | SingleOrDefault | Last | LastOrDefault | Any | All | Aggregate
+		- Count | Sum | Min | Max | Average | Concat | Distinct | Union | Intersect | Except | AsQueryable
+		- Reverse | AsEnumerable | ToArray | ToList | ToDictionary | OfType | Cast | ToLookup | Skip | Take 
+	
+	- [File & Directory Methods]
+	
+	- [Miscellaneous]
+	
+
+	

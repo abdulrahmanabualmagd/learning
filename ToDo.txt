@@ -362,3 +362,11 @@ What is .NET and what is the differences between the other versions(.NET Framewo
 design pattern is a way to solve an issue what ever  the used programming languge in solving that issue
 principle is some thing good that we follow under 
 Architicture Style : provide stadards between systems communication
+
+type-checking 
+memory allocation
+copying
+
+
+polymorphism (static binding/ dynamic binding)
+boxing and Clr

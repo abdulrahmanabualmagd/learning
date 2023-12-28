@@ -1,4 +1,4 @@
-[Create Console Project]
+--------------------------------------------------[Create Console Project] --------------------------------------------------
 	- Bash => dotnet new console 	// [console, mvc, webapi, ...] [-o output, -n name, ...]
 	- bash => dotnet run			// to run the project
 	- bash => dotnet build          // build the application
@@ -9,15 +9,9 @@
 	- /* */                         // Multiple Line Comment
 	- ///							// XML Comment 
 	
-[Input & Output]
-	- Console.WriteLine("Something");	// Print 
-	- Console.ReadLine();				// Read
-	- Console.ReadKey();				// Read the next Key Pressing by the User
-	- Console.Clear();					// Clear the log
-	- Console.SetCursorPosition			// Set the position of the Cursor
+-------------------------------------------------- [Data Tpyes] --------------------------------------------------
 	
-[Data Tpyes]
-	- [Integral Types]
+	- [ Integral Types ]
 		- byte / sbyte		=> 8bit			
 		- short / ushort	=> 16bit	=> System.Int16		//.Net Type
 		- int / uint		=> 32bit    => System.Int32     //.NET Type
@@ -37,7 +31,7 @@
 	- [ Boolean ]
 		- bool				=> 1bit	=> true/false			=> System.Boolean
 				
-	- [Date]		
+	- [ Date ]		
 		- DateTime			=> 8bit							=> System.DateTime
 		- DateTime date = DateTime.now;
 		
@@ -64,38 +58,41 @@
 			public void DisplayInfo(){ Conole.Writeline($"{name} {age}") }		// Methods
 		}
 	
-	- [ Classes ]
-		- Fields, Methods, Properties(get, set), Constructor
-		- Constructor [default, parameterized, deepCopy, shallowCopy, static]
+	- [ Classes ] 	--------------------------------------------------
+		- Members:		Fields, Methods, Properties(get, set), Constructor
+		- Constructor: 	[default, parameterized, deepCopy, shallowCopy, static]
+		- [ Parent Class(base) | Child Class(derived) | Abstract Class | Sealed Class | Static Class | Partial Class | Generic Class | Container Class ]
+		- [ Singleton Class | Factory Class | Immutable Class | DTO Class | Attribute Class | Disposal Class |   ]
 		
-	- [ Interfaces ]
+	- [ Interfaces ] 	--------------------------------------------------
 		- public interface IMovable{ void Draw(); int X {get; set;} }
 	
 	- [ Other Types ]
 		- dynamic 			=> Represents an object whose operations are resolved at runtime
 		- var				=> Implicitly-typed variable, the type is inferred by the compiler
 		
-[Operators]
-	- Arithmetic Operators: 	=> [+, -, /, *, %]  
+-------------------------------------------------- [ Operators ] --------------------------------------------------
+
+	- Arithmetic Operators: 		=> [+, -, /, *, %]  
 	
-	- Comparison Operators: 	=> [==, !=, <, >, <=, >=]   
+	- Comparison Operators: 		=> [==, !=, <, >, <=, >=]   
 	
-	- Logical Operators: 		=> [&&, ||, !]              
+	- Logical Operators: 			=> [&&, ||, !]              
 	
-	- Assignment Operators: 	=> [=, +=, -=, *=, /=, %=]  
+	- Assignment Operators: 		=> [=, +=, -=, *=, /=, %=]  
 	
-	- Inc and Dec Operators: 	=> [++, --]  
+	- Inc and Dec Operators: 		=> [++, --]  
 	
 	- Bitwise Operators: 		=> [&, |, ^, ~, <<, >>]
 		
-[ Implicit / Explicit Conversions ]
+-------------------------------------------------- [ Implicit / Explicit Conversions ] --------------------------------------------------
 	- Implicit Conversion is done by the compiler if there is no data will be lost like:
-		int x = 5;	double y = x;		// here x implicitly converted into double => no data loss
+		int x = 5;	double y = x;			// here x implicitly converted into double => no data loss
 		
 	- Explicit Conversion is done manually and need a cast to force it like:
 		double x = 3.3; 	int y = (int)x;		// We have to cast the value as an int
 		
-[Built-In Methods]
+-------------------------------------------------- [Built-In Methods] --------------------------------------------------
 
 	- [String Class Methods]
 		- .Length | [indexing] | .Substring() | .Concat | .Equals | .Compare | .ToLower
@@ -175,7 +172,7 @@
 		- [Environment Class]
 			- Environment.[GetCommandLineArgs | CurrentDirectoruy | Exit | GetFolderPath | MachineName | OSVersion | StackTrace | SystemDirectory | TickCount | TickCount64 | UserDomainName | userName | Version | WorkingSet]
 		
- [WorkFlow]
+--------------------------------------------------  [WorkFlow] --------------------------------------------------
 	- [Sequential Execution]
 		- Statements are executed one after the other in the order they appear in the code 
 		
@@ -206,41 +203,91 @@
 			[AccessModifier] [ReturnType] [FunctionName]([Params]){[body]}
 		- Method is a function but associated with an object or a class (a member of a class)
 		- Arrow function like: public ind Add(int a, int b) => a + b;
+
+
+-------------------------------------------------- [Generics] --------------------------------------------------
+	- Writing a code that can work with any data type.
+	- We can use Generic method in non-generic class
+	- [Generic Class & Method]
+		//Generic Class
+		public Class GenericClass<T>
+		{
+			private T genericField;
+			public GenericClass(T vlaue){
+				GenericField = value;
+			}
+			//Generic Method
+			public T GetValue(){
+				return genericField;
+			}
+		}
+		Genericclass<int> data = new GenericClass<int>(3);
 		
-
+	- [Generic Interfaces and Delegates]
+		- public interface IGenericInterface<T>{ T GetValue(); }
+		- public delegate void GenericDelegate<T>(T argument) 
+		
+	- [Constriants]
+		- Used with Generic types to specify the capabilities or characteristics that the type parameter must have 
+			- where T : class				// Ensures that the type argument is a reference type (class)
+			- where T : struct				// Ensures that the type argument is a value type (struct)
+			- where T : new()				// Ensures that the type argument has a parameterless constructor
+			- where T : myBaseClass			// Ensures that the type argument must be or derive from a specific base class 
+			- where T : IMyInterface		// Ensures that the type argument implements a specific interface
+			- where T : U					// Ensures that the type argument must be or derive from the type specified by U
+			- where T : notnull        		// Ensures that the type argument is non-nullable reference or non-nullable value
+		- Use benefits => [ Type Safety | Reusability | Avoid Reflection | Prevent Nullability | Readability and Intent ]
+		- public class Employee(): Person, IWorkable, 
 	
-[Class & Interface & Struct]
-	+---------------------+----------------------+-----------------------+------------------------+
-	|      Attribute      |        Class         |      Interface        |         Struct         |
-	+---------------------+----------------------+-----------------------+------------------------+
-	|      Purpose        | Model complex objects| Define a contract of  | Represent a lightweight|
-	|                     | with fields,         | members that a class  | value type with fields,|
-	|                     | properties, methods, | must implement.       | properties, methods,   |
-	|                     | events, and more.    | Supports abstraction  | and other members.     |
-	|                     |                      | and polymorphism.     |                        |
-	+---------------------+----------------------+-----------------------+------------------------+ 	[Class]                                                     [Interface]
-	|       Members       | Fields, properties,  | Public and abstract   | Fields, properties,    | 		- Create object                                          	- Can't Create Ojbect
-	|                     | methods, events,     | methods, properties,  | methods, and more.     | 		- Inherit another class                                  	- Can't inherit anotehr class
-	|                     | and more.            | events, indexers, etc.|                        | 		- Inherited by a class                                   	- Could be Implemented by another class 
-	+---------------------+----------------------+-----------------------+------------------------+ 		- Have Constructor                                       	- Don't have constructors
-	|     Inheritance     | Supports single      | Supports multiple     | Does not support       | 		- Disallow abstract methods                              	- Contain abstract methods
-	|                     | inheritance.         | inheritance.          | inheritance.           | 		- Variable and methods can't be dealcared as public only 	- Variables and methods can only declare as public
-	+---------------------+----------------------+-----------------------+------------------------+ 		- variables are static, final, or neither                	- Variables are static 
-	|   Copy Semantics    | Copied by reference. | N/A                   | Copied by value.       | 		- Does not supports multiple inheritance                 	- Supports multiple inheritance
-	|                     |                      |                       |                        | 		- Conatain Final and static methods                      	- don't contain final and static methods
-	+---------------------+----------------------+-----------------------+------------------------+
-	| Default Constructor | Provided by the      | N/A                   | Provided by the        |
-	|                     | compiler if not      |                       | compiler if not        |
-	|                     | explicitly defined.  |                       | explicitly defined.    |
-	+---------------------+----------------------+-----------------------+------------------------+
-	|      Examples       | class Person         | interface IDrawable   | struct Point           |
-	|                     | {                    | {                     |  {                     |
-	|                     |     public string    |     void Draw();      |      public int X;     |
-	|                     |     Name { get; set; |     int X { get; set; |      public int Y;     |
-	|                     |     }                | }                     |  }                     |
-	|                     |                      |                       |                        |
-	+---------------------+----------------------+-----------------------+------------------------+
-
+-------------------------------------------------- [Delegate] --------------------------------------------------
+	- A type which represents references to methods with a particular parameter list and return type
+	
+	- public delegate void MyDelegate(string message);			// Delegate Creation, Assignable with methods void return type and takes string as a parameter 
+	- public class MyClass{
+		public void MyMethod(string message){					// We will assign the reference of that method to a variable of MyDelegate Type
+			Console.WriteLine(message);
+		}
+	}
+	- MyClass obj = new MyClass();								// Create Instance from the class MyClass to use Its method
+	- MyDelegate d = obj.MyMethod;								// Assign the reference of the method to the newly created 
+	// now I can pass it to a function or invoke it 
+	
+	- [ Multicasting ]
+		- Delegates support multicastin, which means you can combine multiple methods into a single delegate
+		d += obj.someOtherMethod
+		d();
+		
+	[ Commonly Used Delegates ]
+		- [ Func ] 
+			- Represents a function that returns value and takes values
+			- Func<int, int, int> add = (a,b) => a+b;	int result = add(3,5);
+			
+		- [ Action ]
+			- Represents a method returns void and takes parameters
+			- Action<string,string> print = (a,b) => Console.WriteLine(a+b);
+			
+		- [ Predicate ]
+			- Represents a method return boolean and takes parameters
+			- Predicate<int> isbigger = (a) => a <= 6;	isbigger(3);		// Takes only one argument
+			
+-------------------------------------------------- [ Event ] --------------------------------------------------
+	- Observer design Pattern
+		- Publisher (Subject)
+			- This is the entity that holds the information, notifies observers(listeners) about changes [WebSite, News]
+		
+		- Listeners (Observer)
+			- These are the entities interested in being notified when the publisher changes [Users]
+		
+		- Subscription
+			- This is the mechanism that connects the publisher and the listeners
+		
+		
+		
+	
+	
+		
+		
+	
 	
 	
 	

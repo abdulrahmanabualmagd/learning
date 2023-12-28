@@ -302,3 +302,5 @@ what do do when starting building a software application steps and best practice
 lambda expression & arrow
 
 memory allocation in initialization and declaration of arrays and list
+C# Reflections
+Dictionary and Dictionary Methods

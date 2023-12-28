@@ -126,7 +126,7 @@ types of exception
 	-- indexoutofrangeexception
 	
 
-we usetry and catch to handle exception
+we use try and catch to handle exception
 
 try{}catch(FormatException FEx ){}catch(NullRefgerenceException FEx){}	-- fex hold all the data for that type of exceptions
 we can obtain more than one catch
@@ -684,6 +684,13 @@ amount and type
 	minus it from the dictionary 
 when low make it call the supplier to get more products supplier is the listener 
 
+
+
+
+
+
+
+
 ============= [ Day Five ] ===================
 
 -- [ Control ] --
@@ -1117,70 +1124,3 @@ careful naming the control Name because Name is used in the form in another spec
 
 Last Lecture note completed ##
       - Eng Mrihan Videos
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -126,7 +126,7 @@
 				
 		- [explicit operator]
 			- public static explicit operator double(myObject value){ return value.weight; }
-			// User-defined explicit conversion operator which convert an instance from the class to a double
+			// User-defined explicit conversion operator which convert an instance from a class to a double
 			
 	
 	- [DateTime Methods]
@@ -144,5 +144,45 @@
 	
 	- [Miscellaneous]
 	
+[Class & Interface & Struct]
+	+---------------------+----------------------+-----------------------+------------------------+
+	|      Attribute      |        Class         |      Interface        |         Struct         |
+	+---------------------+----------------------+-----------------------+------------------------+
+	|      Purpose        | Model complex objects| Define a contract of  | Represent a lightweight|
+	|                     | with fields,         | members that a class  | value type with fields,|
+	|                     | properties, methods, | must implement.       | properties, methods,   |
+	|                     | events, and more.    | Supports abstraction  | and other members.     |
+	|                     |                      | and polymorphism.     |                        |
+	+---------------------+----------------------+-----------------------+------------------------+
+	|       Members       | Fields, properties,  | Public and abstract   | Fields, properties,    |
+	|                     | methods, events,     | methods, properties,  | methods, and more.     |
+	|                     | and more.            | events, indexers, etc.|                        |
+	+---------------------+----------------------+-----------------------+------------------------+
+	|     Inheritance     | Supports single      | Supports multiple     | Does not support       |
+	|                     | inheritance.         | inheritance.          | inheritance.           |
+	+---------------------+----------------------+-----------------------+------------------------+
+	|   Copy Semantics    | Copied by reference. | N/A                   | Copied by value.       |
+	|                     |                      |                       |                        |
+	+---------------------+----------------------+-----------------------+------------------------+
+	| Default Constructor | Provided by the      | N/A                   | Provided by the        |
+	|                     | compiler if not      |                       | compiler if not        |
+	|                     | explicitly defined.  |                       | explicitly defined.    |
+	+---------------------+----------------------+-----------------------+------------------------+
+	|      Examples       | class Person         | interface IDrawable   | struct Point           |
+	|                     | {                    | {                     |  {                     |
+	|                     |     public string    |     void Draw();      |      public int X;     |
+	|                     |     Name { get; set; |     int X { get; set; |      public int Y;     |
+	|                     |     }                | }                     |  }                     |
+	|                     |                      |                       |                        |
+	+---------------------+----------------------+-----------------------+------------------------+
 
-	
+	- [Class]
+		- Create object
+		- Inherit another class
+		- Inherited by a class
+		- Have Constructor
+		- Disallow abstract methods
+		- Variable and methods can't be dealcared as public only
+		- variables are static, final, or neither
+		- Does not supports multiple inheritance
+		- Conatain Final and static methods

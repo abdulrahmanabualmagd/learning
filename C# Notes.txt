@@ -97,15 +97,17 @@
 		
 [Built-In Methods]
 
-	- [String Methods]
+	- [String Class Methods]
 		- .Length | [indexing] | .Substring() | .Concat | .Equals | .Compare | .ToLower
 		  .ToUpper | .Trim | .Contains | .IndexOf | .LastIndexOf | .Replace | .Split
 	
-	- [Math Methods]
+	- [Math Class Methods]
 		- Math.[Add, Subtact, Multiply, Divide, Pow, Sin, Cos, Tan, PI, Log, Log10, Sqrt, Round, Ceiling, Floor, Abs]
 	
-	- [Array & List methods]
+	- [Array Methods]
 		- .Length | [Indexing] | .CopyTo | .Clone | .Sort | .BinarySearch | .Fill | .Reverse | .Clear | .Equals | .ToList() | .Copy
+		- int[,] matrix;
+		- int[][] jaggedArray;
 	
 	- [Type Conversion Methods]
 		- implicit / explicit (casting)
@@ -128,21 +130,84 @@
 			- public static explicit operator double(myObject value){ return value.weight; }
 			// User-defined explicit conversion operator which convert an instance from a class to a double
 			
-	
-	- [DateTime Methods]
-		- DateTime.[Now | UtcNow ]
-		- value.[Yar | Month | Day | Hour | Minute | Second | AddHours() | AddMinutes(-2) | ParseExact() | IsLeapYear() | ToUniversalTime() ]
-		- .ToString() | 
-	
 	- [Linq Methods]
 		- Where | Select | OrderBy | OrderByDescending | GroupBy | Join | GroupJoin | Take | Skip
 		- First | FirstOrDefault | Single | SingleOrDefault | Last | LastOrDefault | Any | All | Aggregate
 		- Count | Sum | Min | Max | Average | Concat | Distinct | Union | Intersect | Except | AsQueryable
 		- Reverse | AsEnumerable | ToArray | ToList | ToDictionary | OfType | Cast | ToLookup | Skip | Take 
 	
-	- [File & Directory Methods]
-	
+	- [IO Methods] (using System.IO;)
+		
+		- [File Class]
+			- File.ReadAllText("") 			=> Returns string
+			- FileInfo("")					=> Returns FileInfo 
+			- File.[Exists | Copy | Delete | Move | ReadAllLines | ReadAllBytes | WriteAllText | AppendTet | OpenRead | OpenWrite]
+		
+		- [Directory Class]
+			- Directory.GetFiles("") 		=> Returns string[]
+			- DirectoryInfo("")				=> Returns DirectoryInfo
+			- Directory.[Exists | CreateDirectory | GetFiles | GetDirectories | GetParent | Move | Delete | GetLogicaldrives | GetCreationTime | GetLastAccessTime | GetLastWriteTime]
+		
+		- [Path Class]
+			- Path.[Combine() | GetExtension | GetFileName | GetDirectoryName | GetFullPath | GetPathRoot | GetRandomFileName | IsPathRooted | ChangeExtension | GetTempFileName | GetTempPath ]
+			
+		- [FileStream Class]
+			- FileStream fs = new FileStream("",FileMode.Open)	
+			- fs.[Read | Write | Seek | Length | Flush | Close | Dispose | CanRead | CanWrite | CanSeek | Position ]
+		
 	- [Miscellaneous]
+		
+		- [Random Class]
+			- Random random = new Random()
+			- random.[ Next | NextDouble | NextByte(new byte[10]) | Convert.ToBase64String(new byte[10]) => string ]
+			
+		- [Convert Class]
+			- Convert.[ ToBoolean | ToByte | ToInt32 | ToSingle | ToDouble | ToString | ToDateTime | ToChar | ChangeType ]
+		
+		- [DateTime & TimeSpan Classes]
+			- DateTime.[Now | Today | UtcNow | Parse | TryParse | TopString("yyyy-MM-dd HH:mm:ss") | AddDays | Now.Subtract | Compare | Now.DayOfWeek | IsLeapYear ]
+			- TimeSpan.[FromSeconds | FromMInutes | FromHours | Parse(time) | Compare |  ]
+			- time.[Add | Subtract | TotalSeconds | TotalHours | TotalMinutes | ToString() | Equals(time2) | Zero ]
+
+		- [Console Class]
+			- Console.[Write | WriteLine | Read | Readline | ReadKey | Beep | Title | WindowWidth | WindowHeight | BufferWidth | BufferHeight ]
+		
+		- [Environment Class]
+			- Environment.[GetCommandLineArgs | CurrentDirectoruy | Exit | GetFolderPath | MachineName | OSVersion | StackTrace | SystemDirectory | TickCount | TickCount64 | UserDomainName | userName | Version | WorkingSet]
+		
+ [WorkFlow]
+	- [Sequential Execution]
+		- Statements are executed one after the other in the order they appear in the code 
+		
+	- [Selection Statements]
+		- if - else
+		- switch
+	
+	- [Repetition Statements]
+		- for					=> Number of Iteration is knew
+		- wihle					=> Unknown number of iteration and continues looping until the condition change
+		- do-while				=> Same as while but to ensure that the body executed at least once
+		- foreach-in			=> Looping over Collections like Arrays, Lists, etc...
+	
+	- [Jump Statements]
+		- break
+		- continue
+		- return
+		- goto
+		
+	- [Exception Handling]
+		- try-catch-finally
+		- try{}catch(){}catch(){}finally{}
+		- Use cases for finally [Cleanup Operations | Guaranteed Execution | Resource Deallocation]
+
+
+	- [Functions & Methods]
+		- Function is a self-contained unit of code that performs a specific task
+			[AccessModifier] [ReturnType] [FunctionName]([Params]){[body]}
+		- Method is a function but associated with an object or a class (a member of a class)
+		- Arrow function like: public ind Add(int a, int b) => a + b;
+		
+
 	
 [Class & Interface & Struct]
 	+---------------------+----------------------+-----------------------+------------------------+
@@ -153,16 +218,16 @@
 	|                     | properties, methods, | must implement.       | properties, methods,   |
 	|                     | events, and more.    | Supports abstraction  | and other members.     |
 	|                     |                      | and polymorphism.     |                        |
-	+---------------------+----------------------+-----------------------+------------------------+
-	|       Members       | Fields, properties,  | Public and abstract   | Fields, properties,    |
-	|                     | methods, events,     | methods, properties,  | methods, and more.     |
-	|                     | and more.            | events, indexers, etc.|                        |
-	+---------------------+----------------------+-----------------------+------------------------+
-	|     Inheritance     | Supports single      | Supports multiple     | Does not support       |
-	|                     | inheritance.         | inheritance.          | inheritance.           |
-	+---------------------+----------------------+-----------------------+------------------------+
-	|   Copy Semantics    | Copied by reference. | N/A                   | Copied by value.       |
-	|                     |                      |                       |                        |
+	+---------------------+----------------------+-----------------------+------------------------+ 	[Class]                                                     [Interface]
+	|       Members       | Fields, properties,  | Public and abstract   | Fields, properties,    | 		- Create object                                          	- Can't Create Ojbect
+	|                     | methods, events,     | methods, properties,  | methods, and more.     | 		- Inherit another class                                  	- Can't inherit anotehr class
+	|                     | and more.            | events, indexers, etc.|                        | 		- Inherited by a class                                   	- Could be Implemented by another class 
+	+---------------------+----------------------+-----------------------+------------------------+ 		- Have Constructor                                       	- Don't have constructors
+	|     Inheritance     | Supports single      | Supports multiple     | Does not support       | 		- Disallow abstract methods                              	- Contain abstract methods
+	|                     | inheritance.         | inheritance.          | inheritance.           | 		- Variable and methods can't be dealcared as public only 	- Variables and methods can only declare as public
+	+---------------------+----------------------+-----------------------+------------------------+ 		- variables are static, final, or neither                	- Variables are static 
+	|   Copy Semantics    | Copied by reference. | N/A                   | Copied by value.       | 		- Does not supports multiple inheritance                 	- Supports multiple inheritance
+	|                     |                      |                       |                        | 		- Conatain Final and static methods                      	- don't contain final and static methods
 	+---------------------+----------------------+-----------------------+------------------------+
 	| Default Constructor | Provided by the      | N/A                   | Provided by the        |
 	|                     | compiler if not      |                       | compiler if not        |
@@ -176,13 +241,19 @@
 	|                     |                      |                       |                        |
 	+---------------------+----------------------+-----------------------+------------------------+
 
-	- [Class]
-		- Create object
-		- Inherit another class
-		- Inherited by a class
-		- Have Constructor
-		- Disallow abstract methods
-		- Variable and methods can't be dealcared as public only
-		- variables are static, final, or neither
-		- Does not supports multiple inheritance
-		- Conatain Final and static methods
+	
+	
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	

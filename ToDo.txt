@@ -296,3 +296,9 @@ boxing and Clr
 dynamic keyword
 
 the different between class, constructor, and interface
+
+what to do when plannig to design database systems (steps) best practice
+what do do when starting building a software application steps and best practice like SLDC
+lambda expression & arrow
+
+memory allocation in initialization and declaration of arrays and list

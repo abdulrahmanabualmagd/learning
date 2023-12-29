@@ -60,7 +60,7 @@
 	
 	- [ Classes ] 	--------------------------------------------------
 		- Members:		Fields, Methods, Properties(get, set), Constructor
-		- Constructor: 	[default, parameterized, deepCopy, shallowCopy, static]
+		- Constructor: 	[ Default, Parameterized, DeepCopy, ShallowCopy, Static]
 		- [ Parent Class(base) | Child Class(derived) | Abstract Class | Sealed Class | Static Class | Partial Class | Generic Class | Container Class ]
 		- [ Singleton Class | Factory Class | Immutable Class | DTO Class | Attribute Class | Disposal Class |   ]
 		
@@ -241,10 +241,17 @@
 	
 -------------------------------------------------- [Delegate] --------------------------------------------------
 	- A type which represents references to methods with a particular parameter list and return type
+      - Pass a function as a parameter to another function
+      - Create new delegate 
+            - public delegate void MyDelegate(string message)           // A Reference Type which match only the methods that returns void and take string as a parameter 
+                                                                                                           // MyDelegate is a type not an instance
+      - Create Instance from the delegate
+            - MyDelegate print = (a) => Console.WriteLine(a);             // Create an Instance(print) from MyDelegate Delegate and                                   
 	
-	- public delegate void MyDelegate(string message);			// Delegate Creation, Assignable with methods void return type and takes string as a parameter 
-	- public class MyClass{
-		public void MyMethod(string message){					// We will assign the reference of that method to a variable of MyDelegate Type
+      
+	- public delegate void MyDelegate(string message);	            // Delegate Creation, Assignable with methods void return type and takes string as a parameter 
+	- public class MyClass{                                                                   
+		public void MyMethod(string message){				      // We will assign the reference of that method to a variable of MyDelegate Type
 			Console.WriteLine(message);
 		}
 	}
@@ -257,7 +264,7 @@
 		d += obj.someOtherMethod
 		d();
 		
-	[ Commonly Used Delegates ]
+	[ Delegates Built-In ]
 	
 		- [ Func ] 
 			- Represents a function that returns value and takes values		T1 <= T2, T3, ...
@@ -270,9 +277,17 @@
 		- [ Predicate ]
 			- Represents a method return boolean and takes parameters		bool <= T1
 			- Predicate<int> isbigger = (a) => a <= 6;	isbigger(3);		// Takes only one argument
+                  
+          [Anonymous delegate]
+                    - A reference who have no name its reference not stored in the stack
+                    - prin(delegate (int num) {return num>5})       // one use only, when we need a function just for one time, we don't create it
+                    - Anonymous is not a better use instead we use Lambda Expression
+                    - print(delegate (int num) { return num>5 })                   =>                  print(num => num > 5)
 			
 -------------------------------------------------- [ Event ] --------------------------------------------------
-	- Observer design Pattern
+	- [ Observer design Pattern ]
+                    - Simulating the Event Concept with that
+                    
 		- Publisher (Subject)
 			- This is the entity that holds the information, notifies observers(listeners) about changes [WebSite, News]
 		
@@ -281,15 +296,19 @@
 		
 		- Subscription
 			- This is the mechanism that connects the publisher and the listeners
-			
+          
+          - There are issues using delegates
+                    - assign delegate to null remove all the methods 
+                    - any one can call it and it must be public so let the listeners subscibe
+                    - Listener can assign more that one method
+                    
+          - To solve these 
+                    - we have to disallow the listener to control the publisher => we use 'event' keyword
+                    - by using event we can only use -= and +=. We can't use = so we can't assign null to it
+          
+          
 		
-		[listener]
-		- subscribe throught the constructor 
-		- add the method to supply company into the subscription delegate so
 		
-		[publisher]
-		- create subscription (create delegate)
-		- when the amount run out, in call its subscription so the subscriber will listen to it
 		
 		
 		

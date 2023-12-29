@@ -258,16 +258,17 @@
 		d();
 		
 	[ Commonly Used Delegates ]
+	
 		- [ Func ] 
-			- Represents a function that returns value and takes values
+			- Represents a function that returns value and takes values		T1 <= T2, T3, ...
 			- Func<int, int, int> add = (a,b) => a+b;	int result = add(3,5);
 			
 		- [ Action ]
-			- Represents a method returns void and takes parameters
+			- Represents a method returns void and takes parameters		void <= T1, T2, ...
 			- Action<string,string> print = (a,b) => Console.WriteLine(a+b);
 			
 		- [ Predicate ]
-			- Represents a method return boolean and takes parameters
+			- Represents a method return boolean and takes parameters		bool <= T1
 			- Predicate<int> isbigger = (a) => a <= 6;	isbigger(3);		// Takes only one argument
 			
 -------------------------------------------------- [ Event ] --------------------------------------------------
@@ -280,6 +281,16 @@
 		
 		- Subscription
 			- This is the mechanism that connects the publisher and the listeners
+			
+		
+		[listener]
+		- subscribe throught the constructor 
+		- add the method to supply company into the subscription delegate so
+		
+		[publisher]
+		- create subscription (create delegate)
+		- when the amount run out, in call its subscription so the subscriber will listen to it
+		
 		
 		
 		

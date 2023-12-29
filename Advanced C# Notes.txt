@@ -546,18 +546,6 @@ $$ Built-In Delegates are [multicast] Delegates
 
 ========================== [ Day Four ] ===============================================
               -- [ Event ] --
-is a collection of the items that have connection between each other and have a maker and user
-publisher and sender ( maker ) , Reciever and sender, subscription or ...
-publisher or sender and somebody interest in this so he want a notifictation when this message receive 
-publisher is the magazine, listener is the one who interest in reading magazines 
-	the listener registered 
-event consists of [ publisher, sender | Listener | subscribe between both ]
-
-there must be a publisher and listener and subscritption between both to notified with the 
-
-publisher 	have [ list , method to add to list ] 
-Website 	have [
-Person 		have [ 
 
 here we have two types of the listener 
 listener have to provide a method to receive the data from the publisher 

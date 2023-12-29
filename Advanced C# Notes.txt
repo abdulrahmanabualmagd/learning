@@ -4,6 +4,14 @@ linq
 indexer
 EF
 
+	like @ public override string tostring()
+	{
+		return string.Format("");
+	}
+	
+	when creating a collection of a specific object 
+	we include [ Add(), Insert(), Remove(), Index, Type Arr ]
+
 
 i to i , i to c , i+i+i to c 	[ interface ]
 
@@ -410,161 +418,8 @@ wihle(obj.MoveNext())
 we could use 
 	class list2<T> : List<T> {}	-- instead of implementing IList we use List<> becuase I don't want to modify the interface methods and List Implement it 
 
-
-================ [ Day Three ] ================
-when creating a collection of a specific object 
-	we include [ Add(), Insert(), Remove(), Index, Type Arr ]
-
--- we could use li[0] = new point() {x = 2, y = z}; where x and y are members to point
-
--- we can change the tostring() to print the members instead of printing the reference of an object 
-	like @ public override string tostring()
-	{
-		return string.Format("");
-	}
-
--- don't forget to add the above code to prac files 
-
----------------------------------------------------------
-
-				-- [ Delegate ] --
-
-passing a function as a parameter  to another function
-
- @ delegate bool Delegate1 (int item);
-	-- here we created a delegate for a function that return bool and take one parameter int item
-	-- creating delegate like the same signature for a function
-	-- delegate is a reference type
-	-- it's not an instance it's a type named Delegate1
-	-- by this line the compiler make a class inherit from Delegate like @ public class Delegate1 : Delegate {} but Delegate1 not an instance it's a [TYPE]
-	-- we create it a type that will refer to something with the same signature of the function 
-
-	@ Delegate1 De = new Delegate1(FunctionNameWithTheSameSignature); -- here we can put only the function with the same signature as the created Delegate Delegate1
-		-- he is waiting for a function that takes int and return bool
-		-- here we binded the De with the function that inserted as a parameter her 
-		-- we can pass it to any function now with the type of the base creator (Delegate1)
-		
-	@ public void Display (Delegate1 d){ d.Invoke(item) }	-- where the item is a parameter to the function which the delegate is pointing to, 
-	@ Display(De);	-- here we passed the delegate that pointing to a specific function
-			
-	so we can do this
-	@ delegate bool Delegate1(int item)
-	@ Delegate1 De = new Delegate1(//here we put the name of the function that have the same signature);
-	// now we pass it to a function that takes a parameter which its typs is Delegate1
-	@static void print(Delegate1 d){d.Invoke(1);}
-
-	-- De is a reference for the function
-		-- so that's why we write @De.invoke(item) -- to call the function that reserved in the De and pass the parameter item to it
-		-- we can use it without the Invoke @ De(item);
-
-	-- we can @ Delegate De = // the name of that function directly becuase it's a reference 
-		-- also the compiler do it by default @new Delegate1(functionName)
-	-- we can send the function directly to another function 
-		-- like @ print(FunctionName);	we are sending a reference
-			-- functionName holding a reference for a collection of procedures
-			-- print hold a reference of its procedures to execute
-		$$ but the functionName must be defined in the declaration of that function 
-			@print(Delegate1 d){}
-			@print(functionName); // we can send the function dirctly without using the created instance from Delegate1
-				-- and the functionName must have the same signature of the Deletage1 type that definied in the print Definition
--- without delegates 
-	-- I wouldn't be able to declare the function that takes a function with specific signature
-	for @ print (Delegate1);
-		-- if we write the functionName directly it's ok but the function must have the same signature as Delegate1 Type
-
--- anonymous object @ new Employee()
--- anonymous @ var x = {name="",age=}
--- anonymous function or delgate [ a function used only for one time]
-	-- so we don't need to create a function that we will use it only for one time 
-	-- when applying this with delegates
-
-@print(delegate (int num) {return num > 5;})	-- anonymous delegate of function [ one use only ]
-	-- here we created anonymous delegate becuase I don't want to use that procedure more than one time 
-	-- all these instead of creating @delegate Delegate1 = new Delegate(); Delegate1 De = new Delegate1(functionName); -- because here we need to use it in more that one place
-
---anonymous is something that don't have name 
-
---anonymous is not a better use
-
-// but there is another method that's better than this method
-	-- remove the delegate keyword	
-	-- remove the parameter datateype				-- becuase it's already declared in the function definition
-	-- if there is only one parameter remove the parenthesis
-	-- remove the return keywork
-	-- remove the brackets if there is only one statement
-	-- we add '=>'	[ lambda expression ]
--- so the final 
-@print(delegate (int num) {return num > 5;}) 	       |--->| 		@print(num => num > 5);
-
-@print(num => num > 5);	-- here num is int and the return type is bool 
-	-- the function already know the types from the function definition 
-		@ public void print(Delegate1 de){}
-	-- where Delegate1 is 
-		@ delegate bool Delegate1 (int num)
-
-------------------------------------------------------------
-
-		-- [ Multicast Delegate ] --
-
--- can reference for more than one function 
-@ delegate bool Delegate1 (int num);
-@ Delegate1 De = new Delegate1(FunctionName);
-	De += anotherFunctionName;
--- also we can minus the added function;
-	De -+ anotherFunctionName; 		-- where this function is inserted to the De
-
--- so we can make it pointer to more than one reference but all pointed function must be in the same signature of the Delegate1
--- when call it it invoke and execute more than one function
-
-----------------------------------------------------------------------
-
-		-- [ Built-In Delegate ] --
-
--- Predicate<>	-- refer to any function that returns boolean and take one parameter from any datatype (generic)
-	@predicate<int> pre = functionName;	-- take int and return bool
-	-- if there is a delegate have a specific signature and another delegate with different name but the same signature
-	-- only we can use the one that we used it in the definition of that function $$
-		-- we can't use them interchangebly on any function
-
---  Func<>	-- refer to any function that return any type but not take any parameter (parameterless)
-		-- or can also refer to any function that return any type and take parameters up to 15 input params 
-
-	@Func<string,bool> 	-- take string and return bool
-	@Func<int,bool,string>	-- take int, bool and return string
-	@func<int>		-- takes nothing and return int
-
-		-- last type is the return type in func<,,,>
-
--- Action<>	-- refer to a function which return void and take parameters up to 16 input params
-		-- must take at least one parameter 
-
-
-$$ Built-In Delegates are [multicast] Delegates
-
--- built-in delegate handle most common used cases so we don't need to create new delegates
-
-
 ========================== [ Day Four ] ===============================================
               -- [ Event ] --
-
-here we have two types of the listener 
-listener have to provide a method to receive the data from the publisher 
-listener provide the method that the publishber need to send the info
-
-wbseite recive the message method 
-person recieve the message method 
-
-publisher have list and addtolist method 
-website have method that takes message 
-person have method that takes message 
-
-subscription the connection between the publisher and the person and website 
-publisher require a specific signature for the methods in the listeners because he have a delegate with the same signature 
-and that delegate is refer to the both methods in the listeners
-we create the delegate type in the publisher int the publisher class 
-we use it as a mutli task delegate in the main we assign it with the methods of the listener 
-and then we call the delegate in the publisher which call the methods added to the delegate in the main
-subscription here is the delegate the refer to the listeners methods $$4
 
 we are trying to simulate the event concept 
 

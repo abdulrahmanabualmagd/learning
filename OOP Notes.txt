@@ -341,7 +341,7 @@ multiple inheritance is forbidden in c#
 	{}
 
 Access modifiers
-	-- public		-- visible over the solution
+	-- public		          -- visible over the solution
 	-- private		-- souction scope 
 	-- internal		-- visible only inside the project (namespace) -- assemply
 	-- protected		-- children scope in solution

@@ -1,29 +1,4 @@
-generic
-exception handling
-linq
-indexer
-EF
-
-	like @ public override string tostring()
-	{
-		return string.Format("");
-	}
-	
-	when creating a collection of a specific object 
-	we include [ Add(), Insert(), Remove(), Index, Type Arr ]
-
-
-i to i , i to c , i+i+i to c 	[ interface ]
-
-functoins to deal with database with different functionality like establish and insert and read
-
-concrete class ?
-
-there is a built in interfaces
-	-- like collection, dictionaries, stack, queue, have main functions related to each other
-		-- there is an interface [ ICollection ] go to definition and check it out
-			-- inside it you'll find properties and methods
-[ Iqueryable ] [ ICollection ] [ ICollection ] 
+[ Iqueryable ] [ ICollection ] 
 
 Iqueryable is something that deals with sql 
 we write c# query and map take place then execute sql 

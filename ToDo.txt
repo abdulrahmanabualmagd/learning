@@ -175,3 +175,4 @@ how array stored. Sequentially?
 concurrency and multithreading
 thread class in System.Threading
 Union and intersection in C#
+classes relations

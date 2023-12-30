@@ -281,7 +281,19 @@
 		| Attribute Class	| Yes   	| Yes     | No      |
 		| Singleton Class 	| Yes   	| No      | Yes     |
 		---------------------------------------------------
-	
+		
+-------------------------------------------------- [ Classes Relations ] --------------------------------------------------
+
+	- [Inheritance]
+		- class inherit properties and members from another class and become derived(child) from the base(parent)
+	- [Composition]
+		- Involve Creating an instance of one class within another, The outer class depend on the inner class
+	- [Agregation]
+		- a special form of association where one Class contain another class inside it but not depend on it 
+	- [Association]
+		- bi-directional relationship, one-to-one, one-to-many, many-to-many
+	- [Dependency]
+		- a weaker form of accociation, occurs when a class relies on another class TEMPORARILY
 	
 -------------------------------------------------- [ Interfaces ] --------------------------------------------------
 	
@@ -453,30 +465,4 @@
 		       remove { _myEvent -= value; }
 		   }
 		
-		
-		
-		
-		
-		
-		
-	
-	
-		
-		
-	
-	
-	
-	
-	
-	
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
+-------------------------------------------------- [  ] --------------------------------------------------

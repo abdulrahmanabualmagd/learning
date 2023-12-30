@@ -10,27 +10,18 @@ and the other design patterns
 
 how to use packages Identity JWT bearer 
 
-the differences between the hard , soft , and mix Reset 
 
 redis in-memory (remote dictionary server)
 
 Englich Bussiness Networking course
 
-design pattern
-
-build workshop gallery for you work 
-
 SMTP
 
 SignalR
 
-Host Listener
-
 how to contribute with other open source in github
 
 ask for pull request in the context of contributing with others
-
-typescript projects to do, try catch
 
 how to collaborate on a database using version control in git
 
@@ -47,13 +38,6 @@ github => [issues, code review, pull requests]
 asynchronous and parallelism
 
 CPU-Intensive VS I/O Intensive Tasks
-
-Angular Component Standalone and dependency => look for angular updates
-
-@component{
-      standalone:,
-      imports:[],
-}
 
 @for(item of products; track @index){}         // https://angular.io/api/core/for
 @for (item of items; track item.id; let idx = $index, e = $even) {
@@ -85,130 +69,9 @@ input.ng-invalid {
 this.loginForm.value.username       // to access the form control syntax
 
 // we have to use ngSubmitFront-End:
-      - HTML
-      - CSS
-      - Bootstrap
-      - JavaScript (ES6+)
-      - TypeScript (TS)
-      - React
-      - Redux
-      - jQuery
-      - Angular
-
-Back-End:
-      - C#
-      - Object-Oriented Programming (OOP)
-      - ASP.NET Core Web API
-      - ASP.NET Core MVC
-      - Entity Framework Core
-      - ASP.NET MVC
-      - SQL Server
-      - LinQ
-      - Windows Forms
-      - Node.js
-      - Express.js
       
-      - Full Stack:
-      - Full-Stack Development
+	  
 
-Web Development:
-      - Responsive Design
-      - Web Accessibility (WCAG)
-      - Front-End Build Tools (e.g., Webpack, Babel, Parcel)
-      - Testing Libraries/Frameworks (e.g., Jest, Enzyme, React Testing Library)
-      - GraphQL
-
-DevOps and Deployment:
-      - Version Control (Git)
-      - CI/CD (Jenkins, GitLab CI, GitHub Actions)
-      - Containerization (Docker)
-
-Database:
-      - SQL Server
-      - Entity Framework Core
-      - NoSQL Databases (e.g., MongoDB, Cassandra)
-
-Server-Side Technologies:
-      - ASP.NET Core Web API
-      - ASP.NET Core MVC
-      - Node.js
-      - Express.js
-
-Additional Back-End:
-      - Authentication and Authorization (e.g., OAuth, JWT, IdentityServer)
-      - WebSockets
-      - Microservices Architecture
-      - Message Queues (e.g., RabbitMQ, Apache Kafka)
-      - Serverless Computing (e.g., AWS Lambda, Azure Functions)
-
-General Development Skills:
-      - DevOps and CI/CD
-      - Agile/Scrum Methodologies
-      - Cloud Platforms (e.g., AWS, Azure, Google Cloud Platform)
-      - Automated Testing (e.g., Mocha, Jest, Jasmine)
-
-Other Development Platforms:
-      - OutSystems
-      - Low-Code Development
-
-Customer Relationship Management (CRM):
-      - CRM Systems (e.g., Salesforce, Microsoft Dynamics CRM, HubSpot)
-      - Customization and Configuration
-      - Workflow Automation
-      - Data Management
-      - CRM Integrations
-      - User Training and Support
-      
-------------------------------------------------------------------
-
-
-Fluent Api
-
-ASP.NET Identity
-
-ASP.NET JWT
-
-Patterns [ Unit Of Work / Generic Repository ]
-
-and the other design patterns
-
-how to use packages Identity JWT bearer 
-
-the differences between the hard , soft , and mix Reset 
-
-redis in-memory (remote dictionary server)
-
-Englich Bussiness Networking course
-
-build workshop gallery for you work 
-
-SMTP
-
-SignalR
-
-Host Listener
-
-how to contribute with other open source in github
-
-ask for pull request in the context of contributing with others
-
-typescript projects to do, try catch
-
-how to collaborate on a database using version control in git
-
-what is mapped type in typescript
-
-Promises (Asynchronous Operation)
-
-Search for "What are the Core Features for Javascript?"
-
-What is Redux library?
-
-github => [issues, code review, pull requests]
-
-asynchronous and parallelism
-
-CPU-Intensive VS I/O Intensive Tasks
 SSR & SSG   in new version of angular 
 AWS
 
@@ -306,4 +169,9 @@ C# Reflections
 Dictionary and Dictionary Methods
 anonymous
 JIT C# Compiler
-C# accessors add,remove,get,set
+
+asp.net core attributes    
+how array stored. Sequentially?
+concurrency and multithreading
+thread class in System.Threading
+Union and intersection in C#

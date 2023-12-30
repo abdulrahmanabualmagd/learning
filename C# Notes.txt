@@ -181,10 +181,10 @@
 		- switch
 	
 	- [Repetition Statements]
-		- for					=> Number of Iteration is knew
-		- wihle					=> Unknown number of iteration and continues looping until the condition change
-		- do-while				=> Same as while but to ensure that the body executed at least once
-		- foreach-in			=> Looping over Collections like Arrays, Lists, etc...
+		- for		=> Number of Iteration is knew
+		- wihle		=> Unknown number of iteration and continues looping until the condition change
+		- do-while	=> Same as while but to ensure that the body executed at least once
+		- foreach-in	=> Looping over Collections like Arrays, Lists, etc...
 	
 	- [Jump Statements]
 		- break
@@ -203,8 +203,146 @@
 			[AccessModifier] [ReturnType] [FunctionName]([Params]){[body]}
 		- Method is a function but associated with an object or a class (a member of a class)
 		- Arrow function like: public ind Add(int a, int b) => a + b;
+		
+-------------------------------------------------- [ Collections ] --------------------------------------------------
 
+	- There are three types of collections pfovided by the .NET Framework
+		- Collection (non-generic)
+			- These are the older collection classes that existed before the introduction of generics in C# 2.0.
+			- Less type-safe and less efficient than their generic counterparts
+			- Like Queue, Stack, HashTable, ArrayList
+			
+		- Generic Collection
+			- Introduced with C# 2.0, type-safe, more efficient, better performance due to elemination of boxing/unboxing, preferred to use in modern C# development
+			- like List<T>, Dictionary<T>, Tvalue<T>, Queue<T>, Stack<T>
+		
+		- Concurent Collection
+			- Itroduced in C# 4.0, designed for thread safety
+			- Suitable for concurent operation in multithreaded scenarios
+			- like ConcurrentQueue<T>, ConcurrentStack<T>, ConcurrentBag<T>, ConcurrentDictionary<TKey, TValue>
+		
+	
+	Dictionary<TKey, TValue>: 	=> A collection of unique key-value pairs with fast access based on keys.
+	List<T>: 			=> A dynamic array implementation for creating resizable lists.
+	Queue<T>: 		=> Represents a first-in, first-out (FIFO) collection of objects.
+	SortedList<TKey, TValue>: 	=> A collection of key-value pairs automatically sorted by keys.
+	Stack<T>: 		=> Represents a last-in, first-out (LIFO) collection of objects.
+	HashSet<T>: 		=> An unordered collection of unique elements with high-performance set operations.
+	LinkedList<T>:		=> Represents a doubly-linked list for efficient insertion and removal.
+		
+	
 
+ -------------------------------------------------- [ Access Modifier ] --------------------------------------------------
+ 
+	- [ public ]			=>  	Visible over the entire solution.
+	- [ private ]			=>   	Limited to the class scope.
+	- [ internal ]			=>  	Visible only inside the project (namespace or assembly).
+	- [ protected ]			=>  	Limited to children (derived classes) within the solution.
+	- [ proteced internal ]		=>  	project scope + children scope in solution
+	- [ private protected ]		=>  	Limited to children within the same assembly.
+
+ -------------------------------------------------- [ Classes ] --------------------------------------------------
+
+	- Blueprint or a template for creating objects
+	
+	- Members [ Fields(Attributes/Variables) | Properties | Methods | Constructors ]
+	
+	- Constructors [ Default, Parameterized, DeepCopy, ShallowCopy, Static ]
+	
+	- Property Accessor: [ get | set ]
+	
+	- [ Class Inheritance ]
+		- Class can inherit only from a anothe single class and multiple Interfaces
+		- class Dog : Animal, IMovable, ITouchable
+		
+	- [ Class Types ]
+		
+		- Abstract Class		=> cannot be instantiated. Could only inherit from it, become (parent) only
+		- Sealed Class		=> can be instantiated but can't be inherited, become (child) only 	
+		- Static Class		=> can't be instantiated also Contain only static members like Math class(Implicitly Sealed) 
+		- Partial Class               => is defined in multiple files 
+		- Generic Class		=> can with any datatype
+		- Container Class		=> holds and manages a collection of other objects, encapsulating their functionality
+		- Singleton Class		=> ensures only one instance is created and provides a global point of access to it
+		- Factory Class		=> responsible for creating and returning instances of other classes
+		- Immutable Class		=> whose instances can't be modified, enhancing predictibility and thread safety
+		- DTO Class		=> used for transferring data between software application subsystems and distributed systems
+		- Attribute Class		=> defines custom metadata and can be attached to code elements 
+		- Disposal Class		=> implementing the IDisposable interface used for releasing unmanaged resources such as file handles or database connections
+		- Concrete Class		=> Can create objects, have a complemete Implementation for all methods declared(non abstract method[ready to create objects])	
+		
+		---------------------------------------------------
+		| Class Type        | Parent 	| Child 	| Object| |
+		---------------------------------------------------
+		| Static Class    	| No    	| No      | No      |
+		| Abstract Class  	| Yes   	| Yes     | No      |
+		
+		| Sealed Class    	| No    	| Yes     | Yes     |
+		| Attribute Class	| Yes   	| Yes     | No      |
+		| Singleton Class 	| Yes   	| No      | Yes     |
+		---------------------------------------------------
+	
+	
+-------------------------------------------------- [ Interfaces ] --------------------------------------------------
+	
+	- public interface IDrawable{ void method();  int id{get;set;} }
+	- Contains Properties and Methods without body;
+	- avoid overloading, to avoid ambiguity and implement SOLID ISP(interface segregation Principle)
+	- use default value instead of overloads => void Method(int id, string name = "N/A") here name is optional because it have a default value
+	- if there are multiple logical variations of a method, consider creating separate interface for each variation
+	
+	- [Methods] 	=> Implement Methods without providing an implementation(no body)
+	- [Properties]	=> Declare a contract for a getter, setter, or both
+	- [Events]	=> Declare a contract for subscribing and unsubscribing to an event
+	- [Indexers]	=> Declare Indexers
+	- [Nested Types]	=> Can Contain other types including nested interfaces or classes
+	- [Default Interface Member (C#8.0 or later)]	=> Provide a way to include method implementations in interfaces, Classes can choose to use the default implementation or provide their own 
+	- [Static Members (C#8.0 or later)]		=> Can include static members, these members are associated with the interface itsefl and not with any specific instance, only belongs to the interface
+	
+
+-------------------------------------------------- [ Built-In Interfaces ] --------------------------------------------------
+
+	- [IEnumberable]		=> Represents a collection that can be enumerated (iterated) using 'foreach' loop
+	- [IEnumerator]		=> Provides a way to iterate through a collection
+		- Used to make the collections Enumerable by Implementing the interfaces IEnumerable and IEnumerator
+		- IEnumerable Provide a way to iterate over any list  
+	
+	
+	- [IComparable] 		=> Defines a method to compare an object with another of the same type
+		- Choose the way you want to compare between two objects like compare objects by their Ids or names
+		- Within the same class unlike IComparer 
+	- [IComparer]		=> Defines a method to compare two objects of the specified type 
+		- Used to choose the way to compare between class instances but in seperated class
+		- The difference between IComparable  & IComparer is that IComparer provide a seperate class for comparison
+	
+	- [IEnumerable<T>]  	=> Represents a strongly typed collection that can be enumerated.
+	- [IEnumerator<T>]  	=> Provides a way to iterate through a strongly typed collection.
+	
+	- [IQueryable]  		=> Provides functionality to evaluate queries against a specific data source.
+	
+	- [IDisposable]  		=> Defines a method to release unmanaged resources.
+	- [IFormattable]  		=> Defines a method to format the value of an object into a string representation.
+	
+	- [IEquatable<T>] 		=> Provides a method for comparing the equality of objects of the same type.
+	- [IConvertible]  		=> Defines methods for converting an object to another type.
+	- [ICloneable]  		=> Defines a method to create a shallow copy of an object.
+	- [INotifyPropertyChanged]  	=> Defines an event for notifying clients when a property value changes.
+	- [IAsyncResult]  		=> Represents the status of an asynchronous operation.
+	- [IList<T>]  		=> Represents a list of objects that can be individually accessed by index.
+	- [ICollection<T>]  	=> Defines methods for manipulating generic collections.
+	- [IDictionary<TKey, TValue>] => Represents a generic collection of key/value pairs.
+	- [IComparable<T>]  	=> Defines a method to compare an object with another object of the same type.
+	- [IEqualityComparer<T>] 	=> Defines methods for comparing equality of objects of a specific type.
+	- [IEquatable<T>]  		=> Provides a method for comparing the equality of objects of the same type.
+	
+-------------------------------------------------- [ Indexer ] --------------------------------------------------
+	
+	- An indexer in C# allows access to elements within this class using array-like syntax. 
+	- For instance, if we have a class 'Person' and another class 'PList' containing an array of persons ('_plist'), 
+	- we can access this array using the indexer. 
+	- The indexer is similar to a property, but it permits indexing the class by adding square brackets '[]' to the instance name.
+	
+         
 -------------------------------------------------- [Generics] --------------------------------------------------
 	- Writing a code that can work with any data type.
 	- We can use Generic method in non-generic class
@@ -306,7 +444,15 @@
                     - we have to disallow the listener to control the publisher => we use 'event' keyword
                     - by using event we can only use -= and +=. We can't use = so we can't assign null to it
           
-          
+          - [ Event Accessor ]
+		- [ add ]		=> 	myEvent += value;
+		- [ remove ]	=> 	myEvent -= value;
+		-  public event EventHandler MyEvent			// EventHandler is a Delegate 
+		   {
+		       add { _myEvent += value; }
+		       remove { _myEvent -= value; }
+		   }
+		
 		
 		
 		

@@ -176,3 +176,5 @@ concurrency and multithreading
 thread class in System.Threading
 Union and intersection in C#
 classes relations
+deferred, eager, lazy, immediate, deferred, explicit 
+what is data migration in code first approach

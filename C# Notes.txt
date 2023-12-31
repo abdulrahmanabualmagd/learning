@@ -331,6 +331,12 @@
 	- [IEnumerator<T>]  	=> Provides a way to iterate through a strongly typed collection.
 	
 	- [IQueryable]  		=> Provides functionality to evaluate queries against a specific data source.
+		- Is an interface defined in System.Linq, it's part of the language integrated query (LINQ)
+		- Extends IEnumerable
+			- able to build and execute more complex queries that can be translated into a form that is understood by the underlying data source
+			- Allow deffered execution, with IEnumerable the entire dataset is loaded into memory before any filtering or projection is applied
+			- On the other hand IQueryable allos the query to be composed and transformed into a format that is optimized for specific data source
+			- The query is not executed until the data is actually needed which can result in more efficient and optimized queries
 	
 	- [IDisposable]  		=> Defines a method to release unmanaged resources.
 	- [IFormattable]  		=> Defines a method to format the value of an object into a string representation.
@@ -464,5 +470,70 @@
 		       add { _myEvent += value; }
 		       remove { _myEvent -= value; }
 		   }
+		   
+-------------------------------------------------- [ Yield Return ] --------------------------------------------------
+	
+	- Is used in an iterator block to produce a sequence of avlue lazily
+	- Iterator blocks are methods or properties that contain one or more Yield statements
+	
+	static IEnumerable<int> GenerateNumbers(){
+		for (int i = 1; i<= 5; i++)
+		{
+			yield return i;		// multiple return executed by iterating using for each to that function
+		}
+	}
+	IEnumerable<int> list = GenerateNumbers();	// The iterator method is called but it doesn't execute the entire method at once
+	- the method starts executing until it reaches the yield retun statement 
+	- the value specified after yield return is produced to the calling code 
+	- the method is paused and the control returns to the calling code with the produced value 
+	- the next time the iterator method is called, it resumes execution from where it left off continuing until the next yield retun or the end of the method
+	- this lazy evaluation allows you to efficiently work with large seuences of data without loading all the data into memory at once
+
+-------------------------------------------------- [ IQueryable & IEnumerable ] --------------------------------------------------
+	
+	// GetPeople returns list of Person objects
+
+	+------------------------------------------------------------------------------------------+
+	|// in [IEnumerable] the condition'x.age < 30' will be executed in the client side         |
+	|// means that it will retrieve the data here then execute the condition                   |
+	|IEnumerable<Person> enumerable = repository.GetPeopleIEnumerable().Where(x => x.Age < 30);|
+	|------------------------------------------------------------------------------------------|
+	|// In [IQueryable] the condition 'x.age < 30' will be executed in the server side  	 |
+	|// means that it will execute the condition on server before getting the data here        |
+          |IQueryable<Person>  queryable  = repository.GetPeopleIQueryable().Where (x => x.Age < 30);|
+	+------------------------------------------------------------------------------------------+
+	
+	- enumerable and queryable will store the expression tree and will be defferred until we iterate over it or 
+	- explicitly trigger the the execution by calling these methods [ .ToList() | .ToArray ]
+	
+-------------------------------------------------- [ LinQ ] --------------------------------------------------
+	- Language Integrated Query
+		- We can deal with Two Primary Syntax [ Method Syntax ] & [ Query Syntax ]
+		- LinQ is designed to provide a unified way of querying different type of data sources using a consistent syntax
+		- It enalbes developers to writ qureies directly in their programming language instead of using SQL or other query language seprately
+	
+	- LinQ Types	
+		- LinQ to Object		// Allows querying in-memory objects and collections	
+		- LinQ to SQL		// Enables querying relational databases using the LinQ syntax
+		- LinQ to Entity		// Similar to LinQ to SQL but designed to work with the Entity
+		- LinQ to XML 		// Provides a way to query and manipulate XML documents
+	
+	- [Syntax]
+		- [ Method Syntax ]
+			- We use Extension methods provided by the System.LinQ ( Which designed to chained together )
+			- Fluent Interface 		// Offers a more fluent and method-chaining approach
+			- Lambda Expressions	// We use it for defining the Criteria for filtering, Projecting, ordering and other query operations
+			- IQuerable<object> q = collection.Where(n=> n< 2).OrderBy(n=> n.Name).Select(n=> n.Name);     
 		
--------------------------------------------------- [  ] --------------------------------------------------
+		- [ Query Syntax ]
+			- SQL-like Syntax, we use SQL Queries
+			- More preferred for comples queries
+			- Compiler Translation // Under the hood, the C# compiler translates query expressions into method syntax, so the two styles are are equivalent
+			- var q = from n in collection where n < 2 order by n.Name select n.Name;
+	
+	- [ LinQ Providers ]
+		- LinQ relies on providers to translate the LinQ queries into a format that the underlying data source can unerstand
+		- Providers exist for various data sources such as LinQ to SQL for relational databases and LinQ to XML for XML
+			
+		
+	

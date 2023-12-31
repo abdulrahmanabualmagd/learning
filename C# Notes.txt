@@ -328,9 +328,12 @@
 		- The difference between IComparable  & IComparer is that IComparer provide a seperate class for comparison
 	
 	- [IEnumerable<T>]  	=> Represents a strongly typed collection that can be enumerated.
+		- In Deferred execution, it filter the data in the client side after retreiving the data
+		
 	- [IEnumerator<T>]  	=> Provides a way to iterate through a strongly typed collection.
 	
 	- [IQueryable]  		=> Provides functionality to evaluate queries against a specific data source.
+		- In Deferred execution it filter the data in the server side before getting the data
 		- Is an interface defined in System.Linq, it's part of the language integrated query (LINQ)
 		- Extends IEnumerable
 			- able to build and execute more complex queries that can be translated into a form that is understood by the underlying data source
@@ -534,6 +537,20 @@
 	- [ LinQ Providers ]
 		- LinQ relies on providers to translate the LinQ queries into a format that the underlying data source can unerstand
 		- Providers exist for various data sources such as LinQ to SQL for relational databases and LinQ to XML for XML
-			
+	
+	- [ LinQ Methods ]
+		- Where | Select
+		- OrderBy | OrderByDescending
+		- GroupBy
+		- Any | All
+		- First | FirstOrDefault
+		- Last | LastOrDefault
+		- Count
+		- Sum | Average | Min | Max
+		- Skip | Take
 		
+		
+	- [ LinQ to SQL ]
+		- 
+	
 	

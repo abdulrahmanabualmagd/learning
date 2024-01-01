@@ -362,8 +362,7 @@
 	- For instance, if we have a class 'Person' and another class 'PList' containing an array of persons ('_plist'), 
 	- we can access this array using the indexer. 
 	- The indexer is similar to a property, but it permits indexing the class by adding square brackets '[]' to the instance name.
-	
-         
+	       
 -------------------------------------------------- [Generics] --------------------------------------------------
 	- Writing a code that can work with any data type.
 	- We can use Generic method in non-generic class
@@ -508,49 +507,227 @@
 	
 	- enumerable and queryable will store the expression tree and will be defferred until we iterate over it or 
 	- explicitly trigger the the execution by calling these methods [ .ToList() | .ToArray ]
-	
+
+-------------------------------------------------- [ Extension Method ] --------------------------------------------------
+	- A feature in C# that allows you to add new methods to existing types without modifying them
+	- Are defined in static classes and are marked with 'this' keyword before the first parameter, indicating the type that the method extends
+		public static class PersonExtension{			// Rule#1 Class Must be static because it is a functionality class
+			public static void Show(this Person data){	// Rule#2 Function Must be static to use it directly
+								// Rule#3 First Parameter must start with 'this' then the [Class Name]
+				Console.WriteLine(data.Name);
+			}
+		}
+		// In Program 
+		Person person = new Person(0, "Abdulrahman");
+		       person.Show();	// Use the extension method
+		       
 -------------------------------------------------- [ LinQ ] --------------------------------------------------
-	- Language Integrated Query
-		- We can deal with Two Primary Syntax [ Method Syntax ] & [ Query Syntax ]
+	
+	- [ Language Integrated Query ] --------------------------------------------------
+		- Came after ADO, but ADO more speed than LinQ, Used in Banks
+		- We can deal with Two Primary Syntax [ Method Syntax ] & [ Query Syntax ]	// Built-in Extension Methods
 		- LinQ is designed to provide a unified way of querying different type of data sources using a consistent syntax
-		- It enalbes developers to writ qureies directly in their programming language instead of using SQL or other query language seprately
+		- It enables developers to write qureies directly in their programming language instead of using SQL or other query language seprately
 	
-	- LinQ Types	
-		- LinQ to Object		// Allows querying in-memory objects and collections	
-		- LinQ to SQL		// Enables querying relational databases using the LinQ syntax
-		- LinQ to Entity		// Similar to LinQ to SQL but designed to work with the Entity
-		- LinQ to XML 		// Provides a way to query and manipulate XML documents
+	- [ LinQ Types ] --------------------------------------------------	
+		
+		1- [ LinQ to Object ] 
+			-- Data Source => [ Memory Collections ]
+			-- Most Common Type of LinQ query
+			-- It allow you to Query in memory collections [ Arrays, List, Dictionaries ] with the LinQ operators
+			-- @ var nums = new List<int> {1,2,3,4,5,6}; @ var q = nums.Where(n => n < 3);	// 
+			-- then we use foreach to use it
+			-- Use Case: In-memory data manipulation
+
+		2- [ LinQ to XML ] 
+			-- Data Source => [ XML Data ]
+			-- Manipulate XML data using [XElement] & [XDocument] Classes
+			-- we can perform operations like filtering, projecting and sorting 
+			-- @ XDocument xmlDoc = XDocument.Load("fileName.xml");	
+			-- @ var q = from element in xmlDoc.Descendants("Person") where (string)element.Attribute("gender") == "male" select element;
+			-- Use Case: Manipulating XML data
+
+		3- [ LinQ to SQL ]	// Not Used any more, why shoule I work with SQL Only 
+			-- Data Source => [ SQL Database ] 
+			-- Create LinQ Queries that translate into SQL Queries
+			-- Providing strongly-typed approach to database access
+			-- @ var db = new DataContext("connectionString");
+			-- @ q = from customer in db.Customers where custromer.City == "NewYork" select customer;
+			-- Use Case: Strongly-typed approach to database access
+
+		4- [ LinQ to Entity ] 
+			-- Similar to LinQ to SQL
+			-- query databases using Entity Framework
+			-- A more versatile and feature-rich ORM (Object-Relational Mapping) Framework
+			-- @ using (var context = new MyDbContext())
+			-- @ {var query = from product in context.Products where product.Category == "Electronics" select product;}
+			-- Use Case: Similar to LinQ to SQL but more versatile and feature-rich
+
+		5- [ LinQ to DataSet ]	// ef	
+			-- Data Source => [ ADO.NET DataSet ]	
+			-- which is a collection of zero or more tables represented by DataTable objects
+			-- @ var dataSet = new DataSet();
+			-- @ dataTable = dataSet.Tables["TableName"];
+			-- @ var q = from row in dataTabel.AsEnumerable() where (int)row["Age"] > 30 select row;
+			-- Use Case: Disconnected data, data retrieved from database and stored in the memory
+
+		6- [ LinQ to Objects with parallelism ]
+			-- Data Source => [ Memory Collections ] 
+			-- Use PLinQ to perform LinQ Queries on in-memory collections in parallel
+			-- which takes advantage of multi-coreprocessors to speed up query execution
+			-- @ var nums = Enumerable.Range(1,100000);
+			-- @ var q = numbers.AsParallel().Where(n=> n % 2 == 0);
+			-- Use Case: Performing LinQ queries in-memory collections in parallel to take advantage of multi-core processors
 	
-	- [Syntax]
+	- [Syntax] --------------------------------------------------
 		- [ Method Syntax ]
 			- We use Extension methods provided by the System.LinQ ( Which designed to chained together )
 			- Fluent Interface 		// Offers a more fluent and method-chaining approach
 			- Lambda Expressions	// We use it for defining the Criteria for filtering, Projecting, ordering and other query operations
 			- IQuerable<object> q = collection.Where(n=> n< 2).OrderBy(n=> n.Name).Select(n=> n.Name);     
-		
+						// The Output for the Where is input for the next chain
+						// We Could use anonymous object to return multiple value
 		- [ Query Syntax ]
 			- SQL-like Syntax, we use SQL Queries
 			- More preferred for comples queries
 			- Compiler Translation // Under the hood, the C# compiler translates query expressions into method syntax, so the two styles are are equivalent
 			- var q = from n in collection where n < 2 order by n.Name select n.Name;
 	
-	- [ LinQ Providers ]
+	- [ LinQ Providers ] --------------------------------------------------
 		- LinQ relies on providers to translate the LinQ queries into a format that the underlying data source can unerstand
 		- Providers exist for various data sources such as LinQ to SQL for relational databases and LinQ to XML for XML
 	
-	- [ LinQ Methods ]
-		- Where | Select
-		- OrderBy | OrderByDescending
-		- GroupBy
-		- Any | All
-		- First | FirstOrDefault
-		- Last | LastOrDefault
-		- Count
-		- Sum | Average | Min | Max
-		- Skip | Take
+	- [ Standard Query Operators ] --------------------------------------------------
+
+		1- [ Projection Operators ]
+			- [ Where ]           	Filters elements based on a specified condition
+			- [ OfType ]          	Filters elements of a specific type from a collection
+	
+		2- [ Transformation Operators ]	
+			- [ Select ]          	Projects each element into a new form or type
+			- [ SelectMany ]      	Projects each element of a collection to an IEnumerable and flattens the resulting sequence into one sequence
+	
+		3- [ Sorting Operators ]	
+			- [ OrderBy ]         	Sorts elements in ascending order based on a key
+			- [ OrderByDescending]	Sorts elements in descending order based on a key
+			- [ ThenBy ]          	Performs a secondary sort on elements that have the same key
+			- [ ThenByDescending ]	Performs a secondary descending sort on elements that have the same key
+	
+		4- [ Aggregation Operators ]		// All Data loaded to calculate it					
+			- [ Count ]           	Returns the number of elements in a collection
+			- [ Sum ]             	Computes the sum of numeric elements in a collection
+			- [ Average ]         	Computes the average of numeric elements in a collection
+			- [ Min ]             	Returns the minimum element in a collection
+			- [ Max ]             	Returns the maximum element in a collection
+			- [ Aggregate ]       	Applies an accumulator function to the elements in a collection
+	
+		5- [ Quantifier Operators ]	
+			- [ Any ]             	Determines if any elements in a collection satisfy a specified condition
+			- [ All ]             	Determines if all elements in a collection satisfy a specified condition
+	
+		6- [ Element Operators ]	
+			- [ First ]           	Returns the first element that satisfies a specified condition
+			- [ FirstOrDefault ]  	Returns the first element that satisfies a specified condition or a default value if no elements match
+			- [ Single ]          	Returns the only element that satisfies a specified condition
+			- [ SingleOrDefault ] 	Returns the only element that satisfies a specified condition or a default value if no elements match
+	
+		7- [ Set Operators ]	
+			- [ Distinct ]        	Returns distinct elements from a collection
+			- [ Union ]           	Returns the union of two collections
+			- [ Intersect ]       	Returns the intersection of two collections
+			- [ Except ]          	Returns elements that are in the first collection but not in the second collection
+	
+		8- [ Partitioning Operators ]	
+			- [ Take ]            	Returns a specified number of elements from the start of a collection
+			- [ Skip ]            	Bypasses a specified number of elements from the start of a collection
+			- [ TakeWhile ]       	Returns elements from a collection as long as a specified condition is true
+			- [ SkipWhile ]       	Bypasses elements from a collection as long as a specified condition is true
+
+	- [ LinQ to Objects ] --------------------------------------------------
+		- LinQ can be used with any collection that implements the IEnumerable<T> or IQueryable<T>
+		- It provides a way to query in-memory collections like arrays, list, dictionaries, etc
 		
+	- [ LinQ to SQL & Entities ] --------------------------------------------------
+		- LinQ can be used to query databases using LinQ to SQL or LinQ to Entities
+		- LinQ to SQL is used for querying SQL Server databases
+		- LinQ to Entities is used for querying Entity Framework data models
+
+	- [ Deferred Execution ] --------------------------------------------------
+		- LinQ Queries are lazily executed, meaning that the query is not executed until the result is actually needed
+			- IEnumerable<Person> list = plist.list;				// Eager Execution, no LinQ Query used 			
+			- IEnumerable<Person> list = plist.list.Where(person => person.age < 25);	// Deferred Execution, LinQ Query used, list will store the expression tree and the query will be executed when iterate over it 
+			- IQueryable<Person>  list = plist.list.AsQueryable().Where(p=>p.age<25);	// Deferred Execution, the filtering will done in the server side 
+		- This allows for more efficient querying, especially when dealing with large datasets
+	
+	- [ Anonymous Types ] --------------------------------------------------
+		- LinQ often makes use of anonymous types to project the result of a query into a new type on the fly
+			- var result = from item in collection select new {item.Name, item.Property};	
+				// 'select' part is used for project the data
+				// 'new' is used to create new instance of an anonymous object to project it
+	
+	- [ Lambda Exressions ] --------------------------------------------------
+		- Used in LinQ to define inline functions for filtering, ordering, and projecting
+			- var query = collection.Where(item=> itme.Property > 10).OrderBy(item => item.Name);
 		
-	- [ LinQ to SQL ]
+	- [ Integration with Language Features ] --------------------------------------------------
+		- LinQ integrates seamlessly with other language  features such as lambda expressions, extension methods, and anonymous types
+	
+	- [ Error Handling ] --------------------------------------------------
+		- LinQ provides a concise and readable way to handle errors in queries using the try-catch block
+			try{
+				var result = from item in collection select item.Property / item.Divisor;
+			}catch (DivisionByZeroException ex){
+				// Handl the exception
+			}
+
+-------------------------------------------------- [ Dependency Injection ] --------------------------------------------------			
+	- Is a design pattern and a technique in software development where the components of a system are provided with their dependencies rather that creating them internally
+	- Instead of a component creating its dependencies, the dependencies are "Injected" into the component from the outside
+	- Types of injection are
+		- Constructor Injection
+		- Method Injection
+		- Property Injection
 		- 
 	
+			
+-------------------------------------------------- [ Entity Framework ] --------------------------------------------------
+	- Entity Framework Core (EF Core)
+		- Uses an Entity Data Model to represent the conceptual model of the data
+		- This Models Include Entities, represents tables in the database, associations (representing relationships between entities) and mapping
+		- This is the version of Entity Framework designed to work with .NET Core
+	
+	- Code-First / Model-First approach
+		- [Code-First]
+			Define C# classes; EF Core generates the database.
+
+		- [Model-First]
+			- Design the database schema; EF Core generates C# classes.
+			
+	- DbContext
+		- Represents a database session, includes DbSet<T> for entities.
+		
+	- Entity Types
+		- Classes representing database tables, with properties mapping to columns.
+	
+	- Configuration
+		- Classes representing database tables, with properties mapping to columns.
+	
+	- LinQ Queries
+		- Use LINQ for complex queries against entity types.
+		
+	- Database Migrations
+		- EF Core Includes a migration system that enables you to evolve the database schema as your application evelves
+		- Migration can be generated and applied to update the database
+	
+	- Database Providers
+		- Supports various database providres (SQL Server, SQLite, ...)
+		
+	- Async Operations
+		- Supports asynchronous query and save operations for scalabitily
+		
+	- Dependency Injection
+		- Integrated with .NET Core's dependency injection system
+		
+	- Logging and Interception
+		- Provides logging for debugging, allows interception of database operations
 	

@@ -5,23 +5,6 @@ https://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/code-first-approach-in-e
 
 
 
-LinQ ( Language Integrated Query )
-	-- we can deal with Two Primary Syntax [ Method Syntax ] & [ Query Syntax ]
-
--[ Method Syntax ] 
-	-- we use Extension methods provided by the System.LinQ (which designed to chained together)
-	-- Fluent Interface 	// Offers a more fluent and method-chaining approach
-	-- Lambda Expressions 	// We use it for defining the creteria for filtering, projecting, ordering, and other query operations 
-	-- @ var q = collection.Where(n => n < 2).OrderBy(n => n.Name).Select(n => n.Name)
-
-
--[ Query Expressions ] 
-	-- (SQL-like Syntax) we use Sql Queries 
-	-- Readability 		// more preferred for complex queries
-	-- Compiler Translation // #under the hood, the C# compiler translates query expressions into method syntax, so the two styles are equivalent
-	-- @ var q = from n in collection where n < 2 order by n.Name select n.Name;
-
-
 Code-First Devlelopment 
       [ how to define data model classes ]
       [ Entity Classes ]
@@ -158,241 +141,15 @@ what is migration history table ?
 
 attributes like key and composite primary key how to make it 
 
------------------- [ Operators ] -----------------------
-
-1- [ Projection Operators ] 
-	- [ Where ] 	Filters Element based on a specified condition
-@	- [ OfType ] 	Filters Eelements of a specific type from a collection
-
-2- [ Filtering Operators ] 
-	- [ Select ] 	Project each eleemnt into a new form or type 
-@	- [ SelectMany ]Projects each element of a collection to an IEnumberable and Flattens the Resulting sequece into one sequence 	
-
-3- [ Sorting Operators ]
-	- [ OrderBy ] 	Sorts elements in Ascending order based on a key 
-	-[orderByDescending] Sorts elements descending order based on a key
-	- [ ThenBy ] 	Performs a secondary sort on elements that have the same key
-	-[ThenByDescending]  Performs a secondary desceding sort on elements that have the same key
-
-4- [ Aggregation Operators ]
-	- [ Count ] 	Returns the number of elements in a collection
-	- [ Sum ]	Computes the sum of numeric elements in a collection
-	- [ Average ] 	Computes the average of numberic elements in a collection
-	- [ Min ] 	Returns the minimum element in a collection
-	- [ Max ] 	Returns the maximum element in a collection
-@	- [ Aggregate ] Applies an accumulator function to the elements in a colletion
-
-5- [ Quantifier Operators ]
-	- [ Any ] 	Determines if any elements in acollection satisfy a specified condition
-	- [ All ]	Determines if all elements in a collection satisfy a specified condition
-
-6- [ Element Operator ]
-	- [ First ] 	Returns the first element that satisfies a specified condition
-	- [FirstOrDefault]  Returns the first element that satisfies a specified condition or a default value if no elements match
-	- [ Single ] 	Returns the only element that satisfies a specified condition 
-	- [SingleOrDefault] Returns the only element that satisfies a specified condition or a default value if no elements match
-
-7- [ Set Operators ]
-	- [ Distinct ] 	Returns distinct elements from a collection
-	- [ Union ] 	Returns the union of two collections
-	- [ Intersect ] Returns the intersection of two collections
-	- [ Except ] 	Returns elements that are in the first collection but not in the second collection
-
-8- [ Partitioning Operators ] 
-	- [ Take ] 	Returns a specified number of elements from the start of a collection
-	- [ Skip ] 	Bypasses a specified number of elements from the start of a collection
-	- [ TakeWhile ] Returns elements from a collection as long as a specified condition is true
-	- [ SkipWhile ] Bypasses elements from a collection as long as a specified condition is true
-
------------------------ [ Types ] ------------------------
-// There are several types each type designed for different Data Sources and different Scenarios
-// the most comomon type :
-
-1- [ LinQ to Object ] 
-	-- Data Source => [ Memory Collections ]
-	-- Most Common Type of LinQ query
-	-- It allow you to Query in memory collections [ Arrays, List, Dictionaries ] with the LinQ operators
-	-- @ var nums = new List<int> {1,2,3,4,5,6};
-	   @ var q = nums.Where(n => n < 3);	// 
-	-- then we use foreach to use it
-
-2- [ LinQ to XML ] 
-	-- Data Source => [ XML Data ]
-	-- Manipulate XML data using [XElement] & [XDocument] Classes
-	-- we can perform operations like filtering, projecting and sorting 
-	-- @ XDocument xmlDoc = XDocument.Load("fileName.xml");	
-	-- @ var q = from element in xmlDoc.Descendants("Person") where (string)element.Attribute("gender") == "male" select element;
-
-3- [ LinQ to SQL ] 
-	-- Data Source => [ SQL Database ] 
-	-- Create LinQ Queries that translate into SQL Queries
-	-- Providing strongly-typed approach to database access
-	-- @ var db = new DataContext("connectionString");
-	-- @ q = from customer in db.Customers where custromer.City == "NewYork" select customer;
-
-4- [ LinQ to Entity ] 
-	-- Similar to LinQ to SQL
-	-- query databases using Entity Framework
-	-- A more versatile and feature-rich ORM (Object-Relational Mapping) Framework
-	-- @ using (var context = new MyDbContext())
-	-- @ {var query = from product in context.Products where product.Category == "Electronics" select product;}
-
-
-5- [ LinQ to DataSet ]
-	-- Data Source => [ ADO.NET DataSet ]	
-	-- which is a collection of zero or more tables represented by DataTable objects
-	-- @ var dataSet = new DataSet();
-	-- @ dataTable = dataSet.Tables["TableName"];
-	-- @ var q = from row in dataTabel.AsEnumerable() where (int)row["Age"] > 30 select row;
-
-6- [ LinQ to Objects with parallelism ]
-	-- Data Source => [ Memory Collections ] 
-	-- Use PLinQ to perform LinQ Queries on in-memory collections in parallel
-	-- which takes advantage of multi-coreprocessors to speed up query execution
-	-- @ var nums = Enumerable.Range(1,100000);
-	-- @ var q = numbers.AsParallel().Where(n=> n % 2 == 0);
-
-
-
-=========== [ Day One ] ===========
-LinQ & Entity Framwork
-console --
-
-[ Extension Method ]
-making an extenstion method for the list 
-create static class == static because it is a functionality class
-create static method that will be an extension for the class the we specify
-
-public static List<int> Filter(List<int> inputList)
-{
-	List<int> OutList = new List<int>();
-	foreach(var item in inputList)
-	{if (item%2==0) OutList.Add(item);}return OutList;
-}
-
-we can path the delegate as a parameter for the static function in the main function 
-
-we create two function for even and odd funciton and make a delegate have the same signature as even and odd
-but we didn't use extension method yet 
-
-any thing I can do iteration on it implement IEnumerable 
-we should make extension method if I want to make it extension for generic class
-to make an extension for List we create method 
-public static IEnumerable<T> Filter<T> (this IEnumerable e, del)
-{
-	// this extenstion for any collection that have iteration 
-	// IEnumerable<int> Result = Lst.Filter(n=> n> 3);	// here we make extension method for any class Emplement IEnumerable like list
-	// 
-}
-
-rules for extension method 
--- function must be static 
--- class must be static and obtain the static function
--- first parameter for the method must be 'this' // here the compiler understand that this function is extension method for the next word after 'this'
-
-public static IEnumeable<int> Test()
-{
-	return new List<int>() {1,2,3,4};
-}	
-
-var Result = Test();
-foreach(var item in Result)
-{
-	Console.WriteLine(item);
-}
-
-
 
 var something dynamic determine the data that it referring to in compile time unlike js
 
-var 
-public static IEnumeable<int> Test2()
-{
-	yield return 1;
-	yield return 2;
-	yield return 3;
-// we can obtain multiple return for IEnumerable object using yeild 'keyword'
-// relation between yeild with return and foreach for IEnumberable object 
-
-	-- [ Yeild ] --
--- allow many returns => return each item alone in each iteration 
--- changing the default behaiour of execution called [ Deferred Execution ]
-	-- the funtion will be executed only when there is Iteration like below 
-	@
-	var result = functionNameThatHaveYeild(); --here the result holds Potential result 
-	foreach(var item in result){} $$because of this line the function will be executed and on each iterate it will look execute the function not thre result to make it return the next Yeild value
--- the function that have Yeirl return to execute must be foreach to execute it [ Deferred Execution ]
--- the behaviour that caused by Yeild return [
-the normal execution called [ Eager Execution ]	=> holds the return result of the function
-
 [Eager / Deferred ] Execution
-}
-
-IEnumerable<int> R = Lst.Filter(n=>n>3);
-
-foreach(var item in R){}
-lst.add(9)
-// deffered => will see the new item => execute function again with the updates of the data source
-	with every iteration will execute the function 
-// Eager => will only print the result list from r without any updates happen for it 
-foreach(var item in R){}
-any variable holds data we call it datasource
 
 // eager execution => sub_routine
 
 // deffered execution => co-routine
 
-IEnumberable<int> r = Lst.Where();
-	-- Where<TSource> returns IEnumerable<Tsource> ==> Built-in Extension method 
-	-- Select  				       ==> Built-in Extension method 
-	-- Top
-	-- join
-	-- subquery
-
-Linq => IEnumerable (static class) contain static methods and use [yeild return]
-
-LinQ come after ADO
-More easier for 
-Language Integrated Query => 
-
-@ => Import sympoly from the upcomming path
-
-Northwind db new Northwind(@"Path");
-var query = from c in db.Custromers select c;
-
-there is types of linQ
-
-LinQ to [ SQL/ Xml/ Object/ Data Set ]
-sql not used any more because why should I have to work with sql only 
-data set => ef
-object => in memory objects $$
-xml => 
-what is the different between ado and linq
-	== ado more speed that linq used in banks system
-
-all differ in the way that we get to the data source 
-
--- instead of writting IEnumerable ... we short it to var and it will ..
-var Query = SamplData.Departments.Select(d => d); -- Query holds Potential data 
-foreach(var item in Query) -- this is important for deffered execution 
-{
-	Console.WriteLine(item.Name);	
-}
-
-could we convert it to eager ==> we add .ToList();
-@@@ var Query = SamplData.Departments.Select(d => d).ToList(); -- here we make it eager 
-	-- Query Holds List of Departments
-
-in Deferred any modification is sensible for the list before foreach
-when we should use eager and deffered 
-
-what Are all the extension method for the LinQ??$$ [ Deffered by default ]
-single, default, first, take, while 		-- |^
-
-if  i want to return mutli value we can use anoanymous object in return 
-var Query = SampleData.Select().Where();
-		-- the output of Select is input for Where
-		-- so we should contain the data that Where use in conditino
 
 var Query = from d in SampleData.Departments where d.Name.Length > 3 select d;
 
@@ -401,17 +158,6 @@ int Query = (from e in SampleData.Employees where e.Salary > 2000 select e).Coun
 Query Expression 
 pipline
 aggregate function 
-
-var Query  = (from e in SampleData.Empolyees where e.Salary > 2000 select e).Max(e>e.Salary);
-
-var Query = ( from e in SampleData.Emploees where e.Salary > 2000 select e ).First();
-
-/First()/ throw exception if not become true  /FirstOrDefault/ put the default value if not become true(condition)
-
-what is the different between take() and FirstOrDefault
-	take(n) take n numbers of data not only one unlike FirstOrDefault
-
-Skip(2) skip first two and get the rest 
 
 TakeWhile(e=>e.name.lenth<5); -- takes lambda Expression
 what is different between takewile and where ??
@@ -753,23 +499,3 @@ IQueryable => [ Sorting / Filtering / Projecting ]
 [ Navigation Property ]
       - property of an entity class that represents a relationship between entities in a database 
       - it represent the relatinships between tables in a relational database 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

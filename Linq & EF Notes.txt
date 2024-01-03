@@ -108,12 +108,6 @@ Defining New Model
                   modelBuilder.Entity<StudentCourse>().HasOne(sc=>sc.Course).WithMany(c=>c.StudentCourses).HasForeignKey(sc=>sc.CourseId);
                   
 
-For Creating a new project Code-First 
-      --#-- install entity framework using nuget package manger [ Install-Package EntityFramework + ENTER ]
-      --#-- Define my model classes create classes properties and define constrains priary keys and so on 
-      --#-- Create a DbContext that inherit from the DbContext and have DbSet for each of my model classes
-      --#-- add a connection string specifying the database server, initial catalog and other server details also the name of the connection 
-      --#-- don't forget to write Database.CreateIfNotExist & Database.SetInitializer in the constuctor of the class that inherits from the DbContext
 
 
 What is [ Proxy in C# ]

@@ -1,5 +1,3 @@
-Fluent Api
-
 ASP.NET Identity
 
 ASP.NET JWT
@@ -18,10 +16,6 @@ Englich Bussiness Networking course
 SMTP
 
 SignalR
-
-how to contribute with other open source in github
-
-ask for pull request in the context of contributing with others
 
 how to collaborate on a database using version control in git
 
@@ -183,3 +177,11 @@ IQueryable, IEnumerable / Eager, Deferred => Use Cases
 Cohesion & Coupling
 SOLID Principles
 Design Patterns Dependency Injection
+dependency injection container 
+entity framework attributes
+attributes and data annotations
+database migration seed() method
+on the configuration constructor enable automaticMigrationEnabled -- set it to true
+allowdataloss in the context of migration
+[notmapped] attribute
+compostite attribute 

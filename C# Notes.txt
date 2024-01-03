@@ -782,6 +782,7 @@ WCF or Web API for building services (optional)
 		
 		- Create DbContext
 			- Create a Class and Inherit from DbContext	(Data)
+			- Define Ctor [defualt] & [DbContextOptions<> options]
 			- Define your entities as Dbset Properites
 			- Configure Database provider and Connection string Using OnConfiguring Method
 				- optionsBuilder.UseSqlServer("ConnectionString");	// Don't Use the connection String here directly
@@ -795,3 +796,149 @@ WCF or Web API for building services (optional)
 		- Create Instance(Connection To Database) 
 			- var context = new SchoolDbContext();
 			- Implicitly Opened and Closed when reading Data
+			
+	- [Navigation&Shadow Properties]
+		- Navigation Property is a property on an entity that represents a relationship to another entity. iIt allows you to navigate from one entity to another using the defined relationship
+		- 
+			
+	- [virtual & .Include() & .Load()]
+		- using 'virtual' keyword => EF create a proxy class At runtime, which enables features such as lazy loading and change tracking
+		- Lazy loading means that related entities are not loaded from the database until you access the navigation property
+		- If we didn't use 'virtual' so we can use '.Include()' the property to eager loading the related entities
+		- .Include() used for Eager Loading, as part of the LinQ query 
+			- var studentsWithCourses = context.Students.Include(s => s.Courses).ToList();
+		- .Load() used for explicit loading of related entities after the main entity has been retrieved from the database
+			-var student =context.Entry(student).Collection(s => s.Courses).Load();
+			
+	[Lazy Loading]
+		- a design pattern and a technique used to defer the loading of an object until it is actually needed       
+		- improve performance and resource effciency by loading data or objects on-demand rather than loading everything upfornt.
+		- [Deferred Initialization] we defer the initialization until the property is accessed for the first time 
+		- [Loading On Demand] when a client code accesses the property, it checks whether the data or resource has already been loaded
+		- good dealing with performance bottlenecks to avoid loading data on that moment
+		@
+		public class Customer
+		{
+		private List<Order> orders;
+		public List<Order> Orders{get{if (orders==null)orders=LoadOrders();}}
+		}
+	  
+	- [ Deffered Execution ]
+		- have the same concept like in Lazy Loading but it's associated with LINQ
+		- it refers to the practice of postponing the execution of a query or operation on a collection until the  results are actually needed 
+		- 
+		
+	- [ Lazy Loading Proxy ]
+		- marking a navigation property with virtual keyword in Entity framework => Generates a [Dynamic Proxy Class] at runtime for the entity class
+		- used to intercept property access and load related data on-demand ( Lazy Loading )
+		- without using virtual keyword, Lazy Loading won't work as expected instead to explicitly load data using methods like .Include(), .Load()
+		- by making the navigation property 'virtual' we allow entity framework to create the necessary infrastructure to enable lazy loading for the property
+	
+-------------------------------------------------- [ EF Fluent API ] --------------------------------------------------
+	- Are methods that allws us to configure and customize the tentity model and its mapping to the underlying databse 
+	- It provides a more programmatic and code-centric way to define the database schema and mappings as an alternative to using data annotations or default conventions
+	
+	- [Separation of Configuration from Classes]
+		- With Fluent API, Configuration is separated fro mthe entity classes
+		- This Scnarios where you want to keep your entity classes clean and free from attributes or annotations related to database
+	- [Extensibility]
+		- Provides a rich set of methods for configuring various aspects of the model and it's highly extensible
+		- We can create our own conventions or configuration methods to suit specific requirements 
+	- [Entity configuration]
+		- We can use Fluent API to confiure various aspects of an entity such as [ Primary key | Indexes | Column Names | Data Types | and more ]
+		- modelBuilder.Entity<user>()
+			.HasKey(u=> u.UserId);
+	
+	- [Releationship Configuration]
+		- Fluent API is Particularly Configuring relationships between entities
+		- Specifying the foreign key properties and defining the cascade behavior
+		- modelBuilder.Entity<order>()
+			.HasOne(o=> o.Customer)
+			.WithMany(c=> c.Orders)
+			.HasForeignKey(o=> o.CustomerId)
+			.OnDelete(DeleteBehavior.Cascade);
+			
+	- [Table Mapping]
+		- We can use Fluent API to specify the table name, schema, and othe details for the mapped tables
+		- modelBuilder.Entity<User>()
+			.ToTable("AppUsers", "dbo");
+		
+	- [Complex Types]
+		- modelBuilder.ComplexType<Address>();
+	
+	- [Query Types]
+		- modelBuilder.Query<SomeQueryType>().ToView("Someview");
+	
+	- [Index Configuration]
+		- Fluent API can be used to configure indexes on columns
+		- modelBuilder.Entity<Product>()
+			.HasIndex(p=> p.ProductCode)
+			.IsUnique();
+	- [Configuring Conventions]
+		- Configures custom conventions applying to multiple entities
+		- modelBuilder.Conventions.Add(new MyCustomCenventions());
+	
+	- [Fluent API Methods]
+		- modelBuilder.
+			- Entity<YourrEntity>()
+			- HasKey(e=>e.id)
+			- Property()
+			- HasOne() | HasMany() | WithMany()
+			- HasForeignKey()
+			- ToTable()
+			- HasIndex()
+			- HasDisciminator<string>("Discriminator")
+			- Ignore()
+			- OwnsOne() | OwnsMany()
+		
+	modelBuilder.Entity<StudentCourse>().HasKey(sc=> new {sc.StrudentId, sc.CourseId});
+	modelBuilder.Entity<StudentCourse>().HasOne(sc=>sc.Student).WithMany(s=>s.StudentCourses).HasForeignKey(sc=> sc.StudentId);
+	modelBuilder.Entity<StudentCourse>().HasOne(sc=>sc.Course).WithMany(c=>c.StudentCourses).HasForeignKey(sc=>sc.CourseId);
+                 
+			
+-------------------------------------------------- [ Attributes ] --------------------------------------------------
+	- Are a powerful feature that allows you to add metadata to your code 
+	- Metadata, in this context, is information about the code that is not part of the actual program logic 
+	- But provides additional information for tools, compilers, or runtime environments
+	- Attributes are typically used for a variety of purposes, including code documentation, code analysis, and runtime behavior customization
+	
+	- [Syntax]
+		- Attributes are declared using square brackets '[]' placed before the target element in the code
+		- The target can be [assembly, module, type, method, parameter, field, property, event, return value]
+		
+	- [Attributes Types]
+		- System Attributes
+			[CLSCompliant(true)] | [STAThread] | [Serializable]
+
+		- Security Attributes
+			[PrincipalPermission(SecurityAction.Demand, Role = "Admin")] | [SecurityCritical] | [SuppressUnmanagedCodeSecurity]
+
+		- Code Analysis Attributes
+			[CodeAnalysis.SuppressMessage("Category", "RuleId")] | [CodeAnalysis.ExcludeFromCodeCoverage] | [CodeAnalysis.SuppressWarnings("WarningCode")]
+
+		- Testing Attributes
+			[TestMethod] | [Fact] | [Test]
+
+		- Web API Attributes
+			[Route("api/users")] | [HttpGet] | [FromBody]
+
+		- ASP.NET MVC Attributes
+			[Authorize] | [HttpPost] | [ValidateAntiForgeryToken]
+
+		- Entity Framework Attributes
+			[Key] | [Column("ColumnName")] | [ForeignKey("ForeignKeyProperty")]
+
+		- XAML Attributes
+			[DisplayName("Name")] | [Category("Category")] | [Description("Description")]
+
+		- Custom Attributes
+			[CustomLog("Log Message")] | [MyCustom("Custom Value")] | [SpecialHandling("Handle this case")]
+
+			
+	- [ Data Annotation ] 
+		- Validation Attributes
+			- [Required] | [StringLength(50)] | [Range(18, 99)] 
+		- Display Attributes
+			- [Display(Name = "Full Name")] | [DisplayFormat(DataFormatString = "{0:C}")] | [DisplayName("Email Address")] 
+		- Concurrency Check Attributes
+			- [ConcurrencyCheck] | [Timestamp] | [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

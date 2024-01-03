@@ -1,5 +1,38 @@
+Basic syntax
+Data types
+Variables
+Operators
+Control flow (if statements, loops)
+Arrays
+Functions and methods
+Classes and objects
+Inheritance
+Polymorphism
+Encapsulation
+Interfaces
+Exception handling
+File I/O
+Delegates and events
+Generics
+LINQ (Language Integrated Query)
+Asynchronous programming
+Collections (List, Dictionary, etc.)
+Attributes and Reflection
+Nullable types
+Properties
+Indexers
+Namespaces
+Dependency Injection
+Unit testing (e.g., using NUnit)
+Working with databases (ADO.NET, Entity Framework)
+ASP.NET for web development (optional)
+WPF or WinForms for desktop applications (optional)
+WCF or Web API for building services (optional)
+
 --------------------------------------------------[Create Console Project] --------------------------------------------------
 	- Bash => dotnet new console 	// [console, mvc, webapi, ...] [-o output, -n name, ...]
+	- Bash => dotnet sln add "path to project"
+	- Bash => dotnet add package Microsoft.EntityFrameworkCore
 	- bash => dotnet run			// to run the project
 	- bash => dotnet build          // build the application
 	- bash => dotnet restore 		// install the necessary  
@@ -12,24 +45,24 @@
 -------------------------------------------------- [Data Tpyes] --------------------------------------------------
 	
 	- [ Integral Types ]
-		- byte / sbyte		=> 8bit			
-		- short / ushort	=> 16bit	=> System.Int16		//.Net Type
-		- int / uint		=> 32bit    => System.Int32     //.NET Type
-		- long / ulong		=> 64bit	=> System.Int64		//.NET Type
+		- byte  / sbyte	=> 8bit			
+		- short / ushort	=> 16bit		=> System.Int16	//.Net Type
+		- int   / uint	=> 32bit  	=> System.Int32     //.NET Type
+		- long  / ulong	=> 64bit		=> System.Int64	//.NET Type
 		
 	- [ Floating-Point ]
-		- float 			=> 32bit		0.1f			=> System.Single			
-		- double 			=> 64bit		0.1				=> System.Double
-		- decimal 			=> 128bit		0.1m			=> System.Decimal
+		- float 		=> 32bit		0.1f		=> System.Single			
+		- double 		=> 64bit		0.1		=> System.Double
+		- decimal 	=> 128bit		0.1m		=> System.Decimal
 		
 	- [ Character ]
-		- Char 				=> 16bit	=> System.Char
+		- Char 		=> 16bit		=> System.Char
 		
 	- [ String ]
-		- String 			=> 16bit/char	=> System.String
+		- String 		=> 16bit/char	=> System.String
 	
 	- [ Boolean ]
-		- bool				=> 1bit	=> true/false			=> System.Boolean
+		- bool		=> 1bit		=> true/false	=> System.Boolean
 				
 	- [ Date ]		
 		- DateTime			=> 8bit							=> System.DateTime
@@ -37,14 +70,14 @@
 		
 	- [ Object ]
 		- var person = new { name = "John", age = 25 };		// Anonymous types
-		- Person person = new Person("john", 25);			// Instance from a Class Person
+		- Person person = new Person("john", 25);		// Instance from a Class Person
 		- dynamic obj = new System.Dynamic.ExpanoObject();	obj.name = "John"; Console.WriteLine(obj.name);	// Dynamic Object
 	
 	- [ Nullable ]
 		- [primitive] + [?]	=> allow null
 
 	- [ Enumerations ]
-		- enum 				=> value type that defines a set of named integral constants
+		- enum 					=> value type that defines a set of named integral constants
 		- enum Days {sat, sun, mon = 5, tues, }		// int x = (int)Days.sun;
 		
 	- [ Arrays ]
@@ -692,42 +725,73 @@
 			
 -------------------------------------------------- [ Entity Framework ] --------------------------------------------------
 	- Entity Framework Core (EF Core)
-		- Uses an Entity Data Model to represent the conceptual model of the data
-		- This Models Include Entities, represents tables in the database, associations (representing relationships between entities) and mapping
-		- This is the version of Entity Framework designed to work with .NET Core
-	
-	- Code-First / Model-First approach
-		- [Code-First]
-			Define C# classes; EF Core generates the database.
+			- Uses an Entity Data Model to represent the conceptual model of the data
+			- This Models Include Entities, represents tables in the database, associations (representing relationships between entities) and mapping
+			- This is the version of Entity Framework designed to work with .NET Core
+		
+		- Code-First / Model-First approach
+			- [Code-First]
+				Define C# classes; EF Core generates the database.
+			- For Creating a new project Code-First 
+			      - install entity framework using nuget package manger [ Install-Package EntityFramework + ENTER ]
+			      - Define my model classes create classes properties and define constrains priary keys and so on 
+			      - Create a DbContext that inherit from the DbContext and have DbSet for each of my model classes
+			      - add a connection string specifying the database server, initial catalog and other server details also the name of the connection 
+			      - don't forget to write Database.CreateIfNotExist & Database.SetInitializer in the constuctor of the class that inherits from the DbContext
 
-		- [Model-First]
-			- Design the database schema; EF Core generates C# classes.
+
+			- [Model-First]
+				- Design the database schema; EF Core generates C# classes.
+				
+		- DbContext
+			- Represents a database session, includes DbSet<T> for entities.
 			
-	- DbContext
-		- Represents a database session, includes DbSet<T> for entities.
+		- Entity Types
+			- Classes representing database tables, with properties mapping to columns.
 		
-	- Entity Types
-		- Classes representing database tables, with properties mapping to columns.
+		- Configuration
+			- Classes representing database tables, with properties mapping to columns.
+		
+		- LinQ Queries
+			- Use LINQ for complex queries against entity types.
+			
+		- Database Migrations
+			- EF Core Includes a migration system that enables you to evolve the database schema as your application evelves
+			- Migration can be generated and applied to update the database
+		
+		- Database Providers
+			- Supports various database providres (SQL Server, SQLite, ...)
+			
+		- Async Operations
+			- Supports asynchronous query and save operations for scalabitily
+			
+		- Dependency Injection
+			- Integrated with .NET Core's dependency injection system
+			
+		- Logging and Interception
+			- Provides logging for debugging, allows interception of database operations
 	
-	- Configuration
-		- Classes representing database tables, with properties mapping to columns.
-	
-	- LinQ Queries
-		- Use LINQ for complex queries against entity types.
+	- [ Code First Approach ]
+		- Make sure You installed these packages 		(Package)
+			- Microsoft.EntityFrameworkCore
+			- Microsoft.EntityFrameworkCore.Tools
+			- Microsoft.EntityFrameworkCore.SqlServer
+			- Microsoft.EntityFrameworkCore.Design
 		
-	- Database Migrations
-		- EF Core Includes a migration system that enables you to evolve the database schema as your application evelves
-		- Migration can be generated and applied to update the database
-	
-	- Database Providers
-		- Supports various database providres (SQL Server, SQLite, ...)
+		- Define your models and the relation between each entity	(Models)
 		
-	- Async Operations
-		- Supports asynchronous query and save operations for scalabitily
+		- Create DbContext
+			- Create a Class and Inherit from DbContext	(Data)
+			- Define your entities as Dbset Properites
+			- Configure Database provider and Connection string Using OnConfiguring Method
+				- optionsBuilder.UseSqlServer("ConnectionString");	// Don't Use the connection String here directly
+					- UseSqlServer 	=> Provider
+					- ConnectionString	=> "server=.;database=NameDatabase;trusted_connection=true;TrustServerCertificate=True;" 
 		
-	- Dependency Injection
-		- Integrated with .NET Core's dependency injection system
-		
-	- Logging and Interception
-		- Provides logging for debugging, allows interception of database operations
-	
+		- Migration
+			- Add-Migration [MigrationName]         // Create Migration
+			- Update-Database			// To Create Database
+
+		- Create Instance(Connection To Database) 
+			- var context = new SchoolDbContext();
+			- Implicitly Opened and Closed when reading Data

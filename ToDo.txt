@@ -176,7 +176,7 @@ concurrency and multithreading
 thread class in System.Threading
 Union and intersection in C#
 classes relations
-deferred, eager, lazy, immediate, deferred, explicit 
+deferred, eager, lazy, immediate, deferred, explicit => .include, .load, 'virtual'
 what is data migration in code first approach
 DDD Domain-Driven Design .NET Core
 IQueryable, IEnumerable / Eager, Deferred => Use Cases

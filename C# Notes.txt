@@ -1014,4 +1014,24 @@ WCF or Web API for building services (optional)
 			- This often result in less control over low-level details but can lead to more readable and maintainable code 
 			
 &&&concurrecny, thread, task, process, deadlock, parallelism, synchronization, concurrency control, asynchronous programming
+
+
+-------------------------------------------------- [ MVC ] --------------------------------------------------
+	- A wb application framework developed by microsoft for building dynamic, data-driven web applications
+	- It is a part of the larger ASP.NET framework and provides a pattern-based way to build scalable and maintainable web applications
+	- The MVC architectural pattern separates an application into three main components [ Model | View | Controller ]
+	
+		- [Model]
+			- Represents the application's data and business logic
+			- Responsible for retrieving and storing data, as well as defining the rules for data manipulation
+			- Notifies the View whenever there is a change in the data
+		- [ View ]
+			- Rpresents the user interface UI of the application
+			- Displays the data to the user and sends user inputs to the Controller for processing
+			- The View is passive and does not contain business logic, it only displays infromation
 			
+		- [ Controller ] 
+			- Handlers user input and update the Model accordingly
+			- Acts as an intermediary between the Model and the View processing user, requests, manipulating data, and updating the View
+			- The Controller interprets the user's actions and decides which View to display
+	

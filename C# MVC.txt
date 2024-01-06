@@ -1,0 +1,53 @@
+-------------------------------------------------- [ MVC ] --------------------------------------------------
+	
+	- A web application framework developed by microsoft for building dynamic, data-driven web applications
+	- It is a part of the larger ASP.NET framework and provides a pattern-based way to build scalable and maintainable web applications
+	- The MVC architectural pattern separates an application into three main components [ Model | View | Controller ]
+	
+	- [ Cross-Platform ]   
+		- ASP.NET Core is cross-platrform, meaning it can run on Windows, macOS, and Linux.
+		- This allows developers to chooose their preferred development environment
+		
+	- [Model-View-Conctroller (MVC Architecture Pattern)]	
+		- [Model]
+			- Represents the application's data and business logic
+			- Responsible for retrieving and storing data, as well as defining the rules for data manipulation
+			- Notifies the View whenever there is a change in the data
+		- [ View ]
+			- Rpresents the user interface UI of the application
+			- Displays the data to the user and sends user inputs to the Controller for processing
+			- The View is passive and does not contain business logic, it only displays infromation
+			
+		- [ Controller ] 
+			- Handlers user input and update the Model accordingly
+			- Acts as an intermediary between the Model and the View processing user, requests, manipulating data, and updating the View
+			- The Controller interprets the user's actions and decides which View to display
+	- Structure Architecture
+	
+		- Dependencies
+		- Properties
+		- wwwroot
+		- Controllers
+		- Data			=> Data Access Logic
+		- Models			=> UI Models
+		- Services		=> Application Services (interfaces and implentations)	
+		- Views			=> Presentation Logic	
+		
+		- app.config		
+		- appsettings.json
+		- bower.json
+		- bundleconfig.json
+		- program.cs
+		- startup.cs
+	
+	- [ Middleware ]
+		- ASP.NET Core uses a middleware pipeline to process HTTP requests and responses.
+		- Middleware components can be added to customize the request-handling pipeline
+	- [ Dependency Injection ]
+		- ASP.NET Core includes a built-in dependency injection system, making it easy
+		- To manageandinject dependencies into controllers and other components
+	- [ Razor Views ]
+		- Razor is the default view engine in ASP.NET Core MVC. 
+		- IT allows developers to write both h HTML and C# code in the same file, making it easier to work with dynamic content 
+		
+		

@@ -22,23 +22,6 @@
 			- Handlers user input and update the Model accordingly
 			- Acts as an intermediary between the Model and the View processing user, requests, manipulating data, and updating the View
 			- The Controller interprets the user's actions and decides which View to display
-	- Structure Architecture
-	
-		- Dependencies
-		- Properties
-		- wwwroot
-		- Controllers
-		- Data			=> Data Access Logic
-		- Models			=> UI Models
-		- Services		=> Application Services (interfaces and implentations)	
-		- Views			=> Presentation Logic	
-		
-		- app.config		
-		- appsettings.json
-		- bower.json
-		- bundleconfig.json
-		- program.cs
-		- startup.cs
 	
 	- [ Middleware ]
 		- ASP.NET Core uses a middleware pipeline to process HTTP requests and responses.
@@ -48,6 +31,81 @@
 		- To manageandinject dependencies into controllers and other components
 	- [ Razor Views ]
 		- Razor is the default view engine in ASP.NET Core MVC. 
-		- IT allows developers to write both h HTML and C# code in the same file, making it easier to work with dynamic content 
+		- IT allows developers to write both HTML and C# code in the same file, making it easier to work with dynamic content 
+	
+	- [ Tag Helpers ]
+		- Are a feature in ASP.NET Core MVC that enable Developers to write server-side code within HTML tags
+		- Porviding a more natureal and readable syntax
+	
+	- [ Routing ]
+		- Allows developers to define how urls map to controller actions
+	
+	- [ Model Binding ]
+		- Model binding is the process of mapping HTTP request data to controller action parameters
+		- Making it easy to work with form data, query parameters, and more 
 		
+	- [ Filters ]
+		- Allow you to run code before or after specific stages in the request processing pipeline
+		- like include authorization filters, action filters, and exception filters
 		
+	- [ ASP.NET Core Identity ]
+		- A membership system that adds login functionality to your application
+		- Provides user registration, login, and other features for managing user authentication
+		
+	- [ Testing ]
+		- ASP.NET Core MVC applications can be easily until tested, 
+		- Thanks to the framework's support for dependency injection and Separation of concerns
+		
+	- [ Middleware and Extensibility ]
+		- ASP.NET Core allows you to add and configure middleware components to extend the fucntionality of your application easily
+	
+	- [ JSON-based Configuration ]
+		- Configuration in ASP.NET Core is often done using JSON files, making it more readable and maintainable
+	
+	- [ Cross-Site Request Forgery (CSRF) Protection ]
+		- Provides built-in protection against CSRF attacks through anti-forgery tokens
+	
+	- [ Real-time Communication ]
+		- SignalR is a library in ASP.NET Core that enables real-time communication between the server and clients, making it easier to implement features like chat applications
+	
+	- [ NuGet Packages ]
+		- ASP.NET Core components and libraries and distributed as NuGet Packages making it easy to manage dependencies  and update to the latest versions 
+	
+	- [ Structure Architecture ]
+	
+		- Dependencies
+		- Properties
+		- wwwroot
+		- Controllers
+		- Data			=> Data Access Logic
+		- Models			=> UI Models
+		- Services		=> Application Services (interfaces and implentations)	
+		
+		- Views			=> Presentation Logic	
+			- Include Views for each controller
+			- Include Shared Views
+				- [_Layout.cshtml] 		=> Contain a layout that I could use it in View Start file to make it shared across all the pages
+				- [_PartialView.cshtml]	=> Resuable components that can be included in other views, we put libraries here that we could include it in other views
+				- [_loginPartial.cshtml]      => Can dsplay different content based on whether the user is authenticated or not
+				
+			- [_ViewStart.cshtml]		=> When a view is rendered, the code in this file is executed before the view iteself, allowing you to define layout 
+			- [_ViewImports.cshtml]		=> The content of _ViewImports is automatically applied to every view withing the same directory or its subdirectories 
+			
+		- app.config		
+		- appsettings.json				=> Configuration file commonly used in ASP.NET Core projects to store various settings for the application'
+							=> Contain configurations related to database connections, loggin, authentication, and other application-specific settings
+							=> to access any value we use Configuration object which is availabvle through depenency injection
+							
+		- bower.json
+		- bundleconfig.json
+		- program.cs
+		- startup.cs	
+		
+	- [Routing]
+		- app.MapControllerRoute(
+			name:"default",
+			pattern: "{Controller=Home}/{action=Index}/{id?}"
+		
+		);
+		
+	

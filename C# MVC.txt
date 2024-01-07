@@ -25,7 +25,8 @@
 	
 	- [ Middleware ]
 		- ASP.NET Core uses a middleware pipeline to process HTTP requests and responses.
-		- Middleware components can be added to customize the request-handling pipeline
+		- Middleware components can be added to customize the request-handling pipeline   
+		
 	- [ Dependency Injection ]
 		- ASP.NET Core includes a built-in dependency injection system, making it easy
 		- To manageandinject dependencies into controllers and other components
@@ -104,8 +105,53 @@
 	- [Routing]
 		- app.MapControllerRoute(
 			name:"default",
-			pattern: "{Controller=Home}/{action=Index}/{id?}"
-		
+			pattern: "{Controller=Home}/{action=Index}/{id?}",
+			default: "{Controller=Home}/{action=Home}"
 		);
 		
+----------------------------------- [ Create Project ] ---------------------------
+	- Create new MVC Core project 
+	- Add Packages using CLI or PMC
+		- Microsoft.EntityFrameworkCore
+		- Microsoft.EntityFrameworkCore.Tools
+		- Microsoft.EntityFrameworkCore.Design
+		- Microsoft.EntityFrameworkCore.SqlServer
+	- Macke Sure that you installed Client Side Library
+		- bootstrap
+		- jquery 
+		- jquery-validation
+		- jquery-validation-unobtrusive
+	
+	- [Model Directory]
+		- Create the entities
+	
+	- [Data Directory]
+		- Create Application DbContext
+			- Inherit from DbContext
+			- Create [Default Constructor] and [DbContextOptions Constructor]
+			- Setup DbSet<Entity>
+			- [Fluent API] Setup protected override void OnModelCreating(ModelBuilder modelBuilder)
+		- [Migration Directory]
+			- Inside the Data Directory we add Migrations Directory which holds the application migrations
+			- Add-migration Mi1 -o \Data\Migrations
+	
+	- in AppSettings (builder.Configuration) 
+		- Add Connection String for the connection between the database and the application
+		- "ConnectionString":{
+			"ConnectionName": "Server=.;Database=TwentyOctober;Trusted_Connection=True;TrustServerCertificate=True;"	
+		  }
+	
+	- Add to Application Services SqlServer
+		- Register the database 
+		- builder.Service.AddDbContext<ApplicationDbContext>(options=> options.UseSqlServer(builder.Configuration.GetConnectionstring("ConnectionName")));
+		
+	- We're using Repository Pattern unit of work and Generic repository
+		- Create IRepository<> and Include the abstract methods [add, delete, getall, update]
+		- Create Repository for each entity like SchoolRepository and StudentRepository and Inherit from Irepository<Student/School>
+		- Register all the repositories to the services to be injected
+			- builder.Services.AddScooped(typeof(IRepository<Student>), typeof(StudentRepository));
+	
+		
+		
+	
 	

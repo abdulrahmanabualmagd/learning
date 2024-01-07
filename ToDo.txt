@@ -167,4 +167,7 @@ complete dependency injection
 refactoring technique
 optmisitic concurrency mode & row version & timestamp in database management and Entity Framework  [Web API Project]
 Concurrent Programming: &&&concurrecny, thread, task, process, deadlock, parallelism, synchronization, concurrency control, asynchronous programming (#Line 1006)
- 
+Seperation of concerns
+IServiceCollection 
+Dependency Injection Container DIC
+IService Provider Interface

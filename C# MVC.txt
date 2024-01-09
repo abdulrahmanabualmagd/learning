@@ -150,8 +150,69 @@
 		- Create Repository for each entity like SchoolRepository and StudentRepository and Inherit from Irepository<Student/School>
 		- Register all the repositories to the services to be injected
 			- builder.Services.AddScooped(typeof(IRepository<Student>), typeof(StudentRepository));
+
+------------------------------ [ IActionResult Return Types ] -----------------------------
+
+	- ViewResult	=> return View(data);
+	- JsonResult	=> return Json(data);
+	- RedirectResult	=> return Redirect("/Home/Index");
+	- ContentResult	=> return Content("PlainText");'
+	- FileResult	=> byte[] fileContents = getfileContents(); return File(fileContents, "application/octet-stream", "filename.txt");
+	- StatusCoreResult	=> return NotFound();	// Returns a 404 Not Found Status
 	
+
+	
+------------------------------ [ Data Binding ] -----------------------------
+	
+	- [ Model Binding ]
 		
+	- [ ViewData and ViewBag ]
+		- ViewData["Message"] = "" / ViewBag.Message = ""
+	
+	- [ Strongly typed views and model binding ]
+		- @model TypeOfDataHoldedByModel
+		- We could use view model to pass multiple data with specified shape as we need 
+	
+	- JSON Binding (Model Binding For AJAX Request)	return Json result from IActionResult
+		- In case we're using ajax call instead if using View return, we return JSON Data
+		- So the action is look like
+			- var data = new {StudentCount = 5, SchoolCount= 7};
+			- return Json(data);
+			
+		- in the View we write Jquery Script and request the data from the url of the controller and its action
+			- Make sure you included Jquery library
+			$(document).ready(function(){
+			   $("#DomElement").click(function(){
+				$.ajax({
+					url:"",
+					type:"Get",
+					dataType: "json",
+					success: function(data){
+						$("#text1tomodify").text("newnext");
+						$("#text2tomodify").text("newtext");
+					},
+					error: function(e){
+						console.log("Error Happened!", e)
+					}
+				})
+			   })
+			});
+
+---------------------------------- [ HTML & Tag Helpers ] ---------------------------------------
+	- [ Tag Helpers]
+		- asp-action="Index"	=> specifies the action method for generating urls in anchor
+		- asp-controller="Home"	=> specifies the controller for generating URLs in anchor elements
+		- asp-route		=> specifies route values for generating Urls like using action and controller with asp-route-id="1"
+		- asp-for"Model.PropertyName"	=> Generate html element for model properties, aiding in model binding or forms
+		- asp-validation-for="Model.x	=> Generates HTML attribute for client-side validation based on model validation attribute
+		- asp-area="Admin"		=> Specifies the area for generating Url used with action and contorller tag helpers
 		
+	    - [ Tag Helpers Attributes ]
+		- asp-if="ModelIsAdmin"	=> conditional rendering of html elements
+		- asp-append-version="Bool"	=> appends a version number to static file url for cach busting
+		- asp-route
 	
-	
+	- [ HTML Helpers ]
+		-
+		
+------------------------------------ [ Page Ination ] -------------------------------------------

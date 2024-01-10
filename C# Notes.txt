@@ -1015,23 +1015,43 @@ WCF or Web API for building services (optional)
 			
 &&&concurrecny, thread, task, process, deadlock, parallelism, synchronization, concurrency control, asynchronous programming
 
+------------------------------------- [ ASP.NET Core Identity ] ----------------------------------------
+	- Install package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+	- Make the ApplicationDbContext inherit from IdentityDbContext instead of inheriting from the DbContext
+	
+	- [Modify Tables Names and Ignore Columns using fluent api] 
+		- builder.Entity<IdentityUser>().ToTable("Users").Ignore(u=> u.PhonNumberConfirmed);
+		- builder.Entity<IdentityRole>().ToTable("Roles");
+		- builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+		- and so on for Users, Roles, UserRoles, UserClaims, UserLogins, RoleClaims, UserTokens
+		
+	- [Add Extra Properties for the Identity tables]
+		- Create a class and inherit from the table that you want to extent like 
+			- public class User : IdentityUser{
+				// Add properties
+			}
+		- In the application context we have to use generic type from the IdenttiyDbContext
+			- public class ApplicationDbContext : IdentityDbContext<User>{}	// Note that We added the Classes that Are extended for each tables
+		
+		- In case we extended more that one table we add them all like 
+			- public class ApplicationDbContext : IdentityDbContext<User, UserRoles, ...> {}
+	
+	- [Methods for Each Class & methods in Identity]
+		- UserManger<TUser>		=> [CreateAsync | DeleteAsync | FindByIdAsync | UpdateAsync | GetRolesAsync]
+		- SignInManger<TUser>	=> [PasswordSignInAsync | SignInAsync | SignOutAsync | TwoFactorSignInAsync]
+		- RoleManger<TRole>		=> [CreateAsync | DeleteAsync | FindByIdAsync | FindByNameAsync | UpdateAsync | GetUsersInRoleAsync]
+		- ClaimsPrincipal		=> [IsInRole | HasClaim]
+		- PasswordHasher<TUser>	=> [HashPassword | VerifyHashedPassword]
+		- IdentityResultClass
+		- TokenProviders		=> [GenerateEmailConfirmationTokenAsync | GeneratePasswordResetTokenAsync ...]
+		- IdentityOptions		
+		- UserClaims & UserProperties => [AddClaimAsync | RemoveClaimAsync | ...]
+		
+	- Register New User
+		- Create DTOs 
+		- Create the Register DTO Class and include the data needed for registeration
+		
 
--------------------------------------------------- [ MVC ] --------------------------------------------------
-	- A wb application framework developed by microsoft for building dynamic, data-driven web applications
-	- It is a part of the larger ASP.NET framework and provides a pattern-based way to build scalable and maintainable web applications
-	- The MVC architectural pattern separates an application into three main components [ Model | View | Controller ]
-	
-		- [Model]
-			- Represents the application's data and business logic
-			- Responsible for retrieving and storing data, as well as defining the rules for data manipulation
-			- Notifies the View whenever there is a change in the data
-		- [ View ]
-			- Rpresents the user interface UI of the application
-			- Displays the data to the user and sends user inputs to the Controller for processing
-			- The View is passive and does not contain business logic, it only displays infromation
-			
-		- [ Controller ] 
-			- Handlers user input and update the Model accordingly
-			- Acts as an intermediary between the Model and the View processing user, requests, manipulating data, and updating the View
-			- The Controller interprets the user's actions and decides which View to display
-	
+
+
+

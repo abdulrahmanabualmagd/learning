@@ -216,3 +216,6 @@
 		-
 		
 ------------------------------------ [ Page Ination ] -------------------------------------------
+	- In pagination we use a skip and take LinQ methods to get specific page depend on the size of the page like 
+	- _context.Students.Skip((pageIndex-1) * pageSize).Take(PageSize).ToList();
+	

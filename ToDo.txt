@@ -171,3 +171,16 @@ Seperation of concerns
 IServiceCollection 
 Dependency Injection Container DIC
 IService Provider Interface
+what is scaffolding
+use of each package in asp.net core
+
+
+
+
+
+
+
+
+
+
+what do I will gain in work experience 

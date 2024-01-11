@@ -1046,11 +1046,40 @@ WCF or Web API for building services (optional)
 		- TokenProviders		=> [GenerateEmailConfirmationTokenAsync | GeneratePasswordResetTokenAsync ...]
 		- IdentityOptions		
 		- UserClaims & UserProperties => [AddClaimAsync | RemoveClaimAsync | ...]
+	
+	- [ASP.NET Core Identity Tables]
+		- [Users]		=> User information like Id, username, confirmation flag and so on
+		- [Roles]		=> Role information, roles are used to group users and apply authorization based on role
+		- [UserRoles]	=> A linking table that establishes a many to many relationship between users and roles, User Id and Role Id
+		- [UserLogins]	=> Used to store external login information, include user Id, login provider, provider key, and display name
+		- [UserClaims]	=> Stores user claims, Storing additional user information or authorization data
+		- [UserTokens]	=> Used to store tokens (Security tokens, password reset tokens), it includes (User Id, Login provider, and name)
+		- [RoleClaims]	=> Stores claims associated with roles
+		- [UserTokens]	=> This table is used to store tokens associated with a user
+	
 		
 	- Register New User
-		- Create DTOs 
-		- Create the Register DTO Class and include the data needed for registeration
 		
+		-[Create User]
+		     - Create Credential DTO for Receive the registeration data from the user  
+		     - Create User Instance and Assign the data received form the Credential DTO
+		     - _userManger.CreateAsync(UserInstnaace, PasswordFromCredentialsReceived);	Returns IdentityResult which indicate the state of the Creations
+		
+		- [Assign Role]
+		     - Check for Roles, Create if not exist and assign it to the Created User
+		     - Assign Role to the created account also check at first if the role exist if not Create new role and then assign it 
+		     - UserRole.Concurrencytsamp = Guid.NewGuid().ToString();		// Adding New 128-bit value => GIUD Structure  
+		     - _roleManger.RoleExistsAync("") | _roleManger.Createsync(IdentityRole UserRole) | _userManger.AddToRoleAsync(NewUser, "User")
+		
+		- [Assign Claims]
+		     - Create Claims to the User => List<Claim>{ new Claim(ClaimTypes.NameIdentifier, NewUser.Id.ToString()), ...}
+		     - _userManger.AddClaimsAsync(NewUser, claims)
+		     
+	- Login 
+		- [Verify Email]
+		- [Check Lockout]
+		- [Verify Password]
+		- 
 
 
 

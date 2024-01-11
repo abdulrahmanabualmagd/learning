@@ -158,7 +158,7 @@ deferred, eager, lazy, immediate, explicit => .include, .load, 'virtual'
 what is data migration in code first approach
 DDD Domain-Driven Design .NET Core
 dependency injection container 
-database migration seed() method
+database migration seed() method => update default values on update-database , write initial values to use it like adding Client and admin roles
 on the configuration constructor enable automaticMigrationEnabled -- set it to true
 allowdataloss in the context of migration
 [notmapped] attribute
@@ -173,6 +173,7 @@ Dependency Injection Container DIC
 IService Provider Interface
 what is scaffolding
 use of each package in asp.net core
+
 
 
 

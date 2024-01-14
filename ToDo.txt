@@ -4,14 +4,9 @@ ASP.NET JWT
 
 Patterns [ Unit Of Work / Generic Repository ]
 
-and the other design patterns
-
 how to use packages Identity JWT bearer 
 
-
 redis in-memory (remote dictionary server)
-
-Englich Bussiness Networking course
 
 SMTP
 
@@ -26,8 +21,6 @@ Promises (Asynchronous Operation)
 Search for "What are the Core Features for Javascript?"
 
 What is Redux library?
-
-github => [issues, code review, pull requests]
 
 asynchronous and parallelism
 
@@ -70,7 +63,6 @@ SSR & SSG   in new version of angular
 AWS
 
 enableProdMode
-createCustomElement
 
 how to produce an angular custom elements to use it in any enviroment
 
@@ -138,9 +130,6 @@ sql server acid
 
 What is .NET and what is the differences between the other versions(.NET Framework, .NET Core, .NET)
 
-design pattern is a way to solve an issue what ever  the used programming languge in solving that issue
-principle is some thing good that we follow under 
-Architicture Style : provide stadards between systems communication
 
 type-checking 
 memory allocation
@@ -154,34 +143,45 @@ dynamic keyword
 
 the different between class, constructor, and interface
 
-what to do when plannig to design database systems (steps) best practice
-what do do when starting building a software application steps and best practice like SLDC
-lambda expression & arrow
+what to do when plannig to design database systems (steps) best practice to follow
+what to do when starting building a software application steps and best practice like SLDC
 
 memory allocation in initialization and declaration of arrays and list
 C# Reflections
-Dictionary and Dictionary Methods
-anonymous
 JIT C# Compiler
-
-asp.net core attributes    
+ 
 how array stored. Sequentially?
 concurrency and multithreading
-thread class in System.Threading
 Union and intersection in C#
 classes relations
-deferred, eager, lazy, immediate, deferred, explicit => .include, .load, 'virtual'
+deferred, eager, lazy, immediate, explicit => .include, .load, 'virtual'
 what is data migration in code first approach
 DDD Domain-Driven Design .NET Core
-IQueryable, IEnumerable / Eager, Deferred => Use Cases
-Cohesion & Coupling
-SOLID Principles
-Design Patterns Dependency Injection
 dependency injection container 
-entity framework attributes
-attributes and data annotations
-database migration seed() method
+database migration seed() method => update default values on update-database , write initial values to use it like adding Client and admin roles
 on the configuration constructor enable automaticMigrationEnabled -- set it to true
 allowdataloss in the context of migration
 [notmapped] attribute
 compostite attribute 
+complete dependency injection
+refactoring technique
+optmisitic concurrency mode & row version & timestamp in database management and Entity Framework  [Web API Project]
+Concurrent Programming: &&&concurrecny, thread, task, process, deadlock, parallelism, synchronization, concurrency control, asynchronous programming (#Line 1006)
+Seperation of concerns
+IServiceCollection 
+Dependency Injection Container DIC
+IService Provider Interface
+what is scaffolding
+use of each package in asp.net core
+
+
+
+
+
+
+
+
+
+
+
+what do I will gain in work experience 

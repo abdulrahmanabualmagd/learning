@@ -553,6 +553,21 @@ WCF or Web API for building services (optional)
 		// In Program 
 		Person person = new Person(0, "Abdulrahman");
 		       person.Show();	// Use the extension method
+
+-------------------------------------------------- [ Async & Await ] --------------------------------------------------		       
+	- Are keywords used in asynchronous programming to make it easier to work with asynchronouse code
+	- Asyncronous programming is used to handle operations that may take a significant amount of time
+	- Such as I/O operations or networkrequests, without blocking the main execution thread 
+	
+	- [async]
+		- Is used to define a method as a asynchronous method
+		- Asyncrhonous method can persorform work without blocking the calling thread, allowing other tasks to continue
+	
+	- [await]
+		- Used to asynchronously wait for a task to compolete
+		- It can only be used within an asynchronous method that is marked with the async keyword
+		- When we use 'await' with a task the control returns to the calling method until the awaited task completes.
+		- This allows theapplication to remain responsive while the asynchronous operation is in progress
 		       
 -------------------------------------------------- [ LinQ ] --------------------------------------------------
 	
@@ -719,10 +734,8 @@ WCF or Web API for building services (optional)
 	- Types of injection are
 		- Constructor Injection
 		- Method Injection
-		- Property Injection
-		- 
-	
-			
+		- Property Injection     
+
 -------------------------------------------------- [ Entity Framework ] --------------------------------------------------
 	- Entity Framework Core (EF Core)
 			- Uses an Entity Data Model to represent the conceptual model of the data
@@ -798,8 +811,24 @@ WCF or Web API for building services (optional)
 			- Implicitly Opened and Closed when reading Data
 			
 	- [Navigation&Shadow Properties]
-		- Navigation Property is a property on an entity that represents a relationship to another entity. iIt allows you to navigate from one entity to another using the defined relationship
-		- 
+		- [Shadow Property]
+			- A proprety that is not defined in the entity class but is implicitly created by EF to be used for various Purposes
+			- Such as Tracking changes, Storing additional information. Unlike regular properties, shadow properties are not exposed in the entity class
+			- The existance is known only to EF.
+		
+		-[ Navigation Property ]
+			- A property on an entity that represents a relationship to another entity. 
+			- It allows you to navigate from one entity to another using the defined relationship
+			- Reference navigation property (one-to-***)	=> public Customer Customer {get;set;}
+			- Collection Navigation Property (many-to-***)	=> public ICollection<Post> Posts{get;set;}
+			- [Related Keywords]
+				- ForeignKey Attribute	[ForeignKey("CustomerId")]
+				- InverseProperty Attribute	[InverseProperty("MainCategory")]
+				- Include() method		Used to specify related data to be included in the query results when retrieving data from the database 
+					- Helps in Eagrly loading the navigation properties to avoid the N+1 query problem
+				- [Required] | [StringLength()] | [Column("StudentName", TypeName= "nvarchar(100)")] | [Table("Students")] | [NoMapped]
+				- [ConcurrencyCheck]	 
+
 			
 	- [virtual & .Include() & .Load()]
 		- using 'virtual' keyword => EF create a proxy class At runtime, which enables features such as lazy loading and change tracking
@@ -833,6 +862,16 @@ WCF or Web API for building services (optional)
 		- used to intercept property access and load related data on-demand ( Lazy Loading )
 		- without using virtual keyword, Lazy Loading won't work as expected instead to explicitly load data using methods like .Include(), .Load()
 		- by making the navigation property 'virtual' we allow entity framework to create the necessary infrastructure to enable lazy loading for the property
+		
+	- [ N + 1 Proeblem ]
+		- A common performance problem that can occur in ORM Frameworks like EF.
+		- It arises when an ORM fetches a collection of entities along with their related entities in a separate query for each original entity
+		- N => Represents the number of entities you initially retrieve
+		- 1 => Represents the additional query executed for each of the N entitie to fetch related data
+			- if We have 3 Authors each one have his books
+				- The main query will retrieve the list of Authors which represents the (1)
+				- when access theri books it will execute N of queries, in this case we have 3 Authors 
+				- So each Author will have one qeury to get his books so we have 3 Queries which represents the (N)
 	
 -------------------------------------------------- [ EF Fluent API ] --------------------------------------------------
 	- Are methods that allws us to configure and customize the tentity model and its mapping to the underlying databse 
@@ -844,6 +883,7 @@ WCF or Web API for building services (optional)
 	- [Extensibility]
 		- Provides a rich set of methods for configuring various aspects of the model and it's highly extensible
 		- We can create our own conventions or configuration methods to suit specific requirements 
+	
 	- [Entity configuration]
 		- We can use Fluent API to confiure various aspects of an entity such as [ Primary key | Indexes | Column Names | Data Types | and more ]
 		- modelBuilder.Entity<user>()
@@ -942,3 +982,105 @@ WCF or Web API for building services (optional)
 			- [Display(Name = "Full Name")] | [DisplayFormat(DataFormatString = "{0:C}")] | [DisplayName("Email Address")] 
 		- Concurrency Check Attributes
 			- [ConcurrencyCheck] | [Timestamp] | [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+----------------------------------- [ Lower/Higher Control/Abstration ] -------------------------------
+	- [Abstraction]
+		- Higher-Level absraction
+			- It means that the user interacts with a simplified interface that hides many details
+			- The user Doesn't need to understand or deal with the lower-level complexities directly
+		- Lower-Level abstraction
+			- Provides more details and direct view of the unerlying system
+			- User has to deal with more specifics and has a greater understanding of the inner workings
+			
+	- [Level of Control]
+		- Higher-Level of Control
+			- The programmer has more direct influence over the fine-Grained  details of the system
+			- Means more flexibility but also require more responsibility for managing those details
+			
+		- Lower-Level of Control
+			- Means that certain aspects of the system are managed automatically or abstracted away
+			- Reducing the need for the programmer to micromangge  every detail
+			- This can make programmin easier but might sacrifice some flexibility
+	
+	- [Thread]
+		- Lower-Level abstraction, Higher Level of control
+			- threads provide a relatively low-level abstraction of concurrent execution
+			- When we work with threads, we have more direct control over the execution flow, synchronization and communication between therads
+			- This also means more responsiblity for managing these details 
+	
+	- [Task]
+		- Higher-Level Abstraction, Lower-Level of Control
+			- Provide a higherLevel abstraction that allowsdevelopers to express concurrency in a more straightforward manner
+			- This often result in less control over low-level details but can lead to more readable and maintainable code 
+			
+&&&concurrecny, thread, task, process, deadlock, parallelism, synchronization, concurrency control, asynchronous programming
+
+------------------------------------- [ ASP.NET Core Identity ] ----------------------------------------
+	- Install package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+	- Make the ApplicationDbContext inherit from IdentityDbContext instead of inheriting from the DbContext
+	
+	- [Modify Tables Names and Ignore Columns using fluent api] 
+		- builder.Entity<IdentityUser>().ToTable("Users").Ignore(u=> u.PhonNumberConfirmed);
+		- builder.Entity<IdentityRole>().ToTable("Roles");
+		- builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+		- and so on for Users, Roles, UserRoles, UserClaims, UserLogins, RoleClaims, UserTokens
+		
+	- [Add Extra Properties for the Identity tables]
+		- Create a class and inherit from the table that you want to extent like 
+			- public class User : IdentityUser{
+				// Add properties
+			}
+		- In the application context we have to use generic type from the IdenttiyDbContext
+			- public class ApplicationDbContext : IdentityDbContext<User>{}	// Note that We added the Classes that Are extended for each tables
+		
+		- In case we extended more that one table we add them all like 
+			- public class ApplicationDbContext : IdentityDbContext<User, UserRoles, ...> {}
+	
+	- [Methods for Each Class & methods in Identity]
+		- UserManger<TUser>		=> [CreateAsync | DeleteAsync | FindByIdAsync | UpdateAsync | GetRolesAsync]
+		- SignInManger<TUser>	=> [PasswordSignInAsync | SignInAsync | SignOutAsync | TwoFactorSignInAsync]
+		- RoleManger<TRole>		=> [CreateAsync | DeleteAsync | FindByIdAsync | FindByNameAsync | UpdateAsync | GetUsersInRoleAsync]
+		- ClaimsPrincipal		=> [IsInRole | HasClaim]
+		- PasswordHasher<TUser>	=> [HashPassword | VerifyHashedPassword]
+		- IdentityResultClass
+		- TokenProviders		=> [GenerateEmailConfirmationTokenAsync | GeneratePasswordResetTokenAsync ...]
+		- IdentityOptions		
+		- UserClaims & UserProperties => [AddClaimAsync | RemoveClaimAsync | ...]
+	
+	- [ASP.NET Core Identity Tables]
+		- [Users]		=> User information like Id, username, confirmation flag and so on
+		- [Roles]		=> Role information, roles are used to group users and apply authorization based on role
+		- [UserRoles]	=> A linking table that establishes a many to many relationship between users and roles, User Id and Role Id
+		- [UserLogins]	=> Used to store external login information, include user Id, login provider, provider key, and display name
+		- [UserClaims]	=> Stores user claims, Storing additional user information or authorization data
+		- [UserTokens]	=> Used to store tokens (Security tokens, password reset tokens), it includes (User Id, Login provider, and name)
+		- [RoleClaims]	=> Stores claims associated with roles
+		- [UserTokens]	=> This table is used to store tokens associated with a user
+	
+		
+	- Register New User
+		
+		-[Create User]
+		     - Create Credential DTO for Receive the registeration data from the user  
+		     - Create User Instance and Assign the data received form the Credential DTO
+		     - _userManger.CreateAsync(UserInstnaace, PasswordFromCredentialsReceived);	Returns IdentityResult which indicate the state of the Creations
+		
+		- [Assign Role]
+		     - Check for Roles, Create if not exist and assign it to the Created User
+		     - Assign Role to the created account also check at first if the role exist if not Create new role and then assign it 
+		     - UserRole.Concurrencytsamp = Guid.NewGuid().ToString();		// Adding New 128-bit value => GIUD Structure  
+		     - _roleManger.RoleExistsAync("") | _roleManger.Createsync(IdentityRole UserRole) | _userManger.AddToRoleAsync(NewUser, "User")
+		
+		- [Assign Claims]
+		     - Create Claims to the User => List<Claim>{ new Claim(ClaimTypes.NameIdentifier, NewUser.Id.ToString()), ...}
+		     - _userManger.AddClaimsAsync(NewUser, claims)
+		     
+	- Login 
+		- [Verify Email]
+		- [Check Lockout]
+		- [Verify Password]
+		- 
+
+
+
+

@@ -1,0 +1,11 @@
+Follow the mvc identity workflow
+
+usermanger.signin
+accountmanger.login
+
+external login
+two-way-vertification
+email confirmation
+how to uer logger and store in console or external file to track things and what is the purpose of using the logger 
+
+

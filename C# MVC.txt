@@ -1,0 +1,221 @@
+-------------------------------------------------- [ MVC ] --------------------------------------------------
+	
+	- A web application framework developed by microsoft for building dynamic, data-driven web applications
+	- It is a part of the larger ASP.NET framework and provides a pattern-based way to build scalable and maintainable web applications
+	- The MVC architectural pattern separates an application into three main components [ Model | View | Controller ]
+	
+	- [ Cross-Platform ]   
+		- ASP.NET Core is cross-platrform, meaning it can run on Windows, macOS, and Linux.
+		- This allows developers to chooose their preferred development environment
+		
+	- [Model-View-Conctroller (MVC Architecture Pattern)]	
+		- [Model]
+			- Represents the application's data and business logic
+			- Responsible for retrieving and storing data, as well as defining the rules for data manipulation
+			- Notifies the View whenever there is a change in the data
+		- [ View ]
+			- Rpresents the user interface UI of the application
+			- Displays the data to the user and sends user inputs to the Controller for processing
+			- The View is passive and does not contain business logic, it only displays infromation
+			
+		- [ Controller ] 
+			- Handlers user input and update the Model accordingly
+			- Acts as an intermediary between the Model and the View processing user, requests, manipulating data, and updating the View
+			- The Controller interprets the user's actions and decides which View to display
+	
+	- [ Middleware ]
+		- ASP.NET Core uses a middleware pipeline to process HTTP requests and responses.
+		- Middleware components can be added to customize the request-handling pipeline   
+		
+	- [ Dependency Injection ]
+		- ASP.NET Core includes a built-in dependency injection system, making it easy
+		- To manageandinject dependencies into controllers and other components
+	- [ Razor Views ]
+		- Razor is the default view engine in ASP.NET Core MVC. 
+		- IT allows developers to write both HTML and C# code in the same file, making it easier to work with dynamic content 
+	
+	- [ Tag Helpers ]
+		- Are a feature in ASP.NET Core MVC that enable Developers to write server-side code within HTML tags
+		- Porviding a more natureal and readable syntax
+	
+	- [ Routing ]
+		- Allows developers to define how urls map to controller actions
+	
+	- [ Model Binding ]
+		- Model binding is the process of mapping HTTP request data to controller action parameters
+		- Making it easy to work with form data, query parameters, and more 
+		
+	- [ Filters ]
+		- Allow you to run code before or after specific stages in the request processing pipeline
+		- like include authorization filters, action filters, and exception filters
+		
+	- [ ASP.NET Core Identity ]
+		- A membership system that adds login functionality to your application
+		- Provides user registration, login, and other features for managing user authentication
+		
+	- [ Testing ]
+		- ASP.NET Core MVC applications can be easily until tested, 
+		- Thanks to the framework's support for dependency injection and Separation of concerns
+		
+	- [ Middleware and Extensibility ]
+		- ASP.NET Core allows you to add and configure middleware components to extend the fucntionality of your application easily
+	
+	- [ JSON-based Configuration ]
+		- Configuration in ASP.NET Core is often done using JSON files, making it more readable and maintainable
+	
+	- [ Cross-Site Request Forgery (CSRF) Protection ]
+		- Provides built-in protection against CSRF attacks through anti-forgery tokens
+	
+	- [ Real-time Communication ]
+		- SignalR is a library in ASP.NET Core that enables real-time communication between the server and clients, making it easier to implement features like chat applications
+	
+	- [ NuGet Packages ]
+		- ASP.NET Core components and libraries and distributed as NuGet Packages making it easy to manage dependencies  and update to the latest versions 
+	
+	- [ Structure Architecture ]
+	
+		- Dependencies
+		- Properties
+		- wwwroot
+		- Controllers
+		- Data			=> Data Access Logic
+		- Models			=> UI Models
+		- Services		=> Application Services (interfaces and implentations)	
+		
+		- Views			=> Presentation Logic	
+			- Include Views for each controller
+			- Include Shared Views
+				- [_Layout.cshtml] 		=> Contain a layout that I could use it in View Start file to make it shared across all the pages
+				- [_PartialView.cshtml]	=> Resuable components that can be included in other views, we put libraries here that we could include it in other views
+				- [_loginPartial.cshtml]      => Can dsplay different content based on whether the user is authenticated or not
+				
+			- [_ViewStart.cshtml]		=> When a view is rendered, the code in this file is executed before the view iteself, allowing you to define layout 
+			- [_ViewImports.cshtml]		=> The content of _ViewImports is automatically applied to every view withing the same directory or its subdirectories 
+			
+		- app.config		
+		- appsettings.json				=> Configuration file commonly used in ASP.NET Core projects to store various settings for the application'
+							=> Contain configurations related to database connections, loggin, authentication, and other application-specific settings
+							=> to access any value we use Configuration object which is availabvle through depenency injection
+							
+		- bower.json
+		- bundleconfig.json
+		- program.cs
+		- startup.cs	
+		
+	- [Routing]
+		- app.MapControllerRoute(
+			name:"default",
+			pattern: "{Controller=Home}/{action=Index}/{id?}",
+			default: "{Controller=Home}/{action=Home}"
+		);
+		
+----------------------------------- [ Create Project ] ---------------------------
+	- Create new MVC Core project 
+	- Add Packages using CLI or PMC
+		- Microsoft.EntityFrameworkCore
+		- Microsoft.EntityFrameworkCore.Tools
+		- Microsoft.EntityFrameworkCore.Design
+		- Microsoft.EntityFrameworkCore.SqlServer
+	- Macke Sure that you installed Client Side Library
+		- bootstrap
+		- jquery 
+		- jquery-validation
+		- jquery-validation-unobtrusive
+	
+	- [Model Directory]
+		- Create the entities
+	
+	- [Data Directory]
+		- Create Application DbContext
+			- Inherit from DbContext
+			- Create [Default Constructor] and [DbContextOptions Constructor]
+			- Setup DbSet<Entity>
+			- [Fluent API] Setup protected override void OnModelCreating(ModelBuilder modelBuilder)
+		- [Migration Directory]
+			- Inside the Data Directory we add Migrations Directory which holds the application migrations
+			- Add-migration Mi1 -o \Data\Migrations
+	
+	- in AppSettings (builder.Configuration) 
+		- Add Connection String for the connection between the database and the application
+		- "ConnectionString":{
+			"ConnectionName": "Server=.;Database=TwentyOctober;Trusted_Connection=True;TrustServerCertificate=True;"	
+		  }
+	
+	- Add to Application Services SqlServer
+		- Register the database 
+		- builder.Service.AddDbContext<ApplicationDbContext>(options=> options.UseSqlServer(builder.Configuration.GetConnectionstring("ConnectionName")));
+		
+	- We're using Repository Pattern unit of work and Generic repository
+		- Create IRepository<> and Include the abstract methods [add, delete, getall, update]
+		- Create Repository for each entity like SchoolRepository and StudentRepository and Inherit from Irepository<Student/School>
+		- Register all the repositories to the services to be injected
+			- builder.Services.AddScooped(typeof(IRepository<Student>), typeof(StudentRepository));
+
+------------------------------ [ IActionResult Return Types ] -----------------------------
+
+	- ViewResult	=> return View(data);
+	- JsonResult	=> return Json(data);
+	- RedirectResult	=> return Redirect("/Home/Index");
+	- ContentResult	=> return Content("PlainText");'
+	- FileResult	=> byte[] fileContents = getfileContents(); return File(fileContents, "application/octet-stream", "filename.txt");
+	- StatusCoreResult	=> return NotFound();	// Returns a 404 Not Found Status
+	
+
+	
+------------------------------ [ Data Binding ] -----------------------------
+	
+	- [ Model Binding ]
+		
+	- [ ViewData and ViewBag ]
+		- ViewData["Message"] = "" / ViewBag.Message = ""
+	
+	- [ Strongly typed views and model binding ]
+		- @model TypeOfDataHoldedByModel
+		- We could use view model to pass multiple data with specified shape as we need 
+	
+	- JSON Binding (Model Binding For AJAX Request)	return Json result from IActionResult
+		- In case we're using ajax call instead if using View return, we return JSON Data
+		- So the action is look like
+			- var data = new {StudentCount = 5, SchoolCount= 7};
+			- return Json(data);
+			
+		- in the View we write Jquery Script and request the data from the url of the controller and its action
+			- Make sure you included Jquery library
+			$(document).ready(function(){
+			   $("#DomElement").click(function(){
+				$.ajax({
+					url:"",
+					type:"Get",
+					dataType: "json",
+					success: function(data){
+						$("#text1tomodify").text("newnext");
+						$("#text2tomodify").text("newtext");
+					},
+					error: function(e){
+						console.log("Error Happened!", e)
+					}
+				})
+			   })
+			});
+
+---------------------------------- [ HTML & Tag Helpers ] ---------------------------------------
+	- [ Tag Helpers]
+		- asp-action="Index"	=> specifies the action method for generating urls in anchor
+		- asp-controller="Home"	=> specifies the controller for generating URLs in anchor elements
+		- asp-route		=> specifies route values for generating Urls like using action and controller with asp-route-id="1"
+		- asp-for"Model.PropertyName"	=> Generate html element for model properties, aiding in model binding or forms
+		- asp-validation-for="Model.x	=> Generates HTML attribute for client-side validation based on model validation attribute
+		- asp-area="Admin"		=> Specifies the area for generating Url used with action and contorller tag helpers
+		
+	    - [ Tag Helpers Attributes ]
+		- asp-if="ModelIsAdmin"	=> conditional rendering of html elements
+		- asp-append-version="Bool"	=> appends a version number to static file url for cach busting
+		- asp-route
+	
+	- [ HTML Helpers ]
+		-
+		
+------------------------------------ [ Page Ination ] -------------------------------------------
+	- In pagination we use a skip and take LinQ methods to get specific page depend on the size of the page like 
+	- _context.Students.Skip((pageIndex-1) * pageSize).Take(PageSize).ToList();
+	

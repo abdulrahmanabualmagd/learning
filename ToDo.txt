@@ -173,6 +173,24 @@ Dependency Injection Container DIC
 IService Provider Interface
 what is scaffolding
 use of each package in asp.net core
+what is record and the differences between record and class , and why it preferred to be used in DTOs
+what is principle of proximity => a concept which refer to grouping related elements in one place 
+Differeneces between add transient and add scoped
+
+
+Follow the mvc identity workflow
+usermanger.signin
+external login
+two-way-vertification
+email confirmation
+how to uer logger and store in console or external file to track things and what is the purpose of using the logger 
+
+
+
+git secrets & git Crypt
+
+
+
 
 
 

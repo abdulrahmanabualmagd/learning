@@ -736,7 +736,7 @@ WCF or Web API for building services (optional)
 		- Method Injection
 		- Property Injection     
 
--------------------------------------------------- [ Entity Framework ] --------------------------------------------------
+-------------------------------------------------- [ Entity Framework Core ] --------------------------------------------------
 	- Entity Framework Core (EF Core)
 			- Uses an Entity Data Model to represent the conceptual model of the data
 			- This Models Include Entities, represents tables in the database, associations (representing relationships between entities) and mapping
@@ -872,6 +872,17 @@ WCF or Web API for building services (optional)
 				- The main query will retrieve the list of Authors which represents the (1)
 				- when access theri books it will execute N of queries, in this case we have 3 Authors 
 				- So each Author will have one qeury to get his books so we have 3 Queries which represents the (N)
+				
+	- [Data Seeding]
+		- Seeding refers to the process of populating a database with initial data during the application's database initialization.
+		- This is commonly done to provide a set of predefined data that the application relies on when it start running, ensuring that the database is in a consistent and usable state
+		
+		- Seeding Ways
+			- Fluent API OnModelCreating method
+			- Migrations using migrationBuilder.Insert() | migrationBuilder.Sql()
+			- Separated Configuration Classes
+			- Configure method Startup file
+			- Custom Initializer IDbContextInitializer<TContext>
 	
 -------------------------------------------------- [ EF Fluent API ] --------------------------------------------------
 	- Are methods that allws us to configure and customize the tentity model and its mapping to the underlying databse 
@@ -1057,10 +1068,14 @@ WCF or Web API for building services (optional)
 		- [RoleClaims]	=> Stores claims associated with roles
 		- [UserTokens]	=> This table is used to store tokens associated with a user
 	
-		
+	- Create IAccountMangerService & AccountMangerService and Inject it in the controller 
+	- Install Package AutoMapper dependency injection
+	
 	- Register New User
 		
+		
 		-[Create User]
+		
 		     - Create Credential DTO for Receive the registeration data from the user  
 		     - Create User Instance and Assign the data received form the Credential DTO
 		     - _userManger.CreateAsync(UserInstnaace, PasswordFromCredentialsReceived);	Returns IdentityResult which indicate the state of the Creations

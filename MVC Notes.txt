@@ -28,23 +28,28 @@
                   - used when you want to return a specific HTTP status code without a content body like what you see when page not fount [ Erorr 404 page not found]
 
 
-[Single Responsibility(SRP)]
-      - Each class should have only one responsibility
-[Open-Closed Principle(OCP)]
-      - Classes, Modules, Functions, Etc.. Should be able to extend but closed for modification
-      - we should be able to extend the behavior of a module wihout altering its surce code
-      - Achieve that by using Techniques like Inheritance, Interfaces, and Abstract Calsses to allow for extension through new code rather than modifying existing code
-[Liskov Substitution Principle(LSP)]
-      - the objects of a derivd class should be able to replace objects of the base class without affecting the correctness of the program
-[Interface Segregation Principle(ISP)]
-      - Classes, Modules that depend on interfaces should not be forced to depend on interfaces they don't use
-      - Classes should not be required to implement methods it doesn't need
-      - to adhere to ISP, create small specific interfaces rather that large monolithic ones
-      - and let classes implement only the interfaces that are relevant to them
-[Dependency Inversion Principle(DIP)]
-      - Promotes high-level modules (classes or components) to be independent of low level modules.
-      - both should depend on abstractions
-      - this priciple helps in decouple different parts of the system and makes it easier to replace or extend components without affecting the entire system
+- [ SOLID Principles ]
+          - [Single Responsibility(SRP)]
+                - Each class should have only one responsibility
+                
+          - [Open-Closed Principle(OCP)]
+                - Classes, Modules, Functions, Etc.. Should be able to extend but closed for modification
+                - we should be able to extend the behavior of a module wihout altering its surce code
+                - Achieve that by using Techniques like Inheritance, Interfaces, and Abstract Calsses to allow for extension through new code rather than modifying existing code
+          
+          - [Liskov Substitution Principle(LSP)]
+                - the objects of a derivd class should be able to replace objects of the base class without affecting the correctness of the program
+          
+          - [Interface Segregation Principle(ISP)]
+                - Classes, Modules that depend on interfaces should not be forced to depend on interfaces they don't use
+                - Classes should not be required to implement methods it doesn't need
+                - to adhere to ISP, create small specific interfaces rather that large monolithic ones
+                - and let classes implement only the interfaces that are relevant to them
+          
+          - [Dependency Inversion Principle(DIP)]
+                - Promotes high-level modules (classes or components) to be independent of low level modules.
+                - both should depend on abstractions
+                - this priciple helps in decouple different parts of the system and makes it easier to replace or extend components without affecting the entire system
       
       
 what is attribute routing and controller discovery

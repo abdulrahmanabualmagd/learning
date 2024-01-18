@@ -178,28 +178,45 @@ what is principle of proximity => a concept which refer to grouping related elem
 Differeneces between add transient and add scoped
 
 
-Follow the mvc identity workflow
+Good Ethical Sensiblitiy
+
+
+Project ASP.NET Core MVC
+ - using 3-Tiers Architecture , Repository Design Pattern , Dependency Injection  and Unit of Work
+ - CRUD Operations [Create, read, update , delete] on Models [Departments , Employees , Users , Roles]
+ - Can Upload Image for Employee
+ - asynchronous programming multithreading
+ - External login with google
+ - Search By Ajax Call
+ - Forget Password and confirm the Identity by send Email Using mailkit or send SMS using twilio
+
+
 usermanger.signin
-external login
 two-way-vertification
 email confirmation
-how to uer logger and store in console or external file to track things and what is the purpose of using the logger 
-
-
-
-git secrets & git Crypt
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 what do I will gain in work experience 
+
+
+SolutionName
+│
+├── PresentationTier (Web Application or API)
+│   ├── Controllers
+│   ├── Views
+│   ├── Models (ViewModels or DTOs)
+│   ├── wwwroot (for web assets like CSS, JS, images)
+│   ├── appsettings.json
+│   └── Startup.cs
+│
+├── BusinessLogicTier (Class Library)
+│   ├── Services
+│   ├── Interfaces
+│   ├── Models (Business models)
+│   └── DTOs (Data Transfer Objects)
+│
+└── DataAccessTier (Class Library)
+    ├── Context (e.g., DbContext for Entity Framework Core)
+    ├── Entities (Database models)
+    ├── Repositories
+    ├── Migrations (if using EF Core Code-First)
+    └── Interfaces

@@ -1,0 +1,23 @@
+External Authentication
+	- Install provider package
+	- builder.Services.AddAuthentication()
+		.AddGoogle(options =>
+			options.ClientId = "your-clidentid";
+			options.ClientSecret = "your-client-secret"
+		)
+	
+	- Enable Authentication and Authorization middleware
+		- app.UseAuthentication();
+		- app.UseAuthorization(); 
+		
+	- Redirect to External Provider by controller action
+		- we get the url from the provider where the user will login 
+		- /signin-{provider}
+	
+	- Handle call back 
+		- Implement callback endpoint to handle the authentication result 
+		
+	- User Claims
+		- Obtain the user from external provider, now we can 
+		
+	

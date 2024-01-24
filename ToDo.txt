@@ -195,28 +195,5 @@ usermanger.signin
 two-way-vertification
 email confirmation
 
-what do I will gain in work experience 
 
-
-SolutionName
-│
-├── PresentationTier (Web Application or API)
-│   ├── Controllers
-│   ├── Views
-│   ├── Models (ViewModels or DTOs)
-│   ├── wwwroot (for web assets like CSS, JS, images)
-│   ├── appsettings.json
-│   └── Startup.cs
-│
-├── BusinessLogicTier (Class Library)
-│   ├── Services
-│   ├── Interfaces
-│   ├── Models (Business models)
-│   └── DTOs (Data Transfer Objects)
-│
-└── DataAccessTier (Class Library)
-    ├── Context (e.g., DbContext for Entity Framework Core)
-    ├── Entities (Database models)
-    ├── Repositories
-    ├── Migrations (if using EF Core Code-First)
-    └── Interfaces
+    

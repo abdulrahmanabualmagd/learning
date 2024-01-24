@@ -1,0 +1,54 @@
+
+
+datastructure types and the differences 
+	between each other array and array list access and linked list add remove
+
+	
+Solid Principle and define each one and usage
+
+OOP principles 
+	- overload and overwrite 
+	- abstract class and interface 
+	
+	- async and await 
+	- value type and reference type
+	
+Static binding and dynamic binding
+struct and enum in the memory
+	
+	
+
+JSON
+	
+design pattern define and types and type for each type
+	- what are the use cases for each 
+	- like singleton why use it and the purpose and where to use it like in appsettings
+	
+	
+SQL 
+	indexes index types and which column could I apply the index 
+	how to optimize the query like reduce views, using indexing
+	primary key and foreign key 
+	
+	how to access some data like accessing the project which connected the department that connected to the epmloyee using joins orally
+	joins types and the differences between each other and what is self join in what case could we use it 
+	function and stored procedure and views triggers
+	
+	
+
+scope transient singleton
+	
+Algorithms search binary self organized and selection and 
+	 Sort med quick selection insertion bubble
+	
+.net architecture
+	- CLR CIL/IL and so on
+	
+	
+	
+	
+ 
+
+
+
+

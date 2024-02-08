@@ -1,16 +1,25 @@
-- api core .net
+
+
 - mvc dashboard
+- api core .net
 - angular 
+
+
 - authentication and authrization (mvc & api[jwt])
+- External login [ Google Facebook GitHub ]
 
 
 - We have to use (Team-Management Tool [trello]) and (Version Control[git/github])
 
-- Generic Repostiory 
+- Generic Repository 
 - Unit Of Work
-- Spesefication design pattern 
-- Cashing
+- Specification design pattern 
+- Caching
 - JWT
+- redis
+- signalr
+- pagination
+- Seed for any modification that require applying new features
 
 --------- [ E-Commerce Features ] 
 
@@ -52,6 +61,8 @@ Product:
       - Condition (New or Used)
       - Stock Quantity
       - Discount
+      
+Details
       - Model      
       - Color 
       - Storage
@@ -63,6 +74,7 @@ Product:
       - OS version  
       
 ProductIdntity
+      - Id
       - Serial Number                     PK
       - product Id                        FK
   
@@ -74,7 +86,7 @@ Image:
       
 Warranty:   
       - Warranty ID                       PK
-      - Product  ID                       FK
+      - Serial  ID                        FK
       - Warranty Description
       - Warranty Duration
             
@@ -103,7 +115,7 @@ Phones
 
 Address:
       - ID                                PK
-      - Customer ID                       FK
+      - User ID                           FK
       - Street Address
       - City
       - State/Province
@@ -168,15 +180,15 @@ Payment:
       - Order ID                          FK
       - Payment Date
       - Payment Method (Credit Card, PayPal, COD)
+      
 
-            
 Promotion                                 // For Coupons and discounts 
       - Promotion Code
       - Discount Percentage
       - Start Date
       - End Date  
-
-          
+      
+      
 Shipment:     
       - ID                                PK
       - Shipment Type (Standard, Express) 
@@ -201,6 +213,7 @@ Return Request:
       - Request Date
       - Reason for Return
       - Status ( Pending, Approved, Rejected )      
+      
 Return Product:
       - ID                                PK
       - Return Request ID                 FK
@@ -208,17 +221,20 @@ Return Product:
       - Quantity
       - Condition (Like New, Defective)
       - Comments      
-Refund:
-      - Refund ID                         PK
-      - Return Request ID                 FK
-      - Refund Date
-      - Refund Amount      
+
 Return Status Log:
       - ID                                PK
       - Return Request ID                 FK
       - Status
       - Date
       - Comments or Notes
+      
+Refund:
+      - Refund ID                         PK
+      - Return Request ID                 FK
+      - Refund Date
+      - Refund Amount      
+      
 
 
 

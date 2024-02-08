@@ -1,5 +1,3 @@
-
-
 datastructure types and the differences 
 	between each other array and array list access and linked list add remove
 
@@ -14,16 +12,14 @@ OOP principles
 	- value type and reference type
 	
 Static binding and dynamic binding
-struct and enum in the memory
-	
-	
+
+Struct and enum in the memory
 
 JSON
 	
 design pattern define and types and type for each type
 	- what are the use cases for each 
 	- like singleton why use it and the purpose and where to use it like in appsettings
-	
 	
 SQL 
 	indexes index types and which column could I apply the index 
@@ -34,14 +30,12 @@ SQL
 	joins types and the differences between each other and what is self join in what case could we use it 
 	function and stored procedure and views triggers
 	
-	
-
-scope transient singleton
+Scope transient singleton
 	
 Algorithms search binary self organized and selection and 
-	 Sort med quick selection insertion bubble
-	
-.net architecture
+	- Sort med quick selection insertion bubble
+
+.NET Architecture
 	- CLR CIL/IL and so on
 	
 	

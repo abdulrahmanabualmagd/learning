@@ -1,0 +1,36 @@
+Specifications Design Pattern 
+          
+          - ISpecifications             where T : TEntity
+          - Specifications              where T : TEntity
+          
+          - StudentSpecifications : Specifications
+                    - Passing the Expression to the Cirteria through the constructor
+                    - AddIncludes
+                    - AddOrderBy
+                    - AddPageInation
+                    
+          - GenericRepo
+                    - GetAllWithSpecAsync (ISpecification<T> spec)
+                    
+          - SpecificationEvaluator (QueryBuilder) [ Infrastructure Layer ]
+                    - check the unnullable value and add the chaining to the query
+                    
+                    - Criteria != null
+                              - query.where(specs.Criteria)                    
+                    - OrderBy != null
+                              - query.OrderBy(specs.OrderBy)
+                    - OrderByDesc != null
+                              - query.OrderByDescending(specs.OrderByDesc)
+                    - IsPageInationEnabled
+                              - query.Skip(specs.Skip).Take(specs.Take)
+                    - query = specs.Includes.Aggregate(query, (CurrentQuery, Expresion) => CurrentQuery.include(Expression) )
+                    
+                              
+1 -> controller(Web)                    // Go to Services with the received params
+2 -> Service(Services)                  // Contain Logics and Send the params to Speicifications 
+3 -> specifications(Core)               // Create Specs new specs and go to the Services
+4 -> Services(Services)                 // Pass the Created services to the Unit of work method which deals with the spcefications
+5 -> UnitOfWork(Infra)                  // Deal with the generic Repo that related to the entity          
+6 -> GenericRepo(Infra) 
+7 -> SpecificationsEvaluator(infra) 
+8 -> GenericRepo(Infra)

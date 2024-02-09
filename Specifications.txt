@@ -28,9 +28,9 @@ Specifications Design Pattern
                               
 1 -> controller(Web)                    // Go to Services with the received params
 2 -> Service(Services)                  // Contain Logics and Send the params to Speicifications 
-3 -> specifications(Core)               // Create Specs new specs and go to the Services
+3 -> specifications(Core)               // Create Specs new specs and go to the Services and add includes
 4 -> Services(Services)                 // Pass the Created services to the Unit of work method which deals with the spcefications
 5 -> UnitOfWork(Infra)                  // Deal with the generic Repo that related to the entity          
-6 -> GenericRepo(Infra) 
+6 -> GenericRepo(Infra)                 // pass the specified specs to query 
 7 -> SpecificationsEvaluator(infra) 
 8 -> GenericRepo(Infra)

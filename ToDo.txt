@@ -1,199 +1,58 @@
-ASP.NET Identity
+- decorator design pattern, 
+- redis in-memory (remote dictionary server)
+- SMTP
+- SignalR
+- Database Collaboration on git
+- Promises (Asynchronous Operation)
+- What are the Core Features for Javascript?
+- What is Redux library?
+- SSR & SSG   in new version of angular 
+- AWS
+- enableProdMode
+- angular custom elements to use it in any enviroment
+- changeDetectionStrategy.OnPush
+- .pipe.tap
+- when the router receives a URL, it goes through the configuration in order$$
+- inject() method from angular/core
+- different between angular core and cli
+- form of injection, = inject(Router);
+- navigate() {this.router.navigateByUrl('/contacts');}           // Make sure to import inject from core 
+- agile methodologies (Scrum, Kanban).
+- unit test to add to cv
+- sql server acid 
+- C# type-checking 
+- memory allocation
+- copying
+- dynamic keyword
+- the different between class, constructor, and interface
+- what to do when plannig to design database systems (steps) best practice to follow
+- what to do when starting building a software application steps and best practice like SLDC
+- memory allocation in initialization and declaration of arrays and list
+- C# Reflections
+- JIT C# Compiler
+- how array stored. Sequentially?
+- Union and intersection in C#
+- deferred, eager, lazy, immediate, explicit => .include, .load, 'virtual'
+- DDD Domain-Driven Design .NET Core
+- allowdataloss in the context of migration
+- [notmapped] attribute
+- compostite attribute 
+- optmisitic concurrency mode & row version & timestamp in database management and Entity Framework  [Web API Project]
+- Concurrent Programming: &&&concurrecny, thread, task, process, deadlock, parallelism, synchronization, concurrency control, asynchronous programming (#Line 1006)
+- IServiceCollection, Dependency Injection Container DIC, IService Provider Interface
+- what is scaffolding
+- what is record and the differences between record and class , and why it preferred to be used in DTOs
+- Differeneces between add transient and add scoped
 
-ASP.NET JWT
-
-Patterns [ Unit Of Work / Generic Repository ]
-
-how to use packages Identity JWT bearer 
-
-redis in-memory (remote dictionary server)
-
-SMTP
-
-SignalR
-
-how to collaborate on a database using version control in git
-
-what is mapped type in typescript
-
-Promises (Asynchronous Operation)
-
-Search for "What are the Core Features for Javascript?"
-
-What is Redux library?
-
-asynchronous and parallelism
-
-CPU-Intensive VS I/O Intensive Tasks
-
-@for(item of products; track @index){}         // https://angular.io/api/core/for
-@for (item of items; track item.id; let idx = $index, e = $even) {
-  Item #{{ idx }}: {{ item.name }}
-}
-
-export interface Note {
-  id: number;
-  title: string;
-  text: string;
-}
-export const NOTES: Note[] = [ ... ]
-
-(ngSumbit) => //on forms
-<form (ngSubmit)="showName()" #myForm="ngForm">       // We used a reference here!
-<input type="submit" value="Submit" [disabled]="!myForm.form.valid" /> // try the form driven tempalte 
-
-// CSS Form Validation Condition 
-input.ng-valid {
-  background-color: #79ba6a;
-}
-input.ng-invalid {
-  background-color: #f58c84;
-}
-
-// Reactive Forms
-<input type="text" [formControl]="name" name="name" />      // Create new Form Control
-
-this.loginForm.value.username       // to access the form control syntax
-
-// we have to use ngSubmitFront-End:
-      
-	  
-
-SSR & SSG   in new version of angular 
-AWS
-
-enableProdMode
-
-how to produce an angular custom elements to use it in any enviroment
-
-changeDetectionStrategy.OnPush
-
-.pipe.tap
-
-Angular Component Standalone and dependency => look for angular updates
-
-@component{
-      standalone:,
-      imports:[],
-}
-
-@for(item of products; track @index){}         // https://angular.io/api/core/for
-@for (item of items; track item.id; let idx = $index, e = $even) {
-  Item #{{ idx }}: {{ item.name }}
-}
-
-export interface Note {
-  id: number;
-  title: string;
-  text: string;
-}
-export const NOTES: Note[] = [ ... ]
-
-(ngSumbit) => //on forms
-<form (ngSubmit)="showName()" #myForm="ngForm">       // We used a reference here!
-<input type="submit" value="Submit" [disabled]="!myForm.form.valid" /> // try the form driven tempalte 
-
-// CSS Form Validation Condition 
-input.ng-valid {
-  background-color: #79ba6a;
-}
-input.ng-invalid {
-  background-color: #f58c84;
-}
-
-// Reactive Forms
-<input type="text" [formControl]="name" name="name" />      // Create new Form Control
-
-this.loginForm.value.username       // to access the form control syntax
-
-// we have to use ngSubmit
-// stand alone and lazy loading 
--- when the router receives a URL, it goes through the configuration in order$$
-inject() method from angular/core
-different between angular core and cli
-
-//new form of injection 
-router = inject(Router);
-navigate() {
-  this.router.navigateByUrl('/contacts');
-}           // Make sure to import inject from core 
-
-$$$$$$$ WebSocket
-      // like in gmail updating messages autmatically without cliking on anything like (signalR) I think
-      
-agile methodologies (Scrum, Kanban).
-
-unit test to add to cv
-
-sql server acid 
+- Search By Ajax Call
+- Forget Password and confirm the Identity by send Email Using mailkit or send SMS using twilio
+- usermanger.signin
+- two-way-vertification
+- email confirmation
+- WebSocket // like in gmail updating messages autmatically without cliking on anything like (signalR) I think
 
 
-What is .NET and what is the differences between the other versions(.NET Framework, .NET Core, .NET)
 
-
-type-checking 
-memory allocation
-copying
-
-
-polymorphism (static binding/ dynamic binding)
-boxing and Clr
-
-dynamic keyword
-
-the different between class, constructor, and interface
-
-what to do when plannig to design database systems (steps) best practice to follow
-what to do when starting building a software application steps and best practice like SLDC
-
-memory allocation in initialization and declaration of arrays and list
-C# Reflections
-JIT C# Compiler
- 
-how array stored. Sequentially?
-concurrency and multithreading
-Union and intersection in C#
-classes relations
-deferred, eager, lazy, immediate, explicit => .include, .load, 'virtual'
-what is data migration in code first approach
-DDD Domain-Driven Design .NET Core
-dependency injection container 
-database migration seed() method => update default values on update-database , write initial values to use it like adding Client and admin roles
-on the configuration constructor enable automaticMigrationEnabled -- set it to true
-allowdataloss in the context of migration
-[notmapped] attribute
-compostite attribute 
-complete dependency injection
-refactoring technique
-optmisitic concurrency mode & row version & timestamp in database management and Entity Framework  [Web API Project]
-Concurrent Programming: &&&concurrecny, thread, task, process, deadlock, parallelism, synchronization, concurrency control, asynchronous programming (#Line 1006)
-Seperation of concerns
-IServiceCollection 
-Dependency Injection Container DIC
-IService Provider Interface
-what is scaffolding
-use of each package in asp.net core
-what is record and the differences between record and class , and why it preferred to be used in DTOs
-what is principle of proximity => a concept which refer to grouping related elements in one place 
-Differeneces between add transient and add scoped
-
-
-Good Ethical Sensiblitiy
-
-
-Project ASP.NET Core MVC
- - using 3-Tiers Architecture , Repository Design Pattern , Dependency Injection  and Unit of Work
- - CRUD Operations [Create, read, update , delete] on Models [Departments , Employees , Users , Roles]
- - Can Upload Image for Employee
- - asynchronous programming multithreading
- - External login with google
- - Search By Ajax Call
- - Forget Password and confirm the Identity by send Email Using mailkit or send SMS using twilio
-
-
-usermanger.signin
-two-way-vertification
-email confirmation
 
 
     

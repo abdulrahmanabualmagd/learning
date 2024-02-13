@@ -1,14 +1,12 @@
 - decorator design pattern, 
 - redis in-memory (remote dictionary server)
 - SMTP
-- SignalR
-- Database Collaboration on git
-- Promises (Asynchronous Operation)
+- SignalR (.net)
+- Socket.io (nodejs)
 - What are the Core Features for Javascript?
 - What is Redux library?
 - SSR & SSG   in new version of angular 
 - AWS
-- enableProdMode
 - angular custom elements to use it in any enviroment
 - changeDetectionStrategy.OnPush
 - .pipe.tap
@@ -49,7 +47,12 @@
 - usermanger.signin
 - two-way-vertification
 - email confirmation
-- WebSocket // like in gmail updating messages autmatically without cliking on anything like (signalR) I think
+
+Local tunnel port forwarding in Visual Studio Code
+websocket vs long polling vs event source
+
+- socket.io
+- downcasting vs upcasting
 
 
 

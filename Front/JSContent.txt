@@ -31,8 +31,8 @@
 
 6- Asynchronous JavaScript:
           - Callbacks
-          - Promises
           - Async/await
+          - Promises
           - Fetch API for making HTTP requests
 
 7- Error Handling:
@@ -95,7 +95,7 @@
 17- Package Managers and Build Tools:
           - npm (Node Package Manager)
           - yarn
-          - Webpack
+          - Webpack           // Modules hybrid (ecmascript, commonjs)
           - Babel
 
 18- Version Control Systems:

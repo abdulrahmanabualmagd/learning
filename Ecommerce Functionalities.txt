@@ -1,5 +1,3 @@
-
-
 - mvc dashboard
 - api core .net
 - angular 

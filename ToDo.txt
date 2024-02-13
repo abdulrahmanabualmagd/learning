@@ -42,7 +42,95 @@
 - what is record and the differences between record and class , and why it preferred to be used in DTOs
 - Differeneces between add transient and add scoped
 
-- Search By Ajax Call
+What is OAuth2, OpenID, And Two-Factor Authentication?
+Role-Based Access Control
+Claims Based Identity - are statements about the user such as their names, Email, or roles and are used for (Authorization)
+Token Based Authentication - makes it suitable for building modern Statless APIs
+Customization
+Password Hashing
+External Authentication
+Account Confirmation and password Reset
+what and how to implement the class constraints
+What Are Async function ?
+What is the Third-Party Authentication
+What does entry keyword mean in C#
+What is Task?
+buddy class
+proxy class
+what is wpf => customizable windows form (you draw)
+what is thedifferent between key and dot notation? Person.Name, Persons['Ahmed']
+what is the different between the filters and the pipeline 
+          - pipeilne is like services such as the endpoints 
+          - filters is like the attribute of route and aciton (not sure) have higher priority when route it will use the attribute 
+the different between attribute route and action 
+		- is that action change the name of the action and we have to change the all configuration that operate with that action 
+		- route just change the appearance of the action in the url part
+		- These features exsists from mvc 5
+
+if we want to make the developer can't know the name of the action we put [ActionName("name of the action")]
+          - put then we have to write the old name in all configuration
+          - also we have a problem that we have to rename the view or pass the name of the view 
+			
+	@htlm.validationSummary() responsible for gathering all the validations in the upper part of the page
+	@html.AntiForgeryToken()  responsible for forbidden the user to access 
+[IActionResult] 
+      - is an interface that represents the result of an action method in a controller
+      
+      Common Types of results that Implement IActionResult interface:
+            - [ View Result ]
+                  - represents a view that will be rendered as an HTML page and sent to the client 
+                  - used when you want to return an html view as the response
+                  - typically used for renderiug web pages in MVC applications
+            
+            - [ JsonResult ]
+                  - representts data serialized as JSON that is sent to the client
+                  - used when you want to return JSON data in response to an AJAX request or a web API endpoint 
+            
+            - [ FileResult ] 
+                  - Represents a file that is sent to the client for download 
+                  - Used when you want to return a file (pdf, image, document) to the client 
+            
+            - [ RedirectResult ] 
+                  - Represents a redirection to another URL
+                  - used when you want to redirct the client to a different action or external URL
+                  
+            - [ ContentResult ] 
+                  - Represent a custom Text-based response
+                  - used when you want to return plain text or custom content 
+            
+            - [ StatusCodeResult ]
+                  - Represents a response with a specific HTTP status code
+                  - used when you want to return a specific HTTP status code without a content body like what you see when page not fount [ Erorr 404 page not found]
+what is attribute routing and controller discovery
+
+built-in framework services
+
+built-in middleware
+
+what is ioc Container(Inversion of controll) also reffered as dependency injection
+
+what is the relation between url and dns between the connection of client => server 
+      - URL: Uniform Resource locator / DNS: Domain Name System
+      - you type url on your web browser
+      - your browser sends a query to a dns server 
+      - the dns server looks up the ip address associated with the url 
+      - the dns return the associated ip address
+      - you web browser uses the ip address to conect to the web server 
+      - the web server sends back the html code for the requested page
+      - your web browser renders the received html code and displays that page
+why it is not good to throw heavy c# in view
+	
+what is mono framework
+[Factory Design Pattern]
+      -- create a class that contain a static function which create and return an object from a class so here we make another way that create the object unlike the Tightly coupling
+      -- we achieved Single Responsibility
+
+[MidlleWare]
+      - use
+      - run 
+      - map
+      
+
 - Forget Password and confirm the Identity by send Email Using mailkit or send SMS using twilio
 - usermanger.signin
 - two-way-vertification
@@ -53,7 +141,8 @@ websocket vs long polling vs event source
 
 - socket.io
 - downcasting vs upcasting
-
+- restful web api
+BCL / COMPILER / GARBAGE COLLECTOR / TRANSFERRING IL  => CLR
 
 
 

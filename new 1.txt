@@ -1,0 +1,28 @@
+Responsibilities
+
+Implement new web applications as well as maintain existing applications.
+Translate business requirements into functional applications throughout all stages of the SDLC.
+Write clean, testable code using .NET and Angular.
+Integrate software components and third-party programs.
+Ensure the best possible performance, quality, and responsiveness of applications.
+Identify bottlenecks and bugs, and devise solutions to mitigate and address these issues.
+Help maintain code quality, organization, and automation.
+Verify and deploy programs and systems.
+Unit-test, Troubleshoot, debug code for robustness, including edge cases, usability, and general reliability
+Familiar with UI/UX design and have an eye for layout aesthetics.
+Collaborate with cross-functional teams to define, design, and ship new features
+Continuously discover, evaluate, and implement new technologies to maximize development efficiency
+Qualifications & Work Experience
+
+0-1 Year of experience as a software developer.
+Bachelor's degree in Computer Science / Computer Engineering or related discipline.
+Excellent Programming skills With C#.
+Deep Understanding of SOLID Principles.
+Solid understanding of object-oriented programming concepts and design patterns.
+Very Good experience in using ASP.NET Core and Angular and TypeScript.
+Having skills in designing and working with Restful Web APIs is a must.
+Experience in HTML5, CSS3, c, JavaScript, and jQuery libraries.
+Very Good Knowledge of SQL & Database Knowledge (Write Complex queries, Stored Procedures, Triggers, Functions, Views).
+Very Good Knowledge of Database Design / Normalization Skills.
+Experience in Git source control.
+Experience in Agile Development Methodologies.

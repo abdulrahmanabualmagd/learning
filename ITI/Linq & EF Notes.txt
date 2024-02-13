@@ -1,7 +1,6 @@
-What is [ Proxy in C# ]
-
-
 ------------------- [ Qeustions ] -------------------
+
+What is [ Proxy in C# ]
 
 enable lazy loading by adding keyword 'virtual' to the property
       
@@ -26,6 +25,8 @@ attributes like key and composite primary key how to make it
 
 var something dynamic determine the data that it referring to in compile time unlike js
 
+performance and memory overload [ deferred / eager ] which case make me chose which one
+
 [Eager / Deferred ] Execution
 
 // eager execution => sub_routine
@@ -33,277 +34,18 @@ var something dynamic determine the data that it referring to in compile time un
 // deffered execution => co-routine
 
 
-var Query = from d in SampleData.Departments where d.Name.Length > 3 select d;
-
-int Query = (from e in SampleData.Employees where e.Salary > 2000 select e).Count(); 
-
-Query Expression 
-pipline
-aggregate function 
-
-TakeWhile(e=>e.name.lenth<5); -- takes lambda Expression
-what is different between takewile and where ??
-	where check all the list 
-	takewhile if the condition become false it will stop checking what is next if even there is a match for the condition
-
-skipwhile()take lambda expression
-	-- after first match will take it and the restof the list weither matches or not 
-
-first, firstOrDefault, Take, TakeWhile, Skip, SkiopWhile, 
-
-join @ subQuery
-
-var Query = from e in SampleData.Employees from d in SampleData.Departments where e.Department == d select new {e.Name, d.Name};
-foreach(var item in Query){console.WriteLine(item.Name);}
-
-var Query = from e in SampleData.Employees join d in SampleData.Departments on e.Dpepartment equals d select new { e.Name, DeptName = d.Name };
-foreach (var item in Query){console.WriteLine(item ... }
-
-var Query = SampleData.Employees.Select(e=>new {e.Name, DepName = e.Department.Name}
-
-// sub Query
-var Query = from d in SampleData.Departments select new { d.Nam, Employees = from e in Sampledata.Employees where e.Department == d select e.Name};
-
-
-or sub-query 
-IEnumerable 
-
-region Casting
-// error, Cannot Implement IEnumberable 
-var Query = from e in SampleData.GetEmployee() select e;
-
-1-- not the best 
-@var Query = from Employee e in SampleData.GetEmployee() select e;	-- casting every object return to [employee]
-	-- high risk for object not type of employee [Not Safe]
-
-2-- not the best 
-@var  Query = from e in SampleData.GetEmployee().Cast<Empolyee>() select e; -- casting all the returning object to Employee
-	-- high risk for object not type of Employee [Not Safe]
-
-3-- most used [ More Safe ] called [ Safe Casting ]
--- cast to IEnumerable<Employee>
-@var Query = from e in SmpaleData.GetEmployee().OfType<Employee>() select e; -- convert it to IEnumerable of Employee (just convert the object from type IEnumerable<Employee>
-
-lab
-using 2 method [ sub-Query / joni / relation .. differentiate
-
-
-=========== [ Day Two ] ==============
-application = [A medium] = database
-
-ef is a medium layer [ EF API ] called [Entity Data Model] => Contain [ Conceptual Model / Mapping / Storage Model ]
-
-we are using LinQ to deal with EF that Deal with the data source
-
-deepy context lite weight from EF [unrequired functionality removed]
-object context is old version but deepy context is new and light weight 
-
-install to the project 
-three methods to work with EF
-	- [ new item in the project ]
-	- [Data] [ADO.NET Entity Data Model] 
-	
-	- database first [ EF Designer from database]
-	- [Empty EF Designer model] not working in the industry
-	- [Emply Code First Model] Code First - Most Common Used
-	- [Code First From Database] Mixed Mode for complex projects [ Classes + 
-
-	IP Address
-connection string contain all the data for connection details
-app.config is like bios tells how the application should work 
-
-which version of EF [6.x / 5.0] // choose the latest
-
-what is DbContext (entity framework)
-concurrency mode 
-navigation peroprty
-
-CompanyEntity 
-
-// connection string must have name // we can obtain more that one connection string // stored in app.config
-CompanyEntities context = new CompanyEntities();
-what is different between IQueryable and IEnumerable?
-What is Expression Tree [respnsible for converting c# query to sql server query
-
-var q = context.Department.Select(d=>d);
-
-$$$-eager laod, lazy load, Explicit load, IQueryable, IEnumerable, when to use each one on different business cases
-
-explain what happened here
-var q = context.Departments.Select(d=>d).Where(d=>d.ID>); // $$
-search for it 
-
-performance and memory overload [ deferred / eager ] which case make me chose which one
-
-to convert from deferred to eager we pub .ToList()
-var q = context.Departments.Select(d=>d).ToList.Where(d=>d.ID > 10);
-explain what heppned here$$
-
-context.Database.Log = Console.WriteLine; // show all states
-
-Department Dept = context.Departments.FirstOrDefault();
-dept.Name = "UpdateDept";
-
-context.SaveChanges();	// 
-context.Entry(Dept).State=System.Data.Entity.EntityState.Modified  // this line occurs autmatically 
-context.Entry(Dept).State=System.Data.Entity.EntityState.Add
-context.Entry(Dept).State=System.Data.Entity.EntityState.Delete
-context.Entry(Dept).State=System.Data.Entity.EntityState.Detached
-[ Unchanged/ Modified ]
-// search for it 
-Department dept = new Department(ID=, NAME='', ...);
-context.Departments.Add(dept);
-context.SaveChanges();
-
-
-Department Dept = context.Departments.FirstOrDefault();
-context.Departments.Remove(dept);
-context.SaveChanges();
-
-[Relation] we don't have join because we're working C#
-
-var q = from e in context.Employees select new {e.Name, DeptName=e.Department.Name};
-foreac(){}
-
-Department NewDept = new Department(){ID = 26, Name= "TestRelation"};
-Employee Emp = new Employee (){Name = "EmpRelation", Department = NewDept};
-context.Employees.Add(Emp);
-contxtl.saveChanges();
-
-Department newDept2 = new Department(){}
-Employee emp2 = new Employee(){Name = "empRelation2", Department = emp.ID};
-context.Departments.Add();
-context.saveChanges();
-
-//include foreign key with the model // Search for it 
-
-// adding stored procedure 
-	// browser model show 
-view/ table => class
-stroed procedure => function 
-
-ef can't understand the return of the stored procedure so we determine it by ourself 
-	-- go to model browser and the name of the proc in function imports and change it to entity with the name of the class that we know it will return data from that type
-	-- return a collection Of
-
 what is DbSet // IQueryrable
-concurrence mode 
 
-
-============== [ Day Three ] ================
-the deferred execution occurs when you enumerate the results by using the foreach or ToList() ToArray()
-
-what is ToList(), ToArray() search for it ??
-
-[databasefirst] we took yesterday !
-
-relation in C# search!
-
-dependent is the foreign key that is pointing to the primary key [Princible Key] 
-
-relook at the relation region in the demo // why we send it as newDept and the different between send it as the dept.id 
-
-(@"") what is the purpose of the '@' symbol
-
-concurrency mode // check before savechanges that the value as excpected 
+concurrence mode // check before savechanges that the value as excpected 
 but lower the performance and extra amount consumed in memory [ OriginalValue / CurrentValue ]
 
-TimeStamp Search!!
+TimeStamp Search!! searching for specific information or events within a dataset based on timestamps or time-related information associated with those events.
 
-Entris is an array in the exception that holds all the objects that a problem occured to it 
-
-var value = ex.Entries.First(); // get the last object add to the list 
-value.Reload(); // select again from the beginning to update the value // can't detect wich column have problem occured so it reload the all the columns (Row)
-
-value.OriginalValues.SetVAslues(value.GetDatabaseValue());	the same as the previous two line inside the catch 
-	// here we set the original value that added from the concourrency mode 
-	// value.GetDatabaseValue() Search!! // it get the values from the database again as the [ value.Reload() ] 
-
-also we have a getValues like setValue search!!
-
-each context has its own try-catch 
-
-what is custom error handling
-
-what is documentation in C#?
-
-============================
-
-what is dataware house ?
-
-what is netget package manger ==> search for entityframework (not the core version)	work with the latest stable version !!
-
-if there is no internet connection get the ef from the package from an old project
-
-how to add connection string to the app.config
-
-in the datacontext class that inherits from dbcontext in the constructor of the datacontext 
-public context():base(name of the connection string )	sent it to the dbcontext constructor with the connection string name 
-
-what is DbSet //implemented in the datacontext class // is the table that create in the sql server when adding it to the sql server //context.add(dept)
+what is dataware house ? A data warehouse is a specialized database designed for storing and managing large volumes of data from various sources.
 
 what is migration history a table in the sql
 
-ID column auto detected and will by default set it as primary key 
-and if it numeric will set it Identity and not null
-
-any reference type by default will make it allow null
-
-context.add // automatically savechanges [affect the database] // only will create the table without adding the objects created 
-	-- to add it we have to write context.saveChanges(); // this will save the object to the [binded table] that we add it to the context 
-
-the created table in the database is the name of the DbSet<>
-
-migration is the mapping of c# to database [migration]
-
-class Database is existed if the datasource is sql
-
-Database.SetIntializer<dataContext>(strategy) like [ drop... ]
-
-what is model in ef?
-
-model is the structure of the table, each row record considered as model
-
-if the database is in use we can't modify or drop any table $$ like if we open the ssms and we're trying to modify the database from the visual studio 
-
-what is attributes in C#
-	addtional infromation that maps over a class
-
-what is data annotation use the attrubutes 
-
-[table(""myDept,schema="newschema")]
-internal class{}
-
-[key]
-[Column("ID")]
-public int deptID {get;set;}	// here the key is information for that line [ next line ]
-
-[Required] -- make the name not allow the null [ attributes ] 
-[]	// we can add more than one attribute in sperated line or sperated by comma on the same line like [,]
-public string Name{get;set;}
-
-to be able to use the data annotations we have to add using namespaces for the data annotation
-
-
-// in c# corner 
-// search for that snippet 
-[Timestamp]
-public byte[] TimeStamp{get;set;}
-
-
-seperate which one to use [ Code First ] or [ Database First ]
-which functionality we should focus on when use each case !
-
-what is fluent API or AI ??$$
-
-how to handle relations like one to many or many to many 
-
-one to many we add the a list in the many
-
-inside the department list of employees and it will directly understand that a relation 
-
 // InverseProerty search!!
-https://www.entityframeworktutorial.net/code-first/inverseproperty-dataannotations-attribute-in-code-first.aspx
 
 many to many relation we put list on both $ it will autmatically create new table and understant that it's a many to many relation
 
@@ -314,8 +56,3 @@ composite attribute search!
 	-- no user-defined datatype must all be primitive type 
 	-- must be object only inside the other class [not list]
 	-- if we add a user defined datatype it must be [ complex type & must add [ComplexType] attribute & object not list ]
-
-
-
-
-

@@ -144,6 +144,8 @@ websocket vs long polling vs event source
 - restful web api
 BCL / COMPILER / GARBAGE COLLECTOR / TRANSFERRING IL  => CLR
 
+survey apis
+
 
 
 

@@ -1,0 +1,18 @@
+----------------------------- [ Server ] -----------------------------
+1- Install Microsoft.AspNetCore.SignalR.Client
+2- Create class that inherit from Hub and write the SendMessage Method
+3- Register SignalR Service 
+4- Add app.MapHub<ClassName>("/PathToHub") after default mapping
+
+
+----------------------------- [ Client ] -----------------------------
+1- Use Microsoft SignalR library in JS
+2- Create new signalR connection using 
+          => const connection = new signalR.HubConnectionBuilder().withUrl("UrlToHub").build();
+3- Create Event for handling incoming messages 
+          => connection.on("ReceiveMessage", (user,message)=>{ //Print the message })
+4- Starting the connection
+          => connection.start().then(()=> // Print Connected).catch(console.error);
+
+5- For sending Message we have to use 
+          => connection.invoke("MethodNameInHub", "ParameterOfThemethod")

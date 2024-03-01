@@ -342,5 +342,24 @@ how to squash commit
             Note: this command not reversible, means that it will undo changes for good...
 
 
-      
+git init: Initializes a new Git repository in the current directory.
+git clone: Clones a repository into a new directory.
+git add: Adds changes in the working directory to the staging area.
+git status: Shows the current state of the working directory and staging area.
+git commit: Records changes staged in the staging area to the repository.
+git push: Pushes local changes to a remote repository.
+git pull: Fetches changes from a remote repository and merges them into the current branch.
+git fetch: Fetches changes from a remote repository but does not merge them into the current branch.
+git merge: Merges changes from one branch into another.
+git rebase: Reapplies commits on top of another base tip.
+git branch: Lists, creates, or deletes branches.
+git checkout: Checks out a branch or restores working tree files.
+git log: Shows the commit history.
+git reset: Resets the current HEAD to a specified state.
+git revert: Reverts one or more commits.
+git tag: Creates, lists, deletes, or verifies tags.
+git stash: Stashes changes in the working directory.
+git remote: Manages tracked repositories.
+git config: Sets configuration values for the user, system, or repository.  
+git blame: Shows what revision and author last modified each line of a file.
       

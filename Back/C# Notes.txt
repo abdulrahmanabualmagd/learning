@@ -308,8 +308,7 @@ WCF or Web API for building services (optional)
 		| Class Type        | Parent 	| Child 	| Object| |
 		---------------------------------------------------
 		| Static Class    	| No    	| No      | No      |
-		| Abstract Class  	| Yes   	| Yes     | No      |
-		
+		| Abstract Class  	| Yes   	| Yes     | No      |		
 		| Sealed Class    	| No    	| Yes     | Yes     |
 		| Attribute Class	| Yes   	| Yes     | No      |
 		| Singleton Class 	| Yes   	| No      | Yes     |

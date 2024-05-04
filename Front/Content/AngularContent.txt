@@ -1,0 +1,119 @@
+01- Introduction to Angular:
+    - What is Angular?
+    - Angular versions and their differences (AngularJS, Angular 2+, Angular 10, etc.)
+    - Angular CLI (Command Line Interface)
+    - Setting Up Angular Development Environment:
+    - Installing Node.js and npm (Node Package Manager)
+    - Installing Angular CLI
+    - Setting up a new Angular project
+
+02- Angular Architecture:
+    - Modules
+    - Components
+    - Templates
+    - Directives
+    - Services
+    - Dependency Injection
+    - Pipes
+
+03- Components:
+    - Component Structure
+    - Component Lifecycle Hooks
+    - Data Binding
+    - Interpolation
+    - Property Binding
+    - Event Binding
+    - Two-way Binding
+
+04- Templates:
+    - Template Syntax
+    - Template Expressions
+    - Template Statements
+    - Structural Directives (ngIf, ngFor, ngSwitch)
+
+05- Directives:
+    - Built-in Directives
+    - Attribute Directives
+    - Structural Directives
+    - Custom Directives
+
+06- Services and Dependency Injection:
+    - Creating Services
+    - Dependency Injection in Angular
+    - Singleton Services
+    - Injecting Services into Components
+
+07- Modules:
+    - Angular Modules
+    - Feature Modules
+    - Shared Modules
+
+08- Routing and Navigation:
+    - Angular Router
+    - Configuring Routes
+    - Route Parameters
+    - Route Guards
+    - Lazy Loading Modules
+
+09- Forms:
+    - Template-driven Forms
+    - Reactive Forms
+    - Form Validation
+    - Custom Validators
+
+10- HTTP Client:
+    - Making HTTP requests
+    - Handling responses
+    - Interceptors
+
+11- Observables and RxJS:
+    - Introduction to Observables
+    - Operators
+    - Subjects
+    - RxJS in Angular
+
+12- Angular CLI:
+    - Generating Components, Services, Modules, etc.
+    - Building and serving the application
+    - Running tests
+    - Deploying Angular application
+
+13- Testing Angular Applications:
+    - Unit Testing with Jasmine
+    - Test Bed and Mocking Dependencies
+    - End-to-End Testing with Protractor
+
+14- Angular Best Practices and Patterns:
+    - Component Communication Patterns
+    - Folder Structure
+    - Error Handling
+    - Performance Optimization
+
+15- Advanced Topics:
+    - Server-Side Rendering (Angular Universal)
+    - Progressive Web Apps (PWA)
+    - Internationalization and Localization
+    - Animation and Effects
+
+16- Third-Party Integrations:
+    - Angular Material
+    - Bootstrap
+    - Firebase
+    - GraphQL
+    - NgRx (State Management)
+
+17- Deployment and Optimization:
+    - Production Build
+    - Performance Optimization Techniques
+    - SEO Optimization
+
+18- Angular Security:
+    - Cross-Site Scripting (XSS) Prevention
+    - Cross-Site Request Forgery (CSRF) Protection
+    - Authentication and Authorization
+
+19- Angular Community and Resources:
+    - Angular Documentation
+    - Official Angular Blog
+    - Angular Community Forums
+    - Angular Meetups and Conferences

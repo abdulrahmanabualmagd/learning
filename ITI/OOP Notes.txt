@@ -1,146 +1,126 @@
-what is linear programming  [ go to were n invention but makes the code a spacitti code ( very very hard to trace ) ] [ repetition - maintainance - no scope - (syntactic error [ assigning different value type to the variable ]
-structural programming or procedural programming => came after linear programming [ divide the page to two scopes ( the main code / functions ) 
+// Linear Programming
+	[go to where n invention but make the code a spacitti code (very very hard to trace)]
+	[repetition - maintenance - no scope - (syntactic error [assigning different value type to the variable]
+	structural programming or procedural programming => came after linear programming [divide the page into two scopes (the main code / functions)]
 
-y2k problem date issues due to modifying all the code to have more digits in all the code / ( in general big code and places to modify any modification )
+// Y2K Problem
+	Date issues due to modifying all the code to have more digits in all the code / (in general big code and places to modify any modification)
 
-the main four princible core 
-	-- Encapsulation		          -- Hide Data
-	-- Abstraction 			-- Hide Functionality's Details		$$ -- may be merge the two concepts [ encapsulation / abstraction ] under  ( ABSTRACTION )
-	-- Inheritance			-- Class inherits attributes and methods from another class
-	-- Polymorphism			-- Different results with different uses
+// Main Four Principle Core
+	- Encapsulation
+	  - Hide Data
+	- Abstraction
+	  - Hide Functionality's Details
+	  - May merge the two concepts [encapsulation / abstraction] under (ABSTRACTION)
+	- Inheritance
+	  - Class inherits attributes and methods from another class
+	- Polymorphism
+	  - Different results with different uses
 
+// Note: JavaScript with ES.next became Object-Oriented Programming Language.
+	- All created classes by default inherit from the object class unless I make it inherit from something.
 
-note: js with es.next became Object oriented programming language.
+// Types of Classes
+	- Concrete class
+	  - The normal one that we take any class can inherit from it
+	- Sealed class
+	  - We can't inherit from it
+	  - Must be used in the beginning of creating the project and then after implementation
+	- Static class
+	  - All its fields, properties, methods, and constructor must be static like Math class consists of static and const
+	  - Can't create object from it, can't inherit except from static class
+	- Partial class
+	  - We have two classes and defined it as partial then the compiler merge both classes, this will make more than developer work on it each dev works on a different scope on the partial class
+	  - Internal partial class className // use this line on separated class files
+	- Nested class
+	  - Class inside a class
+	  - For the inner class we should create object to the outer class and then we can use its field [we can see the private field in the inner but the opposite won't work]
+	  - To create an object with the inner class we should include the outer.inner
+	- Abstract class
+	  - We can only create objects with the abstract class just other classes can inherit from it.
+	  - Parent can reference child object
+	  - Child cannot reference parent [boxing - unboxing - domcasting - upcasting]
+	  - Upcasting can be done implicitly (access the parent class member gut it is not possible to access all the child class members
+	  - Boxing is the process of converting a value type to a reference type
+	  - Unboxing is the process of converting a reference type to a value type
+	  - Upcasting is the process of converting derived type to a base type
+	  - Downcasting is the process of converting base type to a derived type
+	- Abstract method must be inside abstract class
+	  - Abstract method must be public
+	  - Abstract method have by default virtual so in the derived class we use override and implement it
+	  - The derived class from abstract class must have the abstract method from the base class OR we can set the derived class to abstract class
+	- Interface a contract that the class must do it
+	  - Any method inside the interface by default => abstract + public + virtual
+	  - We can't write variable inside the interface,
+	  - We can write property inside the interface just (auto-implemented property) and that's because it doesn't have implementation
 
--- all created classes by default inherit from the object class unless I make it inherit from something.
+// What is the Difference Between the Abstract Class and the Interface
+	- Abstract class can have both abstract method and non-abstract method
+	- Interface can have abstract methods / property only (auto-implemented property) added newly
+	- Indexer (added newly in the interfaces)
+	- Abstract class can have variables and but interfaces cannot
+	- Abstract methods in abstract class can have access modifiers, interfaces by default public + abstract + virtual
+	- Class can implement multiple interfaces but inherits from only one class
+	  - Multiple implementation for interfaces allowed in specific logic allowed, but in C# multiple inheritance not allowed in C#
+	- Abstract class used in case of inheritance
+	- There is no inheritance between the class and the interface but there is a contract that the class must implement all of it
 
-types of classes 
-	-- concrete class	-- the normal one that we take any class can inherit from it
-	-- sealed class		-- we can't inherit from it 		-- must be used in the beginning of creating the project and then after implemenation 
-	-- static class 	-- all its fields, proerpties, methods, and constructor must be static like Math class consists of static and const
-				-- can't create object from it, cant inherit except from static class
-	-- partial class	-- we have two classes and defined it as partial then the compiler merge both classes, this will make more than developer work on it each dev works on a different scope on the partial class
-				internal partial class className 	-- use this line on sepearated class files	
-	-- nested class		-- class inside a class -- for the inner class we should create object to the outer class and then we can use its field [ we can see the private feild in the inner but the opposite won't work ]
-				-- to create an oabject with the inner class we should include the outer.inner		
-	-- abstract class 	-- we can only create objects with the abstract class just other classes can inherirt from it.
+// Constructor
+	Special Type Of Function because => 1- Must Named AS Class Name || 2- Don't Have Return Type
+	Can't Inherit But Can Change
+	Can Be Overloaded
 
+	- Private Constructor
+		Cannot create object from it
 
-	-- parent can ref child object 
-	-- child can not ref parent 
-		[ boxing - unboxing - domcasting - upcasting ]
+	- Static Constructor
+		Called only once with first interaction with class
+		Cannot have any access modifiers or parameters
 
-	-- upcasting can done implicitly ( access the parent class member gut it is not possible to access all teh child class members
-boxing is the process of converting a value type to a referecnce type 
-unboxing is the process of conveting a reference type to a value type 
+	- Destructor or Finalizer
+		~ClassName()
+		{
+		}
+		Instructions for Garbage Collector before killing object in memory
+		Can not be called
+		Cannot have any access modifiers or parameters
 
-upcasting is the process of converting derived type to a base type 
-downcasting is the process of converting base type to a derived type 
+// Static Members
+	- Created only once in memory
+	- Belongs to class only not objects
+	- Shared for all objects
+	- Can be accessed only by class name
+	- Static Function works with only static member
+	- Non-Static Function works with static and non-static member
 
+// Class And Struct And Enum
+	By Default Internal
+	Class Member And Struct Members By Default Private
 
-abstract contain virtual inside it show any class inherit from it it must implement this abstract method inside it 
+// Relations Between Classes:
+	- Composition: Class A is main part of Class B
+	- Aggregation: Class A is optional part of Class B
+	- Association: Class A uses class B
+	- Inheritance: Is-A relation
 
-abstract method must be inside abstract class 
-	-- abstract method must be public 
-	-- abstract method have by default virtual so in the derived class we use override and implement it
-	-- the derived class from abstract class must have the abstract method from the base class 	OR  we can set the derived class to abstract class
+// Inheritance
+	- Represents Is-A Relation
+	- Class can inherit from one class only
+	- Can have multilevel inheritance
+	- Cannot have multiple inheritance
+	- Class that classes inherit from: Parent, Base, Super
+	- Class that inherits from other class: Child, Derived, Subclass
 
-
-interface a contract that the class must do it 
-	-- any method inside the interface by default => abstract + public + virtual  --- so I can't set one of these to interface 
-	-- we can't write variable inside the interaface, 
-	-- we can write property inside the interface just (auto implemented property) and that's becuase it doesn't have implementation
-
-	-- defualt implementation [ self study ]
-
-what is the difference between the abstract class and the interface 
-	abstract class can have both abstract method and non abstract method 
-	interface can have abstract methods / property only (auto implemented property) added newley 
-						-- indexer (added newley in the interfaces)
-	abstract class can have variables and but inerfaces cannot 
-	abstract methods in abstract class can have access modifiers , interfaces by default public + abstract + virtual
-	class can implement multiple interfaces but inherits from only one class 
-		mutlitple implementation for interfaces allowed in specific logic allowed, but in c# multiple inheritance not allowed in C#
-	abstract class used in case of inheritance
-	there is no inheritance between the class and the interface but there is a contract that the class must implement all of it 
-
-
-------------------------------------- [ Tricks ] ---------------------------------
-
--constractor 
-Special Type Of Function because => 1- Must Named AS Class Name ||  2- Don't Have Return Type 
-
-Can't Inhericted But Can Chaing 
-Can be Overloadind 
-
-
--private ctor -- cannot create objec From It, 
-
--Static Constructor
- Called only once with first interaction with class 
- cannot have any access modifiers or param
--Destructor or Finalizer
-        ~ClassName()
-        {
-            
-        }
-instructions for Garbage Collector before killing object in memory 
-can not  be called 
-cannot have any access modifiers or Param 
-
--------- Static Members ----------------------
- created only once in memeory 
- belongs to class only not objects 
- Shared for all objects
- can be accessed only by class name 
-
--- Statict Function Work With Onley Static Member 
--- Non Static Function Work with Static Andd Non Static Member
-
-***********************************************************************
--- Class And Struct And Enum ===> By Default Internal 
--- Class Member  And Struct Members ==> By Default Private 
-*********************************************************************
-ClassName  ObjectName ==> Declare Reference 
-ObjectName = New ClassName() ===> Creatioin or Instantion 
-New===> Allocation In Memory 
-Constractor ===> Inialize Member of Object
-********************************************************************
-Shallow Copy :: Two References Point(Refere to) Same Object In Heab ==> التعديل ف واحد يسمع ف التاني 
-Deep Copy :: Copy Date From object To Anthor ==> التديل ف واحد ملهوش علاقه بالتاني 
-*******************************************************************
-Relations Between Classes :
-             *  1- Composition ==> Class A is Main part of Class B  ==> Consist Of Relation   
-             *  2- Aggregation ==> Class A is optional part of Class B ==> Has A  Relation
-             *  3- Association ==> Class A use class B  ==> Use  Relation 
-             *  4- Inheritance ==> is-A Relation 
-*******************************************************************
-   Inhertance 
-
-             * ==> Represent is-A Relation
-             * ==> Class can inherit from ONE class Only 
-             * ==> Can have Multi-level inheritance ==> Class A inherits from class B and Class B inherirts from class C
-             * ==> but cannot have multiplue inhrit ==> Class A cannot inherit from 2 classes at the same time
-             * ==> Class that classes inherits from  ==> Parent , Base , Super
-             * ==> Class inherit that inherits from other class ==> Child , Derived , Subclass
-
--- Base KeyWord Reference To Parent
--- This KeyWord Reference To Current Object
-Reference parent = Object Child ==> Valid , Implicitly 
-Refrence child = Object Parent ===> Not Valid , Explicily
-if you write this code ---> Refernce Child = (Parent) oBjectChild ==> Compile Time Error 
-Types of classes :
-
-1- Concrete Class 
-==> User Define Class
-2- Sealed Class
-     ==> cannot inherit from it 
-     ==> can inherit from other class 
-     ==> can create object
-3- Sataic Class 
-    ==> cannot create object 
-    ==> all fileds inside class must be static 
-    ==> Ex : Math Class
-4- Partial Class 
-       ===> Merge two files as one class
-       ==>two  Classes Must Be Same Name  
+// Types of Classes
+	1. Concrete Class
+	   - User-defined class
+	2. Sealed Class
+	   - Cannot inherit from it
+	   - Can inherit from other class
+	   - Can create object
+	3. Static Class
+	   - Cannot create object
+	   - All fields inside class
+	4. Partial Class
+	   - Merge two files as one class
+	   - Two classes must have the same name

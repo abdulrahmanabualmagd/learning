@@ -1,7 +1,0 @@
-1. Install Node.js.
-2. Verify installation with `node -v`.
-3. Write a script (e.g., `app.js`) with `console.log("Hello, World!")`.
-4. Run script with `node app.js`.
-5. Learn Node.js concepts.
-6. Explore npm for packages.
-7. Build projects (e.g., web servers, APIs).
